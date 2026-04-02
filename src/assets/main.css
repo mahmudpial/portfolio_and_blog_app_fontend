@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --void: #05080F;
+  --surface: #0D1220;
+  --electric: #3B82F6;
+  --glow: #60A5FA;
+  --frost: #A8C4E8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #05080F;
+  color: #A8C4E8;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05080F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3B82F6;
+}
+
+/* Global dot-grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, #3B82F620 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Radial blue cloud glow blobs */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, #3B82F610 0%, transparent 70%),
+    radial-gradient(ellipse 500px 300px at 90% 80%, #60A5FA0D 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* All content above background effects */
+#app {
+  position: relative;
+  z-index: 1;
+}
