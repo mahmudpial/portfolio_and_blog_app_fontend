@@ -1,21 +1,21 @@
 <!-- src/views/admin/DashboardView.vue -->
 <template>
     <div style="background:#05080F;min-height:100vh;">
-        <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
             <!-- ── PAGE HEADER ──────────────────────────────────── -->
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <div>
+            <div class="flex items-start justify-between mb-8 flex-wrap gap-4">
+                <div class="min-w-0">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-1"
                         style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                     <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                         Dashboard
                     </h1>
-                    <p class="text-sm mt-1" style="color:#A8C4E8;font-family:system-ui;">
+                    <p class="text-sm mt-1 break-words" style="color:#A8C4E8;font-family:system-ui;">
                         Welcome back, <span class="text-white font-medium">{{ auth.user?.name }}</span>
                     </p>
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 rounded-xl border text-sm"
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl border text-sm w-full sm:w-auto justify-center sm:justify-start"
                     style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
                     <span class="w-2 h-2 rounded-full bg-green-400" style="box-shadow:0 0 6px #4ade80;"></span>
                     {{ formatDate(new Date()) }}
@@ -23,7 +23,7 @@
             </div>
 
             <!-- ── STATS ROW ────────────────────────────────────── -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="dashboard-stats-grid grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div v-for="stat in statsCards" :key="stat.label"
                     class="rounded-2xl border p-5 relative overflow-hidden transition-all hover:-translate-y-0.5"
                     style="background:#0D1220;border-color:#1e3a5f;">
@@ -46,7 +46,7 @@
             </div>
 
             <!-- ── NAV CARDS ────────────────────────────────────── -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+            <div class="dashboard-nav-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
                 <RouterLink v-for="card in navCards" :key="card.to" :to="card.to" class="rounded-2xl border p-5 text-center transition-all duration-300
                  hover:-translate-y-1 no-underline group relative overflow-hidden"
                     style="background:#0D1220;border-color:#1e3a5f;"
@@ -148,7 +148,116 @@
                 </div>
 
                 <!-- Table -->
-                <div class="overflow-x-auto">
+                <div class="sm:hidden px-4 py-4 space-y-3">
+                    <div v-for="u in filteredUsers" :key="`mobile-${u.id}`" class="rounded-2xl border p-4"
+                        style="background:#05080F;border-color:#1e3a5f;">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                                    style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                    {{ initials(u.name) }}
+                                </div>
+                                <div class="min-w-0">
+                                    <div class="font-semibold text-white text-sm truncate" style="font-family:system-ui;">
+                                        {{ u.name }}
+                                    </div>
+                                    <div class="text-xs break-all mt-1" style="color:#A8C4E8;font-family:system-ui;">
+                                        {{ u.email }}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold flex-shrink-0"
+                                :style="u.role === 'admin'
+                                    ? 'background:#dc262615;color:#f87171;border:1px solid #dc262630;'
+                                    : 'background:#3B82F615;color:#60A5FA;border:1px solid #3B82F630;'"
+                                style="font-family:system-ui;">
+                                {{ u.role }}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#0f1f38;background:#0D1220;">
+                                <div class="text-[10px] font-semibold uppercase tracking-[0.18em]"
+                                    style="color:#475569;font-family:system-ui;">
+                                    Status
+                                </div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="u.status === 'active'
+                                        ? 'background:#4ade80;box-shadow:0 0 6px #4ade80;'
+                                        : 'background:#475569;'">
+                                    </span>
+                                    <span class="text-xs font-medium capitalize"
+                                        :style="u.status === 'active' ? 'color:#4ade80;' : 'color:#94a3b8;'"
+                                        style="font-family:system-ui;">
+                                        {{ u.status }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#0f1f38;background:#0D1220;">
+                                <div class="text-[10px] font-semibold uppercase tracking-[0.18em]"
+                                    style="color:#475569;font-family:system-ui;">
+                                    Joined
+                                </div>
+                                <div class="text-xs mt-2" style="color:#A8C4E8;font-family:system-ui;">
+                                    {{ formatDate(u.created_at) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <button @click="openEdit(u)" class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs
+                             border transition-all hover:scale-[1.01]"
+                                style="border-color:#1e3a5f;color:#A8C4E8;background:#0D1220;font-family:system-ui;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                </svg>
+                                Edit User
+                            </button>
+                            <button @click="toggleStatus(u)" class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs
+                             border transition-all hover:scale-[1.01]" :style="u.status === 'active'
+                                ? 'border-color:#dc262630;color:#f87171;background:#dc262610;font-family:system-ui;'
+                                : 'border-color:#16a34a30;color:#4ade80;background:#16a34a10;font-family:system-ui;'">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.5">
+                                    <path v-if="u.status === 'active'" d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10" />
+                                    <path v-else d="M5 3l14 9-14 9V3z" />
+                                </svg>
+                                {{ u.status === 'active' ? 'Disable User' : 'Enable User' }}
+                            </button>
+                            <button v-if="u.role !== 'admin'" @click="deleteUser(u)" class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs
+                             border transition-all hover:scale-[1.01]"
+                                style="border-color:#dc262630;color:#f87171;background:#dc262610;font-family:system-ui;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <polyline points="3 6 5 6 21 6" />
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                    <path d="M10 11v6M14 11v6" />
+                                </svg>
+                                Delete User
+                            </button>
+                        </div>
+                    </div>
+
+                    <div v-if="filteredUsers.length === 0" class="text-center py-12">
+                        <svg class="mx-auto mb-3" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                            stroke="#1e3a5f" stroke-width="1">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        <p class="text-sm font-medium text-white mb-1" style="font-family:system-ui;">
+                            No users found
+                        </p>
+                        <p class="text-xs" style="color:#475569;font-family:system-ui;">
+                            Try adjusting your filters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hidden sm:block overflow-x-auto">
                     <table class="w-full">
                         <thead>
                             <tr style="border-bottom:1px solid #0f1f38;">
@@ -472,6 +581,13 @@
 .modal-leave-to {
     opacity: 0;
     transform: scale(.96) translateY(8px);
+}
+
+@media (max-width: 420px) {
+    .dashboard-stats-grid,
+    .dashboard-nav-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 </style>
 
