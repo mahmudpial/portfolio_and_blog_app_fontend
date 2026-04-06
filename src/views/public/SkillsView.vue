@@ -31,16 +31,16 @@
                     style="background:linear-gradient(90deg,transparent,#3B82F6,transparent);"></div>
 
                 <!-- Stats row -->
-                <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+                <div class="stats-grid grid grid-cols-3 gap-4 max-w-2xl mx-auto">
                     <div v-for="stat in headerStats" :key="stat.label"
-                        class="rounded-2xl border py-7 px-4 transition-all hover:-translate-y-1"
+                        class="stat-card rounded-2xl border py-7 px-4 transition-all hover:-translate-y-1"
                         style="background:#0D1220;border-color:#1e3a5f;">
-                        <div class="font-bold text-white mb-1" style="font-size:36px;font-family:'Georgia',serif;">
+                        <div class="stat-value font-bold text-white mb-1" style="font-size:36px;font-family:'Georgia',serif;">
                             {{ stat.value }}<span style="font-size:20px;color:#60A5FA;">{{ stat.suffix }}</span>
                         </div>
-                        <div class="text-xs font-semibold uppercase tracking-widest"
+                        <div class="stat-label text-xs font-semibold uppercase tracking-widest"
                             style="color:#475569;font-family:system-ui;letter-spacing:.15em;">
-                            {{ stat.label }}
+                            {{ displayStatLabel(stat.label) }}
                         </div>
                     </div>
                 </div>
@@ -232,15 +232,46 @@
     border-color: #3B82F640 !important;
     box-shadow: 0 0 24px #3B82F612;
 }
+
+.stat-label {
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        gap: 0.75rem;
+    }
+
+    .stat-card {
+        padding: 1.15rem 0.55rem;
+    }
+
+    .stat-value {
+        font-size: 2rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em !important;
+    }
+}
 </style>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import api from '@/api/axios'
 
 const skills = ref([])
 const loading = ref(true)
 const activeCategory = ref('')
+const isSmallDisplay = ref(false)
+let viewportMediaQuery = null
+
+const handleViewportChange = (e) => {
+    isSmallDisplay.value = e.matches
+}
 
 const currentlyLearning = [
     'AI / Machine Learning',
@@ -250,6 +281,10 @@ const currentlyLearning = [
 ]
 
 onMounted(async () => {
+    viewportMediaQuery = window.matchMedia('(max-width: 480px)')
+    isSmallDisplay.value = viewportMediaQuery.matches
+    viewportMediaQuery.addEventListener('change', handleViewportChange)
+
     try {
         const { data } = await api.get('/skills')
         skills.value = data.data || []
@@ -258,6 +293,11 @@ onMounted(async () => {
     } finally {
         loading.value = false
     }
+
+})
+
+onBeforeUnmount(() => {
+    viewportMediaQuery?.removeEventListener('change', handleViewportChange)
 })
 
 // ── Derived categories ────────────────────────────────────
@@ -316,5 +356,10 @@ function getLevelStyle(pct) {
     if (pct >= 50) return 'background:#3B82F615;color:#60A5FA;border-color:#3B82F630;'
     if (pct >= 25) return 'background:#1e3a5f;color:#A8C4E8;border-color:#1e3a5f;'
     return 'background:#1e3a5f;color:#A8C4E8;border-color:#1e3a5f;'
+}
+
+function displayStatLabel(label) {
+    if (isSmallDisplay.value && label === 'Technologies') return 'Tech'
+    return label
 }
 </script>
