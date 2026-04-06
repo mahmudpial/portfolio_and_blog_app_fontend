@@ -361,7 +361,7 @@ const contactInfo = [
 ]
 
 const socials = [
-    { label: 'GitHub', url: 'https://github.com/mahmudpial' },
+    { label: 'GitHub', url: 'https://github.com/' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pial-mahmud/' },
     { label: 'Fiverr', url: 'https://www.fiverr.com/s/akD7e5g' },
     { label: 'Website', url: '#' },
