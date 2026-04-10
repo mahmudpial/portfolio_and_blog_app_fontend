@@ -111,3 +111,11 @@ See the [Vite Configuration Reference](https://vite.dev/config/) for all availab
 ## 📄 License
 
 Licensed under the [MIT License](LICENSE).
+
+---
+## 🙋‍♂️ Author
+
+**Pial Mahmud**
+Full Stack Web Developer | CSE Student @ Daffodil International University
+[GitHub](https://github.com/mahmudpial) · [Portfolio](https://portfolio-and-blog-app-fontend.vercel.app/)
+
