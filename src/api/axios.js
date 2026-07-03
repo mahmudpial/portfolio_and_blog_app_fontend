@@ -7,6 +7,9 @@ const api = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
+  // ১. CORS এবং সেশনের জন্য এটি সবচেয়ে গুরুত্বপূর্ণ
+  withCredentials: true,
+  withXSRFToken: true,
 });
 
 // ── Request interceptor — attach token ────────────────────────
