@@ -7,7 +7,7 @@ const api = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  // ১. CORS এবং সেশনের জন্য এটি সবচেয়ে গুরুত্বপূর্ণ
+  // ১. CORS and cookies support
   withCredentials: true,
   withXSRFToken: true,
 });
