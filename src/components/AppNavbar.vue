@@ -1,17 +1,17 @@
 <template>
-    <nav class="sticky top-0 z-50" style="background:#0D1220;border-bottom:1px solid #0f1f38;">
+    <nav class="sticky top-0 z-50" style="background:#120E1C;border-bottom:1px solid #241730;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
 
             <div class="flex items-center gap-3 min-w-0">
                 <RouterLink to="/" class="flex items-center gap-1.5 group flex-shrink-0">
                     <span class="font-bold text-white" style="font-family:'Georgia',serif;font-size:17px;">Pial</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"
-                        style="box-shadow:0 0 6px #3B82F6;"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-violet-500 flex-shrink-0"
+                        style="box-shadow:0 0 6px #8B5CF6;"></span>
                     <span class="font-bold text-white" style="font-family:'Georgia',serif;font-size:17px;">Dev</span>
                 </RouterLink>
 
                 <div class="hidden sm:flex items-center gap-2 min-w-0">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.5"
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A" stroke-width="2.5"
                         class="flex-shrink-0">
                         <path d="M9 18l6-6-6-6" />
                     </svg>
@@ -42,16 +42,16 @@
                     {{ link.label }}
                 </RouterLink>
 
-                <div class="w-px h-5 mx-1" style="background:#1e3a5f;"></div>
+                <div class="w-px h-5 mx-1" style="background:#3B2A5A;"></div>
 
                 <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border"
-                    style="background:#05080F;border-color:#1e3a5f;">
+                    style="background:#0A0610;border-color:#3B2A5A;">
                     <div class="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                        style="background:linear-gradient(135deg,#1e3a5f,#2563EB);font-size:9px;">
+                        style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);font-size:9px;">
                         {{ auth.user?.name?.[0]?.toUpperCase() }}
                     </div>
                     <span class="text-xs font-medium max-w-20 truncate"
-                        style="color:#A8C4E8;font-family:system-ui;">
+                        style="color:#C9B9E8;font-family:system-ui;">
                         {{ firstName }}
                     </span>
                     <span class="text-xs px-1.5 py-0.5 rounded-full" style="background:#dc262615;color:#f87171;
@@ -60,7 +60,7 @@
                     </span>
                 </div>
 
-                <div class="w-px h-5 mx-1" style="background:#1e3a5f;"></div>
+                <div class="w-px h-5 mx-1" style="background:#3B2A5A;"></div>
 
                 <button @click="auth.logout()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
                  border transition-all hover:scale-105" style="border-color:#dc262630;color:#f87171;
@@ -76,26 +76,26 @@
             </div>
 
             <button class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg transition-colors hover:bg-white/5 flex-shrink-0"
-                style="color:#A8C4E8;" @click="menuOpen = !menuOpen" aria-label="Toggle admin menu">
+                style="color:#C9B9E8;" @click="menuOpen = !menuOpen" aria-label="Toggle admin menu">
                 <span class="block w-5 h-0.5 rounded-full transition-all" :style="menuOpen
-                    ? 'background:#3B82F6;transform:translateY(8px) rotate(45deg);'
-                    : 'background:#A8C4E8;'"></span>
+                    ? 'background:#8B5CF6;transform:translateY(8px) rotate(45deg);'
+                    : 'background:#C9B9E8;'"></span>
                 <span class="block w-5 h-0.5 rounded-full transition-all"
-                    :style="menuOpen ? 'opacity:0;' : 'background:#A8C4E8;'"></span>
+                    :style="menuOpen ? 'opacity:0;' : 'background:#C9B9E8;'"></span>
                 <span class="block w-5 h-0.5 rounded-full transition-all" :style="menuOpen
-                    ? 'background:#3B82F6;transform:translateY(-8px) rotate(-45deg);'
-                    : 'background:#A8C4E8;'"></span>
+                    ? 'background:#8B5CF6;transform:translateY(-8px) rotate(-45deg);'
+                    : 'background:#C9B9E8;'"></span>
             </button>
         </div>
 
         <transition name="mobile-menu">
-            <div v-if="menuOpen" class="md:hidden border-t" style="background:#0D1220;border-color:#0f1f38;">
+            <div v-if="menuOpen" class="md:hidden border-t" style="background:#120E1C;border-color:#241730;">
                 <div class="px-4 sm:px-6 py-4 flex flex-col gap-3">
                     <div class="flex items-center justify-between gap-3 rounded-xl border px-4 py-3"
-                        style="background:#05080F;border-color:#1e3a5f;">
+                        style="background:#0A0610;border-color:#3B2A5A;">
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                                style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                 {{ auth.user?.name?.[0]?.toUpperCase() }}
                             </div>
                             <div class="min-w-0">
@@ -115,7 +115,7 @@
 
                     <RouterLink v-for="link in links" :key="link.to" :to="link.to" @click="menuOpen = false"
                         class="flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all hover:bg-white/5"
-                        style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;"
+                        style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;"
                         active-class="mobile-admin-active">
                         <svg v-if="link.icon === 'dashboard'" width="14" height="14" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2.5" class="flex-shrink-0">
@@ -151,14 +151,14 @@
 
 <style scoped>
 .admin-nav-active {
-    color: #60A5FA !important;
-    border-color: #3B82F630 !important;
+    color: #C084FC !important;
+    border-color: #8B5CF630 !important;
     background: rgba(59, 130, 246, 0.08) !important;
 }
 
 .mobile-admin-active {
-    color: #60A5FA !important;
-    border-color: #3B82F630 !important;
+    color: #C084FC !important;
+    border-color: #8B5CF630 !important;
     background: rgba(59, 130, 246, 0.08) !important;
 }
 

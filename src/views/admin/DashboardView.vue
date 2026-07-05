@@ -1,22 +1,22 @@
 <!-- src/views/admin/DashboardView.vue -->
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
             <!-- ── PAGE HEADER ──────────────────────────────────── -->
             <div class="flex items-start justify-between mb-8 flex-wrap gap-4">
                 <div class="min-w-0">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                     <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                         Dashboard
                     </h1>
-                    <p class="text-sm mt-1 break-words" style="color:#A8C4E8;font-family:system-ui;">
+                    <p class="text-sm mt-1 break-words" style="color:#C9B9E8;font-family:system-ui;">
                         Welcome back, <span class="text-white font-medium">{{ auth.user?.name }}</span>
                     </p>
                 </div>
                 <div class="flex items-center gap-2 px-4 py-2 rounded-xl border text-sm w-full sm:w-auto justify-center sm:justify-start"
-                    style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                    style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                     <span class="w-2 h-2 rounded-full bg-green-400" style="box-shadow:0 0 6px #4ade80;"></span>
                     {{ formatDate(new Date()) }}
                 </div>
@@ -26,7 +26,7 @@
             <div class="dashboard-stats-grid grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div v-for="stat in statsCards" :key="stat.label"
                     class="rounded-2xl border p-5 relative overflow-hidden transition-all hover:-translate-y-0.5"
-                    style="background:#0D1220;border-color:#1e3a5f;">
+                    style="background:#120E1C;border-color:#3B2A5A;">
                     <div class="absolute top-0 right-0 w-16 h-16 rounded-full pointer-events-none" :style="`background:radial-gradient(circle,${stat.glow}20 0%,transparent 70%);
             transform:translate(30%,-30%);`"></div>
                     <div class="flex items-center gap-3 mb-3">
@@ -49,15 +49,15 @@
             <div class="dashboard-nav-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
                 <RouterLink v-for="card in navCards" :key="card.to" :to="card.to" class="rounded-2xl border p-5 text-center transition-all duration-300
                  hover:-translate-y-1 no-underline group relative overflow-hidden"
-                    style="background:#0D1220;border-color:#1e3a5f;"
-                    onmouseover="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 24px #3B82F618'"
-                    onmouseout="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'">
+                    style="background:#120E1C;border-color:#3B2A5A;"
+                    onmouseover="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 24px #8B5CF618'"
+                    onmouseout="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'">
                     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                        style="background:radial-gradient(ellipse 120px 80px at 50% 50%,#3B82F608,transparent 70%);">
+                        style="background:radial-gradient(ellipse 120px 80px at 50% 50%,#8B5CF608,transparent 70%);">
                     </div>
                     <div class="text-3xl mb-3 relative z-10">{{ card.icon }}</div>
                     <div class="font-semibold text-white text-sm mb-1 relative z-10
-                      group-hover:text-blue-400 transition-colors" style="font-family:'Georgia',serif;">
+                      group-hover:text-violet-400 transition-colors" style="font-family:'Georgia',serif;">
                         {{ card.label }}
                     </div>
                     <div class="text-xs relative z-10" style="color:#475569;font-family:system-ui;">
@@ -86,11 +86,11 @@
             </transition>
 
             <!-- ── USERS TABLE CARD ─────────────────────────────── -->
-            <div class="rounded-2xl border overflow-hidden" style="background:#0D1220;border-color:#1e3a5f;">
+            <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
 
                 <!-- Card header -->
                 <div class="px-6 py-5 border-b flex items-center justify-between flex-wrap gap-3"
-                    style="border-color:#0f1f38;">
+                    style="border-color:#241730;">
                     <div>
                         <h2 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
                             User Management
@@ -101,7 +101,7 @@
                     </div>
                     <button @click="openAddUser()" class="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold
                    rounded-xl transition-all hover:scale-105"
-                        style="background:#3B82F6;box-shadow:0 0 16px #3B82F635;font-family:system-ui;">
+                        style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <line x1="12" y1="5" x2="12" y2="19" />
@@ -112,7 +112,7 @@
                 </div>
 
                 <!-- Filters -->
-                <div class="px-6 py-4 border-b flex flex-wrap gap-3 items-center" style="border-color:#0f1f38;">
+                <div class="px-6 py-4 border-b flex flex-wrap gap-3 items-center" style="border-color:#241730;">
                     <div class="relative flex-1 min-w-48">
                         <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" width="14"
                             height="14" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5">
@@ -122,19 +122,19 @@
                         <input v-model="search" @input="filterUsers()" type="text"
                             placeholder="Search by name or email..."
                             class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
-                            style="background:#05080F;border:1px solid #1e3a5f;color:#A8C4E8;font-family:system-ui;"
-                            onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                            style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;"
+                            onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                     </div>
                     <select v-model="filterRole" @change="filterUsers()"
                         class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                        style="background:#05080F;border:1px solid #1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                        style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
                         <option value="">All roles</option>
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
                     </select>
                     <select v-model="filterStatus" @change="filterUsers()"
                         class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                        style="background:#05080F;border:1px solid #1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                        style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
                         <option value="">All status</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
@@ -142,7 +142,7 @@
                     <!-- Clear filters -->
                     <button v-if="search || filterRole || filterStatus" @click="clearFilters()"
                         class="px-4 py-2.5 rounded-xl text-xs font-medium border transition-colors hover:bg-white/5"
-                        style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                        style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                         Clear
                     </button>
                 </div>
@@ -150,18 +150,18 @@
                 <!-- Table -->
                 <div class="sm:hidden px-4 py-4 space-y-3">
                     <div v-for="u in filteredUsers" :key="`mobile-${u.id}`" class="rounded-2xl border p-4"
-                        style="background:#05080F;border-color:#1e3a5f;">
+                        style="background:#0A0610;border-color:#3B2A5A;">
                         <div class="flex items-start justify-between gap-3 mb-4">
                             <div class="flex items-center gap-3 min-w-0">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                                    style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                    style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                     {{ initials(u.name) }}
                                 </div>
                                 <div class="min-w-0">
                                     <div class="font-semibold text-white text-sm truncate" style="font-family:system-ui;">
                                         {{ u.name }}
                                     </div>
-                                    <div class="text-xs break-all mt-1" style="color:#A8C4E8;font-family:system-ui;">
+                                    <div class="text-xs break-all mt-1" style="color:#C9B9E8;font-family:system-ui;">
                                         {{ u.email }}
                                     </div>
                                 </div>
@@ -169,14 +169,14 @@
                             <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold flex-shrink-0"
                                 :style="u.role === 'admin'
                                     ? 'background:#dc262615;color:#f87171;border:1px solid #dc262630;'
-                                    : 'background:#3B82F615;color:#60A5FA;border:1px solid #3B82F630;'"
+                                    : 'background:#8B5CF615;color:#C084FC;border:1px solid #8B5CF630;'"
                                 style="font-family:system-ui;">
                                 {{ u.role }}
                             </span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 mb-4">
-                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#0f1f38;background:#0D1220;">
+                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#241730;background:#120E1C;">
                                 <div class="text-[10px] font-semibold uppercase tracking-[0.18em]"
                                     style="color:#475569;font-family:system-ui;">
                                     Status
@@ -193,12 +193,12 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#0f1f38;background:#0D1220;">
+                            <div class="rounded-xl border px-3 py-2.5" style="border-color:#241730;background:#120E1C;">
                                 <div class="text-[10px] font-semibold uppercase tracking-[0.18em]"
                                     style="color:#475569;font-family:system-ui;">
                                     Joined
                                 </div>
-                                <div class="text-xs mt-2" style="color:#A8C4E8;font-family:system-ui;">
+                                <div class="text-xs mt-2" style="color:#C9B9E8;font-family:system-ui;">
                                     {{ formatDate(u.created_at) }}
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                         <div class="flex flex-col gap-2">
                             <button @click="openEdit(u)" class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs
                              border transition-all hover:scale-[1.01]"
-                                style="border-color:#1e3a5f;color:#A8C4E8;background:#0D1220;font-family:system-ui;">
+                                style="border-color:#3B2A5A;color:#C9B9E8;background:#120E1C;font-family:system-ui;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -242,7 +242,7 @@
 
                     <div v-if="filteredUsers.length === 0" class="text-center py-12">
                         <svg class="mx-auto mb-3" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                            stroke="#1e3a5f" stroke-width="1">
+                            stroke="#3B2A5A" stroke-width="1">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                             <circle cx="9" cy="7" r="4" />
                             <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -260,7 +260,7 @@
                 <div class="hidden sm:block overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr style="border-bottom:1px solid #0f1f38;">
+                            <tr style="border-bottom:1px solid #241730;">
                                 <th class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">User</th>
                                 <th class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
@@ -277,7 +277,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="u in filteredUsers" :key="u.id" class="group transition-colors cursor-default"
-                                style="border-bottom:1px solid #0f1f38;" onmouseover="this.style.background='#0a1628'"
+                                style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
                                 onmouseout="this.style.background='transparent'">
 
                                 <!-- User -->
@@ -285,7 +285,7 @@
                                     <div class="flex items-center gap-3">
                                         <div class="w-9 h-9 rounded-full flex items-center justify-center
                                 text-xs font-bold text-white flex-shrink-0"
-                                            style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                             {{ initials(u.name) }}
                                         </div>
                                         <div>
@@ -296,7 +296,7 @@
                                 </td>
 
                                 <!-- Email -->
-                                <td class="px-6 py-4 text-sm" style="color:#A8C4E8;font-family:system-ui;">
+                                <td class="px-6 py-4 text-sm" style="color:#C9B9E8;font-family:system-ui;">
                                     {{ u.email }}
                                 </td>
 
@@ -304,7 +304,7 @@
                                 <td class="px-6 py-4">
                                     <span class="px-2.5 py-1 rounded-full text-xs font-semibold" :style="u.role === 'admin'
                                         ? 'background:#dc262615;color:#f87171;border:1px solid #dc262630;'
-                                        : 'background:#3B82F615;color:#60A5FA;border:1px solid #3B82F630;'"
+                                        : 'background:#8B5CF615;color:#C084FC;border:1px solid #8B5CF630;'"
                                         style="font-family:system-ui;">
                                         {{ u.role }}
                                     </span>
@@ -335,7 +335,7 @@
                                     <div class="flex gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
                                         <button @click="openEdit(u)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
                              border transition-all hover:scale-105"
-                                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2.5">
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -376,7 +376,7 @@
                             <tr v-if="filteredUsers.length === 0">
                                 <td colspan="6" class="text-center py-16">
                                     <svg class="mx-auto mb-3" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                                        stroke="#1e3a5f" stroke-width="1">
+                                        stroke="#3B2A5A" stroke-width="1">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                                         <circle cx="9" cy="7" r="4" />
                                         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -397,7 +397,7 @@
                 <!-- Pagination -->
                 <div v-if="pagination.last_page > 1"
                     class="flex items-center justify-between px-6 py-4 border-t flex-wrap gap-3"
-                    style="border-color:#0f1f38;">
+                    style="border-color:#241730;">
                     <span class="text-xs" style="color:#475569;font-family:system-ui;">
                         Page {{ pagination.current_page }} of {{ pagination.last_page }}
                     </span>
@@ -405,7 +405,7 @@
                         <button :disabled="pagination.current_page === 1"
                             @click="fetchUsers(pagination.current_page - 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -415,7 +415,7 @@
                         <button :disabled="pagination.current_page === pagination.last_page"
                             @click="fetchUsers(pagination.current_page + 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             Next
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
@@ -432,10 +432,10 @@
             <div v-if="editModal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
                 style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="editModal.show = false">
                 <div class="rounded-2xl border w-full max-w-md shadow-2xl"
-                    style="background:#0D1220;border-color:#1e3a5f;">
+                    style="background:#120E1C;border-color:#3B2A5A;">
 
                     <!-- Modal header -->
-                    <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:#0f1f38;">
+                    <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:#241730;">
                         <div>
                             <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
                                 Edit User
@@ -464,13 +464,13 @@
                             </label>
                             <input v-if="field.type !== 'select'" v-model="editModal.form[field.key]" :type="field.type"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                             <select v-else v-model="editModal.form[field.key]"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;">
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;">
                                 <option v-for="opt in field.options" :key="opt.value" :value="opt.value"
-                                    style="background:#0D1220;">{{ opt.label }}</option>
+                                    style="background:#120E1C;">{{ opt.label }}</option>
                             </select>
                         </div>
                     </div>
@@ -479,12 +479,12 @@
                     <div class="flex gap-3 px-6 pb-6">
                         <button @click="saveEdit()" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
                      transition-all hover:scale-105"
-                            style="background:#3B82F6;box-shadow:0 0 16px #3B82F635;font-family:system-ui;">
+                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
                             Save Changes
                         </button>
                         <button @click="editModal.show = false"
                             class="flex-1 py-3 rounded-xl text-sm border transition-colors hover:bg-white/5"
-                            style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             Cancel
                         </button>
                     </div>
@@ -497,10 +497,10 @@
             <div v-if="addModal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
                 style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="addModal.show = false">
                 <div class="rounded-2xl border w-full max-w-md shadow-2xl"
-                    style="background:#0D1220;border-color:#1e3a5f;">
+                    style="background:#120E1C;border-color:#3B2A5A;">
 
                     <!-- Header -->
-                    <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:#0f1f38;">
+                    <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:#241730;">
                         <div>
                             <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
                                 Add New User
@@ -530,13 +530,13 @@
                             <input v-if="field.type !== 'select'" v-model="addModal.form[field.key]" :type="field.type"
                                 :placeholder="field.placeholder"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                             <select v-else v-model="addModal.form[field.key]"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;">
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;">
                                 <option v-for="opt in field.options" :key="opt.value" :value="opt.value"
-                                    style="background:#0D1220;">{{ opt.label }}</option>
+                                    style="background:#120E1C;">{{ opt.label }}</option>
                             </select>
                         </div>
                     </div>
@@ -545,12 +545,12 @@
                     <div class="flex gap-3 px-6 pb-6">
                         <button @click="createUser()" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
                      transition-all hover:scale-105"
-                            style="background:#3B82F6;box-shadow:0 0 16px #3B82F635;font-family:system-ui;">
+                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
                             Create User
                         </button>
                         <button @click="addModal.show = false"
                             class="flex-1 py-3 rounded-xl text-sm border transition-colors hover:bg-white/5"
-                            style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             Cancel
                         </button>
                     </div>
@@ -619,7 +619,7 @@ const statsCards = computed(() => [
     {
         label: 'Total Users', icon: '👥',
         value: users.value.length,
-        color: '#fff', glow: '#3B82F6',
+        color: '#fff', glow: '#8B5CF6',
     },
     {
         label: 'Active', icon: '✅',
@@ -634,7 +634,7 @@ const statsCards = computed(() => [
     {
         label: 'Admins', icon: '🛡',
         value: users.value.filter(u => u.role === 'admin').length,
-        color: '#60A5FA', glow: '#3B82F6',
+        color: '#C084FC', glow: '#8B5CF6',
     },
 ])
 

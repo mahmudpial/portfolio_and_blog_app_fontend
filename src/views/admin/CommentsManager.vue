@@ -1,21 +1,21 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
         <div class="max-w-7xl mx-auto px-6 py-8">
 
             <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                     <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                         Comments Manager
                     </h1>
-                    <p class="text-sm mt-1" style="color:#A8C4E8;font-family:system-ui;">
+                    <p class="text-sm mt-1" style="color:#C9B9E8;font-family:system-ui;">
                         {{ comments.length }} comment{{ comments.length !== 1 ? 's' : '' }} found
                     </p>
                 </div>
                 <select v-model="filterApproved" @change="fetchComments()"
                     class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                    style="background:#0D1220;border:1px solid #1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                    style="background:#120E1C;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
                     <option value="">All comments</option>
                     <option value="0">Pending only</option>
                     <option value="1">Approved only</option>
@@ -32,20 +32,20 @@
 
             <!-- Stats row -->
             <div class="grid grid-cols-3 gap-4 mb-6">
-                <div class="rounded-2xl border p-4" style="background:#0D1220;border-color:#1e3a5f;">
+                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
                     <div class="text-xs font-semibold uppercase tracking-wider mb-1"
                         style="color:#475569;font-family:system-ui;">Total</div>
                     <div class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">{{ totalComments
                     }}</div>
                 </div>
-                <div class="rounded-2xl border p-4" style="background:#0D1220;border-color:#1e3a5f;">
+                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
                     <div class="text-xs font-semibold uppercase tracking-wider mb-1"
                         style="color:#475569;font-family:system-ui;">Pending</div>
                     <div class="text-2xl font-bold" style="color:#F59E0B;font-family:'Georgia',serif;">
                         {{ pendingComments }}
                     </div>
                 </div>
-                <div class="rounded-2xl border p-4" style="background:#0D1220;border-color:#1e3a5f;">
+                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
                     <div class="text-xs font-semibold uppercase tracking-wider mb-1"
                         style="color:#475569;font-family:system-ui;">Approved</div>
                     <div class="text-2xl font-bold" style="color:#4ade80;font-family:'Georgia',serif;">
@@ -54,14 +54,14 @@
                 </div>
             </div>
 
-            <div class="rounded-2xl border overflow-hidden" style="background:#0D1220;border-color:#1e3a5f;">
-                <div class="px-6 py-5 border-b" style="border-color:#0f1f38;">
+            <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
+                <div class="px-6 py-5 border-b" style="border-color:#241730;">
                     <h2 class="font-bold text-white" style="font-family:'Georgia',serif;">All Comments</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr style="border-bottom:1px solid #0f1f38;">
+                            <tr style="border-bottom:1px solid #241730;">
                                 <th v-for="h in ['Author', 'Post', 'Comment', 'Status', 'Actions']" :key="h"
                                     class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">{{ h }}</th>
@@ -69,13 +69,13 @@
                         </thead>
                         <tbody>
                             <tr v-for="c in comments" :key="c.id" class="group transition-colors"
-                                style="border-bottom:1px solid #0f1f38;" onmouseover="this.style.background='#0a1628'"
+                                style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
                                 onmouseout="this.style.background='transparent'">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full flex items-center justify-center
                                 text-xs font-bold text-white flex-shrink-0"
-                                            style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                             {{ (c.user?.name || c.guest_name || 'A')[0].toUpperCase() }}
                                         </div>
                                         <div>
@@ -90,13 +90,13 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-xs font-medium" style="color:#A8C4E8;font-family:system-ui;max-width:180px;
+                                    <span class="text-xs font-medium" style="color:#C9B9E8;font-family:system-ui;max-width:180px;
                     display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         {{ c.post?.title || '—' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-sm" style="color:#A8C4E8;font-family:system-ui;max-width:240px;
+                                    <span class="text-sm" style="color:#C9B9E8;font-family:system-ui;max-width:240px;
                     display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         {{ c.body }}
                                     </span>
@@ -154,7 +154,7 @@
 
                 <div v-if="pagination.last_page > 1"
                     class="flex items-center justify-between px-6 py-4 border-t flex-wrap gap-3"
-                    style="border-color:#0f1f38;">
+                    style="border-color:#241730;">
                     <span class="text-xs" style="color:#475569;font-family:system-ui;">
                         Page {{ pagination.current_page }} of {{ pagination.last_page }}
                     </span>
@@ -162,7 +162,7 @@
                         <button :disabled="pagination.current_page === 1"
                             @click="fetchComments(pagination.current_page - 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -172,7 +172,7 @@
                         <button :disabled="pagination.current_page === pagination.last_page"
                             @click="fetchComments(pagination.current_page + 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             Next
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">

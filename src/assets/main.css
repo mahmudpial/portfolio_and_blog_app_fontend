@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --void: #05080F;
-  --surface: #0D1220;
-  --electric: #3B82F6;
-  --glow: #60A5FA;
-  --frost: #A8C4E8;
+  --void: #0A0610;
+  --surface: #120E1C;
+  --electric: #8B5CF6;
+  --glow: #C084FC;
+  --frost: #C9B9E8;
 }
 
 *,
@@ -16,8 +16,8 @@
 
 html,
 body {
-  background-color: #05080F;
-  color: #A8C4E8;
+  background-color: #0A0610;
+  color: #C9B9E8;
   min-height: 100vh;
 }
 
@@ -27,16 +27,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #05080F;
+  background: #0A0610;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
+  background: #3B2A5A;
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3B82F6;
+  background: #8B5CF6;
 }
 
 /* Global dot-grid texture */
@@ -44,7 +44,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, #3B82F620 1px, transparent 1px);
+  background-image: radial-gradient(circle, #8B5CF620 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
@@ -56,8 +56,8 @@ body::after {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 600px 400px at 10% 20%, #3B82F610 0%, transparent 70%),
-    radial-gradient(ellipse 500px 300px at 90% 80%, #60A5FA0D 0%, transparent 70%);
+    radial-gradient(ellipse 600px 400px at 10% 20%, #8B5CF610 0%, transparent 70%),
+    radial-gradient(ellipse 500px 300px at 90% 80%, #C084FC0D 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }

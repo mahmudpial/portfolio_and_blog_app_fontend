@@ -1,11 +1,11 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
         <!-- ── NAVBAR ─────────────────────────────────────────── -->
         <PublicNavbar />
 
         <!-- ── LOADING ─────────────────────────────────────────── -->
-        <div v-if="loading" class="flex items-center justify-center min-h-screen gap-3" style="color:#A8C4E8;">
-            <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6"
+        <div v-if="loading" class="flex items-center justify-center min-h-screen gap-3" style="color:#C9B9E8;">
+            <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6"
                 stroke-width="2.5">
                 <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
@@ -14,7 +14,7 @@
 
         <!-- ── NOT FOUND ───────────────────────────────────────── -->
         <div v-else-if="!project" class="flex flex-col items-center justify-center min-h-screen gap-4">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A" stroke-width="1">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
             </svg>
@@ -23,7 +23,7 @@
             </p>
             <RouterLink to="/portfolio"
                 class="px-5 py-2.5 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                style="background:#3B82F6;color:#fff;font-family:system-ui;">
+                style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                 Back to Portfolio
             </RouterLink>
         </div>
@@ -41,15 +41,15 @@
                 <div v-if="!project.hero_image" class="absolute inset-0 pointer-events-none">
                     <div class="absolute" style="width:700px;height:500px;top:-200px;left:50%;
             transform:translateX(-50%);border-radius:50%;
-            background:radial-gradient(circle,#1e40af22 0%,transparent 70%);filter:blur(50px);"></div>
-                    <div class="absolute inset-0" style="background-image:radial-gradient(circle,#3B82F612 1px,transparent 1px);
+            background:radial-gradient(circle,#6D28D922 0%,transparent 70%);filter:blur(50px);"></div>
+                    <div class="absolute inset-0" style="background-image:radial-gradient(circle,#8B5CF612 1px,transparent 1px);
             background-size:32px 32px;opacity:0.5;"></div>
                 </div>
 
                 <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pb-12 pt-16">
                     <!-- Breadcrumb -->
                     <div class="flex items-center gap-2 mb-6 text-xs" style="color:#475569;font-family:system-ui;">
-                        <RouterLink to="/portfolio" class="transition-colors hover:text-blue-400"
+                        <RouterLink to="/portfolio" class="transition-colors hover:text-violet-400"
                             style="color:#475569;">
                             Portfolio
                         </RouterLink>
@@ -57,13 +57,13 @@
                             stroke-width="2.5">
                             <path d="M9 18l6-6-6-6" />
                         </svg>
-                        <span style="color:#A8C4E8;">{{ project.title }}</span>
+                        <span style="color:#C9B9E8;">{{ project.title }}</span>
                     </div>
 
                     <!-- Category + status badges -->
                     <div class="flex items-center gap-3 mb-5 flex-wrap" style="display:inline-flex;gap:8px;">
                         <span v-if="project.category" class="text-xs font-bold px-3 py-1.5 rounded-full"
-                            style="background:#3B82F6;color:#fff;font-family:system-ui;">
+                            style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                             {{ project.category }}
                         </span>
                         <span v-if="project.is_featured"
@@ -91,7 +91,7 @@
                         <!-- Live Demo Button -->
                         <a v-if="project.project_url" :href="project.project_url" target="_blank"
                             class="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold rounded-2xl transition-all hover:scale-105"
-                            style="background:#3B82F6;box-shadow:0 0 20px #3B82F635;font-family:system-ui;">
+                            style="background:#8B5CF6;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -103,8 +103,8 @@
 
                         <!-- GitHub Button -->
                         <a v-if="project.github_url" :href="project.github_url" target="_blank"
-                            class="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-2xl border transition-all hover:scale-105 hover:border-blue-500"
-                            style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                            class="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-2xl border transition-all hover:scale-105 hover:border-violet-500"
+                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
@@ -115,7 +115,7 @@
                         <!-- Back button -->
                         <RouterLink to="/portfolio"
                             class="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-2xl border transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -130,7 +130,7 @@
             <section v-if="project.image" class="px-6 md:px-8 py-12">
                 <div class="max-w-5xl mx-auto">
                     <div class="rounded-2xl overflow-hidden border"
-                        style="border-color:#1e3a5f;box-shadow:0 0 40px rgba(59,130,246,0.1);">
+                        style="border-color:#3B2A5A;box-shadow:0 0 40px rgba(59,130,246,0.1);">
                         <img :src="project.image" :alt="project.title"
                             style="width:100%;height:auto;max-height:600px;object-fit:cover;display:block;" />
                     </div>
@@ -145,11 +145,11 @@
                     <article class="flex-1 min-w-0">
                         <!-- Divider -->
                         <div class="w-full h-px mb-10"
-                            style="background:linear-gradient(90deg,#3B82F6,#1e3a5f,transparent);"></div>
+                            style="background:linear-gradient(90deg,#8B5CF6,#3B2A5A,transparent);"></div>
 
                         <!-- Description content -->
                         <div class="prose-custom"
-                            style="color:#A8C4E8;font-family:system-ui;font-size:16px;line-height:1.9;">
+                            style="color:#C9B9E8;font-family:system-ui;font-size:16px;line-height:1.9;">
                             <h2
                                 style="color:#fff;font-size:24px;font-weight:bold;margin-bottom:1rem;font-family:'Georgia',serif;">
                                 Project Overview
@@ -158,23 +158,23 @@
 
                             <!-- ── IMPORTANT LINKS SECTION ──────────────── -->
                             <div
-                                style="background:#0D1220;border:1px solid #1e3a5f;border-radius:12px;padding:1.5rem;margin:2rem 0;">
+                                style="background:#120E1C;border:1px solid #3B2A5A;border-radius:12px;padding:1.5rem;margin:2rem 0;">
                                 <h3
                                     style="color:#fff;font-size:16px;font-weight:600;margin-bottom:1rem;font-family:system-ui;">
                                     🔗 Important Links
                                 </h3>
                                 <div style="display:grid;grid-template-columns:1fr;gap:0.75rem;">
                                     <a v-if="project.project_url" :href="project.project_url" target="_blank"
-                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-blue-500 hover:bg-opacity-10"
-                                        style="border-color:#3B82F630;text-decoration:none;">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60A5FA"
+                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-violet-500 hover:bg-opacity-10"
+                                        style="border-color:#8B5CF630;text-decoration:none;">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
                                             stroke-width="2.5">
                                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                                             <polyline points="15 3 21 3 21 9" />
                                             <line x1="10" y1="14" x2="21" y2="3" />
                                         </svg>
                                         <div style="flex:1;">
-                                            <p style="color:#60A5FA;font-weight:600;font-size:14px;">View Live Project
+                                            <p style="color:#C084FC;font-weight:600;font-size:14px;">View Live Project
                                             </p>
                                             <p style="color:#475569;font-size:12px;">{{ project.project_url }}</p>
                                         </div>
@@ -184,14 +184,14 @@
                                         </svg>
                                     </a>
                                     <a v-if="project.github_url" :href="project.github_url" target="_blank"
-                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-blue-500 hover:bg-opacity-10"
-                                        style="border-color:#3B82F630;text-decoration:none;">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#60A5FA">
+                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-violet-500 hover:bg-opacity-10"
+                                        style="border-color:#8B5CF630;text-decoration:none;">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#C084FC">
                                             <path
                                                 d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
                                         </svg>
                                         <div style="flex:1;">
-                                            <p style="color:#60A5FA;font-weight:600;font-size:14px;">View Source Code
+                                            <p style="color:#C084FC;font-weight:600;font-size:14px;">View Source Code
                                             </p>
                                             <p style="color:#475569;font-size:12px;">GitHub Repository</p>
                                         </div>
@@ -205,10 +205,10 @@
 
                             <!-- ── TECHNOLOGY STACK ──────────────────── -->
                             <h3
-                                style="color:#A8C4E8;font-size:18px;font-weight:600;margin-top:2rem;margin-bottom:1rem;font-family:system-ui;">
+                                style="color:#C9B9E8;font-size:18px;font-weight:600;margin-top:2rem;margin-bottom:1rem;font-family:system-ui;">
                                 Technologies Used
                             </h3>
-                            <p style="margin-bottom:1rem;color:#A8C4E8;">
+                            <p style="margin-bottom:1rem;color:#C9B9E8;">
                                 This project was built using modern web technologies and best practices to ensure
                                 scalability,
                                 performance, and maintainability.
@@ -216,20 +216,20 @@
                             <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:2rem;">
                                 <span v-for="tech in projectTechs" :key="tech"
                                     class="px-4 py-2 rounded-full text-xs font-semibold border"
-                                    style="background:#3B82F610;border-color:#3B82F630;color:#60A5FA;font-family:system-ui;">
+                                    style="background:#8B5CF610;border-color:#8B5CF630;color:#C084FC;font-family:system-ui;">
                                     {{ tech }}
                                 </span>
                             </div>
 
                             <!-- Tech Stack (if available in description) -->
                             <h3
-                                style="color:#A8C4E8;font-size:18px;font-weight:600;margin-top:2rem;margin-bottom:1rem;font-family:system-ui;">
+                                style="color:#C9B9E8;font-size:18px;font-weight:600;margin-top:2rem;margin-bottom:1rem;font-family:system-ui;">
                                 Details
                             </h3>
                             <ul style="list-style:none;padding:0;margin:0;">
                                 <li v-if="project.category"
                                     style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
-                                    <span style="position:absolute;left:0;color:#3B82F6;">→</span>
+                                    <span style="position:absolute;left:0;color:#8B5CF6;">→</span>
                                     <strong>Category:</strong> {{ project.category }}
                                 </li>
                                 <li v-if="project.is_featured"
@@ -241,13 +241,13 @@
                         </div>
 
                         <!-- ── CTA ── -->
-                        <div class="mt-16 pt-8 border-t" style="border-color:#0f1f38;">
+                        <div class="mt-16 pt-8 border-t" style="border-color:#241730;">
                             <p class="text-sm font-semibold text-white mb-4" style="font-family:'Georgia',serif;">
                                 Interested in a similar project?
                             </p>
                             <RouterLink to="/contact"
                                 class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-semibold transition-all hover:scale-105 active:scale-95"
-                                style="background:#3B82F6;color:#fff;box-shadow:0 0 20px #3B82F635;font-family:system-ui;">
+                                style="background:#8B5CF6;color:#fff;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
                                 Get in Touch
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -260,9 +260,9 @@
                     <!-- ── SIDEBAR ──────────────────────────────── -->
                     <aside class="w-full lg:w-72 flex-shrink-0">
                         <!-- Project stats -->
-                        <div class="rounded-2xl p-5 mb-8" style="background:#0D1220;border:1px solid #1e3a5f;">
+                        <div class="rounded-2xl p-5 mb-8" style="background:#120E1C;border:1px solid #3B2A5A;">
                             <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4"
-                                style="color:#A8C4E8;font-family:system-ui;letter-spacing:.08em;">
+                                style="color:#C9B9E8;font-family:system-ui;letter-spacing:.08em;">
                                 Quick Info
                             </h4>
 
@@ -311,17 +311,17 @@
 
                         <!-- ── RELATED PROJECTS ─────────────────────── -->
                         <div v-if="relatedProjects.length > 0" class="rounded-2xl p-5"
-                            style="background:#0D1220;border:1px solid #1e3a5f;">
+                            style="background:#120E1C;border:1px solid #3B2A5A;">
                             <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4"
-                                style="color:#A8C4E8;font-family:system-ui;letter-spacing:.08em;">
+                                style="color:#C9B9E8;font-family:system-ui;letter-spacing:.08em;">
                                 Similar Projects
                             </h4>
 
                             <div class="space-y-3">
                                 <RouterLink v-for="p in relatedProjects" :key="p.id"
                                     :to="{ name: 'ProjectDetail', params: { slug: generateSlug(p.title) } }"
-                                    class="flex items-start gap-3 p-3 rounded-xl border transition-all hover:bg-blue-500 hover:bg-opacity-10"
-                                    style="border-color:#1e3a5f;text-decoration:none;">
+                                    class="flex items-start gap-3 p-3 rounded-xl border transition-all hover:bg-violet-500 hover:bg-opacity-10"
+                                    style="border-color:#3B2A5A;text-decoration:none;">
                                     <!-- Thumbnail -->
                                     <div v-if="p.image" class="w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden">
                                         <img :src="p.image" :alt="p.title"
@@ -329,7 +329,7 @@
                                     </div>
                                     <div v-else
                                         class="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center"
-                                        style="background:#1e3a5f;">
+                                        style="background:#3B2A5A;">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#475569"
                                             stroke-width="1">
                                             <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -480,11 +480,11 @@ const relatedProjects = computed(() => {
     content: '→';
     position: absolute;
     left: 0;
-    color: #3B82F6;
+    color: #8B5CF6;
 }
 
 .prose-custom a {
-    color: #60A5FA;
+    color: #C084FC;
     text-decoration: underline;
     cursor: pointer;
     transition: color 0.2s;

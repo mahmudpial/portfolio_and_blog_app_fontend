@@ -1,5 +1,5 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
 
         <!-- ═══════════════════════════════════════════════════════
          ① HERO SECTION
@@ -9,16 +9,16 @@
             <!-- Background effects -->
             <div class="absolute inset-0 pointer-events-none">
                 <!-- Dot grid -->
-                <div class="absolute inset-0" style="background-image:radial-gradient(circle,#3B82F618 1px,transparent 1px);
+                <div class="absolute inset-0" style="background-image:radial-gradient(circle,#8B5CF618 1px,transparent 1px);
           background-size:32px 32px;opacity:0.6;"></div>
                 <!-- Radial glow orb 1 — animated -->
                 <div class="absolute orb-1" style="width:700px;height:700px;top:-200px;right:-100px;border-radius:50%;
-          background:radial-gradient(circle,#1e40af25 0%,transparent 70%);filter:blur(40px);"></div>
+          background:radial-gradient(circle,#6D28D925 0%,transparent 70%);filter:blur(40px);"></div>
                 <!-- Radial glow orb 2 — animated slower -->
                 <div class="absolute orb-2" style="width:500px;height:500px;bottom:-100px;left:-100px;border-radius:50%;
-          background:radial-gradient(circle,#3B82F618 0%,transparent 70%);filter:blur(60px);"></div>
+          background:radial-gradient(circle,#8B5CF618 0%,transparent 70%);filter:blur(60px);"></div>
                 <!-- Thin horizontal lines -->
-                <div class="absolute inset-0" style="background:linear-gradient(transparent 0%,transparent calc(50% - 1px),#3B82F608 50%,transparent calc(50% + 1px),transparent 100%);
+                <div class="absolute inset-0" style="background:linear-gradient(transparent 0%,transparent calc(50% - 1px),#8B5CF608 50%,transparent calc(50% + 1px),transparent 100%);
           background-size:100% 120px;"></div>
             </div>
 
@@ -30,7 +30,7 @@
 
                     <!-- Available badge -->
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8 text-sm font-medium badge-fade-in"
-                        style="border-color:#1e3a5f;background:#0D1220;color:#4ade80;font-family:system-ui;">
+                        style="border-color:#3B2A5A;background:#120E1C;color:#4ade80;font-family:system-ui;">
                         <span class="w-2 h-2 rounded-full bg-green-400"
                             style="animation:greenPulse 2s infinite;"></span>
                         Available for hire
@@ -43,7 +43,7 @@
                             Hi, I'm
                         </h1>
                         <h1 class="font-bold leading-none hero-line-2" style="font-size:clamp(40px,5.5vw,72px);font-family:'Georgia',serif;
-              letter-spacing:-1px;color:#60A5FA;text-shadow:0 0 40px #3B82F650;">
+              letter-spacing:-1px;color:#C084FC;text-shadow:0 0 40px #8B5CF650;">
                             {{ ownerName }}
                         </h1>
                     </div>
@@ -51,17 +51,17 @@
                     <!-- Typewriter role rotator -->
                     <div class="flex items-center gap-3 mb-6 hero-role">
                         <div class="w-1 h-8 rounded-full flex-shrink-0"
-                            style="background:#3B82F6;box-shadow:0 0 10px #3B82F6;"></div>
+                            style="background:#8B5CF6;box-shadow:0 0 10px #8B5CF6;"></div>
                         <div class="text-lg font-medium overflow-hidden"
-                            style="color:#A8C4E8;font-family:system-ui;min-width:260px;">
+                            style="color:#C9B9E8;font-family:system-ui;min-width:260px;">
                             <span class="typewriter-text">{{ currentRole }}</span>
-                            <span class="typewriter-cursor" style="color:#3B82F6;">|</span>
+                            <span class="typewriter-cursor" style="color:#8B5CF6;">|</span>
                         </div>
                     </div>
 
                     <!-- Bio -->
                     <p class="leading-relaxed mb-10 hero-bio"
-                        style="color:#A8C4E8;max-width:480px;font-family:system-ui;font-size:16px;line-height:1.8;">
+                        style="color:#C9B9E8;max-width:480px;font-family:system-ui;font-size:16px;line-height:1.8;">
                         I build fast, accessible, and beautiful web applications — from
                         pixel-perfect frontends to robust backend systems. Passionate
                         about clean code and great user experiences.
@@ -70,7 +70,7 @@
                     <!-- CTA buttons -->
                     <div class="flex flex-wrap gap-4 mb-10 hero-btns">
                         <RouterLink to="/portfolio" class="flex items-center gap-2 px-7 py-3.5 text-white font-semibold rounded-2xl
-                     transition-all hover:scale-105 hover:shadow-2xl" style="background:#3B82F6;box-shadow:0 0 28px #3B82F640;
+                     transition-all hover:scale-105 hover:shadow-2xl" style="background:#8B5CF6;box-shadow:0 0 28px #8B5CF640;
               font-family:system-ui;font-size:15px;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -80,7 +80,7 @@
                             View My Work
                         </RouterLink>
                         <RouterLink to="/contact" class="flex items-center gap-2 px-7 py-3.5 font-semibold rounded-2xl border
-                     transition-all hover:scale-105 hover:border-blue-500" style="border-color:#1e3a5f;color:#A8C4E8;background:#0D1220;
+                     transition-all hover:scale-105 hover:border-violet-500" style="border-color:#3B2A5A;color:#C9B9E8;background:#120E1C;
               font-family:system-ui;font-size:15px;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -133,36 +133,36 @@
 
                         <!-- Floating "Clean Code" badge -->
                         <div class="absolute -top-5 left-2 z-20 flex items-center gap-2 px-4 py-2
-                        rounded-xl border text-sm font-medium floating-badge-1" style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;
+                        rounded-xl border text-sm font-medium floating-badge-1" style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;
               font-family:system-ui;box-shadow:0 8px 32px #00000060;">
-                            <span style="color:#60A5FA;font-weight:600;">&lt;/&gt;</span> Clean Code
+                            <span style="color:#C084FC;font-weight:600;">&lt;/&gt;</span> Clean Code
                         </div>
 
                         <!-- Card -->
-                        <div class="rounded-3xl border overflow-hidden" style="background:#0D1220;border-color:#1e3a5f;
-              box-shadow:0 0 80px #3B82F618,0 40px 80px #00000060;">
+                        <div class="rounded-3xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;
+              box-shadow:0 0 80px #8B5CF618,0 40px 80px #00000060;">
 
                             <!-- Card header with avatar -->
                             <div class="relative flex flex-col items-center pt-14 pb-10 px-8"
-                                style="background:linear-gradient(180deg,#0a1628 0%,#0D1220 100%);">
+                                style="background:linear-gradient(180deg,#180F28 0%,#120E1C 100%);">
                                 <!-- Corner dots -->
-                                <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-blue-500"
-                                    style="box-shadow:0 0 8px #3B82F6;animation:dotPulse 3s infinite;"></div>
+                                <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-violet-500"
+                                    style="box-shadow:0 0 8px #8B5CF6;animation:dotPulse 3s infinite;"></div>
                                 <div class="absolute bottom-6 left-4 w-1.5 h-1.5 rounded-full"
-                                    style="background:#1e3a5f;"></div>
+                                    style="background:#3B2A5A;"></div>
 
                                 <!-- Avatar circle with ring -->
                                 <div class="relative mb-0">
                                     <div class="w-28 h-28 rounded-full flex items-center justify-center
-                              text-3xl font-bold text-white" style="background:linear-gradient(135deg,#1e3a5f 0%,#2563EB 100%);
-                    box-shadow:0 0 0 4px #0D1220,0 0 0 7px #1e3a5f,0 0 40px #3B82F630;overflow:hidden;">
+                              text-3xl font-bold text-white" style="background:linear-gradient(135deg,#3B2A5A 0%,#7C3AED 100%);
+                    box-shadow:0 0 0 4px #120E1C,0 0 0 7px #3B2A5A,0 0 40px #8B5CF630;overflow:hidden;">
                                         <img v-if="homeAvatarUrl && !homeAvatarLoadFailed" :src="homeAvatarUrl" alt="Admin avatar"
                                             class="w-full h-full object-cover" @error="homeAvatarLoadFailed = true" />
                                         <span v-else>{{ ownerInitials }}</span>
                                     </div>
                                     <!-- Online indicator -->
                                     <div class="absolute bottom-1 right-1 w-5 h-5 rounded-full border-[3px] bg-green-400"
-                                        style="border-color:#0D1220;box-shadow:0 0 6px #4ade80;"></div>
+                                        style="border-color:#120E1C;box-shadow:0 0 6px #4ade80;"></div>
                                 </div>
                             </div>
 
@@ -171,7 +171,7 @@
                                 <h3 class="font-bold text-white text-[26px] mb-2 text-center" style="font-family:'Georgia',serif;">
                                     {{ ownerName }}
                                 </h3>
-                                <p class="text-base mb-7 text-center" style="color:#A8C4E8;font-family:system-ui;">
+                                <p class="text-base mb-7 text-center" style="color:#C9B9E8;font-family:system-ui;">
                                     Full-Stack Developer
                                 </p>
 
@@ -179,11 +179,11 @@
                                 <div class="grid grid-cols-3 gap-3 mb-7">
                                     <div v-for="stat in profileStats" :key="stat.label"
                                         class="text-center py-4 rounded-2xl transition-all hover:scale-105 cursor-default"
-                                        style="background:#05080F;border:1px solid #0f1f38;">
+                                        style="background:#0A0610;border:1px solid #241730;">
                                         <div class="font-bold text-white text-xl" style="font-family:'Georgia',serif;">
                                             {{ stat.value }}
                                         </div>
-                                        <div class="text-xs mt-1" style="color:#A8C4E8;font-family:system-ui;">{{ stat.label
+                                        <div class="text-xs mt-1" style="color:#C9B9E8;font-family:system-ui;">{{ stat.label
                                             }}</div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
 
                         <!-- Floating glow ring behind card -->
                         <div class="absolute inset-0 -z-10 rounded-3xl"
-                            style="box-shadow:0 0 80px #3B82F620;transform:scale(1.05);"></div>
+                            style="box-shadow:0 0 80px #8B5CF620;transform:scale(1.05);"></div>
                     </div>
                 </div>
             </div>
@@ -212,8 +212,8 @@
                 <span class="text-xs uppercase tracking-widest"
                     style="color:#475569;font-family:system-ui;">Scroll</span>
                 <div class="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5"
-                    style="border-color:#1e3a5f;">
-                    <div class="w-1 h-2 rounded-full bg-blue-500 scroll-dot"></div>
+                    style="border-color:#3B2A5A;">
+                    <div class="w-1 h-2 rounded-full bg-violet-500 scroll-dot"></div>
                 </div>
             </div>
         </section>
@@ -221,11 +221,11 @@
         <!-- ═══════════════════════════════════════════════════════
          ② SERVICES SECTION
     ════════════════════════════════════════════════════════ -->
-        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #0f1f38;">
+        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #241730;">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-3"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">What I Do</p>
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">What I Do</p>
                     <h2 class="font-bold text-white"
                         style="font-size:clamp(28px,4vw,44px);font-family:'Georgia',serif;">
                         Services I Offer
@@ -235,16 +235,16 @@
                 <div class="grid md:grid-cols-3 gap-5">
                     <div v-for="(svc, i) in services" :key="svc.title" class="service-card rounded-2xl border p-6 transition-all duration-300
                    hover:-translate-y-2 hover:scale-[1.02] cursor-default"
-                        :style="`background:#0D1220;border-color:#1e3a5f;animation-delay:${i * 80}ms`">
+                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 80}ms`">
                         <!-- Icon tile -->
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 text-xl"
-                            style="background:#3B82F615;border:1px solid #3B82F625;">
-                            <span style="filter:drop-shadow(0 0 4px #3B82F6);">{{ svc.icon }}</span>
+                            style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                            <span style="filter:drop-shadow(0 0 4px #8B5CF6);">{{ svc.icon }}</span>
                         </div>
                         <h3 class="font-bold text-white text-lg mb-3" style="font-family:'Georgia',serif;">
                             {{ svc.title }}
                         </h3>
-                        <p class="text-sm leading-relaxed" style="color:#A8C4E8;font-family:system-ui;">
+                        <p class="text-sm leading-relaxed" style="color:#C9B9E8;font-family:system-ui;">
                             {{ svc.desc }}
                         </p>
                     </div>
@@ -255,20 +255,20 @@
         <!-- ═══════════════════════════════════════════════════════
          ③ CORE TECHNOLOGIES
     ════════════════════════════════════════════════════════ -->
-        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #0f1f38;">
+        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #241730;">
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-start justify-between mb-10 flex-wrap gap-4">
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-widest mb-2"
-                            style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Tech Stack</p>
+                            style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Tech Stack</p>
                         <h2 class="font-bold text-white text-3xl" style="font-family:'Georgia',serif;">
                             Core Technologies
                         </h2>
                     </div>
                     <RouterLink to="/skills"
                         class="flex items-center gap-1.5 text-sm font-medium transition-colors self-end pb-1"
-                        style="color:#A8C4E8;font-family:system-ui;" onmouseover="this.style.color='#60A5FA'"
-                        onmouseout="this.style.color='#A8C4E8'">
+                        style="color:#C9B9E8;font-family:system-ui;" onmouseover="this.style.color='#C084FC'"
+                        onmouseout="this.style.color='#C9B9E8'">
                         View all skills
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -281,16 +281,16 @@
                 <div v-if="!skillsLoading && skills.length > 0" class="flex flex-wrap gap-3">
                     <div v-for="skill in skills.slice(0, 12)" :key="skill.id" class="skill-chip flex items-center gap-3 px-4 py-3 rounded-xl border
                    transition-all hover:-translate-y-1 hover:scale-105 cursor-default"
-                        style="background:#0D1220;border-color:#1e3a5f;">
+                        style="background:#120E1C;border-color:#3B2A5A;">
                         <!-- Letter avatar -->
                         <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                            style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                             {{ skill.name[0].toUpperCase() }}
                         </div>
                         <span class="text-sm font-medium text-white" style="font-family:system-ui;">{{ skill.name
                             }}</span>
                         <span class="text-xs font-semibold px-2 py-0.5 rounded-full"
-                            style="background:#3B82F615;color:#60A5FA;font-family:system-ui;">
+                            style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
                             {{ skill.percentage }}%
                         </span>
                     </div>
@@ -298,13 +298,13 @@
 
                 <!-- Fallback static tags -->
                 <div v-else-if="skillsLoading" class="flex flex-wrap gap-3">
-                    <div v-for="i in 8" :key="i" class="h-14 w-36 rounded-xl animate-pulse" style="background:#0D1220;">
+                    <div v-for="i in 8" :key="i" class="h-14 w-36 rounded-xl animate-pulse" style="background:#120E1C;">
                     </div>
                 </div>
                 <div v-else class="flex flex-wrap gap-3">
                     <div v-for="tag in fallbackTags" :key="tag"
                         class="px-5 py-2.5 rounded-xl border text-sm font-medium transition-all hover:scale-105"
-                        style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                        style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                         {{ tag }}
                     </div>
                 </div>
@@ -314,20 +314,20 @@
         <!-- ═══════════════════════════════════════════════════════
          ④ FEATURED PROJECTS
     ════════════════════════════════════════════════════════ -->
-        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #0f1f38;">
+        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #241730;">
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-start justify-between mb-10 flex-wrap gap-4">
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-widest mb-2"
-                            style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Recent Work</p>
+                            style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Recent Work</p>
                         <h2 class="font-bold text-white text-3xl" style="font-family:'Georgia',serif;">
                             Featured Projects
                         </h2>
                     </div>
                     <RouterLink to="/portfolio"
                         class="flex items-center gap-1.5 text-sm font-medium transition-colors self-end pb-1"
-                        style="color:#A8C4E8;font-family:system-ui;" onmouseover="this.style.color='#60A5FA'"
-                        onmouseout="this.style.color='#A8C4E8'">
+                        style="color:#C9B9E8;font-family:system-ui;" onmouseover="this.style.color='#C084FC'"
+                        onmouseout="this.style.color='#C9B9E8'">
                         View all projects
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -339,27 +339,27 @@
                 <!-- Loading skeleton -->
                 <div v-if="projectsLoading" class="grid md:grid-cols-3 gap-6">
                     <div v-for="i in 3" :key="i" class="rounded-2xl overflow-hidden animate-pulse"
-                        style="background:#0D1220;height:360px;"></div>
+                        style="background:#120E1C;height:360px;"></div>
                 </div>
 
                 <!-- Projects from API -->
                 <div v-else-if="projects.length > 0" class="grid md:grid-cols-3 gap-6">
                     <div v-for="(p, i) in projects" :key="p.id" class="project-card rounded-2xl border overflow-hidden transition-all duration-300
                    hover:-translate-y-2 group"
-                        :style="`background:#0D1220;border-color:#1e3a5f;animation-delay:${i * 100}ms`">
+                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 100}ms`">
 
                         <!-- Image / placeholder -->
                         <div class="h-48 relative overflow-hidden flex items-center justify-center"
-                            style="background:linear-gradient(135deg,#0a1628 0%,#0f2040 100%);">
+                            style="background:linear-gradient(135deg,#180F28 0%,#241338 100%);">
                             <img v-if="p.image" :src="p.image" :alt="p.title"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div v-else class="flex flex-col items-center gap-3">
-                                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f"
+                                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A"
                                     stroke-width="1">
                                     <rect x="2" y="3" width="20" height="14" rx="2" />
                                     <path d="M8 21h8M12 17v4" />
                                 </svg>
-                                <span class="text-xs font-medium" style="color:#1e3a5f;font-family:system-ui;">No
+                                <span class="text-xs font-medium" style="color:#3B2A5A;font-family:system-ui;">No
                                     preview</span>
                             </div>
 
@@ -372,15 +372,15 @@
 
                             <!-- Overlay on hover -->
                             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3"
-                                style="background:#05080Fcc;">
+                                style="background:#0A0610cc;">
                                 <a v-if="p.project_url" :href="p.project_url" target="_blank"
                                     class="px-4 py-2 text-white text-xs font-semibold rounded-xl transition-all hover:scale-105"
-                                    style="background:#3B82F6;font-family:system-ui;">
+                                    style="background:#8B5CF6;font-family:system-ui;">
                                     Live Demo
                                 </a>
                                 <a v-if="p.github_url" :href="p.github_url" target="_blank"
                                     class="px-4 py-2 text-xs font-semibold rounded-xl border transition-all hover:scale-105"
-                                    style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                                    style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     GitHub
                                 </a>
                             </div>
@@ -391,29 +391,29 @@
                             <div class="flex items-center justify-between mb-2">
                                 <span v-if="p.category"
                                     class="text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider"
-                                    style="background:#3B82F615;color:#60A5FA;font-family:system-ui;">
+                                    style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
                                     {{ p.category }}
                                 </span>
                             </div>
                             <h3 class="font-bold text-white mb-2" style="font-family:'Georgia',serif;font-size:17px;">
                                 {{ p.title }}
                             </h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:#A8C4E8;font-family:system-ui;">
+                            <p class="text-sm leading-relaxed mb-4" style="color:#C9B9E8;font-family:system-ui;">
                                 {{ p.description?.substring(0, 110) }}{{ p.description?.length > 110 ? '...' : '' }}
                             </p>
                             <div class="flex gap-2">
                                 <a v-if="p.project_url" :href="p.project_url" target="_blank" class="flex-1 text-center py-2.5 text-white text-xs font-semibold rounded-xl
-                         transition-all hover:scale-105" style="background:#3B82F6;font-family:system-ui;
-                  box-shadow:0 0 16px #3B82F630;">
+                         transition-all hover:scale-105" style="background:#8B5CF6;font-family:system-ui;
+                  box-shadow:0 0 16px #8B5CF630;">
                                     Live Demo
                                 </a>
                                 <a v-if="p.github_url" :href="p.github_url" target="_blank" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-colors hover:border-blue-500"
-                                    style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                         transition-colors hover:border-violet-500"
+                                    style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     GitHub
                                 </a>
                                 <RouterLink v-if="!p.project_url && !p.github_url" to="/portfolio" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-colors" style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                         transition-colors" style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     View Details
                                 </RouterLink>
                             </div>
@@ -423,8 +423,8 @@
 
                 <!-- Graceful empty state -->
                 <div v-else class="text-center py-16 rounded-2xl border"
-                    style="background:#0D1220;border-color:#1e3a5f;">
-                    <svg class="mx-auto mb-4" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f"
+                    style="background:#120E1C;border-color:#3B2A5A;">
+                    <svg class="mx-auto mb-4" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A"
                         stroke-width="1">
                         <rect x="2" y="3" width="20" height="14" rx="2" />
                         <path d="M8 21h8M12 17v4" />
@@ -440,15 +440,15 @@
         <!-- ═══════════════════════════════════════════════════════
          ⑤ TESTIMONIALS
     ════════════════════════════════════════════════════════ -->
-        <section class="py-24 px-6 md:px-16 relative overflow-hidden" style="border-top:1px solid #0f1f38;">
+        <section class="py-24 px-6 md:px-16 relative overflow-hidden" style="border-top:1px solid #241730;">
             <!-- Section glow -->
             <div class="absolute bottom-0 right-0 pointer-events-none" style="width:600px;height:400px;
-        background:radial-gradient(circle at 80% 90%,#1e40af15,transparent 60%);"></div>
+        background:radial-gradient(circle at 80% 90%,#6D28D915,transparent 60%);"></div>
 
             <div class="max-w-7xl mx-auto relative z-10">
                 <div class="text-center mb-16">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-3"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Kind Words</p>
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Kind Words</p>
                     <h2 class="font-bold text-white"
                         style="font-size:clamp(28px,4vw,44px);font-family:'Georgia',serif;">
                         Client Feedback
@@ -458,30 +458,30 @@
                 <div class="grid md:grid-cols-3 gap-5">
                     <div v-for="(t, i) in testimonials" :key="t.name"
                         class="testimonial-card rounded-2xl border p-7 transition-all hover:-translate-y-1"
-                        :style="`background:#0D1220;border-color:#1e3a5f;animation-delay:${i * 100}ms`">
+                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 100}ms`">
                         <!-- Stars -->
                         <div class="flex gap-1 mb-5">
                             <span v-for="s in t.stars" :key="s" style="color:#F59E0B;font-size:18px;">★</span>
                             <span v-for="s in (5 - t.stars)" :key="'e' + s"
-                                style="color:#1e3a5f;font-size:18px;">★</span>
+                                style="color:#3B2A5A;font-size:18px;">★</span>
                         </div>
                         <!-- Quote -->
                         <p class="text-sm leading-relaxed mb-6 italic"
-                            style="color:#A8C4E8;font-family:system-ui;line-height:1.8;">
+                            style="color:#C9B9E8;font-family:system-ui;line-height:1.8;">
                             "{{ t.quote }}"
                         </p>
                         <!-- Author -->
-                        <div class="flex items-center gap-3 pt-5 border-t" style="border-color:#0f1f38;">
+                        <div class="flex items-center gap-3 pt-5 border-t" style="border-color:#241730;">
                             <div class="w-10 h-10 rounded-full flex items-center justify-center
                           font-bold text-white text-sm flex-shrink-0"
-                                style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                 {{ t.name[0] }}
                             </div>
                             <div>
                                 <div class="font-semibold text-white text-sm" style="font-family:'Georgia',serif;">
                                     {{ t.name }}
                                 </div>
-                                <div class="text-xs" style="color:#A8C4E8;font-family:system-ui;">{{ t.role }}</div>
+                                <div class="text-xs" style="color:#C9B9E8;font-family:system-ui;">{{ t.role }}</div>
                             </div>
                         </div>
                     </div>
@@ -492,32 +492,32 @@
         <!-- ═══════════════════════════════════════════════════════
          ⑥ FINAL CTA
     ════════════════════════════════════════════════════════ -->
-        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #0f1f38;">
+        <section class="py-24 px-6 md:px-16" style="border-top:1px solid #241730;">
             <div class="max-w-7xl mx-auto flex justify-center">
                 <div class="w-full max-w-3xl rounded-3xl border p-14 md:p-16 text-center relative overflow-hidden"
-                    style="background:#0D1220;border-color:#1e3a5f;
-          box-shadow:0 0 80px #3B82F610,0 40px 80px #00000040;">
+                    style="background:#120E1C;border-color:#3B2A5A;
+          box-shadow:0 0 80px #8B5CF610,0 40px 80px #00000040;">
 
                     <!-- Glowing radial backdrop -->
                     <div class="absolute inset-0 pointer-events-none">
                         <div class="absolute inset-0"
-                            style="background:radial-gradient(ellipse 700px 400px at 50% 50%,#3B82F60a,transparent 70%);">
+                            style="background:radial-gradient(ellipse 700px 400px at 50% 50%,#8B5CF60a,transparent 70%);">
                         </div>
                         <!-- Corner glow accents -->
                         <div class="absolute top-0 left-0 w-32 h-32 rounded-full"
-                            style="background:radial-gradient(circle,#3B82F615,transparent 70%);transform:translate(-50%,-50%);">
+                            style="background:radial-gradient(circle,#8B5CF615,transparent 70%);transform:translate(-50%,-50%);">
                         </div>
                         <div class="absolute bottom-0 right-0 w-32 h-32 rounded-full"
-                            style="background:radial-gradient(circle,#3B82F615,transparent 70%);transform:translate(50%,50%);">
+                            style="background:radial-gradient(circle,#8B5CF615,transparent 70%);transform:translate(50%,50%);">
                         </div>
                         <!-- Subtle grid -->
-                        <div class="absolute inset-0 opacity-30" style="background-image:radial-gradient(circle,#3B82F610 1px,transparent 1px);
+                        <div class="absolute inset-0 opacity-30" style="background-image:radial-gradient(circle,#8B5CF610 1px,transparent 1px);
               background-size:28px 28px;"></div>
                     </div>
 
                     <div class="relative z-10">
                         <p class="text-xs font-semibold uppercase tracking-widest mb-4"
-                            style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">
+                            style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                             Ready to Build?
                         </p>
                         <h2 class="font-bold text-white leading-tight mb-2"
@@ -525,24 +525,24 @@
                             Let's Create Something
                         </h2>
                         <h2 class="font-bold leading-tight mb-5" style="font-size:clamp(26px,4vw,44px);font-family:'Georgia',serif;
-              color:#60A5FA;text-shadow:0 0 30px #3B82F640;">
+              color:#C084FC;text-shadow:0 0 30px #8B5CF640;">
                             Remarkable
                         </h2>
                         <p class="text-sm leading-relaxed mb-10 mx-auto"
-                            style="color:#A8C4E8;max-width:420px;font-family:system-ui;line-height:1.8;">
+                            style="color:#C9B9E8;max-width:420px;font-family:system-ui;line-height:1.8;">
                             Whether it's a new product, a redesign, or a complex backend — I'm
                             ready to help turn your vision into reality.
                         </p>
                         <div class="flex flex-wrap gap-4 justify-center">
                             <RouterLink to="/contact"
                                 class="px-8 py-3.5 text-white font-semibold rounded-2xl transition-all hover:scale-105"
-                                style="background:#3B82F6;box-shadow:0 0 28px #3B82F640;
+                                style="background:#8B5CF6;box-shadow:0 0 28px #8B5CF640;
                 font-family:system-ui;font-size:15px;">
                                 Start a Project
                             </RouterLink>
                             <RouterLink to="/portfolio" class="px-8 py-3.5 font-semibold rounded-2xl border transition-all hover:scale-105
-                       hover:border-blue-500"
-                                style="border-color:#334155;color:#A8C4E8;font-family:system-ui;font-size:15px;">
+                       hover:border-violet-500"
+                                style="border-color:#334155;color:#C9B9E8;font-family:system-ui;font-size:15px;">
                                 See My Work
                             </RouterLink>
                         </div>
@@ -572,12 +572,12 @@
 
     0%,
     100% {
-        box-shadow: 0 0 6px #3B82F6;
+        box-shadow: 0 0 6px #8B5CF6;
         opacity: 1;
     }
 
     50% {
-        box-shadow: 0 0 14px #3B82F6, 0 0 28px #3B82F660;
+        box-shadow: 0 0 14px #8B5CF6, 0 0 28px #8B5CF660;
         opacity: .7;
     }
 }
@@ -732,22 +732,22 @@
 
 /* Card / service hover glow */
 .service-card:hover {
-    border-color: #3B82F640 !important;
-    box-shadow: 0 0 30px #3B82F610;
+    border-color: #8B5CF640 !important;
+    box-shadow: 0 0 30px #8B5CF610;
 }
 
 .project-card:hover {
-    border-color: #3B82F650 !important;
-    box-shadow: 0 0 30px #3B82F615;
+    border-color: #8B5CF650 !important;
+    box-shadow: 0 0 30px #8B5CF615;
 }
 
 .testimonial-card:hover {
-    border-color: #3B82F640 !important;
+    border-color: #8B5CF640 !important;
 }
 
 .skill-chip:hover {
-    border-color: #3B82F640 !important;
-    box-shadow: 0 0 12px #3B82F610;
+    border-color: #8B5CF640 !important;
+    box-shadow: 0 0 12px #8B5CF610;
 }
 
 /* Social buttons */
@@ -755,9 +755,9 @@
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    border: 1px solid #1e3a5f;
-    background: #0D1220;
-    color: #A8C4E8;
+    border: 1px solid #3B2A5A;
+    background: #120E1C;
+    color: #C9B9E8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -765,10 +765,10 @@
 }
 
 .social-btn:hover {
-    border-color: #3B82F6;
-    color: #60A5FA;
+    border-color: #8B5CF6;
+    color: #C084FC;
     transform: scale(1.1) translateY(-2px);
-    box-shadow: 0 0 12px #3B82F630;
+    box-shadow: 0 0 12px #8B5CF630;
 }
 </style>
 

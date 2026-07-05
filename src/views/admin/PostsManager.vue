@@ -1,21 +1,21 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
         <div class="max-w-7xl mx-auto px-6 py-8">
 
             <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                     <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                         Posts Manager
                     </h1>
-                    <p class="text-sm mt-1" style="color:#A8C4E8;font-family:system-ui;">
+                    <p class="text-sm mt-1" style="color:#C9B9E8;font-family:system-ui;">
                         {{ posts.length }} post{{ posts.length !== 1 ? 's' : '' }} total
                     </p>
                 </div>
                 <button @click="openAdd()" class="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold
                  rounded-xl transition-all hover:scale-105"
-                    style="background:#3B82F6;box-shadow:0 0 16px #3B82F635;font-family:system-ui;">
+                    style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2.5">
                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -33,14 +33,14 @@
                 </div>
             </transition>
 
-            <div class="rounded-2xl border overflow-hidden" style="background:#0D1220;border-color:#1e3a5f;">
-                <div class="px-6 py-5 border-b" style="border-color:#0f1f38;">
+            <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
+                <div class="px-6 py-5 border-b" style="border-color:#241730;">
                     <h2 class="font-bold text-white" style="font-family:'Georgia',serif;">All Posts</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr style="border-bottom:1px solid #0f1f38;">
+                            <tr style="border-bottom:1px solid #241730;">
                                 <th v-for="h in ['Title', 'Category', 'Status', 'Views', 'Actions']" :key="h"
                                     class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">{{ h }}</th>
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="post in posts" :key="post.id" class="group transition-colors"
-                                style="border-bottom:1px solid #0f1f38;" onmouseover="this.style.background='#0a1628'"
+                                style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
                                 onmouseout="this.style.background='transparent'">
                                 <td class="px-6 py-4">
                                     <div class="font-semibold text-white text-sm mb-0.5"
@@ -61,8 +61,8 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <span v-if="post.category" class="text-xs font-semibold px-2.5 py-1 rounded-full"
-                                        style="background:#3B82F615;color:#60A5FA;
-                    border:1px solid #3B82F630;font-family:system-ui;">
+                                        style="background:#8B5CF615;color:#C084FC;
+                    border:1px solid #8B5CF630;font-family:system-ui;">
                                         {{ post.category.name }}
                                     </span>
                                     <span v-else style="color:#475569;font-size:12px;">—</span>
@@ -92,8 +92,8 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
                                         <button @click="openEdit(post)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
-                             border transition-all hover:scale-105" style="border-color:#1e3a5f;color:#A8C4E8;
-                      background:#05080F;font-family:system-ui;">
+                             border transition-all hover:scale-105" style="border-color:#3B2A5A;color:#C9B9E8;
+                      background:#0A0610;font-family:system-ui;">
                                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2.5">
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -132,7 +132,7 @@
                 <!-- Pagination -->
                 <div v-if="pagination.last_page > 1"
                     class="flex items-center justify-between px-6 py-4 border-t flex-wrap gap-3"
-                    style="border-color:#0f1f38;">
+                    style="border-color:#241730;">
                     <span class="text-xs" style="color:#475569;font-family:system-ui;">
                         Page {{ pagination.current_page }} of {{ pagination.last_page }}
                     </span>
@@ -140,7 +140,7 @@
                         <button :disabled="pagination.current_page === 1"
                             @click="fetchPosts(pagination.current_page - 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -150,7 +150,7 @@
                         <button :disabled="pagination.current_page === pagination.last_page"
                             @click="fetchPosts(pagination.current_page + 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
                      disabled:opacity-40 transition-all hover:scale-105"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#05080F;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                             Next
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
@@ -167,9 +167,9 @@
             <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
                 style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="modal.show = false">
                 <div class="rounded-2xl border w-full max-w-2xl shadow-2xl max-h-screen overflow-y-auto"
-                    style="background:#0D1220;border-color:#1e3a5f;">
+                    style="background:#120E1C;border-color:#3B2A5A;">
                     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10"
-                        style="border-color:#0f1f38;background:#0D1220;">
+                        style="border-color:#241730;background:#120E1C;">
                         <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
                             {{ modal.editing ? 'Edit Post' : 'New Post' }}
                         </h3>
@@ -190,8 +190,8 @@
                                 style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Title</label>
                             <input v-model="form.title" type="text" placeholder="Post title..."
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                         </div>
                         <!-- Category + Status -->
                         <div class="grid grid-cols-2 gap-4">
@@ -201,9 +201,9 @@
                                 <input v-model="categoryQuery" @input="syncCategorySelection" list="post-categories"
                                     type="text" placeholder="Select or type a category"
                                     class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                    onfocus="this.style.borderColor='#3B82F6'"
-                                    onblur="this.style.borderColor='#1e3a5f'" />
+                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                    onfocus="this.style.borderColor='#8B5CF6'"
+                                    onblur="this.style.borderColor='#3B2A5A'" />
                                 <datalist id="post-categories">
                                     <option v-for="cat in categories" :key="cat.id" :value="cat.name" />
                                 </datalist>
@@ -212,8 +212,8 @@
                                         @click="selectCategory(cat)"
                                         class="px-2.5 py-1 rounded-full text-xs border transition-all hover:scale-105"
                                         :style="Number(form.category_id) === Number(cat.id)
-                                            ? 'background:#3B82F615;border-color:#3B82F6;color:#60A5FA;'
-                                            : 'background:#05080F;border-color:#1e3a5f;color:#A8C4E8;'">
+                                            ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
+                                            : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'">
                                         {{ cat.name }}
                                     </button>
                                 </div>
@@ -226,9 +226,9 @@
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Status</label>
                                 <select v-model="form.status"
                                     class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;">
-                                    <option value="draft" style="background:#0D1220;">Draft</option>
-                                    <option value="published" style="background:#0D1220;">Published</option>
+                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;">
+                                    <option value="draft" style="background:#120E1C;">Draft</option>
+                                    <option value="published" style="background:#120E1C;">Published</option>
                                 </select>
                             </div>
                         </div>
@@ -239,8 +239,8 @@
                                 Section Background)</label>
                             <input v-model="form.hero_image" type="text" placeholder="https://... (for page header)"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                         </div>
                         <!-- Hero Image URL -->
                         <div>
@@ -249,8 +249,8 @@
                                 Header Background)</label>
                             <input v-model="form.hero_image" type="text" placeholder="https://... (hero section)"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                         </div>
                         <!-- Article Image URL -->
                         <div>
@@ -259,8 +259,8 @@
                                 (Content Body)</label>
                             <input v-model="form.image" type="text" placeholder="https://... (article content)"
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                         </div>
                         <!-- Tags -->
                         <div>
@@ -268,12 +268,12 @@
                                 style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Tags</label>
                             <input v-model="tagQuery" type="text" placeholder="Search tags..."
                                 class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none mb-3"
-                                style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#1e3a5f'" />
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
                             <div v-if="form.tags.length" class="flex flex-wrap gap-2 mb-3">
                                 <span v-for="tagId in form.tags" :key="`selected-${tagId}`"
                                     class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs border"
-                                    style="background:#3B82F615;border-color:#3B82F630;color:#60A5FA;font-family:system-ui;">
+                                    style="background:#8B5CF615;border-color:#8B5CF630;color:#C084FC;font-family:system-ui;">
                                     # {{tags.find(tag => Number(tag.id) === Number(tagId))?.name || tagId}}
                                     <button type="button" @click="toggleTag(tagId)" style="color:inherit;">×</button>
                                 </span>
@@ -281,8 +281,8 @@
                             <div class="flex flex-wrap gap-2" v-if="filteredTags.length">
                                 <button v-for="tag in filteredTags" :key="tag.id" type="button"
                                     class="px-3 py-2 rounded-xl border text-xs transition-all hover:scale-105" :style="form.tags.includes(Number(tag.id))
-                                        ? 'background:#3B82F615;border-color:#3B82F6;color:#60A5FA;'
-                                        : 'background:#05080F;border-color:#1e3a5f;color:#A8C4E8;'"
+                                        ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
+                                        : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'"
                                     style="font-family:system-ui;" @click="toggleTag(tag.id)">
                                     # {{ tag.name }}
                                 </button>
@@ -304,17 +304,17 @@
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Content</label>
                                 <button type="button" @click="showGuide = !showGuide"
                                     class="text-xs px-2 py-1 rounded border transition-all hover:scale-105" :style="showGuide
-                                        ? 'background:#3B82F615;border-color:#3B82F6;color:#60A5FA;'
-                                        : 'background:#05080F;border-color:#1e3a5f;color:#A8C4E8;'"
+                                        ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
+                                        : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'"
                                     style="font-family:system-ui;">
                                     {{ showGuide ? '✓ Guide Open' : '📝 Show Guide' }}
                                 </button>
                             </div>
                             <textarea v-model="form.body" rows="10"
                                 placeholder="Write your post content here... (HTML supported)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none" style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
-                font-family:'Courier New',monospace;line-height:1.7;" onfocus="this.style.borderColor='#3B82F6'"
-                                onblur="this.style.borderColor='#1e3a5f'"></textarea>
+                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none" style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
+                font-family:'Courier New',monospace;line-height:1.7;" onfocus="this.style.borderColor='#8B5CF6'"
+                                onblur="this.style.borderColor='#3B2A5A'"></textarea>
                             <p class="text-xs mt-2" style="color:#475569;font-family:system-us;margin-bottom:1rem;">
                                 HTML is supported. {{ form.body.length }} characters.
                             </p>
@@ -327,12 +327,12 @@
                     <div class="flex gap-3 px-6 pb-6">
                         <button @click="savePost" :disabled="saving" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
                      transition-all hover:scale-105 disabled:opacity-50"
-                            style="background:#3B82F6;box-shadow:0 0 16px #3B82F635;font-family:system-ui;">
+                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
                             {{ saving ? 'Saving...' : modal.editing ? 'Update Post' : 'Publish Post' }}
                         </button>
                         <button @click="modal.show = false"
                             class="flex-1 py-3 rounded-xl text-sm border hover:bg-white/5"
-                            style="border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             Cancel
                         </button>
                     </div>

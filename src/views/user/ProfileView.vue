@@ -162,7 +162,7 @@ async function handleChangePassword() {
 <style scoped>
 .page {
     min-height: 100vh;
-    background: #05080F;
+    background: #0A0610;
     color: #fff;
 }
 
@@ -173,11 +173,11 @@ async function handleChangePassword() {
 }
 
 .profile-card {
-    background: #0D1220;
-    border: 1px solid #1e3a5f;
+    background: #120E1C;
+    border: 1px solid #3B2A5A;
     border-radius: 1rem;
     padding: 2rem;
-    box-shadow: 0 0 60px #3B82F610, 0 40px 80px #00000040;
+    box-shadow: 0 0 60px #8B5CF610, 0 40px 80px #00000040;
 }
 
 .profile-header {
@@ -191,14 +191,14 @@ async function handleChangePassword() {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: #3B82F620;
-    border: 1px solid #3B82F640;
+    background: #8B5CF620;
+    border: 1px solid #8B5CF640;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #60A5FA;
+    color: #C084FC;
     flex-shrink: 0;
     overflow: hidden;
 }
@@ -233,9 +233,9 @@ async function handleChangePassword() {
 }
 
 .badge-user {
-    background: #3B82F615;
-    color: #60A5FA;
-    border: 1px solid #3B82F630;
+    background: #8B5CF615;
+    color: #C084FC;
+    border: 1px solid #8B5CF630;
 }
 
 .badge-active {
@@ -266,8 +266,8 @@ async function handleChangePassword() {
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1rem;
-    background: #05080F;
-    border: 1px solid #1e3a5f;
+    background: #0A0610;
+    border: 1px solid #3B2A5A;
     border-radius: 0.75rem;
     font-size: 0.875rem;
     font-family: system-ui;
@@ -316,8 +316,8 @@ async function handleChangePassword() {
     width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 0.75rem;
-    background: #05080F;
-    border: 1px solid #1e3a5f;
+    background: #0A0610;
+    border: 1px solid #3B2A5A;
     color: #fff;
     font-size: 0.875rem;
     font-family: system-ui;
@@ -327,8 +327,8 @@ async function handleChangePassword() {
 }
 
 .form-group input:focus {
-    border-color: #3B82F6;
-    box-shadow: 0 0 0 3px #3B82F618;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 3px #8B5CF618;
 }
 
 .form-group input::placeholder {
@@ -337,7 +337,7 @@ async function handleChangePassword() {
 
 .btn-primary {
     padding: 0.75rem 1.5rem;
-    background: #3B82F6;
+    background: #8B5CF6;
     color: #fff;
     border: none;
     border-radius: 0.75rem;
@@ -346,7 +346,7 @@ async function handleChangePassword() {
     font-family: system-ui;
     cursor: pointer;
     transition: opacity 0.2s, transform 0.2s;
-    box-shadow: 0 0 24px #3B82F635;
+    box-shadow: 0 0 24px #8B5CF635;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -361,8 +361,8 @@ async function handleChangePassword() {
 .btn-outline {
     padding: 0.6rem 1.25rem;
     background: transparent;
-    color: #A8C4E8;
-    border: 1px solid #1e3a5f;
+    color: #C9B9E8;
+    border: 1px solid #3B2A5A;
     border-radius: 0.75rem;
     font-size: 0.8rem;
     font-weight: 500;
@@ -373,7 +373,7 @@ async function handleChangePassword() {
 }
 
 .btn-outline:hover {
-    border-color: #3B82F6;
+    border-color: #8B5CF6;
     transform: scale(1.02);
 }
 

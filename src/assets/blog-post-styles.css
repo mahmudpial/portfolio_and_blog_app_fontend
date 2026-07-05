@@ -27,13 +27,13 @@
 
 .post-content h2 {
     font-size: 1.8em;
-    border-bottom: 2px solid #3B82F6;
+    border-bottom: 2px solid #8B5CF6;
     padding-bottom: 0.5em;
 }
 
 .post-content h3 {
     font-size: 1.5em;
-    color: #60A5FA;
+    color: #C084FC;
 }
 
 .post-content h4 {
@@ -68,7 +68,7 @@
 
 .post-content ul>li:before {
     content: "▸";
-    color: #3B82F6;
+    color: #8B5CF6;
     font-weight: bold;
     margin-right: 0.8em;
     margin-left: -1.5em;
@@ -76,13 +76,13 @@
 
 /* Blockquotes */
 .post-content blockquote {
-    border-left: 4px solid #3B82F6;
+    border-left: 4px solid #8B5CF6;
     padding: 1rem 1.5rem;
     margin: 1.5em 0;
     background: rgba(59, 130, 246, 0.1);
     border-radius: 0 8px 8px 0;
     font-style: italic;
-    color: #A8C4E8;
+    color: #C9B9E8;
 }
 
 .post-content blockquote p {
@@ -91,7 +91,7 @@
 
 /* Links */
 .post-content a {
-    color: #60A5FA;
+    color: #C084FC;
     text-decoration: none;
     font-weight: 600;
     border-bottom: 2px solid transparent;
@@ -100,8 +100,8 @@
 }
 
 .post-content a:hover {
-    color: #3B82F6;
-    border-bottom-color: #3B82F6;
+    color: #8B5CF6;
+    border-bottom-color: #8B5CF6;
     transform: translateX(2px);
 }
 
@@ -116,7 +116,7 @@
     display: block;
     margin: 2rem auto;
     border-radius: 12px;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -129,7 +129,7 @@
 /* Code blocks */
 .post-content pre {
     background: #0a0e1a;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     border-radius: 8px;
     padding: 1.5rem;
     margin: 1.5em 0;
@@ -141,13 +141,13 @@
 .post-content pre::before {
     content: "💻 Code";
     display: block;
-    color: #60A5FA;
+    color: #C084FC;
     font-size: 0.85em;
     font-family: 'Georgia', serif;
     font-weight: bold;
     margin-bottom: 1rem;
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid #1e3a5f;
+    border-bottom: 1px solid #3B2A5A;
 }
 
 .post-content code {
@@ -165,7 +165,7 @@
     border: 1px solid rgba(59, 130, 246, 0.3);
     padding: 0.2em 0.5em;
     border-radius: 4px;
-    color: #60A5FA;
+    color: #C084FC;
     font-size: 0.95em;
 }
 
@@ -173,7 +173,7 @@
 .post-content hr {
     border: none;
     height: 2px;
-    background: linear-gradient(90deg, #3B82F6, #1e3a5f, transparent);
+    background: linear-gradient(90deg, #8B5CF6, #3B2A5A, transparent);
     margin: 2rem 0;
     border-radius: 2px;
 }
@@ -185,19 +185,19 @@
     margin: 1.5rem 0;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
 }
 
 .post-content th,
 .post-content td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #1e3a5f;
+    border-bottom: 1px solid #3B2A5A;
 }
 
 .post-content th {
     background: rgba(59, 130, 246, 0.1);
-    color: #60A5FA;
+    color: #C084FC;
     font-weight: 700;
 }
 
@@ -211,12 +211,12 @@
 
 /* Strong & emphasis */
 .post-content strong {
-    color: #60A5FA;
+    color: #C084FC;
     font-weight: 700;
 }
 
 .post-content em {
-    color: #A8C4E8;
+    color: #C9B9E8;
     font-style: italic;
 }
 
@@ -233,7 +233,7 @@
 /* Info box styling */
 .post-content .info-box {
     background: rgba(59, 130, 246, 0.1);
-    border-left: 4px solid #3B82F6;
+    border-left: 4px solid #8B5CF6;
     padding: 1.2rem;
     margin: 1.5rem 0;
     border-radius: 8px;
@@ -270,7 +270,7 @@
 }
 
 .post-content .function {
-    color: #60A5FA;
+    color: #C084FC;
 }
 
 .post-content .class {

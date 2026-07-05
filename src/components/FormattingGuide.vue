@@ -90,7 +90,7 @@ function increment() {
 
 <style scoped>
 .formatting-guide {
-    background: #05080F;
+    background: #0A0610;
     border-radius: 8px;
     padding: 1rem;
     margin-top: 1rem;
@@ -107,38 +107,38 @@ function increment() {
 }
 
 .guide-wrapper::-webkit-scrollbar-track {
-    background: #0D1220;
+    background: #120E1C;
     border-radius: 3px;
 }
 
 .guide-wrapper::-webkit-scrollbar-thumb {
-    background: #1e3a5f;
+    background: #3B2A5A;
     border-radius: 3px;
 }
 
 .guide-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #3B82F6;
+    background: #8B5CF6;
 }
 
 .guide-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #60A5FA;
+    color: #C084FC;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #1e3a5f;
+    border-bottom: 2px solid #3B2A5A;
 }
 
 .guide-section {
     margin-bottom: 1.2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #1e3a5f;
+    border-bottom: 1px solid #3B2A5A;
 }
 
 .guide-subtitle {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #A8C4E8;
+    color: #C9B9E8;
     margin-bottom: 0.5rem;
 }
 
@@ -151,7 +151,7 @@ function increment() {
 .code-block {
     display: block;
     background: #0a0e1a;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     border-radius: 6px;
     padding: 0.75rem;
     font-family: 'Courier New', monospace;
@@ -163,22 +163,22 @@ function increment() {
 }
 
 .guide-example {
-    background: #0D1220;
+    background: #120E1C;
     padding: 1rem;
     border-radius: 6px;
 }
 
 .guide-tips {
     background: rgba(59, 130, 246, 0.1);
-    border-left: 3px solid #3B82F6;
+    border-left: 3px solid #8B5CF6;
     padding: 1rem;
     border-radius: 6px;
     font-size: 0.85rem;
-    color: #A8C4E8;
+    color: #C9B9E8;
 }
 
 .guide-tips strong {
-    color: #60A5FA;
+    color: #C084FC;
 }
 
 .guide-tips ul {
@@ -194,7 +194,7 @@ function increment() {
     background: rgba(59, 130, 246, 0.2);
     padding: 2px 6px;
     border-radius: 3px;
-    color: #60A5FA;
+    color: #C084FC;
     font-family: 'Courier New', monospace;
     font-size: 0.8em;
 }

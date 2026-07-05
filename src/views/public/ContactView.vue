@@ -1,39 +1,39 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
 
         <!-- ── HERO HEADER ─────────────────────────────────────── -->
         <section class="relative pt-28 pb-20 px-6 md:px-16 overflow-hidden">
             <!-- Background effects -->
             <div class="absolute inset-0 pointer-events-none">
                 <div class="absolute" style="width:700px;height:500px;top:-200px;left:50%;transform:translateX(-50%);
-          border-radius:50%;background:radial-gradient(circle,#1e40af22 0%,transparent 70%);filter:blur(50px);"></div>
+          border-radius:50%;background:radial-gradient(circle,#6D28D922 0%,transparent 70%);filter:blur(50px);"></div>
                 <div class="absolute" style="width:400px;height:400px;top:-100px;left:-50px;border-radius:50%;
-          background:radial-gradient(circle,#3B82F610 0%,transparent 70%);filter:blur(60px);"></div>
+          background:radial-gradient(circle,#8B5CF610 0%,transparent 70%);filter:blur(60px);"></div>
                 <div class="absolute" style="width:400px;height:400px;top:-100px;right:-50px;border-radius:50%;
-          background:radial-gradient(circle,#3B82F610 0%,transparent 70%);filter:blur(60px);"></div>
+          background:radial-gradient(circle,#8B5CF610 0%,transparent 70%);filter:blur(60px);"></div>
                 <!-- Vertical grid lines -->
-                <div class="absolute inset-0" style="background-image:linear-gradient(90deg,#1e3a5f08 1px,transparent 1px);
+                <div class="absolute inset-0" style="background-image:linear-gradient(90deg,#3B2A5A08 1px,transparent 1px);
           background-size:80px 100%;opacity:0.8;"></div>
-                <div class="absolute inset-0" style="background-image:linear-gradient(#1e3a5f06 1px,transparent 1px);
+                <div class="absolute inset-0" style="background-image:linear-gradient(#3B2A5A06 1px,transparent 1px);
           background-size:100% 80px;opacity:0.8;"></div>
             </div>
 
             <div class="relative z-10 max-w-3xl mx-auto text-center">
                 <p class="text-xs font-semibold uppercase tracking-widest mb-5"
-                    style="color:#3B82F6;font-family:system-ui;letter-spacing:.25em;">Get In Touch</p>
+                    style="color:#8B5CF6;font-family:system-ui;letter-spacing:.25em;">Get In Touch</p>
                 <h1 class="font-bold leading-tight mb-6"
                     style="font-size:clamp(36px,6vw,68px);font-family:'Georgia',serif;">
                     <span class="text-white">Let's </span>
-                    <span style="color:#60A5FA;text-shadow:0 0 40px #3B82F650;">Work Together</span>
+                    <span style="color:#C084FC;text-shadow:0 0 40px #8B5CF650;">Work Together</span>
                 </h1>
                 <p class="text-base leading-relaxed mx-auto"
-                    style="color:#A8C4E8;font-family:system-ui;max-width:480px;line-height:1.8;">
+                    style="color:#C9B9E8;font-family:system-ui;max-width:480px;line-height:1.8;">
                     Have a project in mind or want to collaborate? I'd love to
                     hear from you. Drop a message and I'll get back within 24 hours.
                 </p>
                 <!-- Divider -->
                 <div class="mx-auto mt-8 w-16 h-0.5 rounded-full"
-                    style="background:linear-gradient(90deg,transparent,#3B82F6,transparent);"></div>
+                    style="background:linear-gradient(90deg,transparent,#8B5CF6,transparent);"></div>
             </div>
         </section>
 
@@ -45,16 +45,16 @@
                 <div class="md:col-span-2 flex flex-col gap-4">
 
                     <!-- Contact info card -->
-                    <div class="rounded-2xl border p-6" style="background:#0D1220;border-color:#1e3a5f;">
+                    <div class="rounded-2xl border p-6" style="background:#120E1C;border-color:#3B2A5A;">
                         <h2 class="font-bold text-white text-xl mb-6" style="font-family:'Georgia',serif;">Contact Info
                         </h2>
 
                         <div class="flex flex-col gap-5">
                             <div v-for="info in contactInfo" :key="info.label" class="flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:#3B82F615;border:1px solid #3B82F625;">
+                                    style="background:#8B5CF615;border:1px solid #8B5CF625;">
                                     <component :is="'svg'" v-bind="info.svgProps" v-html="info.svgPath"
-                                        class="text-blue-400" style="color:#60A5FA;">
+                                        class="text-violet-400" style="color:#C084FC;">
                                     </component>
                                 </div>
                                 <div>
@@ -81,7 +81,7 @@
                     </div>
 
                     <!-- Find me online card -->
-                    <div class="rounded-2xl border p-6" style="background:#0D1220;border-color:#1e3a5f;">
+                    <div class="rounded-2xl border p-6" style="background:#120E1C;border-color:#3B2A5A;">
                         <p class="text-xs font-semibold uppercase tracking-widest mb-5"
                             style="color:#475569;font-family:system-ui;letter-spacing:.15em;">
                             Find Me Online
@@ -90,13 +90,13 @@
                             <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" :aria-label="s.label"
                                 class="w-9 h-9 rounded-xl border flex items-center justify-center
          transition-all hover:scale-110 hover:-translate-y-0.5"
-                                style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;"
+                                style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
                                 :onmouseover="s.label === 'Fiverr'
                                     ? `this.style.borderColor='#1dbf73';this.style.color='#1dbf73';this.style.boxShadow='0 0 10px #1dbf7330'`
-                                    : `this.style.borderColor='#3B82F6';this.style.color='#60A5FA';this.style.boxShadow='0 0 10px #3B82F630'`"
+                                    : `this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'`"
                                 :onmouseout="s.label === 'Fiverr'
-                                    ? `this.style.borderColor='#1e3a5f';this.style.color='#A8C4E8';this.style.boxShadow='none'`
-                                    : `this.style.borderColor='#1e3a5f';this.style.color='#A8C4E8';this.style.boxShadow='none'`">
+                                    ? `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`
+                                    : `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`">
                                 <!-- GitHub -->
                                 <svg v-if="s.label === 'GitHub'" width="16" height="16" viewBox="0 0 24 24"
                                     fill="currentColor">
@@ -136,7 +136,7 @@
 
                 <!-- ── RIGHT COLUMN (3/5) — Form ────────────────── -->
                 <div id="contact-form" class="md:col-span-3 scroll-mt-28">
-                    <div class="rounded-2xl border p-8" style="background:#0D1220;border-color:#1e3a5f;">
+                    <div class="rounded-2xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
 
                         <h2 class="font-bold text-white text-2xl mb-1" style="font-family:'Georgia',serif;">Send a
                             Message</h2>
@@ -174,26 +174,26 @@
                                 <div>
                                     <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                         style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                        Full Name <span style="color:#3B82F6;">*</span>
+                                        Full Name <span style="color:#8B5CF6;">*</span>
                                     </label>
                                     <input v-model="form.name" type="text" placeholder="John Doe" required
                                         class="w-full px-4 py-3 rounded-xl text-sm transition-all focus:outline-none"
-                                        style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
+                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
                     font-family:system-ui;"
-                                        onfocus="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 0 3px #3B82F620'"
-                                        onblur="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'" />
+                                        onfocus="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 0 3px #8B5CF620'"
+                                        onblur="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'" />
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                         style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                        Email Address <span style="color:#3B82F6;">*</span>
+                                        Email Address <span style="color:#8B5CF6;">*</span>
                                     </label>
                                     <input v-model="form.email" type="email" placeholder="john@example.com" required
                                         class="w-full px-4 py-3 rounded-xl text-sm transition-all focus:outline-none"
-                                        style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
+                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
                     font-family:system-ui;"
-                                        onfocus="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 0 3px #3B82F620'"
-                                        onblur="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'" />
+                                        onfocus="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 0 3px #8B5CF620'"
+                                        onblur="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'" />
                                 </div>
                             </div>
 
@@ -201,18 +201,18 @@
                             <div>
                                 <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                    Subject <span style="color:#3B82F6;">*</span>
+                                    Subject <span style="color:#8B5CF6;">*</span>
                                 </label>
                                 <div class="relative">
                                     <select v-model="form.subject" required class="w-full px-4 py-3 rounded-xl text-sm appearance-none
-                           transition-all focus:outline-none cursor-pointer" style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
-                    font-family:system-ui;" onfocus="this.style.borderColor='#3B82F6'"
-                                        onblur="this.style.borderColor='#1e3a5f'">
-                                        <option value="" disabled style="background:#0D1220;">
+                           transition-all focus:outline-none cursor-pointer" style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
+                    font-family:system-ui;" onfocus="this.style.borderColor='#8B5CF6'"
+                                        onblur="this.style.borderColor='#3B2A5A'">
+                                        <option value="" disabled style="background:#120E1C;">
                                             Select a subject...
                                         </option>
                                         <option v-for="s in subjects" :key="s" :value="s"
-                                            style="background:#0D1220;color:#fff;">{{ s }}</option>
+                                            style="background:#120E1C;color:#fff;">{{ s }}</option>
                                     </select>
                                     <!-- Chevron -->
                                     <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -228,14 +228,14 @@
                             <div>
                                 <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                    Message <span style="color:#3B82F6;">*</span>
+                                    Message <span style="color:#8B5CF6;">*</span>
                                 </label>
                                 <textarea v-model="form.message" rows="6"
                                     placeholder="Tell me about your project or idea..." required minlength="20" class="w-full px-4 py-3 rounded-xl text-sm resize-none
-                         transition-all focus:outline-none" style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
+                         transition-all focus:outline-none" style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
                   font-family:system-ui;line-height:1.7;"
-                                    onfocus="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 0 3px #3B82F620'"
-                                    onblur="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'"></textarea>
+                                    onfocus="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 0 3px #8B5CF620'"
+                                    onblur="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'"></textarea>
                                 <p class="text-xs mt-2" style="color:#475569;font-family:system-ui;">
                                     Minimum 250 characters.
                                     <span v-if="form.message.length > 0"
@@ -248,7 +248,7 @@
                             <!-- Submit button -->
                             <button type="submit" :disabled="loading || form.message.length < 250" class="w-full py-4 text-white font-semibold rounded-2xl
                        transition-all hover:scale-[1.01] disabled:opacity-50
-                       disabled:cursor-not-allowed flex items-center justify-center gap-3" style="background:#3B82F6;box-shadow:0 0 28px #3B82F640;
+                       disabled:cursor-not-allowed flex items-center justify-center gap-3" style="background:#8B5CF6;box-shadow:0 0 28px #8B5CF640;
                 font-family:system-ui;font-size:15px;">
                                 <svg v-if="!loading" width="18" height="18" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2">
@@ -298,7 +298,7 @@ textarea::placeholder {
 }
 
 select option {
-    background: #0D1220;
+    background: #120E1C;
     color: #fff;
 }
 </style>

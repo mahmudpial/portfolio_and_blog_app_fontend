@@ -1,9 +1,9 @@
 <template>
-    <div style="background:#05080F;min-height:100vh;">
+    <div style="background:#0A0610;min-height:100vh;">
 
         <!-- ── LOADING ─────────────────────────────────────────── -->
-        <div v-if="loading" class="flex items-center justify-center min-h-screen gap-3" style="color:#A8C4E8;">
-            <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6"
+        <div v-if="loading" class="flex items-center justify-center min-h-screen gap-3" style="color:#C9B9E8;">
+            <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6"
                 stroke-width="2.5">
                 <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
@@ -12,7 +12,7 @@
 
         <!-- ── NOT FOUND ───────────────────────────────────────── -->
         <div v-else-if="!post" class="flex flex-col items-center justify-center min-h-screen gap-4">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A" stroke-width="1">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
             </svg>
@@ -20,7 +20,7 @@
                 Article not found
             </p>
             <RouterLink to="/blog" class="px-5 py-2.5 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                style="background:#3B82F6;color:#fff;font-family:system-ui;">
+                style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                 Back to Blog
             </RouterLink>
         </div>
@@ -38,27 +38,27 @@
                 <div v-if="!post.hero_image" class="absolute inset-0 pointer-events-none">
                     <div class="absolute" style="width:700px;height:500px;top:-200px;left:50%;
             transform:translateX(-50%);border-radius:50%;
-            background:radial-gradient(circle,#1e40af22 0%,transparent 70%);filter:blur(50px);"></div>
-                    <div class="absolute inset-0" style="background-image:radial-gradient(circle,#3B82F612 1px,transparent 1px);
+            background:radial-gradient(circle,#6D28D922 0%,transparent 70%);filter:blur(50px);"></div>
+                    <div class="absolute inset-0" style="background-image:radial-gradient(circle,#8B5CF612 1px,transparent 1px);
             background-size:32px 32px;opacity:0.5;"></div>
                 </div>
 
                 <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pb-12 pt-16">
                     <!-- Breadcrumb -->
                     <div class="flex items-center gap-2 mb-6 text-xs" style="color:#475569;font-family:system-ui;">
-                        <RouterLink to="/blog" class="transition-colors hover:text-blue-400" style="color:#475569;">Blog
+                        <RouterLink to="/blog" class="transition-colors hover:text-violet-400" style="color:#475569;">Blog
                         </RouterLink>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <path d="M9 18l6-6-6-6" />
                         </svg>
-                        <span style="color:#A8C4E8;">{{ post.title }}</span>
+                        <span style="color:#C9B9E8;">{{ post.title }}</span>
                     </div>
 
                     <!-- Category + reading time -->
                     <div class="flex items-center gap-3 mb-5 flex-wrap">
                         <span v-if="post.category" class="text-xs font-bold px-3 py-1.5 rounded-full"
-                            style="background:#3B82F6;color:#fff;font-family:system-ui;">
+                            style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                             {{ post.category.name }}
                         </span>
                         <span class="flex items-center gap-1.5 text-xs" style="color:#475569;font-family:system-ui;">
@@ -82,7 +82,7 @@
                         <div class="flex items-center gap-3">
                             <div class="w-9 h-9 rounded-full flex items-center justify-center
                           text-sm font-bold text-white flex-shrink-0"
-                                style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                 {{ post.user?.name?.[0]?.toUpperCase() || 'A' }}
                             </div>
                             <div>
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-px h-8" style="background:#1e3a5f;"></div>
+                        <div class="w-px h-8" style="background:#3B2A5A;"></div>
                         <div class="flex items-center gap-1.5 text-xs" style="color:#475569;font-family:system-ui;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -106,8 +106,8 @@
                         <!-- Tags -->
                         <div v-if="post.tags?.length" class="flex flex-wrap gap-2 ml-auto">
                             <span v-for="tag in post.tags" :key="tag.id" class="text-xs px-2.5 py-1 rounded-full border"
-                                style="background:#0D1220;color:#A8C4E8;
-                border-color:#1e3a5f;font-family:system-ui;">
+                                style="background:#120E1C;color:#C9B9E8;
+                border-color:#3B2A5A;font-family:system-ui;">
                                 # {{ tag.name }}
                             </span>
                         </div>
@@ -123,30 +123,30 @@
                     <article class="flex-1 min-w-0">
                         <!-- Divider -->
                         <div class="w-full h-px mb-10"
-                            style="background:linear-gradient(90deg,#3B82F6,#1e3a5f,transparent);"></div>
+                            style="background:linear-gradient(90deg,#8B5CF6,#3B2A5A,transparent);"></div>
 
                         <!-- Body content -->
                         <div class="post-content" v-html="post.body"
-                            style="color:#A8C4E8;font-family:system-ui;font-size:16px;line-height:1.9;">
+                            style="color:#C9B9E8;font-family:system-ui;font-size:16px;line-height:1.9;">
                         </div>
 
                         <!-- ── REACTIONS ──────────────────────────────── -->
-                        <div class="mt-12 pt-8 border-t" style="border-color:#0f1f38;">
+                        <div class="mt-12 pt-8 border-t" style="border-color:#241730;">
                             <p class="text-sm font-semibold text-white mb-4" style="font-family:'Georgia',serif;">
                                 Did you find this helpful?
                             </p>
                             <div class="flex gap-3 flex-wrap">
                                 <button v-for="r in reactions" :key="r.type" @click="toggleLike(r.type)" class="flex items-center gap-2.5 px-5 py-2.5 rounded-2xl border
                          transition-all hover:scale-105 active:scale-95" :style="userReaction === r.type
-                            ? 'background:#3B82F615;border-color:#3B82F6;box-shadow:0 0 12px #3B82F630;'
-                            : 'background:#0D1220;border-color:#1e3a5f;'" style="font-family:system-ui;">
+                            ? 'background:#8B5CF615;border-color:#8B5CF6;box-shadow:0 0 12px #8B5CF630;'
+                            : 'background:#120E1C;border-color:#3B2A5A;'" style="font-family:system-ui;">
                                     <span style="font-size:18px;">{{ r.icon }}</span>
                                     <span class="text-sm font-semibold"
-                                        :style="userReaction === r.type ? 'color:#60A5FA;' : 'color:#A8C4E8;'">
+                                        :style="userReaction === r.type ? 'color:#C084FC;' : 'color:#C9B9E8;'">
                                         {{ likeCounts[r.type] || 0 }}
                                     </span>
                                     <span class="text-xs hidden sm:block"
-                                        :style="userReaction === r.type ? 'color:#60A5FA;' : 'color:#475569;'">
+                                        :style="userReaction === r.type ? 'color:#C084FC;' : 'color:#475569;'">
                                         {{ r.label }}
                                     </span>
                                 </button>
@@ -154,11 +154,11 @@
                         </div>
 
                         <!-- ── COMMENTS ───────────────────────────────── -->
-                        <div class="mt-12 pt-8 border-t" style="border-color:#0f1f38;">
+                        <div class="mt-12 pt-8 border-t" style="border-color:#241730;">
                             <h3 class="font-bold text-white text-xl mb-8" style="font-family:'Georgia',serif;">
                                 Comments
-                                <span class="text-sm font-normal ml-2 px-2.5 py-1 rounded-full" style="background:#0D1220;color:#60A5FA;
-                  border:1px solid #1e3a5f;font-family:system-ui;">
+                                <span class="text-sm font-normal ml-2 px-2.5 py-1 rounded-full" style="background:#120E1C;color:#C084FC;
+                  border:1px solid #3B2A5A;font-family:system-ui;">
                                     {{ post.comments?.length || 0 }}
                                 </span>
                             </h3>
@@ -167,11 +167,11 @@
                             <div v-if="post.comments?.length > 0" class="flex flex-col gap-5 mb-10">
                                 <div v-for="comment in post.comments" :key="comment.id"
                                     class="flex gap-4 p-5 rounded-2xl border"
-                                    style="background:#0D1220;border-color:#1e3a5f;">
+                                    style="background:#120E1C;border-color:#3B2A5A;">
                                     <!-- Avatar -->
                                     <div class="w-10 h-10 rounded-full flex items-center justify-center
                               text-sm font-bold text-white flex-shrink-0"
-                                        style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                        style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                         {{ (comment.user?.name || comment.guest_name || 'A')[0].toUpperCase() }}
                                     </div>
                                     <div class="flex-1">
@@ -185,7 +185,7 @@
                                             </span>
                                         </div>
                                         <p class="text-sm leading-relaxed"
-                                            style="color:#A8C4E8;font-family:system-ui;line-height:1.7;">
+                                            style="color:#C9B9E8;font-family:system-ui;line-height:1.7;">
                                             {{ comment.body }}
                                         </p>
                                     </div>
@@ -193,9 +193,9 @@
                             </div>
 
                             <div v-else class="text-center py-10 rounded-2xl border mb-10"
-                                style="background:#0D1220;border-color:#1e3a5f;">
+                                style="background:#120E1C;border-color:#3B2A5A;">
                                 <svg class="mx-auto mb-3" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                                    stroke="#1e3a5f" stroke-width="1">
+                                    stroke="#3B2A5A" stroke-width="1">
                                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                 </svg>
                                 <p class="text-sm" style="color:#475569;font-family:system-ui;">
@@ -204,7 +204,7 @@
                             </div>
 
                             <!-- ── COMMENT FORM ─────────────────────────── -->
-                            <div class="rounded-2xl border p-6" style="background:#0D1220;border-color:#1e3a5f;">
+                            <div class="rounded-2xl border p-6" style="background:#120E1C;border-color:#3B2A5A;">
                                 <h4 class="font-bold text-white text-lg mb-1" style="font-family:'Georgia',serif;">Leave
                                     a Comment</h4>
                                 <p class="text-xs mb-6" style="color:#475569;font-family:system-ui;">
@@ -237,41 +237,41 @@
                                     <div>
                                         <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                             style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                            Name <span style="color:#3B82F6;">*</span>
+                                            Name <span style="color:#8B5CF6;">*</span>
                                         </label>
                                         <input v-model="commentForm.guest_name" type="text" placeholder="Your name"
                                             class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                            style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                            onfocus="this.style.borderColor='#3B82F6'"
-                                            onblur="this.style.borderColor='#1e3a5f'" />
+                                            style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                            onfocus="this.style.borderColor='#8B5CF6'"
+                                            onblur="this.style.borderColor='#3B2A5A'" />
                                     </div>
                                     <div>
                                         <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                             style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                            Email <span style="color:#3B82F6;">*</span>
+                                            Email <span style="color:#8B5CF6;">*</span>
                                         </label>
                                         <input v-model="commentForm.guest_email" type="email"
                                             placeholder="your@email.com"
                                             class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                            style="background:#05080F;border:1px solid #1e3a5f;color:#fff;font-family:system-ui;"
-                                            onfocus="this.style.borderColor='#3B82F6'"
-                                            onblur="this.style.borderColor='#1e3a5f'" />
+                                            style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                            onfocus="this.style.borderColor='#8B5CF6'"
+                                            onblur="this.style.borderColor='#3B2A5A'" />
                                     </div>
                                 </div>
 
                                 <!-- Logged-in user badge -->
                                 <div v-else class="flex items-center gap-3 mb-4 p-3 rounded-xl border"
-                                    style="background:#05080F;border-color:#1e3a5f;">
+                                    style="background:#0A0610;border-color:#3B2A5A;">
                                     <div class="w-8 h-8 rounded-full flex items-center justify-center
                               text-xs font-bold text-white"
-                                        style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">
+                                        style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
                                         {{ auth.user?.name?.[0]?.toUpperCase() }}
                                     </div>
                                     <div>
                                         <span class="text-sm font-medium text-white" style="font-family:system-ui;">{{
                                             auth.user?.name }}</span>
                                         <span class="text-xs ml-2 px-2 py-0.5 rounded-full"
-                                            style="background:#3B82F615;color:#60A5FA;font-family:system-ui;">
+                                            style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
                                             Signed in
                                         </span>
                                     </div>
@@ -281,14 +281,14 @@
                                 <div class="mb-4">
                                     <label class="block text-xs font-semibold uppercase tracking-widest mb-2"
                                         style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
-                                        Comment <span style="color:#3B82F6;">*</span>
+                                        Comment <span style="color:#8B5CF6;">*</span>
                                     </label>
                                     <textarea v-model="commentForm.body" rows="5"
                                         placeholder="Share your thoughts or ask a question..."
                                         class="w-full px-4 py-3 rounded-xl text-sm resize-none focus:outline-none"
-                                        style="background:#05080F;border:1px solid #1e3a5f;color:#fff;
-                    font-family:system-ui;line-height:1.7;" onfocus="this.style.borderColor='#3B82F6'"
-                                        onblur="this.style.borderColor='#1e3a5f'">
+                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
+                    font-family:system-ui;line-height:1.7;" onfocus="this.style.borderColor='#8B5CF6'"
+                                        onblur="this.style.borderColor='#3B2A5A'">
                   </textarea>
                                 </div>
 
@@ -296,7 +296,7 @@
                                     class="flex items-center gap-2 px-7 py-3 text-white font-semibold
                          rounded-2xl transition-all hover:scale-105 disabled:opacity-50
                          disabled:cursor-not-allowed"
-                                    style="background:#3B82F6;box-shadow:0 0 20px #3B82F635;font-family:system-ui;">
+                                    style="background:#8B5CF6;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
                                     <svg v-if="!commentLoading" width="16" height="16" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2.5">
                                         <line x1="22" y1="2" x2="11" y2="13" />
@@ -317,8 +317,8 @@
 
                         <!-- Table of contents placeholder / Post info -->
                         <div class="rounded-2xl border overflow-hidden"
-                            style="background:#0D1220;border-color:#1e3a5f;">
-                            <div class="px-5 py-4 border-b" style="border-color:#0f1f38;">
+                            style="background:#120E1C;border-color:#3B2A5A;">
+                            <div class="px-5 py-4 border-b" style="border-color:#241730;">
                                 <h4 class="font-bold text-white text-sm" style="font-family:'Georgia',serif;">
                                     Post Details
                                 </h4>
@@ -326,8 +326,8 @@
                             <div class="p-5 flex flex-col gap-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                        style="background:#3B82F615;border:1px solid #3B82F625;">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60A5FA"
+                                        style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
                                             stroke-width="2">
                                             <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                             <line x1="16" y1="2" x2="16" y2="6" />
@@ -345,8 +345,8 @@
                                 </div>
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                        style="background:#3B82F615;border:1px solid #3B82F625;">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60A5FA"
+                                        style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
                                             stroke-width="2">
                                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                                             <circle cx="12" cy="12" r="3" />
@@ -362,8 +362,8 @@
                                 </div>
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                        style="background:#3B82F615;border:1px solid #3B82F625;">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60A5FA"
+                                        style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
                                             stroke-width="2">
                                             <circle cx="12" cy="12" r="10" />
                                             <polyline points="12 6 12 12 16 14" />
@@ -379,8 +379,8 @@
                                 </div>
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                        style="background:#3B82F615;border:1px solid #3B82F625;">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60A5FA"
+                                        style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
                                             stroke-width="2">
                                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                         </svg>
@@ -397,14 +397,14 @@
                         </div>
 
                         <!-- Share card -->
-                        <div class="rounded-2xl border p-5" style="background:#0D1220;border-color:#1e3a5f;">
+                        <div class="rounded-2xl border p-5" style="background:#120E1C;border-color:#3B2A5A;">
                             <h4 class="font-bold text-white text-sm mb-4" style="font-family:'Georgia',serif;">Share
                                 Article</h4>
                             <div class="flex gap-2">
                                 <a :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(currentUrl)}`"
                                     target="_blank" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl
                          border text-xs font-medium transition-all hover:scale-105"
-                                    style="background:#05080F;border-color:#1e3a5f;color:#A8C4E8;font-family:system-ui;">
+                                    style="background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                                         <path
                                             d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.849L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -414,7 +414,7 @@
                                 <button @click="copyLink" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl
                          border text-xs font-medium transition-all hover:scale-105" :style="copied
                             ? 'background:#052e16;border-color:#16a34a40;color:#4ade80;'
-                            : 'background:#05080F;border-color:#1e3a5f;color:#A8C4E8;'" style="font-family:system-ui;">
+                            : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'" style="font-family:system-ui;">
                                     <svg v-if="!copied" width="13" height="13" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2.5">
                                         <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
@@ -431,8 +431,8 @@
 
                         <!-- Back to blog -->
                         <RouterLink to="/blog" class="flex items-center justify-center gap-2 py-3 rounded-2xl border
-                     text-sm font-medium transition-all hover:scale-105 hover:border-blue-500"
-                            style="border-color:#1e3a5f;color:#A8C4E8;background:#0D1220;font-family:system-ui;">
+                     text-sm font-medium transition-all hover:scale-105 hover:border-violet-500"
+                            style="border-color:#3B2A5A;color:#C9B9E8;background:#120E1C;font-family:system-ui;">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -464,19 +464,19 @@
 
 .post-content :deep(h1) {
     font-size: 2.2rem;
-    border-bottom: 3px solid #3B82F6;
+    border-bottom: 3px solid #8B5CF6;
     padding-bottom: 0.5rem;
 }
 
 .post-content :deep(h2) {
     font-size: 1.8rem;
-    border-bottom: 2px solid #3B82F6;
+    border-bottom: 2px solid #8B5CF6;
     padding-bottom: 0.5rem;
 }
 
 .post-content :deep(h3) {
     font-size: 1.5rem;
-    color: #60A5FA;
+    color: #C084FC;
 }
 
 .post-content :deep(h4) {
@@ -493,13 +493,13 @@
 
 .post-content :deep(p) {
     margin-bottom: 1.3rem;
-    color: #A8C4E8;
+    color: #C9B9E8;
     line-height: 1.9;
 }
 
 /* Links with better styling */
 .post-content :deep(a) {
-    color: #60A5FA;
+    color: #C084FC;
     text-decoration: none;
     font-weight: 600;
     border-bottom: 2px solid transparent;
@@ -508,8 +508,8 @@
 }
 
 .post-content :deep(a:hover) {
-    color: #3B82F6;
-    border-bottom-color: #3B82F6;
+    color: #8B5CF6;
+    border-bottom-color: #8B5CF6;
 }
 
 .post-content :deep(a::after) {
@@ -527,7 +527,7 @@
 .post-content :deep(p code),
 .post-content :deep(li code) {
     background: rgba(59, 130, 246, 0.15);
-    color: #60A5FA;
+    color: #C084FC;
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 13px;
@@ -538,7 +538,7 @@
 /* Code blocks */
 .post-content :deep(pre) {
     background: #0a0e1a;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     border-radius: 12px;
     padding: 1.5rem;
     overflow-x: auto;
@@ -559,12 +559,12 @@
 
 /* Blockquotes */
 .post-content :deep(blockquote) {
-    border-left: 4px solid #3B82F6;
+    border-left: 4px solid #8B5CF6;
     padding: 1.2rem 1.5rem;
     margin: 1.8rem 0;
     background: rgba(59, 130, 246, 0.08);
     border-radius: 0 12px 12px 0;
-    color: #A8C4E8;
+    color: #C9B9E8;
     font-style: italic;
 }
 
@@ -577,7 +577,7 @@
 .post-content :deep(ol) {
     padding-left: 2rem;
     margin: 1.5rem 0;
-    color: #A8C4E8;
+    color: #C9B9E8;
     line-height: 1.9;
 }
 
@@ -587,12 +587,12 @@
 }
 
 .post-content :deep(ul li::marker) {
-    color: #3B82F6;
+    color: #8B5CF6;
     font-weight: bold;
 }
 
 .post-content :deep(ol li::marker) {
-    color: #60A5FA;
+    color: #C084FC;
     font-weight: bold;
 }
 
@@ -602,7 +602,7 @@
     height: auto;
     border-radius: 12px;
     margin: 2rem auto;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
     transition: all 0.3s ease;
     display: block;
@@ -611,14 +611,14 @@
 .post-content :deep(img:hover) {
     transform: scale(1.02);
     box-shadow: 0 10px 40px rgba(59, 130, 246, 0.25);
-    border-color: #3B82F6;
+    border-color: #8B5CF6;
 }
 
 /* Horizontal rules */
 .post-content :deep(hr) {
     border: none;
     height: 2px;
-    background: linear-gradient(90deg, #3B82F6, #1e3a5f, transparent);
+    background: linear-gradient(90deg, #8B5CF6, #3B2A5A, transparent);
     margin: 2.5rem 0;
     border-radius: 2px;
 }
@@ -628,7 +628,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 1.8rem 0;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -637,12 +637,12 @@
 .post-content :deep(td) {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #1e3a5f;
+    border-bottom: 1px solid #3B2A5A;
 }
 
 .post-content :deep(th) {
     background: rgba(59, 130, 246, 0.1);
-    color: #60A5FA;
+    color: #C084FC;
     font-weight: 700;
 }
 
@@ -652,12 +652,12 @@
 
 /* Strong & emphasis */
 .post-content :deep(strong) {
-    color: #60A5FA;
+    color: #C084FC;
     font-weight: 700;
 }
 
 .post-content :deep(em) {
-    color: #A8C4E8;
+    color: #C9B9E8;
     font-style: italic;
 }
 
@@ -669,17 +669,17 @@
 }
 
 .post-content :deep(th) {
-    background: #0a1628;
-    color: #60A5FA;
+    background: #180F28;
+    color: #C084FC;
     padding: 10px 14px;
-    border: 1px solid #1e3a5f;
+    border: 1px solid #3B2A5A;
     text-align: left;
 }
 
 .post-content :deep(td) {
     padding: 10px 14px;
-    border: 1px solid #1e3a5f;
-    color: #A8C4E8;
+    border: 1px solid #3B2A5A;
+    color: #C9B9E8;
 }
 </style>
 

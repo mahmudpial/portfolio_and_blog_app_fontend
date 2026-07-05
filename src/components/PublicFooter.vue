@@ -1,13 +1,13 @@
 <template>
-    <footer style="background:#05080F;border-top:1px solid #0f1f38;position:relative;overflow:hidden;">
+    <footer style="background:#0A0610;border-top:1px solid #241730;position:relative;overflow:hidden;">
 
         <!-- Background effects -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute" style="width:600px;height:400px;bottom:-200px;left:-100px;border-radius:50%;
-        background:radial-gradient(circle,#3B82F615 0%,transparent 70%);filter:blur(60px);"></div>
+        background:radial-gradient(circle,#8B5CF615 0%,transparent 70%);filter:blur(60px);"></div>
             <div class="absolute" style="width:400px;height:300px;bottom:-100px;right:-50px;border-radius:50%;
-        background:radial-gradient(circle,#1e40af12 0%,transparent 70%);filter:blur(50px);"></div>
-            <div class="absolute inset-0" style="background-image:radial-gradient(circle,#3B82F608 1px,transparent 1px);
+        background:radial-gradient(circle,#6D28D912 0%,transparent 70%);filter:blur(50px);"></div>
+            <div class="absolute inset-0" style="background-image:radial-gradient(circle,#8B5CF608 1px,transparent 1px);
         background-size:32px 32px;opacity:0.4;"></div>
         </div>
 
@@ -22,7 +22,7 @@
                         <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">
                             Pial
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-0.5" style="box-shadow:0 0 10px #3B82F6,0 0 20px #3B82F640;
+                        <span class="w-2.5 h-2.5 rounded-full bg-violet-500 mt-0.5" style="box-shadow:0 0 10px #8B5CF6,0 0 20px #8B5CF640;
               animation:logoPulse 2s ease-in-out infinite;"></span>
                         <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">
                             Dev
@@ -30,7 +30,7 @@
                     </div>
 
                     <p class="text-sm leading-relaxed mb-6"
-                        style="color:#A8C4E8;font-family:system-ui;max-width:320px;line-height:1.8;">
+                        style="color:#C9B9E8;font-family:system-ui;max-width:320px;line-height:1.8;">
                         Full-stack developer crafting fast, accessible, and beautiful
                         web applications. Open to freelance projects and full-time
                         opportunities.
@@ -49,8 +49,8 @@
                     <!-- Tech stack badges -->
                     <div class="flex flex-wrap gap-2">
                         <span v-for="tech in techStack" :key="tech" class="text-xs px-3 py-1.5 rounded-full border"
-                            style="background:#0D1220;border-color:#1e3a5f;
-              color:#A8C4E8;font-family:system-ui;">
+                            style="background:#120E1C;border-color:#3B2A5A;
+              color:#C9B9E8;font-family:system-ui;">
                             {{ tech }}
                         </span>
                     </div>
@@ -59,17 +59,17 @@
                 <!-- Col 2 — Navigation (2 cols) -->
                 <div class="md:col-span-2">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Navigation
                     </p>
                     <ul class="space-y-3">
                         <li v-for="link in navLinks" :key="link.to">
                             <RouterLink :to="link.to" class="flex items-center gap-2 text-sm transition-all group"
-                                style="color:#A8C4E8;font-family:system-ui;text-decoration:none;"
-                                onmouseover="this.style.color='#60A5FA';this.style.paddingLeft='4px'"
-                                onmouseout="this.style.color='#A8C4E8';this.style.paddingLeft='0'">
+                                style="color:#C9B9E8;font-family:system-ui;text-decoration:none;"
+                                onmouseover="this.style.color='#C084FC';this.style.paddingLeft='4px'"
+                                onmouseout="this.style.color='#C9B9E8';this.style.paddingLeft='0'">
                                 <span class="w-1 h-1 rounded-full flex-shrink-0"
-                                    style="background:#1e3a5f;transition:background .2s;"></span>
+                                    style="background:#3B2A5A;transition:background .2s;"></span>
                                 {{ link.label }}
                             </RouterLink>
                         </li>
@@ -79,13 +79,13 @@
                 <!-- Col 3 — Services (2 cols) -->
                 <div class="md:col-span-2">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Services
                     </p>
                     <ul class="space-y-3">
                         <li v-for="svc in services" :key="svc" class="flex items-center gap-2 text-sm"
-                            style="color:#A8C4E8;font-family:system-ui;">
-                            <span class="w-1 h-1 rounded-full flex-shrink-0" style="background:#1e3a5f;"></span>
+                            style="color:#C9B9E8;font-family:system-ui;">
+                            <span class="w-1 h-1 rounded-full flex-shrink-0" style="background:#3B2A5A;"></span>
                             {{ svc }}
                         </li>
                     </ul>
@@ -94,7 +94,7 @@
                 <!-- Col 4 — Contact (3 cols) -->
                 <div class="md:col-span-3">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
-                        style="color:#3B82F6;font-family:system-ui;letter-spacing:.2em;">
+                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Contact
                     </p>
 
@@ -104,12 +104,12 @@
                             :rel="info.href.startsWith('mailto:') ? 'noopener noreferrer' : null"
                             class="flex items-center gap-3 p-3 rounded-xl border transition-all
                      hover:-translate-y-0.5 group"
-                            style="background:#0D1220;border-color:#1e3a5f;text-decoration:none;"
-                            onmouseover="this.style.borderColor='#3B82F640'"
-                            onmouseout="this.style.borderColor='#1e3a5f'">
+                            style="background:#120E1C;border-color:#3B2A5A;text-decoration:none;"
+                            onmouseover="this.style.borderColor='#8B5CF640'"
+                            onmouseout="this.style.borderColor='#3B2A5A'">
                             <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                style="background:#3B82F615;border:1px solid #3B82F625;">
-                                <svg :viewBox="info.vb" width="14" height="14" fill="none" stroke="#60A5FA"
+                                style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                                <svg :viewBox="info.vb" width="14" height="14" fill="none" stroke="#C084FC"
                                     stroke-width="2" v-html="info.svgPath"></svg>
                             </div>
                             <div>
@@ -126,7 +126,7 @@
                     <!-- CTA -->
                     <RouterLink :to="{ path: '/contact', hash: '#contact-form' }" class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm
                    font-semibold text-white transition-all hover:scale-105 w-full"
-                        style="background:#3B82F6;box-shadow:0 0 20px #3B82F635;font-family:system-ui;">
+                        style="background:#8B5CF6;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -138,7 +138,7 @@
 
             <!-- ── DIVIDER ───────────────────────────────────────── -->
             <div class="w-full h-px mb-8"
-                style="background:linear-gradient(90deg,transparent,#1e3a5f,#3B82F630,#1e3a5f,transparent);">
+                style="background:linear-gradient(90deg,transparent,#3B2A5A,#8B5CF630,#3B2A5A,transparent);">
             </div>
 
             <!-- ── BOTTOM BAR ────────────────────────────────────── -->
@@ -148,9 +148,9 @@
                 <div class="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
                     <p class="text-sm" style="color:#475569;font-family:system-ui;">
                         © {{ new Date().getFullYear() }}
-                        <span class="font-semibold" style="color:#A8C4E8;">PialDev-</span>
+                        <span class="font-semibold" style="color:#C9B9E8;">PialDev-</span>
                         Crafted with
-                        <span class="font-semibold" style="color:#60A5FA;"> Pial Mahmud</span>
+                        <span class="font-semibold" style="color:#C084FC;"> Pial Mahmud</span>
                     </p>
 
 
@@ -160,13 +160,13 @@
                 <div class="flex items-center gap-3">
                     <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" :aria-label="s.label" class="w-9 h-9 rounded-xl border flex items-center justify-center
          transition-all hover:scale-110 hover:-translate-y-0.5"
-                        style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;"
+                        style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
                         :onmouseover="s.label === 'Fiverr'
                             ? `this.style.borderColor='#1dbf73';this.style.color='#1dbf73';this.style.boxShadow='0 0 10px #1dbf7330'`
-                            : `this.style.borderColor='#3B82F6';this.style.color='#60A5FA';this.style.boxShadow='0 0 10px #3B82F630'`"
+                            : `this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'`"
                         :onmouseout="s.label === 'Fiverr'
-                            ? `this.style.borderColor='#1e3a5f';this.style.color='#A8C4E8';this.style.boxShadow='none'`
-                            : `this.style.borderColor='#1e3a5f';this.style.color='#A8C4E8';this.style.boxShadow='none'`">
+                            ? `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`
+                            : `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`">
                         <!-- GitHub -->
                         <svg v-if="s.label === 'GitHub'" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -197,14 +197,14 @@
                         </svg>
                     </a>
                     <!-- Divider -->
-                    <div class="w-px h-6" style="background:#1e3a5f;"></div>
+                    <div class="w-px h-6" style="background:#3B2A5A;"></div>
 
                     <!-- Scroll to top -->
                     <button @click="scrollToTop()" class="w-9 h-9 rounded-xl border flex items-center justify-center
                    transition-all hover:scale-110 hover:-translate-y-0.5"
-                        style="background:#0D1220;border-color:#1e3a5f;color:#A8C4E8;"
-                        onmouseover="this.style.borderColor='#3B82F6';this.style.color='#60A5FA';this.style.boxShadow='0 0 10px #3B82F630'"
-                        onmouseout="this.style.borderColor='#1e3a5f';this.style.color='#A8C4E8';this.style.boxShadow='none'"
+                        style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
+                        onmouseover="this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'"
+                        onmouseout="this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'"
                         title="Back to top">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -234,11 +234,11 @@
 
     0%,
     100% {
-        box-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F640;
+        box-shadow: 0 0 10px #8B5CF6, 0 0 20px #8B5CF640;
     }
 
     50% {
-        box-shadow: 0 0 16px #3B82F6, 0 0 32px #3B82F680;
+        box-shadow: 0 0 16px #8B5CF6, 0 0 32px #8B5CF680;
     }
 }
 </style>

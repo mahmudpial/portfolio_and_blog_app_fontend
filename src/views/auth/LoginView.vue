@@ -1,15 +1,15 @@
 <template>
     <div class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden"
-        style="background:#05080F;">
+        style="background:#0A0610;">
 
         <!-- Background effects -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute" style="width:600px;height:600px;top:-200px;left:50%;
         transform:translateX(-50%);border-radius:50%;
-        background:radial-gradient(circle,#1e40af20 0%,transparent 70%);filter:blur(50px);"></div>
+        background:radial-gradient(circle,#6D28D920 0%,transparent 70%);filter:blur(50px);"></div>
             <div class="absolute" style="width:300px;height:300px;bottom:-100px;right:-50px;border-radius:50%;
-        background:radial-gradient(circle,#3B82F612 0%,transparent 70%);filter:blur(40px);"></div>
-            <div class="absolute inset-0" style="background-image:radial-gradient(circle,#3B82F612 1px,transparent 1px);
+        background:radial-gradient(circle,#8B5CF612 0%,transparent 70%);filter:blur(40px);"></div>
+            <div class="absolute inset-0" style="background-image:radial-gradient(circle,#8B5CF612 1px,transparent 1px);
         background-size:32px 32px;opacity:0.5;"></div>
         </div>
 
@@ -19,7 +19,7 @@
             <div class="text-center mb-8">
                 <RouterLink to="/" class="inline-flex items-center gap-2 group">
                     <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">Pial</span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500" style="box-shadow:0 0 10px #3B82F6,0 0 20px #3B82F640;
+                    <span class="w-2.5 h-2.5 rounded-full bg-violet-500" style="box-shadow:0 0 10px #8B5CF6,0 0 20px #8B5CF640;
             animation:logoPulse 2s ease-in-out infinite;"></span>
                     <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">Dev</span>
                 </RouterLink>
@@ -29,14 +29,14 @@
             </div>
 
             <!-- Card -->
-            <div class="rounded-2xl border p-8" style="background:#0D1220;border-color:#1e3a5f;
-        box-shadow:0 0 60px #3B82F610,0 40px 80px #00000040;">
+            <div class="rounded-2xl border p-8" style="background:#120E1C;border-color:#3B2A5A;
+        box-shadow:0 0 60px #8B5CF610,0 40px 80px #00000040;">
 
                 <!-- Header -->
                 <div class="flex items-center gap-3 mb-7">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center"
-                        style="background:#3B82F615;border:1px solid #3B82F625;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2">
+                        style="background:#8B5CF615;border:1px solid #8B5CF625;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C084FC" stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />
                         </svg>
@@ -79,10 +79,10 @@
                             </svg>
                             <input v-model="form.email" type="email" required placeholder="your@email.com"
                                 class="w-full pl-11 pr-4 py-3 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#05080F;border:1px solid #1e3a5f;
+                                style="background:#0A0610;border:1px solid #3B2A5A;
                 color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 0 3px #3B82F618'"
-                                onblur="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'" />
+                                onfocus="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 0 3px #8B5CF618'"
+                                onblur="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'" />
                         </div>
                     </div>
 
@@ -94,8 +94,8 @@
                                 Password
                             </label>
                             <RouterLink to="/forgot-password" class="text-xs font-medium transition-colors"
-                                style="color:#3B82F6;font-family:system-ui;" onmouseover="this.style.color='#60A5FA'"
-                                onmouseout="this.style.color='#3B82F6'">
+                                style="color:#8B5CF6;font-family:system-ui;" onmouseover="this.style.color='#C084FC'"
+                                onmouseout="this.style.color='#8B5CF6'">
                                 Forgot password?
                             </RouterLink>
                         </div>
@@ -108,13 +108,13 @@
                             <input v-model="form.password" :type="showPw ? 'text' : 'password'" required
                                 placeholder="••••••••"
                                 class="w-full pl-11 pr-11 py-3 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#05080F;border:1px solid #1e3a5f;
+                                style="background:#0A0610;border:1px solid #3B2A5A;
                 color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#3B82F6';this.style.boxShadow='0 0 0 3px #3B82F618'"
-                                onblur="this.style.borderColor='#1e3a5f';this.style.boxShadow='none'" />
+                                onfocus="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 0 3px #8B5CF618'"
+                                onblur="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'" />
                             <button type="button" @click="showPw = !showPw"
                                 class="absolute right-3.5 top-1/2 -translate-y-1/2 transition-colors"
-                                style="color:#475569;" onmouseover="this.style.color='#60A5FA'"
+                                style="color:#475569;" onmouseover="this.style.color='#C084FC'"
                                 onmouseout="this.style.color='#475569'">
                                 <svg v-if="!showPw" width="15" height="15" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2">
@@ -135,7 +135,7 @@
                     <!-- Submit -->
                     <button type="submit" :disabled="loading" class="w-full py-3.5 text-white font-semibold rounded-xl transition-all
                    hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed
-                   flex items-center justify-center gap-2 mt-2" style="background:#3B82F6;box-shadow:0 0 24px #3B82F635;
+                   flex items-center justify-center gap-2 mt-2" style="background:#8B5CF6;box-shadow:0 0 24px #8B5CF635;
             font-family:system-ui;font-size:15px;">
                         <svg v-if="!loading" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2.5">
@@ -153,15 +153,15 @@
 
                 <!-- Divider -->
                 <div class="flex items-center gap-3 my-6">
-                    <div class="flex-1 h-px" style="background:#0f1f38;"></div>
+                    <div class="flex-1 h-px" style="background:#241730;"></div>
                     <span class="text-xs" style="color:#475569;font-family:system-ui;">or</span>
-                    <div class="flex-1 h-px" style="background:#0f1f38;"></div>
+                    <div class="flex-1 h-px" style="background:#241730;"></div>
                 </div>
 
                 <!-- Register link -->
                 <RouterLink to="/register" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl border
-                 text-sm font-medium transition-all hover:scale-[1.02]" style="border-color:#1e3a5f;color:#A8C4E8;
-          background:#05080F;font-family:system-ui;">
+                 text-sm font-medium transition-all hover:scale-[1.02]" style="border-color:#3B2A5A;color:#C9B9E8;
+          background:#0A0610;font-family:system-ui;">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                         <circle cx="8.5" cy="7" r="4" />
@@ -185,11 +185,11 @@
 
     0%,
     100% {
-        box-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F640;
+        box-shadow: 0 0 10px #8B5CF6, 0 0 20px #8B5CF640;
     }
 
     50% {
-        box-shadow: 0 0 16px #3B82F6, 0 0 32px #3B82F680;
+        box-shadow: 0 0 16px #8B5CF6, 0 0 32px #8B5CF680;
     }
 }
 
