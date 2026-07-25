@@ -31,9 +31,8 @@
 
                     <p class="text-sm leading-relaxed mb-6"
                         style="color:#C9B9E8;font-family:system-ui;max-width:320px;line-height:1.8;">
-                        Full-stack developer crafting fast, accessible, and beautiful
-                        web applications. Open to freelance projects and full-time
-                        opportunities.
+                        I build multi-tenant systems with role-based access control that actually hold up under real use
+                        cases.
                     </p>
 
                     <!-- Available badge -->
@@ -101,8 +100,7 @@
                     <div class="space-y-4 mb-6">
                         <a v-for="info in contactInfo" :key="info.label" :href="info.href"
                             :target="info.href.startsWith('mailto:') ? '_blank' : null"
-                            :rel="info.href.startsWith('mailto:') ? 'noopener noreferrer' : null"
-                            class="flex items-center gap-3 p-3 rounded-xl border transition-all
+                            :rel="info.href.startsWith('mailto:') ? 'noopener noreferrer' : null" class="flex items-center gap-3 p-3 rounded-xl border transition-all
                      hover:-translate-y-0.5 group"
                             style="background:#120E1C;border-color:#3B2A5A;text-decoration:none;"
                             onmouseover="this.style.borderColor='#8B5CF640'"
@@ -118,7 +116,7 @@
                                     {{ info.label }}
                                 </div>
                                 <div class="text-sm font-medium text-white" style="font-family:system-ui;">{{ info.value
-                                }}</div>
+                                    }}</div>
                             </div>
                         </a>
                     </div>
@@ -161,10 +159,10 @@
                     <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" :aria-label="s.label" class="w-9 h-9 rounded-xl border flex items-center justify-center
          transition-all hover:scale-110 hover:-translate-y-0.5"
                         style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
-                        :onmouseover="s.label === 'Fiverr'
-                            ? `this.style.borderColor='#1dbf73';this.style.color='#1dbf73';this.style.boxShadow='0 0 10px #1dbf7330'`
+                        :onmouseover="s.label === 'Upwork'
+                            ? `this.style.borderColor='#6fda44';this.style.color='#6fda44';this.style.boxShadow='0 0 10px #6fda4430'`
                             : `this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'`"
-                        :onmouseout="s.label === 'Fiverr'
+                        :onmouseout="s.label === 'Upwork'
                             ? `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`
                             : `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'`">
                         <!-- GitHub -->
@@ -179,13 +177,11 @@
                                 d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                             <circle cx="4" cy="4" r="2" />
                         </svg>
-                        <!-- Fiverr -->
-                        <svg v-else-if="s.label === 'Fiverr'" width="18" height="18" viewBox="0 0 32 32"
+                        <!-- Upwork -->
+                        <svg v-else-if="s.label === 'Upwork'" width="18" height="18" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
-                                d="M7 32V14h3.5v-1.5C10.5 9 12.5 7 16 7h3v5h-2.5c-1 0-1.5.5-1.5 1.5V14H18.5v5H15V32H7z" />
-                            <circle cx="22.5" cy="8.5" r="3" />
-                            <rect x="20" y="14" width="5" height="18" rx="1" />
+                                d="M13.5 3.5c-1.7 0-3.2 1.1-3.8 2.9l-1.3 4.2c-.4 1.2-.7 2.6-.7 3.7 0 2.3 1.9 4.2 4.2 4.2 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.9-4.2-4.3-4.2-.6 0-1.2.1-1.7.3l.7-2.1c.6-.2 1.2-.3 1.8-.3 1.7 0 3.1 1.3 3.1 3.1 0 1.7-1.3 3.1-3.1 3.1-.8 0-1.5-.3-2-.8l-.8 2.3c.7.7 1.6 1.2 2.6 1.2 2.5 0 4.5-2 4.5-4.5 0-2.5-2-4.5-4.5-4.5z" />
                         </svg>
                         <!-- Globe -->
                         <svg v-else width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -288,7 +284,7 @@ const contactInfo = [
 const socials = [
     { label: 'GitHub', url: 'https://github.com/' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pial-mahmud/' },
-    { label: 'Fiverr', url: 'https://www.fiverr.com/s/akD7e5g' },
+    { label: 'Upwork', url: 'https://www.upwork.com/freelancers/~01e5ccd10431c78406?mp_source=share' },
     { label: 'Website', url: '#' },
 ]
 

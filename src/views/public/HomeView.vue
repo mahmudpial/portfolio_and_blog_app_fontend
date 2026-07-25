@@ -62,9 +62,9 @@
                     <!-- Bio -->
                     <p class="leading-relaxed mb-10 hero-bio"
                         style="color:#C9B9E8;max-width:480px;font-family:system-ui;font-size:16px;line-height:1.8;">
-                        I build fast, accessible, and beautiful web applications — from
-                        pixel-perfect frontends to robust backend systems. Passionate
-                        about clean code and great user experiences.
+                        I build multi-tenant systems with role-based access control that actually hold up under real
+                        use. Proven live in a production RBAC system, and stress-tested by a cross-tenant bug I found
+                        and fixed myself.
                     </p>
 
                     <!-- CTA buttons -->
@@ -114,14 +114,12 @@
                             </svg>
                         </a>
 
-                        <!-- Fiverr -->
-                        <a href="https://www.fiverr.com/s/akD7e5g" target="_blank" class="social-btn"
-                            aria-label="Fiverr">
-                            <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor">
+                        <!-- Upwork -->
+                        <a href="https://www.upwork.com/freelancers/~01e5ccd10431c78406?mp_source=share" target="_blank"
+                            class="social-btn" aria-label="Upwork">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                                 <path
-                                    d="M7 32V14h3.5v-1.5C10.5 9 12.5 7 16 7h3v5h-2.5c-1 0-1.5.5-1.5 1.5V14H18.5v5H15V32H7z" />
-                                <circle cx="22.5" cy="8.5" r="3" />
-                                <rect x="20" y="14" width="5" height="18" rx="1" />
+                                    d="M13.5 3.5c-1.7 0-3.2 1.1-3.8 2.9l-1.3 4.2c-.4 1.2-.7 2.6-.7 3.7 0 2.3 1.9 4.2 4.2 4.2 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.9-4.2-4.3-4.2-.6 0-1.2.1-1.7.3l.7-2.1c.6-.2 1.2-.3 1.8-.3 1.7 0 3.1 1.3 3.1 3.1 0 1.7-1.3 3.1-3.1 3.1-.8 0-1.5-.3-2-.8l-.8 2.3c.7.7 1.6 1.2 2.6 1.2 2.5 0 4.5-2 4.5-4.5 0-2.5-2-4.5-4.5-4.5z" />
                             </svg>
                         </a>
                     </div>
@@ -156,8 +154,9 @@
                                     <div class="w-28 h-28 rounded-full flex items-center justify-center
                               text-3xl font-bold text-white" style="background:linear-gradient(135deg,#3B2A5A 0%,#7C3AED 100%);
                     box-shadow:0 0 0 4px #120E1C,0 0 0 7px #3B2A5A,0 0 40px #8B5CF630;overflow:hidden;">
-                                        <img v-if="homeAvatarUrl && !homeAvatarLoadFailed" :src="homeAvatarUrl" alt="Admin avatar"
-                                            class="w-full h-full object-cover" @error="homeAvatarLoadFailed = true" />
+                                        <img v-if="homeAvatarUrl && !homeAvatarLoadFailed" :src="homeAvatarUrl"
+                                            alt="Admin avatar" class="w-full h-full object-cover"
+                                            @error="homeAvatarLoadFailed = true" />
                                         <span v-else>{{ ownerInitials }}</span>
                                     </div>
                                     <!-- Online indicator -->
@@ -168,11 +167,12 @@
 
                             <!-- Card body -->
                             <div class="px-8 pb-8">
-                                <h3 class="font-bold text-white text-[26px] mb-2 text-center" style="font-family:'Georgia',serif;">
+                                <h3 class="font-bold text-white text-[26px] mb-2 text-center"
+                                    style="font-family:'Georgia',serif;">
                                     {{ ownerName }}
                                 </h3>
                                 <p class="text-base mb-7 text-center" style="color:#C9B9E8;font-family:system-ui;">
-                                    Full-Stack Developer
+                                    Full-Stack Web Developer
                                 </p>
 
                                 <!-- Stats row -->
@@ -183,7 +183,8 @@
                                         <div class="font-bold text-white text-xl" style="font-family:'Georgia',serif;">
                                             {{ stat.value }}
                                         </div>
-                                        <div class="text-xs mt-1" style="color:#C9B9E8;font-family:system-ui;">{{ stat.label
+                                        <div class="text-xs mt-1" style="color:#C9B9E8;font-family:system-ui;">{{
+                                            stat.label
                                             }}</div>
                                     </div>
                                 </div>
@@ -288,7 +289,7 @@
                             {{ skill.name[0].toUpperCase() }}
                         </div>
                         <span class="text-sm font-medium text-white" style="font-family:system-ui;">{{ skill.name
-                            }}</span>
+                        }}</span>
                         <span class="text-xs font-semibold px-2 py-0.5 rounded-full"
                             style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
                             {{ skill.percentage }}%
@@ -795,8 +796,8 @@ watch(homeAvatarUrl, () => {
 
 // ── Typewriter role rotator ──────────────────────────────
 const roles = [
-    'Full-Stack Developer',
-    'Laravel Expert',
+    'Full-Stack Web Developer',
+    'Laravel Backend Expert',
     'UI/UX Enthusiast',
     'API Architect',
     'Problem Solver',
@@ -833,7 +834,7 @@ const projectsLoading = ref(true)
 
 const profileStats = computed(() => [
     { value: projects.value.length > 0 ? projects.value.length + '+' : '3+', label: 'Projects' },
-    { value: '3+', label: 'Years' },
+    { value: '1+', label: 'Years' },
     { value: skills.value.length > 0 ? skills.value.length + '+' : '10+', label: 'Skills' },
 ])
 
