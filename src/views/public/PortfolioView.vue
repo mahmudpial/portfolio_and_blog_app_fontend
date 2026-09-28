@@ -134,10 +134,18 @@
                                     {{ p.title }}
                                 </h3>
 
-                                <p class="text-sm leading-relaxed mb-6"
+                                <p class="text-sm leading-relaxed mb-4"
                                     style="color:#C9B9E8;font-family:system-ui;line-height:1.8;max-width:600px;">
                                     {{ p.description }}
                                 </p>
+
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span v-for="tech in (p.tech_stack?.split(',') || [])" :key="tech"
+                                        class="text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-tighter border transition-colors group-hover:border-purple-500/50"
+                                        style="background:rgba(139, 92, 246, 0.05);color:#C084FC;border-color:rgba(139, 92, 246, 0.1);font-family:system-ui;">
+                                        {{ tech.trim() }}
+                                    </span>
+                                </div>
 
                                 <!-- Buttons -->
                                 <div class="flex flex-wrap gap-3">

@@ -1,315 +1,274 @@
 <template>
-    <div style="background:#0A0610;min-height:100vh;">
-        <div class="max-w-7xl mx-auto px-6 py-8">
+    <div style="background:#0A0610;min-height:100vh;color:#fff;font-family:system-ui;">
+        <div class="max-w-7xl mx-auto px-6 py-10">
 
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
-                    <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
-                        Projects Manager
+            <!-- Header Section -->
+            <div class="flex items-center justify-between mb-10 flex-wrap gap-6">
+                <div class="space-y-1">
+                    <p class="text-xs font-bold uppercase tracking-[0.3em] mb-2"
+                        style="color:#A78BFA;opacity:0.8;">Administrative Control</p>
+                    <h1 class="font-serif text-4xl font-bold text-white tracking-tight">
+                        Project <span style="color:#8B5CF6;">Portfolio</span>
                     </h1>
-                    <p class="text-sm mt-1" style="color:#C9B9E8;font-family:system-ui;">
-                        {{ projects.length }} project{{ projects.length !== 1 ? 's' : '' }} total
+                    <p class="text-sm opacity-60 font-medium">
+                        Managing {{ projects.length }} professional works in your showcase.
                     </p>
                 </div>
-                <button @click="openAdd()" class="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold
-                 rounded-xl transition-all hover:scale-105"
-                    style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
+                <button @click="openAdd" class="group relative flex items-center gap-3 px-6 py-3 text-white text-sm font-bold
+                 rounded-2xl transition-all active:scale-95 overflow-hidden"
+                    style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    <svg class="relative z-10" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="3">
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
-                    Add Project
+                    <span class="relative z-10">Add New Project</span>
                 </button>
             </div>
 
+            <!-- Alert System -->
             <transition name="fade">
-                <div v-if="alertMsg" class="mb-5 p-4 rounded-xl border flex items-center gap-3 text-sm" :style="alertType === 'success'
-                    ? 'background:#052e16;border-color:#16a34a40;color:#4ade80;'
-                    : 'background:#1a0505;border-color:#dc262640;color:#f87171;'" style="font-family:system-ui;">
+                <div v-if="alertMsg" class="mb-8 p-4 rounded-2xl border-l-4 flex items-center gap-3 text-sm font-medium animate-in slide-in-from-top-4"
+                    :style="alertType === 'success'
+                        ? 'background:rgba(16, 185, 129, 0.1);border-color:#10b981;color:#34d399;'
+                        : 'background:rgba(239, 68, 68, 0.1);border-color:#ef4444;color:#f87171;'">
+                    <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" :style="alertType === 'success' ? 'background:#10b981' : 'background:#ef4444'">
+                        <svg class="text-white" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
                     {{ alertMsg }}
                 </div>
             </transition>
 
-            <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
-                <div class="px-6 py-5 border-b" style="border-color:#241730;">
-                    <h2 class="font-bold text-white" style="font-family:'Georgia',serif;">All Projects</h2>
+            <!-- Main Projects Grid/Table -->
+            <div class="rounded-3xl border overflow-hidden backdrop-blur-xl transition-all" style="background:rgba(25, 18, 38, 0.6);border-color:rgba(139, 92, 246, 0.2);">
+                <div class="px-8 py-6 border-b flex items-center justify-between" style="border-color:rgba(139, 92, 246, 0.1);">
+                    <h2 class="font-serif text-xl font-semibold text-white">Curated Works</h2>
+                    <div class="text-xs font-medium opacity-40 uppercase tracking-widest">Sorted by Order</div>
                 </div>
+
                 <div class="overflow-x-auto">
-                    <table class="w-full">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr style="border-bottom:1px solid #241730;">
-                                <th v-for="h in ['Project', 'Category', 'Featured', 'Links', 'Actions']" :key="h"
-                                    class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">{{ h }}</th>
+                            <tr class="bg-white/5">
+                                <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Project Details</th>
+                                <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Category</th>
+                                <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Visibility</th>
+                                <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Links</th>
+                                <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr v-for="p in projects" :key="p.id" class="group transition-colors"
-                                style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
-                                onmouseout="this.style.background='transparent'">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 flex
-                                items-center justify-center"
-                                            style="background:linear-gradient(135deg,#180F28,#3B2A5A);">
+                        <tbody class="divide-y" style="border-color:rgba(139, 92, 246, 0.05);">
+                            <tr v-for="p in projects" :key="p.id" class="group transition-all hover:bg-white/[0.02]">
+                                <td class="px-8 py-5">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all">
                                             <img v-if="p.image" :src="p.image" class="w-full h-full object-cover" />
-                                            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                                stroke="#3B2A5A" stroke-width="1.5">
-                                                <rect x="2" y="3" width="20" height="14" rx="2" />
-                                                <path d="M8 21h8M12 17v4" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <div class="font-semibold text-white text-sm"
-                                                style="font-family:system-ui;">{{ p.title }}</div>
-                                            <div class="text-xs mt-0.5" style="color:#475569;font-family:system-ui;">
-                                                {{ p.description?.substring(0, 50) }}...
+                                            <div v-else class="w-full h-full bg-gradient-to-br from-purple-900 to-black flex items-center justify-center">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2">
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                                </svg>
                                             </div>
                                         </div>
+                                        <div>
+                                            <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors">{{ p.title }}</div>
+                                            <div class="text-xs opacity-50 truncate max-w-xs">{{ p.description }}</div>
+                                        </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <span v-if="p.category" class="text-xs font-semibold px-2.5 py-1 rounded-full"
-                                        style="background:#8B5CF615;color:#C084FC;
-                    border:1px solid #8B5CF630;font-family:system-ui;">
+                                <td class="px-8 py-5">
+                                    <span v-if="p.category" class="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter"
+                                        style="background:rgba(139, 92, 246, 0.1);color:#C084FC;border:1px solid rgba(139, 92, 246, 0.2);">
                                         {{ p.category }}
                                     </span>
-                                    <span v-else style="color:#475569;font-size:12px;">—</span>
+                                    <span v-else class="text-xs opacity-30">—</span>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <span class="flex items-center gap-1.5 text-xs font-medium" :style="p.is_featured
-                                        ? 'color:#F59E0B;'
-                                        : 'color:#475569;'" style="font-family:system-ui;">
-                                        <span>{{ p.is_featured ? '★' : '☆' }}</span>
-                                        {{ p.is_featured ? 'Featured' : 'No' }}
-                                    </span>
+                                <td class="px-8 py-5">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 rounded-full" :style="p.is_featured ? 'background:#F59E0B;box-shadow:0 0 8px #F59E0B;' : 'background:#3B2A5A;'"></div>
+                                        <span class="text-xs font-medium" :style="p.is_featured ? 'color:#F59E0B;' : 'color:#475569;'">
+                                            {{ p.is_featured ? 'Featured' : 'Standard' }}
+                                        </span>
+                                    </div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
+                                <td class="px-8 py-5">
+                                    <div class="flex gap-3">
                                         <a v-if="p.project_url" :href="p.project_url" target="_blank"
-                                            class="text-xs px-2.5 py-1 rounded-lg border transition-colors hover:scale-105"
-                                            style="border-color:#8B5CF630;color:#C084FC;
-                      background:#8B5CF610;font-family:system-ui;">
-                                            Live
+                                            class="p-2 rounded-lg bg-white/5 text-white hover:bg-purple-500/20 transition-all" title="Live Demo">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
                                         </a>
                                         <a v-if="p.github_url" :href="p.github_url" target="_blank"
-                                            class="text-xs px-2.5 py-1 rounded-lg border transition-colors hover:scale-105"
-                                            style="border-color:#3B2A5A;color:#C9B9E8;
-                      background:#0A0610;font-family:system-ui;">
-                                            GitHub
+                                            class="p-2 rounded-lg bg-white/5 text-white hover:bg-purple-500/20 transition-all" title="GitHub Repository">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 0-5-4.8-5-4.8s3-.3 5-.3 5 3.8 5 3.8 5-4.8 5-4.8-5-.3-5-.3-5 3.8-5 3.8z"/><path d="M20 7h-9"/><path d="M14 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M10 11V9a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                                         </a>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
-                                        <button @click="openEdit(p)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
-                             border transition-all hover:scale-105" style="border-color:#3B2A5A;color:#C9B9E8;
-                      background:#0A0610;font-family:system-ui;">
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2.5">
-                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                <td class="px-8 py-5 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button @click="openEdit(p)" class="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                             </svg>
-                                            Edit
                                         </button>
-                                        <button @click="deleteProject(p)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
-                             border transition-all hover:scale-105" style="border-color:#dc262630;color:#f87171;
-                      background:#dc262610;font-family:system-ui;">
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2.5">
-                                                <polyline points="3 6 5 6 21 6" />
-                                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                        <button @click="deleteProject(p)" class="p-2 rounded-xl text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
                                             </svg>
-                                            Delete
                                         </button>
                                     </div>
                                 </td>
                             </tr>
                             <tr v-if="projects.length === 0">
-                                <td colspan="5" class="text-center py-16">
-                                    <div class="text-4xl mb-3">💻</div>
-                                    <p class="text-white font-medium mb-1" style="font-family:system-ui;">
-                                        No projects yet
-                                    </p>
-                                    <p class="text-xs" style="color:#475569;font-family:system-ui;">
-                                        Click "Add Project" to showcase your work.
-                                    </p>
+                                <td colspan="5" class="text-center py-24">
+                                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-4xl">📂</div>
+                                    <p class="text-white font-bold text-lg mb-1">Your gallery is empty</p>
+                                    <p class="text-sm opacity-40">Start by adding your first masterpiece.</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
 
-        <!-- Modal -->
-        <transition name="modal">
-            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
-                style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="modal.show = false">
-                <div class="rounded-2xl border w-full max-w-xl shadow-2xl max-h-screen overflow-y-auto"
-                    style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10"
-                        style="border-color:#241730;background:#120E1C;">
-                        <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
-                            {{ modal.editing ? 'Edit Project' : 'Add Project' }}
-                        </h3>
-                        <button @click="modal.show = false"
-                            class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"
-                            style="color:#475569;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Title</label>
-                            <input v-model="form.title" type="text" placeholder="Project name"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
+            <!-- Enhanced Modal -->
+            <transition name="modal">
+                <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
+                    style="background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
+                    <div class="rounded-3xl border w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto transition-all animate-in zoom-in-95 duration-200"
+                        style="background:#120E1C;border-color:rgba(139, 92, 246, 0.3);">
+                        <div class="flex items-center justify-between px-8 py-6 border-b sticky top-0 z-10"
+                            style="border-color:rgba(139, 92, 246, 0.1);background:#120E1C;">
+                            <h3 class="font-serif text-2xl font-bold text-white">
+                                {{ modal.editing ? 'Refine Project' : 'New Project' }}
+                            </h3>
+                            <button @click="modal.show = false"
+                                class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            </button>
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Description</label>
-                            <textarea v-model="form.description" rows="3" placeholder="Project description..."
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'"
-                                onblur="this.style.borderColor='#3B2A5A'"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Category</label>
-                            <input v-model="form.category" type="text" placeholder="e.g. Web App"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Hero Image URL (Hero
-                                Section Background)</label>
-                            <input v-model="form.hero_image" type="text" placeholder="https://... (for page header)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Project Image URL
-                                (Showcase Section)</label>
-                            <input v-model="form.image" type="text" placeholder="https://... (for project showcase)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Live URL</label>
-                                <input v-model="form.project_url" type="url" placeholder="https://..."
-                                    class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                    onfocus="this.style.borderColor='#8B5CF6'"
-                                    onblur="this.style.borderColor='#3B2A5A'" />
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">GitHub URL</label>
-                                <input v-model="form.github_url" type="url" placeholder="https://github.com/..."
-                                    class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                    onfocus="this.style.borderColor='#8B5CF6'"
-                                    onblur="this.style.borderColor='#3B2A5A'" />
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Technologies
-                                (comma-separated)</label>
-                            <textarea v-model="form.tech_stack" rows="2"
-                                placeholder="e.g. Vue.js, Laravel, MySQL, Tailwind CSS"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'"
-                                onblur="this.style.borderColor='#3B2A5A'"></textarea>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Order</label>
-                                <input v-model="form.order" type="number"
-                                    class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                    onfocus="this.style.borderColor='#8B5CF6'"
-                                    onblur="this.style.borderColor='#3B2A5A'" />
-                            </div>
-                            <div class="flex items-center gap-3 pt-8">
-                                <div class="relative">
-                                    <input type="checkbox" id="featured" v-model="form.is_featured" class="sr-only" />
-                                    <div @click="form.is_featured = !form.is_featured"
-                                        class="w-10 h-6 rounded-full cursor-pointer transition-all flex items-center px-0.5"
-                                        :style="form.is_featured
-                                            ? 'background:#8B5CF6;box-shadow:0 0 8px #8B5CF640;'
-                                            : 'background:#3B2A5A;'">
-                                        <div class="w-5 h-5 rounded-full bg-white shadow transition-transform"
-                                            :style="form.is_featured ? 'transform:translateX(16px);' : ''"></div>
-                                    </div>
+                        <div class="p-8 space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Project Title</label>
+                                    <input v-model="form.title" type="text" placeholder="e.g. AI Portfolio"
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
                                 </div>
-                                <label for="featured" class="text-sm cursor-pointer"
-                                    style="color:#C9B9E8;font-family:system-ui;"
-                                    @click="form.is_featured = !form.is_featured">
-                                    Mark as featured
-                                </label>
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Category</label>
+                                    <input v-model="form.category" type="text" placeholder="e.g. Fullstack Development"
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Description</label>
+                                <textarea v-model="form.description" rows="4" placeholder="Describe the impact and your role..."
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                    @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Project Image URL</label>
+                                    <input v-model="form.image" type="text" placeholder="https://... (thumbnail)"
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Hero Image URL</label>
+                                    <input v-model="form.hero_image" type="text" placeholder="https://... (full header)"
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Live URL</label>
+                                    <input v-model="form.project_url" type="url" placeholder="https://..."
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider opacity-50">GitHub URL</label>
+                                    <input v-model="form.github_url" type="url" placeholder="https://github.com/..."
+                                        class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                        @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Technologies</label>
+                                <textarea v-model="form.tech_stack" rows="2"
+                                    placeholder="e.g. Vue.js, Laravel, MySQL, Tailwind CSS"
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                    @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div class="relative">
+                                        <input type="checkbox" id="featured" v-model="form.is_featured" class="sr-only" />
+                                        <div @click="form.is_featured = !form.is_featured"
+                                            class="w-11 h-6 rounded-full cursor-pointer transition-all flex items-center px-1"
+                                            :style="form.is_featured ? 'background:#8B5CF6;box-shadow:0 0 12px #8B5CF660;' : 'background:#3B2A5A;'">
+                                            <div class="w-4 h-4 rounded-full bg-white shadow transition-transform duration-200"
+                                                :style="form.is_featured ? 'transform:translateX(20px);' : ''"></div>
+                                        </div>
+                                    </div>
+                                    <label for="featured" class="text-sm font-medium cursor-pointer text-white/80"
+                                        @click="form.is_featured = !form.is_featured">
+                                        Featured Showcase
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <label class="text-xs font-bold uppercase tracking-wider opacity-50">Order</label>
+                                    <input v-model="form.order" type="number"
+                                        class="w-20 px-3 py-2 rounded-xl text-sm focus:outline-none border text-center"
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex gap-3 px-6 pb-6">
-                        <button @click="saveProject" :disabled="saving" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
-                     transition-all hover:scale-105 disabled:opacity-50"
-                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
-                            {{ saving ? 'Saving...' : 'Save Project' }}
-                        </button>
-                        <button @click="modal.show = false"
-                            class="flex-1 py-3 rounded-xl text-sm border hover:bg-white/5"
-                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                            Cancel
-                        </button>
+                        <div class="flex gap-4 px-8 pb-8">
+                            <button @click="saveProject" :disabled="saving" class="flex-1 py-4 text-white font-bold rounded-2xl text-sm
+                                transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                                style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
+                                {{ saving ? 'Processing...' : (modal.editing ? 'Update Project' : 'Create Project') }}
+                            </button>
+                            <button @click="modal.show = false"
+                                class="px-8 py-4 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
+                                style="border-color:rgba(139, 92, 246, 0.2);color:#C9B9E8;">
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </transition>
+            </transition>
+        </div>
     </div>
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .3s
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0
-}
-
-.modal-enter-active,
-.modal-leave-active {
-    transition: all .25s ease
-}
-
-.modal-enter-from,
-.modal-leave-to {
-    opacity: 0;
-    transform: scale(.96) translateY(8px)
-}
+.fade-enter-active, .fade-leave-active { transition: all .3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(-10px); }
+.modal-enter-active, .modal-leave-active { transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.modal-enter-from, .modal-leave-to { opacity: 0; transform: scale(.95) translateY(20px); }
 </style>
 
 <script setup>
@@ -349,7 +308,6 @@ function openEdit(p) {
     Object.assign(form, { ...p }); modal.editing = true; modal.editId = p.id; modal.show = true
 }
 async function saveProject() {
-    // Validate required fields
     if (!form.title?.trim()) {
         showAlert('Project title is required', 'error')
         return
@@ -362,14 +320,8 @@ async function saveProject() {
     saving.value = true
     try {
         const payload = { ...form }
-
-        // Ensure boolean is properly sent
-        if (payload.is_featured === undefined) {
-            payload.is_featured = false
-        }
-        if (!payload.order) {
-            payload.order = 0
-        }
+        if (payload.is_featured === undefined) payload.is_featured = false
+        if (!payload.order) payload.order = 0
 
         if (modal.editing) {
             await api.put(`/admin/projects/${modal.editId}`, payload)
