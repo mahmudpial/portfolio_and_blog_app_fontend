@@ -63,12 +63,7 @@
                             <td class="px-8 py-5">
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all">
-                                        <img v-if="p.image" :src="p.image" class="w-full h-full object-cover" />
-                                        <div v-else class="w-full h-full bg-gradient-to-br from-purple-900 to-black flex items-center justify-center">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                            </svg>
-                                        </div>
+                                        <img :src="getProjectImage(p)" class="w-full h-full object-cover" />
                                     </div>
                                     <div>
                                         <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors">{{ p.title }}</div>
@@ -317,6 +312,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import api from '@/api/axios'
+import { getProjectImage } from '@/utils/projectImage'
 
 const projects = ref([])
 const saving = ref(false)

@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="ai-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050B14"/>
+      <stop offset="50%" stop-color="#0B132B"/>
+      <stop offset="100%" stop-color="#070719"/>
+    </linearGradient>
+    <linearGradient id="ai-cyan-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="ai-glow-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="ai-orb-1" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ai-orb-2" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ai-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <pattern id="ai-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="40" cy="0" r="1.5" fill="#06B6D4" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#ai-bg)"/>
+  <rect width="1200" height="675" fill="url(#ai-orb-1)"/>
+  <rect width="1200" height="675" fill="url(#ai-orb-2)"/>
+  <rect width="1200" height="675" fill="url(#ai-grid)"/>
+
+  <!-- Top Glass Bar / App Header -->
+  <rect x="50" y="40" width="1100" height="60" rx="16" fill="#0F172A" fill-opacity="0.8" stroke="#1E293B" stroke-width="1.5"/>
+  <circle cx="80" cy="70" r="6" fill="#EF4444"/>
+  <circle cx="100" cy="70" r="6" fill="#F59E0B"/>
+  <circle cx="120" cy="70" r="6" fill="#10B981"/>
+  
+  <text x="160" y="75" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">FLYRANK AI // LLM STUDIO &amp; PROMPT ENGINE</text>
+  
+  <rect x="880" y="55" width="120" height="30" rx="8" fill="#06B6D4" fill-opacity="0.15" stroke="#06B6D4" stroke-width="1"/>
+  <text x="940" y="75" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">● GEMINI 1.5 PRO</text>
+  
+  <rect x="1015" y="55" width="115" height="30" rx="8" fill="#8B5CF6" fill-opacity="0.2" stroke="#8B5CF6" stroke-width="1"/>
+  <text x="1072" y="75" fill="#C084FC" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">LATENCY: 14ms</text>
+
+  <!-- Left Panel: Neural Graph & Pipeline Orchestrator -->
+  <g transform="translate(50, 120)">
+    <rect width="680" height="495" rx="20" fill="#0A0F1D" fill-opacity="0.85" stroke="#1E293B" stroke-width="1.5"/>
+    
+    <!-- Header of Left Panel -->
+    <text x="30" y="45" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Autonomous Workflow Pipeline</text>
+    <text x="30" y="68" fill="#64748B" font-family="system-ui, sans-serif" font-size="12">Multi-agent LangChain / Gemini API Node Graph</text>
+    
+    <!-- Status Pill -->
+    <rect x="520" y="28" width="130" height="28" rx="14" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-width="1"/>
+    <text x="585" y="46" fill="#34D399" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle">STREAMING ACTIVE</text>
+
+    <!-- Node 1: Input Ingestion -->
+    <g transform="translate(30, 110)">
+      <rect width="180" height="100" rx="14" fill="#111827" stroke="#06B6D4" stroke-width="1.5" filter="url(#ai-glow)"/>
+      <rect width="180" height="100" rx="14" fill="#0F172A" stroke="#06B6D4" stroke-width="1.5"/>
+      <circle cx="28" cy="30" r="10" fill="#06B6D4" fill-opacity="0.2"/>
+      <path d="M 24 30 L 32 30 M 28 26 L 28 34" stroke="#06B6D4" stroke-width="2"/>
+      <text x="48" y="34" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Prompt Ingestion</text>
+      <text x="20" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">RAG Context: 4.8 KB</text>
+      <text x="20" y="80" fill="#06B6D4" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Cosine Sim: 0.94</text>
+    </g>
+
+    <!-- Connector 1 -->
+    <path d="M 210 160 L 260 160" stroke="#06B6D4" stroke-width="2.5" stroke-dasharray="5 3"/>
+    <polygon points="260,160 252,155 252,165" fill="#06B6D4"/>
+
+    <!-- Node 2: Vector Embedding & Neural Model -->
+    <g transform="translate(260, 110)">
+      <rect width="180" height="100" rx="14" fill="#15102A" stroke="#8B5CF6" stroke-width="2"/>
+      <circle cx="28" cy="30" r="10" fill="#8B5CF6" fill-opacity="0.2"/>
+      <polygon points="28,24 34,34 22,34" fill="#8B5CF6"/>
+      <text x="48" y="34" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Gemini LLM Core</text>
+      <text x="20" y="62" fill="#C084FC" font-family="system-ui, sans-serif" font-size="11">Top-P: 0.95 | Temp: 0.2</text>
+      <text x="20" y="80" fill="#34D399" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Tokens: 1,420 / sec</text>
+    </g>
+
+    <!-- Connector 2 -->
+    <path d="M 440 160 L 490 160" stroke="#8B5CF6" stroke-width="2.5" stroke-dasharray="5 3"/>
+    <polygon points="490,160 482,155 482,165" fill="#8B5CF6"/>
+
+    <!-- Node 3: Structured JSON Output -->
+    <g transform="translate(490, 110)">
+      <rect width="160" height="100" rx="14" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
+      <circle cx="28" cy="30" r="10" fill="#10B981" fill-opacity="0.2"/>
+      <circle cx="28" cy="30" r="4" fill="#10B981"/>
+      <text x="48" y="34" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="13" font-weight="700">JSON Output</text>
+      <text x="20" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Schema: Validated</text>
+      <text x="20" y="80" fill="#10B981" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Status: 200 OK</text>
+    </g>
+
+    <!-- Lower Live AI Terminal Code Preview -->
+    <g transform="translate(30, 240)">
+      <rect width="620" height="225" rx="14" fill="#030712" stroke="#1F2937" stroke-width="1"/>
+      <rect x="0" y="0" width="620" height="32" rx="14" fill="#111827"/>
+      <text x="20" y="21" fill="#94A3B8" font-family="monospace" font-size="11">terminal :: ai-pipeline.log</text>
+      
+      <text x="20" y="65" fill="#38BDF8" font-family="monospace" font-size="12">[INFO] POST /api/v1/ai/generate-insights (payload: 1.2mb)</text>
+      <text x="20" y="90" fill="#A78BFA" font-family="monospace" font-size="12">[GEMINI] Embedding computed via text-embedding-004 (768 dimensions)</text>
+      <text x="20" y="115" fill="#34D399" font-family="monospace" font-size="12">[OUTPUT] { "sentiment": "bullish", "confidence": 0.984, "entities": 14 }</text>
+      <text x="20" y="140" fill="#FCD34D" font-family="monospace" font-size="12">[CACHE] Redis hit for semantic cluster #8812 (took 1.2ms)</text>
+      <text x="20" y="165" fill="#E2E8F0" font-family="monospace" font-size="12">[STREAM] Chunk #24 delivered — Response duration: 182ms</text>
+      
+      <!-- Blinking Cursor -->
+      <rect x="420" y="153" width="8" height="15" fill="#06B6D4">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+  </g>
+
+  <!-- Right Panel: Analytics, Metrics & AI Gauges -->
+  <g transform="translate(755, 120)">
+    <rect width="395" height="495" rx="20" fill="#0A0F1D" fill-opacity="0.85" stroke="#1E293B" stroke-width="1.5"/>
+    
+    <text x="25" y="45" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Real-time AI Inference</text>
+    <text x="25" y="68" fill="#64748B" font-family="system-ui, sans-serif" font-size="12">Telemetry &amp; Rate-limit Monitor</text>
+
+    <!-- Metric Card 1 -->
+    <g transform="translate(25, 95)">
+      <rect width="165" height="90" rx="12" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
+      <text x="16" y="28" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="600">TOTAL TOKENS</text>
+      <text x="16" y="60" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="24" font-weight="800">4.82M</text>
+      <text x="16" y="78" fill="#10B981" font-family="system-ui, sans-serif" font-size="10">▲ 24.5% vs yesterday</text>
+    </g>
+
+    <!-- Metric Card 2 -->
+    <g transform="translate(205, 95)">
+      <rect width="165" height="90" rx="12" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
+      <text x="16" y="28" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="600">AVG LATENCY</text>
+      <text x="16" y="60" fill="#C084FC" font-family="system-ui, sans-serif" font-size="24" font-weight="800">185ms</text>
+      <text x="16" y="78" fill="#34D399" font-family="system-ui, sans-serif" font-size="10">● 99.98% SLA target</text>
+    </g>
+
+    <!-- Waveform Graph -->
+    <g transform="translate(25, 210)">
+      <rect width="345" height="150" rx="14" fill="#030712" stroke="#1E293B" stroke-width="1"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Token Throughput (Tokens/Min)</text>
+      
+      <!-- Sparkline path -->
+      <path d="M 20 120 Q 70 80, 110 95 T 180 50 T 250 80 T 325 35" fill="none" stroke="url(#ai-cyan-purple)" stroke-width="3.5" filter="url(#ai-glow)"/>
+      <path d="M 20 120 Q 70 80, 110 95 T 180 50 T 250 80 T 325 35 L 325 135 L 20 135 Z" fill="url(#ai-glow-cyan)" opacity="0.15"/>
+      
+      <circle cx="325" cy="35" r="5" fill="#06B6D4" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="270" y="30" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="11" font-weight="700">98.4k/m</text>
+    </g>
+
+    <!-- Models in Cluster -->
+    <g transform="translate(25, 380)">
+      <rect width="345" height="90" rx="14" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
+      <text x="18" y="28" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="600">CONNECTED APIS &amp; PROVIDERS</text>
+      <circle cx="30" cy="55" r="8" fill="#4285F4"/>
+      <text x="46" y="60" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Google Gemini API</text>
+      
+      <circle cx="190" cy="55" r="8" fill="#10A37F"/>
+      <text x="206" y="60" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12" font-weight="600">OpenAI Embeddings</text>
+    </g>
+  </g>
+</svg>

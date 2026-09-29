@@ -399,7 +399,7 @@
                         <!-- Image / preview -->
                         <div class="h-48 relative overflow-hidden flex items-center justify-center"
                             style="background:linear-gradient(135deg,#180F28 0%,#241338 100%);">
-                            <img :src="getProjectImage(p)" :alt="p.title"
+                            <img :src="getProjectImage(p, i)" :alt="p.title"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div class="absolute inset-0 pointer-events-none"
                                 style="background:linear-gradient(to top, rgba(18,14,28,0.4) 0%, transparent 60%);"></div>
