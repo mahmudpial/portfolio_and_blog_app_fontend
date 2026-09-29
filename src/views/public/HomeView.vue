@@ -29,10 +29,12 @@
                 <div class="hero-left">
 
                     <!-- Available badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8 text-sm font-medium badge-fade-in"
-                        style="border-color:#3B2A5A;background:#120E1C;color:#4ade80;font-family:system-ui;">
-                        <span class="w-2 h-2 rounded-full bg-green-400"
-                            style="animation:greenPulse 2s infinite;"></span>
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border mb-8 text-xs font-semibold badge-fade-in shadow-[0_0_20px_rgba(74,222,128,0.15)]"
+                        style="border-color:rgba(74,222,128,0.3);background:rgba(5,46,22,0.6);color:#4ade80;font-family:system-ui;backdrop-filter:blur(8px);">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
                         Available for hire
                     </div>
 
@@ -69,35 +71,36 @@
 
                     <!-- CTA buttons -->
                     <div class="flex flex-wrap gap-4 mb-10 hero-btns">
-                        <RouterLink to="/portfolio" class="flex items-center gap-2 px-7 py-3.5 text-white font-semibold rounded-2xl
-                     transition-all hover:scale-105 hover:shadow-2xl" style="background:#8B5CF6;box-shadow:0 0 28px #8B5CF640;
+                        <RouterLink to="/portfolio" class="flex items-center gap-2.5 px-7 py-3.5 text-white font-bold rounded-2xl
+                     transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg group/btn relative overflow-hidden" style="background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);box-shadow:0 0 28px rgba(139,92,246,0.45);
               font-family:system-ui;font-size:15px;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" class="transition-transform duration-300 group-hover/btn:scale-110">
                                 <rect x="2" y="3" width="20" height="14" rx="2" />
                                 <path d="M8 21h8M12 17v4" />
                             </svg>
-                            View My Work
+                            <span>View My Work</span>
+                            <span class="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                         </RouterLink>
-                        <RouterLink to="/contact" class="flex items-center gap-2 px-7 py-3.5 font-semibold rounded-2xl border
-                     transition-all hover:scale-105 hover:border-violet-500" style="border-color:#3B2A5A;color:#C9B9E8;background:#120E1C;
+                        <RouterLink to="/contact" class="flex items-center gap-2.5 px-7 py-3.5 font-bold rounded-2xl border
+                     transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-violet-600/20 hover:text-white hover:border-violet-400 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]" style="border-color:#3B2A5A;color:#C9B9E8;background:#140F24;
               font-family:system-ui;font-size:15px;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                 <polyline points="22,6 12,13 2,6" />
                             </svg>
-                            Get In Touch
+                            <span>Get In Touch</span>
                         </RouterLink>
                     </div>
 
                     <!-- Social icons -->
                     <div class="flex items-center gap-4 hero-socials">
-                        <span class="text-xs uppercase tracking-widest" style="color:#475569;font-family:system-ui;">
+                        <span class="text-xs uppercase tracking-widest font-semibold" style="color:#64748B;font-family:system-ui;">
                             Find me on
                         </span>
                         <!-- GitHub -->
-                        <a href="https://github.com/" target="_blank" class="social-btn" aria-label="GitHub">
+                        <a href="https://github.com/" target="_blank" class="social-btn social-github" aria-label="GitHub">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
@@ -105,7 +108,7 @@
                         </a>
 
                         <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/pial-mahmud/" target="_blank" class="social-btn"
+                        <a href="https://www.linkedin.com/in/pial-mahmud/" target="_blank" class="social-btn social-linkedin"
                             aria-label="LinkedIn">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -116,7 +119,7 @@
 
                         <!-- Upwork -->
                         <a href="https://www.upwork.com/freelancers/~01e5ccd10431c78406?mp_source=share" target="_blank"
-                            class="social-btn" aria-label="Upwork">
+                            class="social-btn social-upwork" aria-label="Upwork">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M13.5 3.5c-1.7 0-3.2 1.1-3.8 2.9l-1.3 4.2c-.4 1.2-.7 2.6-.7 3.7 0 2.3 1.9 4.2 4.2 4.2 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.9-4.2-4.3-4.2-.6 0-1.2.1-1.7.3l.7-2.1c.6-.2 1.2-.3 1.8-.3 1.7 0 3.1 1.3 3.1 3.1 0 1.7-1.3 3.1-3.1 3.1-.8 0-1.5-.3-2-.8l-.8 2.3c.7.7 1.6 1.2 2.6 1.2 2.5 0 4.5-2 4.5-4.5 0-2.5-2-4.5-4.5-4.5z" />
@@ -131,59 +134,61 @@
 
                         <!-- Floating "Clean Code" badge -->
                         <div class="absolute -top-5 left-2 z-20 flex items-center gap-2 px-4 py-2
-                        rounded-xl border text-sm font-medium floating-badge-1" style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;
-              font-family:system-ui;box-shadow:0 8px 32px #00000060;">
-                            <span style="color:#C084FC;font-weight:600;">&lt;/&gt;</span> Clean Code
+                        rounded-2xl border text-xs font-bold floating-badge-1" style="background:rgba(20,15,36,0.92);border-color:rgba(139,92,246,0.4);color:#E2D9F3;
+              font-family:system-ui;box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(139,92,246,0.25);backdrop-filter:blur(10px);">
+                            <span class="text-violet-400 font-extrabold">&lt;/&gt;</span> Clean Code
                         </div>
 
                         <!-- Card -->
-                        <div class="rounded-3xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;
-              box-shadow:0 0 80px #8B5CF618,0 40px 80px #00000060;">
+                        <div class="rounded-3xl border overflow-hidden transition-all duration-500 hover:shadow-[0_0_90px_rgba(139,92,246,0.25)]" style="background:rgba(18,14,28,0.95);border-color:#3B2A5A;
+              box-shadow:0 0 80px rgba(139,92,246,0.15),0 40px 80px #00000060;backdrop-filter:blur(12px);">
 
                             <!-- Card header with avatar -->
-                            <div class="relative flex flex-col items-center pt-14 pb-10 px-8"
-                                style="background:linear-gradient(180deg,#180F28 0%,#120E1C 100%);">
+                            <div class="relative flex flex-col items-center pt-14 pb-8 px-8"
+                                style="background:linear-gradient(180deg,#1C1333 0%,#120E1C 100%);">
                                 <!-- Corner dots -->
-                                <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-violet-500"
-                                    style="box-shadow:0 0 8px #8B5CF6;animation:dotPulse 3s infinite;"></div>
-                                <div class="absolute bottom-6 left-4 w-1.5 h-1.5 rounded-full"
+                                <div class="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-violet-400"
+                                    style="box-shadow:0 0 10px #8B5CF6;animation:dotPulse 3s infinite;"></div>
+                                <div class="absolute bottom-6 left-4 w-2 h-2 rounded-full"
                                     style="background:#3B2A5A;"></div>
 
                                 <!-- Avatar circle with ring -->
                                 <div class="relative mb-0">
                                     <div class="w-28 h-28 rounded-full flex items-center justify-center
-                              text-3xl font-bold text-white" style="background:linear-gradient(135deg,#3B2A5A 0%,#7C3AED 100%);
-                    box-shadow:0 0 0 4px #120E1C,0 0 0 7px #3B2A5A,0 0 40px #8B5CF630;overflow:hidden;">
+                              text-3xl font-bold text-white transition-transform duration-500 hover:scale-105" style="background:linear-gradient(135deg,#3B2A5A 0%,#7C3AED 100%);
+                    box-shadow:0 0 0 4px #120E1C,0 0 0 8px rgba(139,92,246,0.35),0 0 45px rgba(139,92,246,0.4);overflow:hidden;">
                                         <img v-if="homeAvatarUrl && !homeAvatarLoadFailed" :src="homeAvatarUrl"
                                             alt="Admin avatar" class="w-full h-full object-cover"
                                             @error="homeAvatarLoadFailed = true" />
                                         <span v-else>{{ ownerInitials }}</span>
                                     </div>
-                                    <!-- Online indicator -->
-                                    <div class="absolute bottom-1 right-1 w-5 h-5 rounded-full border-[3px] bg-green-400"
-                                        style="border-color:#120E1C;box-shadow:0 0 6px #4ade80;"></div>
+                                    <!-- Online indicator with pulse -->
+                                    <div class="absolute bottom-1 right-1 flex items-center justify-center">
+                                        <span class="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-green-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-4 w-4 border-2 border-[#120E1C] bg-green-500 shadow-[0_0_8px_#4ade80]"></span>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Card body -->
                             <div class="px-8 pb-8">
-                                <h3 class="font-bold text-white text-[26px] mb-2 text-center"
+                                <h3 class="font-bold text-white text-[26px] mb-1.5 text-center"
                                     style="font-family:'Georgia',serif;">
                                     {{ ownerName }}
                                 </h3>
-                                <p class="text-base mb-7 text-center" style="color:#C9B9E8;font-family:system-ui;">
+                                <p class="text-sm font-medium mb-7 text-center" style="color:#C9B9E8;font-family:system-ui;">
                                     Full-Stack Web Developer
                                 </p>
 
                                 <!-- Stats row -->
                                 <div class="grid grid-cols-3 gap-3 mb-7">
                                     <div v-for="stat in profileStats" :key="stat.label"
-                                        class="text-center py-4 rounded-2xl transition-all hover:scale-105 cursor-default"
-                                        style="background:#0A0610;border:1px solid #241730;">
-                                        <div class="font-bold text-white text-xl" style="font-family:'Georgia',serif;">
+                                        class="text-center py-3.5 rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-[#1A122E] hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] cursor-default group/stat"
+                                        style="background:#0D0818;border:1px solid #2A1C44;">
+                                        <div class="font-bold text-white text-xl group-hover/stat:text-violet-300 transition-colors font-serif">
                                             {{ stat.value }}
                                         </div>
-                                        <div class="text-xs mt-1" style="color:#C9B9E8;font-family:system-ui;">{{
+                                        <div class="text-[11px] font-semibold mt-0.5 tracking-wider uppercase" style="color:#A79AC5;font-family:system-ui;">{{
                                             stat.label
                                             }}</div>
                                     </div>
@@ -191,10 +196,12 @@
 
                                 <!-- Open to work -->
                                 <div class="flex justify-center">
-                                    <div class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold"
-                                        style="background:#052e16;color:#4ade80;font-family:system-ui;">
-                                        <span class="w-2 h-2 rounded-full bg-green-400"
-                                            style="box-shadow:0 0 6px #4ade80;animation:greenPulse 2s infinite;"></span>
+                                    <div class="flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+                                        style="background:rgba(5, 46, 22, 0.7);color:#4ade80;border:1px solid rgba(74,222,128,0.3);backdrop-filter:blur(6px);font-family:system-ui;">
+                                        <span class="relative flex h-2 w-2">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </span>
                                         Open to Work
                                     </div>
                                 </div>
@@ -203,7 +210,7 @@
 
                         <!-- Floating glow ring behind card -->
                         <div class="absolute inset-0 -z-10 rounded-3xl"
-                            style="box-shadow:0 0 80px #8B5CF620;transform:scale(1.05);"></div>
+                            style="box-shadow:0 0 80px rgba(139,92,246,0.25);transform:scale(1.05);"></div>
                     </div>
                 </div>
             </div>
@@ -818,23 +825,41 @@
 
 /* Social buttons */
 .social-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
     border: 1px solid #3B2A5A;
-    background: #120E1C;
+    background: #140F24;
     color: #C9B9E8;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all .2s;
+    transition: all .25s ease;
 }
 
 .social-btn:hover {
-    border-color: #8B5CF6;
-    color: #C084FC;
-    transform: scale(1.1) translateY(-2px);
-    box-shadow: 0 0 12px #8B5CF630;
+    transform: scale(1.12) translateY(-2px);
+}
+
+.social-github:hover {
+    border-color: #A855F7;
+    background: rgba(168, 85, 247, 0.15);
+    color: #FFFFFF;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+}
+
+.social-linkedin:hover {
+    border-color: #38BDF8;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38BDF8;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+.social-upwork:hover {
+    border-color: #10B981;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
 }
 </style>
 
