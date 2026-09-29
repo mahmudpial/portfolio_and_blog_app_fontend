@@ -25,10 +25,108 @@
 
             <!-- Desktop nav -->
             <div class="hidden md:flex items-center gap-1">
-                <RouterLink v-for="link in navLinks" :key="link.to" :to="link.to"
-                    class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
+                <!-- Home -->
+                <RouterLink to="/" class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
                     :style="`color: var(--color-text);`" active-class="nav-active">
-                    {{ link.label }}
+                    Home
+                </RouterLink>
+
+                <!-- About -->
+                <RouterLink to="/about" class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
+                    :style="`color: var(--color-text);`" active-class="nav-active">
+                    About
+                </RouterLink>
+
+                <!-- Services & Solutions Dropdown Group -->
+                <div class="relative" ref="servicesDropdownRef" @mouseenter="servicesMenuOpen = true" @mouseleave="servicesMenuOpen = false">
+                    <button @click="servicesMenuOpen = !servicesMenuOpen"
+                        class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
+                        :class="{ 'nav-active': isServicesActive }"
+                        :style="`color: var(--color-text);`">
+                        <span>Services &amp; Pricing</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            class="transition-transform duration-200 text-purple-300"
+                            :style="servicesMenuOpen ? 'transform:rotate(180deg);color:#C084FC;' : ''">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+
+                    <!-- Mega Dropdown Panel -->
+                    <transition name="dropdown">
+                        <div v-if="servicesMenuOpen"
+                            class="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl border p-2.5 shadow-2xl z-50 overflow-hidden"
+                            style="background:rgba(18, 14, 28, 0.96); backdrop-filter:blur(24px); border-color:rgba(139, 92, 246, 0.25); box-shadow:0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(139,92,246,0.15);">
+                            
+                            <!-- Skills -->
+                            <RouterLink to="/skills" @click="servicesMenuOpen = false"
+                                class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
+                                    style="background:rgba(139, 92, 246, 0.15); border:1px solid rgba(139, 92, 246, 0.3); color:#C084FC;">
+                                    ⚡
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">
+                                        Skills Matrix
+                                    </div>
+                                    <div class="text-[11px] text-purple-300/70 leading-tight mt-0.5">
+                                        Tech stack, frameworks &amp; languages
+                                    </div>
+                                </div>
+                            </RouterLink>
+
+                            <!-- Services -->
+                            <RouterLink to="/#services" @click="servicesMenuOpen = false"
+                                class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
+                                    style="background:rgba(6, 182, 212, 0.15); border:1px solid rgba(6, 182, 212, 0.3); color:#38BDF8;">
+                                    🛠️
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
+                                        Service Offerings
+                                    </div>
+                                    <div class="text-[11px] text-purple-300/70 leading-tight mt-0.5">
+                                        Full-stack systems, APIs &amp; architecture
+                                    </div>
+                                </div>
+                            </RouterLink>
+
+                            <!-- Pricing -->
+                            <RouterLink to="/pricing" @click="servicesMenuOpen = false"
+                                class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
+                                    style="background:rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.3); color:#34D399;">
+                                    💎
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                                        Pricing &amp; Plans
+                                    </div>
+                                    <div class="text-[11px] text-purple-300/70 leading-tight mt-0.5">
+                                        Predictable tiers, scopes &amp; milestones
+                                    </div>
+                                </div>
+                            </RouterLink>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Portfolio -->
+                <RouterLink to="/portfolio" class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
+                    :style="`color: var(--color-text);`" active-class="nav-active">
+                    Portfolio
+                </RouterLink>
+
+                <!-- Blog -->
+                <RouterLink to="/blog" class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
+                    :style="`color: var(--color-text);`" active-class="nav-active">
+                    Blog
+                </RouterLink>
+
+                <!-- Contact -->
+                <RouterLink to="/contact" class="nav-link relative px-3.5 py-2 text-sm font-medium rounded-lg transition-all"
+                    :style="`color: var(--color-text);`" active-class="nav-active">
+                    Contact
                 </RouterLink>
             </div>
 
@@ -179,11 +277,57 @@
             <div v-if="menuOpen" class="md:hidden border-t overflow-hidden"
                 style="background:var(--color-background-soft);border-color:var(--color-border);">
                 <div class="px-6 py-5 flex flex-col gap-1">
-                    <RouterLink v-for="link in navLinks" :key="link.to" :to="link.to" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-                   transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;"
-                        active-class="mobile-active">
+                    <RouterLink to="/" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;" active-class="mobile-active">
                         <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
-                        {{ link.label }}
+                        Home
+                    </RouterLink>
+
+                    <RouterLink to="/about" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;" active-class="mobile-active">
+                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
+                        About
+                    </RouterLink>
+
+                    <!-- Mobile Services Accordion -->
+                    <div class="py-1">
+                        <button @click="mobileServicesOpen = !mobileServicesOpen"
+                            class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 cursor-pointer border-0 bg-transparent"
+                            :style="`color: var(--color-text);`" style="font-family:system-ui;">
+                            <div class="flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
+                                <span>Services &amp; Pricing</span>
+                            </div>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                class="transition-transform duration-200 text-purple-300"
+                                :style="mobileServicesOpen ? 'transform:rotate(180deg);color:#C084FC;' : ''">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </button>
+                        <div v-if="mobileServicesOpen" class="pl-8 pr-4 space-y-1 mt-1 border-l-2 ml-4 border-purple-500/20">
+                            <RouterLink to="/skills" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
+                                <span>⚡ Skills Matrix</span>
+                            </RouterLink>
+                            <RouterLink to="/#services" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
+                                <span>🛠️ Service Offerings</span>
+                            </RouterLink>
+                            <RouterLink to="/pricing" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
+                                <span>💎 Pricing &amp; Plans</span>
+                            </RouterLink>
+                        </div>
+                    </div>
+
+                    <RouterLink to="/portfolio" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;" active-class="mobile-active">
+                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
+                        Portfolio
+                    </RouterLink>
+
+                    <RouterLink to="/blog" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;" active-class="mobile-active">
+                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
+                        Blog
+                    </RouterLink>
+
+                    <RouterLink to="/contact" @click="menuOpen = false" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-decoration-none" :style="`color: var(--color-text);`" style="font-family:system-ui;" active-class="mobile-active">
+                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#8B5CF6;"></span>
+                        Contact
                     </RouterLink>
 
                     <div class="h-px my-3" style="background:var(--color-border);"></div>
@@ -271,32 +415,32 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
 import api from '@/api/axios'
 
 const auth = useAuthStore()
 const themeStore = useThemeStore()
+const route = useRoute()
+
 const menuOpen = ref(false)
+const servicesMenuOpen = ref(false)
+const servicesDropdownRef = ref(null)
+const mobileServicesOpen = ref(false)
 const profileMenuOpen = ref(false)
 const profileMenuRef = ref(null)
 const settings = ref({})
+
+const isServicesActive = computed(() => {
+    return ['/skills', '/pricing'].includes(route.path) || route.path.startsWith('/services')
+})
 
 const themeColors = computed(() => {
     return themeStore.isDark
         ? { bg: '18, 14, 28', border: '#3B2A5A' }
         : { bg: '240, 240, 245', border: '#D1D5DB' }
 })
-
-const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/skills', label: 'Skills' },
-    { to: '/portfolio', label: 'Portfolio' },
-    { to: '/pricing', label: 'Pricing' },
-    { to: '/blog', label: 'Blog' },
-    { to: '/contact', label: 'Contact' },
-]
 
 async function fetchSettings() {
     try {
@@ -327,6 +471,9 @@ async function handleLogout() {
 function handleClickOutside(event) {
     if (!profileMenuRef.value?.contains(event.target)) {
         closeProfileMenu()
+    }
+    if (!servicesDropdownRef.value?.contains(event.target)) {
+        servicesMenuOpen.value = false
     }
 }
 

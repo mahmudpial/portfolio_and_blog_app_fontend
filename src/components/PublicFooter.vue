@@ -30,8 +30,8 @@
                     </RouterLink>
 
                     <p class="text-sm leading-relaxed mb-6"
-                        style="color:#C9B9E8;font-family:system-ui;max-width:360px;line-height:1.8;">
-                        {{ settings['footer_bio'] || 'I build multi-tenant systems with role-based access control that actually hold up under real use cases.' }}
+                        style="color:#C9B9E8;font-family:system-ui;max-width:380px;line-height:1.8;">
+                        {{ settings['footer_bio'] || 'I build multi-tenant systems with role-based access control that actually hold up under real use cases. Specializing in high-performance Laravel architectures, reactive Vue 3 applications, and resilient cloud infrastructures.' }}
                     </p>
 
                     <!-- Social Icons Section directly under subheading -->
