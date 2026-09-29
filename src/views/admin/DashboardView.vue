@@ -154,39 +154,67 @@
             </div>
 
             <!-- Filters -->
-            <div class="px-6 py-4 border-b flex flex-wrap gap-3 items-center" style="border-color:#241730;">
-                <div class="relative flex-1 min-w-48">
-                    <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" width="14"
-                        height="14" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5">
+            <div class="px-6 py-4 border-b flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between" style="border-color:#241730;">
+                <!-- Search input -->
+                <div class="relative flex-1 min-w-0">
+                    <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="15"
+                        height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
-                    <input v-model="search" @input="filterUsers()" type="text"
+                    <input v-model="search" type="text"
                         placeholder="Search by name or email..."
-                        class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
+                        class="w-full h-11 pl-10 pr-4 rounded-xl text-sm focus:outline-none transition-all"
                         style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;"
-                        onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
+                        onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 14px rgba(139,92,246,0.2)';"
+                        onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
                 </div>
-                <select v-model="filterRole" @change="filterUsers()"
-                    class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                    style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                    <option value="">All roles</option>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-                <select v-model="filterStatus" @change="filterUsers()"
-                    class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                    style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                    <option value="">All status</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
-                <!-- Clear filters -->
-                <button v-if="search || filterRole || filterStatus" @click="clearFilters()"
-                    class="px-4 py-2.5 rounded-xl text-xs font-medium border transition-colors hover:bg-white/5"
-                    style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                    Clear
-                </button>
+
+                <!-- Dropdown filters with balanced equal weights -->
+                <div class="grid grid-cols-2 sm:flex sm:items-center gap-3">
+                    <!-- Role Dropdown -->
+                    <div class="relative w-full sm:w-44">
+                        <select v-model="filterRole"
+                            class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                            style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;"
+                            onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 14px rgba(139,92,246,0.2)';"
+                            onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                            <option value="" style="background:#120E1C;color:#fff;">All roles</option>
+                            <option value="user" style="background:#120E1C;color:#fff;">User</option>
+                            <option value="admin" style="background:#120E1C;color:#fff;">Admin</option>
+                        </select>
+                        <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+
+                    <!-- Status Dropdown -->
+                    <div class="relative w-full sm:w-44">
+                        <select v-model="filterStatus"
+                            class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                            style="background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;"
+                            onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 14px rgba(139,92,246,0.2)';"
+                            onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                            <option value="" style="background:#120E1C;color:#fff;">All status</option>
+                            <option value="active" style="background:#120E1C;color:#fff;">Active</option>
+                            <option value="inactive" style="background:#120E1C;color:#fff;">Inactive</option>
+                        </select>
+                        <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+
+                    <!-- Clear filters -->
+                    <button v-if="search || filterRole || filterStatus" @click="clearFilters()"
+                        class="col-span-2 sm:col-span-1 h-11 px-4 rounded-xl text-xs font-semibold border transition-all hover:bg-white/10 hover:border-purple-400 flex items-center justify-center gap-1.5"
+                        style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        Clear
+                    </button>
+                </div>
             </div>
 
             <!-- Table -->
@@ -436,7 +464,144 @@
                     </table>
                 </div>
             </div>
-        </div>
+
+        <!-- ── ADD / EDIT USER MODAL ───────────────────────── -->
+        <transition name="fade">
+            <div v-if="modal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(10,6,16,0.85);backdrop-filter:blur(8px);">
+                <div class="w-full max-w-lg rounded-2xl border p-6 sm:p-8 relative overflow-hidden shadow-2xl"
+                    style="background:#120E1C;border-color:#3B2A5A;box-shadow:0 24px 60px rgba(0,0,0,0.8),0 0 40px rgba(139,92,246,0.15);"
+                    @click.stop>
+                    
+                    <!-- Modal Header -->
+                    <div class="flex items-center justify-between pb-5 border-b mb-6" style="border-color:#241730;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#C084FC;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
+                                    {{ modal.editing ? 'Edit User' : 'Add New User' }}
+                                </h3>
+                                <p class="text-xs" style="color:#C9B9E8;font-family:system-ui;">
+                                    {{ modal.editing ? 'Update user role, status or details' : 'Create a new user account' }}
+                                </p>
+                            </div>
+                        </div>
+                        <button @click="modal.show = false" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Modal Form -->
+                    <form @submit.prevent="saveUser()" class="space-y-4">
+                        <!-- Full Name -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                Full Name <span class="text-red-400">*</span>
+                            </label>
+                            <input v-model="form.name" type="text" required placeholder="e.g. John Doe"
+                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
+                        </div>
+
+                        <!-- Email Address -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                Email Address <span class="text-red-400">*</span>
+                            </label>
+                            <input v-model="form.email" type="email" required placeholder="e.g. john@example.com"
+                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                Password <span v-if="!modal.editing" class="text-red-400">*</span> <span v-else class="text-[10px] text-slate-400 font-normal lowercase">(leave blank to keep current)</span>
+                            </label>
+                            <input v-model="form.password" type="password" :required="!modal.editing" placeholder="••••••••"
+                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
+                        </div>
+
+                        <!-- Role and Status with balanced 50/50 weights -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Role Dropdown -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                    User Role
+                                </label>
+                                <div class="relative w-full">
+                                    <select v-model="form.role"
+                                        class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                        onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                        onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                                        <option value="user" style="background:#120E1C;color:#fff;">User</option>
+                                        <option value="admin" style="background:#120E1C;color:#fff;">Admin</option>
+                                    </select>
+                                    <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Status Dropdown -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                    Status
+                                </label>
+                                <div class="relative w-full">
+                                    <select v-model="form.status"
+                                        class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                        onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                        onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                                        <option value="active" style="background:#120E1C;color:#fff;">Active</option>
+                                        <option value="inactive" style="background:#120E1C;color:#fff;">Inactive</option>
+                                    </select>
+                                    <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex items-center justify-end gap-3 pt-4 border-t mt-6" style="border-color:#241730;">
+                            <button type="button" @click="modal.show = false"
+                                class="px-5 py-2.5 rounded-xl text-xs font-semibold border transition-colors hover:bg-white/5"
+                                style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                                Cancel
+                            </button>
+                            <button type="submit" :disabled="saving"
+                                class="px-6 py-2.5 rounded-xl text-xs font-bold text-white transition-all duration-200 hover:scale-[1.02] active:scale-95 disabled:opacity-50 flex items-center gap-2 shadow-lg"
+                                style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);box-shadow:0 0 20px rgba(139,92,246,0.4);font-family:system-ui;">
+                                <svg v-if="saving" class="animate-spin -ml-1 mr-1 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span>{{ modal.editing ? 'Save Changes' : 'Create User' }}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script setup>
@@ -453,6 +618,7 @@ const filterRole = ref('')
 const filterStatus = ref('')
 const alertMsg = ref('')
 const alertType = ref('success')
+const saving = ref(false)
 
 const statsCards = computed(() => [
     { type: 'users', label: 'Total Users', value: users.value.length, glow: '#8B5CF6', color: '#C084FC' },
@@ -511,18 +677,43 @@ function showAlert(msg, type = 'success') {
     setTimeout(() => { alertMsg.value = '' }, 3000)
 }
 
-// User Management (Simplified for Dashboard)
+// User Management Modal State & Handlers
 const modal = reactive({ show: false, editing: false, editId: null })
-const form = reactive({ name: '', email: '', role: 'user', status: 'active' })
+const form = reactive({ name: '', email: '', password: '', role: 'user', status: 'active' })
 
 function openAddUser() {
-    Object.assign(form, { name: '', email: '', role: 'user', status: 'active' })
-    modal.editing = false; modal.editId = null; modal.show = true
+    Object.assign(form, { name: '', email: '', password: '', role: 'user', status: 'active' })
+    modal.editing = false
+    modal.editId = null
+    modal.show = true
 }
 
 function openEdit(u) {
-    Object.assign(form, { ...u })
-    modal.editing = true; modal.editId = u.id; modal.show = true
+    Object.assign(form, { name: u.name, email: u.email, password: '', role: u.role, status: u.status })
+    modal.editing = true
+    modal.editId = u.id
+    modal.show = true
+}
+
+async function saveUser() {
+    try {
+        saving.value = true
+        if (modal.editing) {
+            const payload = { name: form.name, email: form.email, role: form.role, status: form.status }
+            if (form.password) payload.password = form.password
+            await api.put(`/admin/users/${modal.editId}`, payload)
+            showAlert('User updated successfully!', 'success')
+        } else {
+            await api.post('/admin/users', form)
+            showAlert('User created successfully!', 'success')
+        }
+        modal.show = false
+        await fetchUsers()
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Operation failed', 'error')
+    } finally {
+        saving.value = false
+    }
 }
 
 async function toggleStatus(u) {

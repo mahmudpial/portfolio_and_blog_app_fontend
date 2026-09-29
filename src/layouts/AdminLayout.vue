@@ -85,17 +85,106 @@
                         <span>View Site</span>
                     </RouterLink>
 
-                    <!-- Logout Button -->
-                    <button @click="auth.logout()"
-                        class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all hover:scale-105"
-                        style="border-color:rgba(239, 68, 68, 0.3); color:#f87171; background:rgba(239, 68, 68, 0.08);">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                            <polyline points="16 17 21 12 16 7" />
-                            <line x1="21" y1="12" x2="9" y2="12" />
-                        </svg>
-                        <span>Logout</span>
-                    </button>
+                    <!-- Profile Dropdown Section -->
+                    <div class="relative" ref="adminProfileRef">
+                        <button @click="profileOpen = !profileOpen"
+                            class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all hover:scale-105"
+                            style="background:rgba(18, 14, 28, 0.8); border-color:rgba(139, 92, 246, 0.25);">
+                            <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                                style="background:linear-gradient(135deg,#7C3AED,#C084FC); box-shadow:0 0 10px rgba(139,92,246,0.3);">
+                                {{ (auth.user?.name || 'A')[0].toUpperCase() }}
+                            </div>
+                            <div class="hidden sm:flex flex-col text-left">
+                                <span class="text-xs font-semibold text-white leading-tight truncate max-w-[120px]">
+                                    {{ auth.user?.name || 'Admin' }}
+                                </span>
+                                <span class="text-[10px] text-purple-300/70 font-medium">Administrator</span>
+                            </div>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                class="transition-transform duration-200 text-purple-300"
+                                :style="profileOpen ? 'transform:rotate(180deg);' : ''">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </button>
+
+                        <transition name="dropdown">
+                            <div v-if="profileOpen"
+                                class="absolute right-0 mt-2 w-64 rounded-2xl border p-2 shadow-2xl z-50 overflow-hidden"
+                                style="background:rgba(18, 14, 28, 0.96); backdrop-filter:blur(24px); border-color:rgba(139, 92, 246, 0.25); box-shadow:0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(139,92,246,0.15);">
+                                
+                                <!-- User Info Header -->
+                                <div class="p-3 mb-1 rounded-xl bg-white/5 border border-white/5 flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs text-white flex-shrink-0"
+                                        style="background:linear-gradient(135deg,#7C3AED,#C084FC);">
+                                        {{ (auth.user?.name || 'A')[0].toUpperCase() }}
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-bold text-white truncate">{{ auth.user?.name || 'Administrator' }}</p>
+                                        <p class="text-[11px] text-purple-300/70 truncate">{{ auth.user?.email || 'admin@example.com' }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Menu links -->
+                                <div class="space-y-1">
+                                    <!-- Profile -->
+                                    <RouterLink to="/profile" @click="profileOpen = false"
+                                        class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                            <circle cx="12" cy="7" r="4" />
+                                        </svg>
+                                        <span>My Profile</span>
+                                    </RouterLink>
+
+                                    <!-- Theme setting toggle -->
+                                    <button @click="themeStore.toggleTheme()"
+                                        class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+                                        <div class="flex items-center gap-2.5">
+                                            <svg v-if="themeStore.isDark" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                            </svg>
+                                            <svg v-else width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="5" />
+                                                <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                                <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                                            </svg>
+                                            <span>Theme Mode</span>
+                                        </div>
+                                        <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wide uppercase"
+                                            style="background:rgba(139,92,246,0.2); color:#C084FC;">
+                                            {{ themeStore.isDark ? 'Dark' : 'Light' }}
+                                        </span>
+                                    </button>
+
+                                    <!-- Site Settings -->
+                                    <RouterLink to="/admin/settings" @click="profileOpen = false"
+                                        class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="3" />
+                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                        </svg>
+                                        <span>Site Settings</span>
+                                    </RouterLink>
+                                </div>
+
+                                <div class="my-1.5 h-px bg-white/10"></div>
+
+                                <!-- Logout -->
+                                <button @click="handleLogout"
+                                    class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all hover:bg-red-500/15"
+                                    style="color:#f87171;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                        <polyline points="16 17 21 12 16 7" />
+                                        <line x1="21" y1="12" x2="9" y2="12" />
+                                    </svg>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </transition>
+                    </div>
                 </div>
             </header>
 
@@ -108,13 +197,36 @@
 </template>
 
 <script setup>
-import { ref, h } from 'vue'
+import { ref, h, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { useThemeStore } from '@/stores/theme'
 
 const route = useRoute()
 const auth = useAuthStore()
+const themeStore = useThemeStore()
 const isExpanded = ref(false)
+const profileOpen = ref(false)
+const adminProfileRef = ref(null)
+
+function handleClickOutside(event) {
+    if (adminProfileRef.value && !adminProfileRef.value.contains(event.target)) {
+        profileOpen.value = false
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+})
+
+async function handleLogout() {
+    profileOpen.value = false
+    await auth.logout()
+}
 
 const IconDashboard = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
     h('rect', { x: 3, y: 3, width: 7, height: 7, rx: 1 }),
