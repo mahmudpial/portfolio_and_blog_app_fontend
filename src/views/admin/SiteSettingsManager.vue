@@ -529,6 +529,52 @@
             </div>
         </div>
 
+        <!-- ══════════════════════════════════════════════════════════
+             TAB 7: SERVICES CMS HUB
+        ══════════════════════════════════════════════════════════ -->
+        <div v-if="activeTab === 'services'" class="space-y-8">
+            <div class="rounded-3xl border p-6 md:p-8" style="background:rgba(18, 14, 28, 0.7);border-color:rgba(139, 92, 246, 0.25);">
+                <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2.5" style="font-family:'Georgia',serif;">
+                            <span class="w-2 h-5 bg-violet-500 rounded-full"></span>
+                            Services &amp; Detail Pages CMS
+                        </h3>
+                        <p class="text-xs text-white/60 mt-1">Manage individual service pages (Hero, Workflow, Tech Stack, Deliverables, Pricing, and Contact buttons).</p>
+                    </div>
+
+                    <RouterLink to="/admin/services"
+                        class="flex items-center gap-2 px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-violet-600/30">
+                        <span>Open Full Services Manager</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </RouterLink>
+                </div>
+
+                <div class="p-6 rounded-2xl border bg-black/40 text-center space-y-4" style="border-color:rgba(139, 92, 246, 0.2);">
+                    <div class="w-16 h-16 rounded-2xl bg-violet-600/20 text-violet-400 mx-auto flex items-center justify-center text-2xl">
+                        ⚡
+                    </div>
+                    <div class="max-w-md mx-auto">
+                        <h4 class="text-white font-bold text-base mb-1">Centralized Service Content Management</h4>
+                        <p class="text-xs text-purple-200/70 leading-relaxed">
+                            Every service page (e.g. <code>/services/1</code>, <code>/services/5</code>) has its own rich CMS modal inside the Services Manager. You can customize the Delivery Timeline, Starting Budget, Workflow Steps, Tech Stacks, Deliverables, and Contact Inquiry CTAs.
+                        </p>
+                    </div>
+                    <div class="pt-2">
+                        <RouterLink to="/admin/services"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold rounded-xl transition-all">
+                            <span>Manage All Services Now</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </RouterLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Floating Bottom Save Bar -->
         <div class="fixed bottom-6 right-8 z-40">
             <button @click="saveSettings" :disabled="saving"
@@ -565,6 +611,7 @@ const tabs = [
     { id: 'footer', label: 'Footer & Links', icon: '🦶' },
     { id: 'faq', label: 'FAQ Manager', icon: '❓' },
     { id: 'feedback', label: 'Client Feedback', icon: '⭐' },
+    { id: 'services', label: 'Services CMS', icon: '⚡' },
 ]
 
 const defaultFaqs = [

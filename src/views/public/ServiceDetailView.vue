@@ -61,7 +61,7 @@
                         <span class="text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#8B5CF620;color:#C084FC;border:1px solid #8B5CF640;font-family:system-ui;">
                             <ServiceIcon :name="currentService.icon || 'code'" :size="14" />
-                            <span>Professional Service</span>
+                            <span>{{ serviceDetails.badge_text || 'Professional Service' }}</span>
                         </span>
                         <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#052e16;color:#4ade80;border:1px solid #16a34a30;font-family:system-ui;">
@@ -76,7 +76,7 @@
                         <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#120E1C;color:#F59E0B;border:1px solid #F59E0B30;font-family:system-ui;">
                             <ServiceIcon name="shield" :size="14" class="text-amber-400" />
-                            <span>30 Days Free Support</span>
+                            <span>{{ serviceDetails.support_guarantee || '30 Days Free Support' }}</span>
                         </span>
                     </div>
 
@@ -112,7 +112,7 @@
                             <p class="text-sm leading-relaxed mb-6" style="color:#C9B9E8;font-family:system-ui;line-height:1.85;">
                                 {{ serviceDetails.overview || currentService.description }}
                             </p>
-                            <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t" style="border-color:#241730;">
+                            <div v-if="serviceDetails.highlights && serviceDetails.highlights.length" class="grid sm:grid-cols-2 gap-4 pt-4 border-t" style="border-color:#241730;">
                                 <div v-for="(highlight, idx) in serviceDetails.highlights" :key="idx"
                                     class="flex items-start gap-3 p-4 rounded-2xl transition-colors hover:border-purple-500/40"
                                     style="background:rgba(25, 18, 38, 0.4);border:1px solid rgba(139, 92, 246, 0.15);">
@@ -130,7 +130,7 @@
                         </div>
 
                         <!-- ② Delivery Workflow / How It Works -->
-                        <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
+                        <div v-if="workflowSteps && workflowSteps.length" class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
                             <div class="flex items-center justify-between mb-8 flex-wrap gap-2">
                                 <div class="flex items-center gap-3.5">
                                     <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
@@ -144,7 +144,7 @@
                                 </div>
                                 <span class="text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider"
                                     style="background:#8B5CF615;color:#C084FC;border:1px solid #8B5CF630;">
-                                    5-Step Agile Process
+                                    {{ workflowSteps.length }}-Step Agile Process
                                 </span>
                             </div>
 
@@ -169,7 +169,7 @@
                         </div>
 
                         <!-- ③ Technologies & Tools -->
-                        <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
+                        <div v-if="techStack && techStack.length" class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
                             <div class="flex items-center gap-3.5 mb-6">
                                 <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
                                     style="background:#8B5CF618;border:1px solid #8B5CF630;">
@@ -182,7 +182,7 @@
                             </div>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <div v-for="tech in serviceDetails.techStack" :key="tech.name"
+                                <div v-for="tech in techStack" :key="tech.name"
                                     class="p-4 rounded-2xl border transition-all hover:-translate-y-1 hover:border-purple-500/50"
                                     style="background:rgba(25, 18, 38, 0.5);border-color:rgba(139, 92, 246, 0.15);">
                                     <div class="text-xs font-bold text-white mb-1" style="font-family:system-ui;">{{ tech.name }}</div>
@@ -221,7 +221,7 @@
                         </div>
 
                         <!-- ⑤ Included Deliverables -->
-                        <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
+                        <div v-if="deliverables && deliverables.length" class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
                             <div class="flex items-center gap-3.5 mb-6">
                                 <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
                                     style="background:#8B5CF618;border:1px solid #8B5CF630;">
@@ -271,15 +271,15 @@
                                     {{ serviceDetails.startingPrice || '$250 - $650' }}
                                 </div>
                                 <div class="text-[11px] text-violet-400 mt-1 font-medium" style="font-family:system-ui;">
-                                    Custom milestones &amp; flexible payment terms
+                                    {{ serviceDetails.pricing_note || 'Custom milestones & flexible payment terms' }}
                                 </div>
                             </div>
 
                             <!-- Hire Button -->
                             <button @click="hireThisService"
-                                class="w-full py-4 text-white font-bold rounded-2xl text-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg mb-4 cursor-pointer"
+                                class="w-full py-4 text-white font-bold rounded-2xl text-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg mb-4 cursor-pointer border-0"
                                 style="background:#8B5CF6;box-shadow:0 8px 25px -4px #8B5CF660;font-family:system-ui;">
-                                <span>Get Started with this Service</span>
+                                <span>{{ serviceDetails.cta_button_text || 'Get Started with this Service' }}</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg>
@@ -287,7 +287,7 @@
 
                             <!-- Direct Fast Connect Buttons with clean SVGs -->
                             <div class="space-y-2.5 pt-2">
-                                <a href="mailto:hello@pialcodes.com"
+                                <a :href="serviceDetails.cta_email ? `mailto:${serviceDetails.cta_email}` : 'mailto:hello@pialcodes.com'"
                                     class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -296,7 +296,7 @@
                                     </svg>
                                     <span>Email Inquiry</span>
                                 </a>
-                                <a href="https://www.linkedin.com/in/pial-mahmud/" target="_blank"
+                                <a :href="serviceDetails.cta_linkedin || 'https://www.linkedin.com/in/pial-mahmud/'" target="_blank"
                                     class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -306,7 +306,7 @@
                                     </svg>
                                     <span>Connect on LinkedIn</span>
                                 </a>
-                                <a href="https://github.com/mahmudpial" target="_blank"
+                                <a :href="serviceDetails.cta_github || 'https://github.com/mahmudpial'" target="_blank"
                                     class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -353,7 +353,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import api from '@/api/axios'
 import ServiceIcon from '@/components/ServiceIcon.vue'
@@ -363,12 +363,17 @@ const router = useRouter()
 
 const loading = ref(true)
 const allServices = ref([])
+const siteSettings = reactive({})
 
-// Detailed knowledge base mapped per service order / title / ID
+// Built-in Knowledge Base fallback
 const serviceKnowledgeBase = {
     1: {
         timeline: '7 - 14 Days',
         startingPrice: '$450 - $850',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'Full-Stack Engineering',
+        cta_button_text: 'Get Started with this Service',
         overview: 'End-to-end full-stack web application engineering utilizing Laravel for a robust, secure backend and Vue.js 3 / Inertia.js for a blazingly responsive, interactive user interface.',
         highlights: [
             'Clean Architecture & Scalable Directory Structure',
@@ -385,11 +390,30 @@ const serviceKnowledgeBase = {
             { name: 'PostgreSQL / MySQL', role: 'Relational Database' },
             { name: 'Vite', role: 'High-speed Bundler' },
             { name: 'Pinia & Vue Router', role: 'State Management' }
+        ],
+        workflowSteps: [
+            { title: '1. Discovery & Technical Blueprint', description: 'We review your exact business goals, user personas, database requirements, and technical constraints to establish a clear milestone timeline.' },
+            { title: '2. Schema & UI/UX Wireframing', description: 'Design of normalized database tables, API contract endpoints, and intuitive interactive component layouts before writing production code.' },
+            { title: '3. Clean & Scalable Coding', description: 'Development using Laravel 11 and Vue.js 3 following clean code standards (SOLID principles, repository patterns, component modularity).' },
+            { title: '4. Security, QA & Performance Testing', description: 'Penetration checks, OWASP security validations, SQL injection prevention tests, responsive device testing, and speed benchmarking.' },
+            { title: '5. Production Deployment & Handover', description: 'Deployment to your live cloud server with SSL certificates, complete Git source code handover, and a walkthrough video guide.' }
+        ],
+        deliverables: [
+            'Complete Production-Ready Source Code with full ownership transfer',
+            'Configured live production deployment on Render, VPS, AWS or DigitalOcean',
+            'Interactive API documentation & Postman collection (for backend services)',
+            'Database migration scripts & comprehensive seeders',
+            'Video walkthrough & documentation guide explaining how everything works',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     },
     2: {
         timeline: '5 - 10 Days',
         startingPrice: '$300 - $600',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'High-Throughput APIs',
+        cta_button_text: 'Build REST APIs',
         overview: 'Design and construction of high-throughput, secure RESTful APIs and microservice communication endpoints, built with standardized JSON responses, Sanctum/JWT token authentication, and interactive Swagger documentation.',
         highlights: [
             'Standardized JSON API Resource Formatting',
@@ -406,11 +430,29 @@ const serviceKnowledgeBase = {
             { name: 'PHPUnit / Pest', role: 'Automated Testing' },
             { name: 'JSON Resources', role: 'Data Transformation' },
             { name: 'Guzzle / HTTP Client', role: 'Service Communication' }
+        ],
+        workflowSteps: [
+            { title: '1. Endpoint & Schema Contract Design', description: 'Defining API routes, request payloads, response structures, and status codes.' },
+            { title: '2. Controller & Service Implementation', description: 'Writing decoupled business logic with Form Requests and Eloquent API Resources.' },
+            { title: '3. Authentication & Security Middleware', description: 'Securing routes with token guards, rate limiters, and CORS policies.' },
+            { title: '4. Automated Testing & Postman Docs', description: 'Generating comprehensive documentation with automated Pest/PHPUnit tests.' },
+            { title: '5. Deployment & Production Monitoring', description: 'Setting up logging, cache warmups, and staging testing.' }
+        ],
+        deliverables: [
+            'Complete RESTful API backend codebase',
+            'Sanctum / JWT Authentication setup',
+            'Interactive Postman Collection & Swagger/OpenAPI docs',
+            'Database schemas and migration files',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     },
     3: {
         timeline: '5 - 10 Days',
         startingPrice: '$350 - $700',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'Intuitive Admin Panels',
+        cta_button_text: 'Build Admin Dashboard',
         overview: 'Customized, intuitive Content Management Systems (CMS) and Admin Control Dashboards built to streamline business workflows, content publishing, user permissions, and visual data analytics.',
         highlights: [
             'Dynamic Content & Media Upload Manager',
@@ -427,11 +469,29 @@ const serviceKnowledgeBase = {
             { name: 'Laravel MediaLibrary', role: 'Asset Management' },
             { name: 'Tailwind CSS', role: 'Component Styling' },
             { name: 'PostgreSQL', role: 'Structured Data Storage' }
+        ],
+        workflowSteps: [
+            { title: '1. Admin Architecture Planning', description: 'Mapping out data tables, metrics, and permission levels.' },
+            { title: '2. Interactive Component System', description: 'Building responsive tables, filters, search, and pagination.' },
+            { title: '3. Real-Time Charting & Analytics', description: 'Connecting reactive dashboards with backend aggregation queries.' },
+            { title: '4. Permissions & Audit Trails', description: 'Restricting access with RBAC and tracking user mutations.' },
+            { title: '5. Launch & Training Walkthrough', description: 'Deploying the CMS with detailed video instructions.' }
+        ],
+        deliverables: [
+            'Full Admin Dashboard SPA & CMS system',
+            'Role and permission management matrices',
+            'Real-time data export & analytics charts',
+            'Step-by-step video guide for admin usage',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     },
     4: {
         timeline: '3 - 7 Days',
         startingPrice: '$200 - $450',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'Database Architecture',
+        cta_button_text: 'Optimize Database',
         overview: 'Database schema design, normalization, migration strategies, indexing, and slow-query tuning for MySQL and PostgreSQL systems to guarantee rapid queries and zero data corruption.',
         highlights: [
             'Normalized Relational Schema Architecture (3NF)',
@@ -445,14 +505,32 @@ const serviceKnowledgeBase = {
             { name: 'PostgreSQL', role: 'Primary Enterprise RDBMS' },
             { name: 'MySQL / MariaDB', role: 'Relational Database' },
             { name: 'Eloquent ORM', role: 'Query Optimization' },
-            { name: 'Neon / AWS RDS', role: 'Cloud Cloud DB' },
+            { name: 'Neon / AWS RDS', role: 'Cloud DB' },
             { name: 'Redis', role: 'In-Memory Cache Layer' },
             { name: 'DB Schema Visualizer', role: 'ERD Modeling' }
+        ],
+        workflowSteps: [
+            { title: '1. Profiling & Slow Query Audit', description: 'Analyzing EXPLAIN execution plans and slow query logs.' },
+            { title: '2. Schema Normalization & Index Tuning', description: 'Creating composite indexes and eliminating redundant data.' },
+            { title: '3. Query Refactoring & Eloquent Optimization', description: 'Preventing N+1 problems and utilizing raw joins where needed.' },
+            { title: '4. Concurrency & Locking Strategy', description: 'Ensuring atomic transactions and preventing race conditions.' },
+            { title: '5. Benchmarking & Documentation', description: 'Verifying latency improvements with throughput benchmarks.' }
+        ],
+        deliverables: [
+            'Complete optimized ERD schema and SQL scripts',
+            'Performance benchmark comparison report',
+            'Indexing & migration strategies',
+            'Automated backup & query caching blueprints',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     },
     5: {
         timeline: '4 - 8 Days',
         startingPrice: '$250 - $500',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'Payment & API Integration',
+        cta_button_text: 'Integrate Payment & APIs',
         overview: 'Secure integration of multiple international and local payment gateways, webhooks, invoice generation, SMS notifications, and third-party SaaS APIs with automatic retry mechanisms.',
         highlights: [
             'Stripe, PayPal, SSLCommerz & bKash Integrations',
@@ -469,11 +547,29 @@ const serviceKnowledgeBase = {
             { name: 'Twilio / SMS API', role: 'SMS Notifications' },
             { name: 'Laravel Queues', role: 'Asynchronous Webhooks' },
             { name: 'Mailgun / SES', role: 'Transactional Email' }
+        ],
+        workflowSteps: [
+            { title: '1. API Credentials & Security Setup', description: 'Configuring sandbox environments, webhook listener endpoints, and encrypting secret keys.' },
+            { title: '2. Gateway & Checkout Implementation', description: 'Integrating checkout session flows, hosted checkouts, and custom card elements.' },
+            { title: '3. Webhook Listener & Transaction Logging', description: 'Handling asynchronous webhook notifications, double-spend prevention, and event logging.' },
+            { title: '4. Testing & Error Simulation', description: 'Simulating declined cards, network drops, and automated payment retries.' },
+            { title: '5. Live Production Handover', description: 'Transitioning to live API keys and verifying real test transactions.' }
+        ],
+        deliverables: [
+            'Complete Payment & API Gateway integration source code',
+            'Webhook listener setup with signature verification',
+            'Automated email receipts & PDF invoice generator',
+            'Comprehensive testing suite for charge success & refund edge cases',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     },
     6: {
         timeline: '4 - 9 Days',
         startingPrice: '$250 - $550',
+        pricing_note: 'Custom milestones & flexible payment terms',
+        support_guarantee: '30 Days Free Support',
+        badge_text: 'Modern UI/UX Frontend',
+        cta_button_text: 'Build Frontend UI',
         overview: 'Converting Figma, Adobe XD, or conceptual designs into pixel-perfect, accessible, mobile-first responsive interfaces loaded with fluid transitions, micro-interactions, and pristine semantic code.',
         highlights: [
             'Pixel-Perfect Figma to Vue.js / HTML5 Translation',
@@ -490,31 +586,39 @@ const serviceKnowledgeBase = {
             { name: 'Vite', role: 'Modern Build Engine' },
             { name: 'Headless UI', role: 'Accessible Components' },
             { name: 'CSS Transitions', role: 'Animation Suite' }
+        ],
+        workflowSteps: [
+            { title: '1. Design System & Token Setup', description: 'Extracting typography, color palette, spacing, and icon sets from Figma.' },
+            { title: '2. Component Architecture & Prototyping', description: 'Creating modular, reusable Vue 3 components with strict props validation.' },
+            { title: '3. Responsive & Accessibility Fine-Tuning', description: 'Testing fluid layouts across mobile, tablet, and ultra-wide screens.' },
+            { title: '4. Micro-Interactions & Animation Polish', description: 'Implementing smooth transitions, hover effects, and loading states.' },
+            { title: '5. Production Optimization & Delivery', description: 'Purging unused CSS, lazy-loading assets, and optimizing bundle sizes.' }
+        ],
+        deliverables: [
+            'Modular Vue.js 3 component library',
+            'Responsive Tailwind CSS theme configuration',
+            'High Google Lighthouse 95+ score optimization',
+            'Clean semantic HTML5 structure',
+            '30 Days of Free Bug Fixing & Priority Technical Support'
         ]
     }
 }
 
-const workflowSteps = [
-    {
-        title: '1. Discovery & Technical Blueprint',
-        description: 'We review your exact business goals, user personas, database requirements, and technical constraints to establish a clear milestone timeline.'
-    },
-    {
-        title: '2. Schema & UI/UX Wireframing',
-        description: 'Design of normalized database tables, API contract endpoints, and intuitive interactive component layouts before writing production code.'
-    },
-    {
-        title: '3. Clean & Scalable Coding',
-        description: 'Development using Laravel 11 and Vue.js 3 following clean code standards (SOLID principles, repository patterns, component modularity).'
-    },
-    {
-        title: '4. Security, QA & Performance Testing',
-        description: 'Penetration checks, OWASP security validations, SQL injection prevention tests, responsive device testing, and speed benchmarking.'
-    },
-    {
-        title: '5. Production Deployment & Handover',
-        description: 'Deployment to your live cloud server with SSL certificates, complete Git source code handover, and a walkthrough video guide.'
-    }
+const defaultWorkflowSteps = [
+    { title: '1. Discovery & Technical Blueprint', description: 'We review your exact business goals, user personas, database requirements, and technical constraints.' },
+    { title: '2. Schema & UI/UX Wireframing', description: 'Design of normalized database tables, API contract endpoints, and intuitive interactive component layouts.' },
+    { title: '3. Clean & Scalable Coding', description: 'Development using Laravel 11 and Vue.js 3 following clean code standards.' },
+    { title: '4. Security, QA & Performance Testing', description: 'Penetration checks, OWASP validations, SQL injection prevention tests, and speed benchmarking.' },
+    { title: '5. Production Deployment & Handover', description: 'Deployment to live cloud server with SSL certificates, Git handover, and video walkthrough.' }
+]
+
+const defaultDeliverables = [
+    'Complete Production-Ready Source Code with full ownership transfer',
+    'Configured live production deployment on Render, VPS, AWS or DigitalOcean',
+    'Interactive API documentation & Postman collection',
+    'Database migration scripts & comprehensive seeders',
+    'Video walkthrough & documentation guide explaining how everything works',
+    '30 Days of Free Bug Fixing & Priority Technical Support'
 ]
 
 const securityStandards = [
@@ -524,15 +628,6 @@ const securityStandards = [
     { iconName: 'package', title: 'Versioned Codebase', desc: 'Organized Git commit history with branch protection and seamless deploy scripts.' }
 ]
 
-const deliverables = [
-    'Complete Production-Ready Source Code with full ownership transfer',
-    'Configured live production deployment on Render, VPS, AWS or DigitalOcean',
-    'Interactive API documentation & Postman collection (for backend services)',
-    'Database migration scripts & comprehensive seeders',
-    'Video walkthrough & documentation guide explaining how everything works',
-    '30 Days of Free Bug Fixing & Priority Technical Support'
-]
-
 const currentService = computed(() => {
     const id = route.params.id
     return allServices.value.find(s => String(s.id) === String(id) || String(s.order) === String(id)) || allServices.value[0] || null
@@ -540,15 +635,82 @@ const currentService = computed(() => {
 
 const serviceDetails = computed(() => {
     if (!currentService.value) return {}
-    const orderKey = currentService.value.order || currentService.value.id || 1
-    return serviceKnowledgeBase[orderKey] || serviceKnowledgeBase[1]
+    const sId = currentService.value.id
+    const orderKey = currentService.value.order || sId || 1
+
+    // 1. Check if stored in siteSettings (from DB)
+    const dbKey = `service_detail_${sId}`
+    if (siteSettings[dbKey]) {
+        try {
+            const parsed = typeof siteSettings[dbKey] === 'string' ? JSON.parse(siteSettings[dbKey]) : siteSettings[dbKey]
+            if (parsed && typeof parsed === 'object') return parsed
+        } catch (e) {}
+    }
+
+    // 2. Check localStorage
+    try {
+        const local = localStorage.getItem(dbKey)
+        if (local) {
+            const parsed = JSON.parse(local)
+            if (parsed && typeof parsed === 'object') return parsed
+        }
+    } catch (e) {}
+
+    // 3. Fallback to built-in knowledge base
+    return serviceKnowledgeBase[orderKey] || serviceKnowledgeBase[sId] || serviceKnowledgeBase[1] || {}
+})
+
+const workflowSteps = computed(() => {
+    if (serviceDetails.value.workflowSteps && serviceDetails.value.workflowSteps.length) {
+        return serviceDetails.value.workflowSteps
+    }
+    const orderKey = currentService.value?.order || currentService.value?.id || 1
+    const fallback = serviceKnowledgeBase[orderKey] || serviceKnowledgeBase[1]
+    return fallback.workflowSteps || defaultWorkflowSteps
+})
+
+const techStack = computed(() => {
+    if (serviceDetails.value.techStack && serviceDetails.value.techStack.length) {
+        return serviceDetails.value.techStack
+    }
+    const orderKey = currentService.value?.order || currentService.value?.id || 1
+    const fallback = serviceKnowledgeBase[orderKey] || serviceKnowledgeBase[1]
+    return fallback.techStack || []
+})
+
+const deliverables = computed(() => {
+    if (serviceDetails.value.deliverables && serviceDetails.value.deliverables.length) {
+        return serviceDetails.value.deliverables
+    }
+    const orderKey = currentService.value?.order || currentService.value?.id || 1
+    const fallback = serviceKnowledgeBase[orderKey] || serviceKnowledgeBase[1]
+    return fallback.deliverables || defaultDeliverables
 })
 
 async function fetchServices() {
     loading.value = true
     try {
-        const { data } = await api.get('/services')
-        allServices.value = data.data || []
+        const [servRes, settRes] = await Promise.allSettled([
+            api.get('/services'),
+            api.get('/settings')
+        ])
+
+        if (servRes.status === 'fulfilled') {
+            allServices.value = servRes.value.data.data || servRes.value.data || []
+        }
+
+        if (settRes.status === 'fulfilled') {
+            const rawSett = settRes.value.data.data ?? settRes.value.data ?? []
+            if (Array.isArray(rawSett)) {
+                rawSett.forEach(s => {
+                    if (s && s.key) siteSettings[s.key] = s.value
+                })
+            } else if (typeof rawSett === 'object' && rawSett !== null) {
+                Object.entries(rawSett).forEach(([k, v]) => {
+                    siteSettings[k] = v
+                })
+            }
+        }
     } catch (err) {
         console.error('Failed to load services:', err)
     } finally {
