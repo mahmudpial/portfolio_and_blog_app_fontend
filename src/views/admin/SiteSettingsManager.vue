@@ -373,6 +373,20 @@
                             class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
                             style="border-color:rgba(139, 92, 246, 0.25);" />
                     </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Discord Server / Profile URL</label>
+                        <input v-model="settingsMap['discord_url']" type="text" placeholder="https://discord.gg/..."
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Slack Workspace URL</label>
+                        <input v-model="settingsMap['slack_url']" type="text" placeholder="https://slack.com/..."
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                    </div>
                 </div>
             </div>
         </div>
