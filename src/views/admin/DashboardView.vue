@@ -393,3 +393,114 @@
             </div>
         </div>
 </template>
+
+<script setup>
+import { ref, reactive, computed, onMounted } from 'vue'
+import api from '@/api/axios'
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
+
+// ── State ──────────────────────────────────────────────────
+const users = ref([])
+const search = ref('')
+const filterRole = ref('')
+const filterStatus = ref('')
+const alertMsg = ref('')
+const alertType = ref('success')
+
+const statsCards = computed(() => [
+    { label: 'Total Users', value: users.value.length, icon: '👥', glow: '#8B5CF6', color: '#C084FC' },
+    { label: 'Active', value: users.value.filter(u => u.status === 'active').length, icon: '✅', glow: '#10B981', color: '#4ADE80' },
+    { label: 'Admins', value: users.value.filter(u => u.role === 'admin').length, icon: '🛡️', glow: '#EF4444', color: '#F87171' },
+    { label: 'Inactive', value: users.value.filter(u => u.status === 'inactive').length, icon: '💤', glow: '#64748B', color: '#94A3B8' },
+])
+
+const navCards = [
+    { to: '/admin/posts', label: 'Blog Posts', sub: 'Manage content', icon: '📝' },
+    { to: '/admin/projects', label: 'Projects', sub: 'Showcase work', icon: '💼' },
+    { to: '/admin/skills', label: 'Skills', sub: 'Update stack', icon: '⚡' },
+    { to: '/admin/services', label: 'Services', sub: 'Offerings', icon: '🛠️' },
+    { to: '/admin/comments', label: 'Comments', sub: 'Engagement', icon: '💬' },
+]
+
+// ── Computed ────────────────────────────────────────────────
+const filteredUsers = computed(() => {
+    return users.value.filter(u => {
+        const matchSearch = !search.value ||
+            u.name.toLowerCase().includes(search.value.toLowerCase()) ||
+            u.email.toLowerCase().includes(search.value.toLowerCase())
+        const matchRole = !filterRole.value || u.role === filterRole.value
+        const matchStatus = !filterStatus.value || u.status === filterStatus.value
+        return matchSearch && matchRole && matchStatus
+    })
+})
+
+// ── Methods ─────────────────────────────────────────────────
+function formatDate(date) {
+    return new Intl.DateTimeFormat('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    }).format(new Date(date))
+}
+
+function initials(name) {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+}
+
+async function fetchUsers() {
+    try {
+        const { data } = await api.get('/admin/users')
+        users.value = data.data || []
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to fetch users', 'error')
+    }
+}
+
+function clearFilters() {
+    search.value = ''; filterRole.value = ''; filterStatus.value = ''
+}
+
+function showAlert(msg, type = 'success') {
+    alertMsg.value = msg
+    alertType.value = type
+    setTimeout(() => { alertMsg.value = '' }, 3000)
+}
+
+// User Management (Simplified for Dashboard)
+const modal = reactive({ show: false, editing: false, editId: null })
+const form = reactive({ name: '', email: '', role: 'user', status: 'active' })
+
+function openAddUser() {
+    Object.assign(form, { name: '', email: '', role: 'user', status: 'active' })
+    modal.editing = false; modal.editId = null; modal.show = true
+}
+
+function openEdit(u) {
+    Object.assign(form, { ...u })
+    modal.editing = true; modal.editId = u.id; modal.show = true
+}
+
+async function toggleStatus(u) {
+    try {
+        const newStatus = u.status === 'active' ? 'inactive' : 'active'
+        await api.patch(`/admin/users/${u.id}`, { status: newStatus })
+        await fetchUsers()
+        showAlert('User status updated!', 'success')
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Update failed', 'error')
+    }
+}
+
+async function deleteUser(u) {
+    if (!confirm(`Delete user ${u.name}?`)) return
+    try {
+        await api.delete(`/admin/users/${u.id}`)
+        await fetchUsers()
+        showAlert('User deleted!', 'success')
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Delete failed', 'error')
+    }
+}
+
+onMounted(fetchUsers)
+</script>

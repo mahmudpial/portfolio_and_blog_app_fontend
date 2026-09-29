@@ -8,7 +8,7 @@
                     Services <span style="color:#8B5CF6;">Management</span>
                 </h1>
                 <p class="text-sm opacity-60 font-medium">
-                    Managing {{ skills.length }} professional capabilities and expertise levels.
+                    Managing {{ services.length }} professional capabilities and expertise levels.
                 </p>
             </div>
             <button @click="openAdd" class="group relative flex items-center gap-3 px-6 py-3 text-white text-sm font-bold
@@ -58,51 +58,51 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y" style="border-color:rgba(139, 92, 246, 0.05);">
-                        <tr v-for="skill in services" :key="skill.id" class="group transition-all hover:bg-white/[0.02]">
+                        <tr v-for="service in services" :key="service.id" class="group transition-all hover:bg-white/[0.02]">
                             <td class="px-8 py-5">
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center"
                                         style="background:linear-gradient(135deg,#180F28,#3B2A5A);">
-                                        <span class="text-white font-bold text-xs">{{ skill.name.slice(0, 2).toUpperCase() }}</span>
+                                        <span class="text-white font-bold text-xs">{{ (service.name || 'S').slice(0, 2).toUpperCase() }}</span>
                                     </div>
                                     <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors" style="font-family:system-ui;">
-                                        {{ skill.name }}
+                                        {{ service.name }}
                                     </div>
                                 </div>
                             </td>
                             <td class="px-8 py-5">
                                 <span class="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter"
                                     style="background:rgba(139, 92, 246, 0.1);color:#C084FC;border:1px solid rgba(139, 92, 246, 0.2);">
-                                    {{ skill.category || 'General' }}
+                                    {{ service.category || 'General' }}
                                 </span>
                             </td>
                             <td class="px-8 py-5 w-64">
                                 <div class="flex items-center gap-4">
                                     <div class="flex-1 h-2 rounded-full overflow-hidden bg-white/5 ring-1 ring-white/10">
                                         <div class="h-full transition-all duration-500" :style="{
-                                            width: skill.percentage + '%',
+                                            width: (service.percentage || 0) + '%',
                                             background: 'linear-gradient(90deg,#8B5CF6,#C084FC)',
                                             boxShadow: '0 0 12px #8B5CF650'
                                         }"></div>
                                     </div>
                                     <span class="text-xs font-bold min-w-[35px] text-right" style="color:#C084FC;font-family:system-ui;">
-                                        {{ skill.percentage }}%
+                                        {{ service.percentage || 0 }}%
                                     </span>
                                 </div>
                             </td>
                             <td class="px-8 py-5">
                                 <span class="text-xs font-medium opacity-50" style="font-family:system-ui;">
-                                    #{{ skill.order }}
+                                    #{{ service.order || 0 }}
                                 </span>
                             </td>
                             <td class="px-8 py-5 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button @click="openEdit(skill)" class="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all">
+                                    <button @click="openEdit(service)" class="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                         </svg>
                                     </button>
-                                    <button @click="deleteSkill(skill)" class="p-2 rounded-xl text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all">
+                                    <button @click="deleteService(service)" class="p-2 rounded-xl text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
                                         </svg>
@@ -110,10 +110,10 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr v-if="skills.length === 0">
+                        <tr v-if="services.length === 0">
                             <td colspan="5" class="text-center py-24">
                                 <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-4xl">⚡</div>
-                                <p class="text-white font-bold text-lg mb-1">No skills listed</p>
+                                <p class="text-white font-bold text-lg mb-1">No services listed</p>
                                 <p class="text-sm opacity-40">Start documenting your professional expertise.</p>
                             </td>
                         </tr>
@@ -131,7 +131,7 @@
                     <div class="flex items-center justify-between px-8 py-6 border-b sticky top-0 z-10"
                         style="border-color:rgba(139, 92, 246, 0.1);background:#120E1C;">
                         <h3 class="font-serif text-2xl font-bold text-white">
-                            {{ modal.editing ? 'Refine Skill' : 'New Capability' }}
+                            {{ modal.editing ? 'Refine Service' : 'New Service' }}
                         </h3>
                         <button @click="modal.show = false"
                             class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white">
@@ -143,7 +143,7 @@
                         </button>
                     </div>
                     <div class="p-8 space-y-6">
-                        <div v-for="f in skillFields" :key="f.key" class="space-y-2">
+                        <div v-for="f in serviceFields" :key="f.key" class="space-y-2">
                             <label class="block text-xs font-bold uppercase tracking-wider opacity-50">
                                 {{ f.label }}
                                 <span v-if="f.key === 'percentage'" style="color:#C084FC; margin-left:8px;">
@@ -162,10 +162,10 @@
                         </div>
                     </div>
                     <div class="flex gap-4 px-8 pb-8">
-                        <button @click="saveSkill" :disabled="saving" class="flex-1 py-4 text-white font-bold rounded-2xl text-sm
+                        <button @click="saveService" :disabled="saving" class="flex-1 py-4 text-white font-bold rounded-2xl text-sm
                             transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
                             style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
-                            {{ saving ? 'Saving...' : (modal.editing ? 'Update Skill' : 'Save Skill') }}
+                            {{ saving ? 'Saving...' : (modal.editing ? 'Update Service' : 'Save Service') }}
                         </button>
                         <button @click="modal.show = false"
                             class="px-8 py-4 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
@@ -179,73 +179,75 @@
     </div>
 </template>
 
-<style scoped>
-.fade-enter-active, .fade-leave-active { transition: all .3s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(-10px); }
-.modal-enter-active, .modal-leave-active { transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.modal-enter-from, .modal-leave-to { opacity: 0; transform: scale(.95) translateY(20px); }
-</style>
-
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import api from '@/api/axios'
 
-const skills = ref([])
+const services = ref([])
 const saving = ref(false)
 const alertMsg = ref('')
 const alertType = ref('success')
 const modal = reactive({ show: false, editing: false, editId: null })
 const form = reactive({ name: '', category: '', percentage: 50, icon: '', order: 0 })
 
-const skillFields = [
-    { key: 'name', label: 'Skill Name', type: 'text', placeholder: 'e.g. Vue.js' },
+const serviceFields = [
+    { key: 'name', label: 'Service Name', type: 'text', placeholder: 'e.g. Web Development' },
     { key: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Frontend' },
     { key: 'percentage', label: 'Proficiency Level', type: 'range', min: 0, max: 100, step: 5 },
     { key: 'icon', label: 'Icon Class', type: 'text', placeholder: 'e.g. la-code' },
     { key: 'order', label: 'Display Order', type: 'number', placeholder: '0' },
 ]
 
-onMounted(fetchSkills)
-
-async function fetchSkills() {
+async function fetchServices() {
     try {
         const { data } = await api.get('/services')
-        skills.value = data.data
+        services.value = data.data || []
     } catch (err) {
         showAlert('Failed to load services', 'error')
     }
 }
+
 function openAdd() {
     Object.assign(form, { name: '', category: '', percentage: 50, icon: '', order: 0 })
     modal.editing = false; modal.editId = null; modal.show = true
 }
-function openEdit(s) {
-    Object.assign(form, { ...s }); modal.editing = true; modal.editId = s.id; modal.show = true
-}
-async function saveSkill() {
-    if (!form.name?.trim()) {
-        showAlert('Skill name is required', 'error')
-        return
-    }
 
+function openEdit(s) {
+    Object.assign(form, { ...s })
+    modal.editing = true; modal.editId = s.id; modal.show = true
+}
+
+async function saveService() {
+    if (!form.name?.trim()) return showAlert('Service name is required', 'error')
     saving.value = true
     try {
         modal.editing
             ? await api.put(`/admin/services/${modal.editId}`, form)
             : await api.post('/admin/services', form)
-        modal.show = false; showAlert('Service saved successfully!', 'success'); fetchSkills()
+        modal.show = false; showAlert('Service saved successfully!', 'success'); fetchServices()
     } catch (err) { showAlert(err.response?.data?.message || 'Failed to save service', 'error') }
     finally { saving.value = false }
 }
-async function deleteSkill(s) {
-    if (!confirm(`Delete "${s.name}"?`)) return
+
+async function deleteService(s) {
+    if (!confirm(`Delete service "${s.name}"?`)) return
     try {
         await api.delete(`/admin/services/${s.id}`)
-        showAlert('Service deleted successfully!', 'success'); fetchSkills()
+        showAlert('Service deleted successfully!', 'success'); fetchServices()
     } catch (err) { showAlert(err.response?.data?.message || 'Failed to delete service', 'error') }
 }
+
 function showAlert(msg, type = 'success') {
     alertMsg.value = msg; alertType.value = type
     setTimeout(() => alertMsg.value = '', 3000)
 }
+
+onMounted(fetchServices)
 </script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active { transition: all .3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(-10px); }
+.modal-enter-active, .modal-leave-active { transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.modal-enter-from, .modal-leave-to { opacity: 0; transform: scale(.95) translateY(20px); }
+</style>

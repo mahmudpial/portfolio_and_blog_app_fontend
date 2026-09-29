@@ -338,3 +338,125 @@
         </transition>
     </div>
 </template>
+
+<script setup>
+import { ref, reactive, onMounted } from 'vue'
+import api from '@/api/axios'
+
+const posts = ref([])
+const categories = ref([])
+const tags = ref([])
+const saving = ref(false)
+const alertMsg = ref('')
+const alertType = ref('success')
+
+const pagination = reactive({
+    current_page: 1,
+    last_page: 1,
+    total: 0
+})
+
+const modal = reactive({ show: false, editing: false, editId: null })
+const form = reactive({ title: '', slug: '', category_id: '', status: 'draft', hero_image: '', image: '', tags: [], body: '' })
+const categoryQuery = ref('')
+const tagQuery = ref('')
+
+async function fetchPosts(page = 1) {
+    try {
+        const { data } = await api.get('/admin/posts', { params: { page } })
+        posts.value = data.data || []
+        pagination.current_page = data.current_page
+        pagination.last_page = data.last_page
+        pagination.total = data.total
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to load posts', 'error')
+    }
+}
+
+async function fetchMetadata() {
+    try {
+        const [catRes, tagRes] = await Promise.all([
+            api.get('/admin/categories'),
+            api.get('/admin/tags')
+        ])
+        categories.value = catRes.data.data || []
+        tags.value = tagRes.data.data || []
+    } catch (err) {
+        console.warn('Failed to fetch post metadata')
+    }
+}
+
+const filteredTags = computed(() => {
+    if (!tagQuery.value) return tags.value
+    return tags.value.filter(t => t.name.toLowerCase().includes(tagQuery.value.toLowerCase()))
+})
+
+function syncCategorySelection() {
+    const cat = categories.value.find(c => c.name.toLowerCase() === categoryQuery.value.toLowerCase())
+    if (cat) form.category_id = cat.id
+}
+
+function selectCategory(cat) {
+    categoryQuery.value = cat.name
+    form.category_id = cat.id
+}
+
+function toggleTag(id) {
+    const idx = form.tags.indexOf(id)
+    if (idx > -1) form.tags.splice(idx, 1)
+    else form.tags.push(id)
+}
+
+async function savePost() {
+    if (!form.title?.trim()) return showAlert('Title is required', 'error')
+    saving.value = true
+    try {
+        const payload = { ...form }
+        modal.editing
+            ? await api.put(`/admin/posts/${modal.editId}`, payload)
+            : await api.post('/admin/posts', payload)
+        modal.show = false
+        showAlert('Post saved successfully!', 'success')
+        fetchPosts(pagination.current_page)
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to save post', 'error')
+    } finally {
+        saving.value = false
+    }
+}
+
+async function deletePost(p) {
+    if (!confirm(`Delete post "${p.title}"?`)) return
+    try {
+        await api.delete(`/admin/posts/${p.id}`)
+        showAlert('Post deleted successfully!', 'success')
+        fetchPosts(pagination.current_page)
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to delete post', 'error')
+    }
+}
+
+function openAdd() {
+    Object.assign(form, { title: '', slug: '', category_id: '', status: 'draft', hero_image: '', image: '', tags: [], body: '' })
+    categoryQuery.value = ''; tagQuery.value = ''
+    modal.editing = false; modal.editId = null; modal.show = true
+}
+
+function openEdit(p) {
+    Object.assign(form, { ...p })
+    categoryQuery.value = p.category?.name || ''
+    tagQuery.value = ''
+    modal.editing = true; modal.editId = p.id; modal.show = true
+}
+
+function showAlert(msg, type = 'success') {
+    alertMsg.value = msg
+    alertType.value = type
+    setTimeout(() => { alertMsg.value = '' }, 3000)
+}
+
+onMounted(() => {
+    fetchPosts()
+    fetchMetadata()
+})
+</script>

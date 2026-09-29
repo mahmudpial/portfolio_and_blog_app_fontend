@@ -182,3 +182,75 @@
             </div>
         </div>
 </template>
+
+<script setup>
+import { ref, reactive, onMounted, computed } from 'vue'
+import api from '@/api/axios'
+
+const comments = ref([])
+const totalComments = ref(0)
+const pendingComments = ref(0)
+const approvedComments = ref(0)
+const filterApproved = ref('')
+const alertMsg = ref('')
+const alertType = ref('success')
+
+const pagination = reactive({
+    current_page: 1,
+    last_page: 1,
+    total: 0
+})
+
+async function fetchComments(page = 1) {
+    try {
+        const params = {
+            page,
+            approved: filterApproved.value || undefined
+        }
+        const { data } = await api.get('/admin/comments', { params })
+        comments.value = data.data || []
+        pagination.current_page = data.current_page
+        pagination.last_page = data.last_page
+        pagination.total = data.total
+
+        totalComments.value = data.total || 0
+        pendingComments.value = data.pending_count || 0
+        approvedComments.value = data.approved_count || 0
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to load comments', 'error')
+    }
+}
+
+function isApproved(c) {
+    return c.is_approved || false
+}
+
+async function approveComment(c) {
+    try {
+        await api.patch(`/admin/comments/${c.id}`, { is_approved: true })
+        showAlert('Comment approved successfully!', 'success')
+        fetchComments(pagination.current_page)
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to approve comment', 'error')
+    }
+}
+
+async function deleteComment(c) {
+    if (!confirm(`Delete comment from ${c.user?.name || 'guest'}?`)) return
+    try {
+        await api.delete(`/admin/comments/${c.id}`)
+        showAlert('Comment deleted successfully!', 'success')
+        fetchComments(pagination.current_page)
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to delete comment', 'error')
+    }
+}
+
+function showAlert(msg, type = 'success') {
+    alertMsg.value = msg
+    alertType.value = type
+    setTimeout(() => { alertMsg.value = '' }, 3000)
+}
+
+onMounted(fetchComments)
+</script>

@@ -195,3 +195,78 @@
         </transition>
     </div>
 </template>
+
+<script setup>
+import { ref, reactive, onMounted } from 'vue'
+import api from '@/api/axios'
+
+const skills = ref([])
+const saving = ref(false)
+const alertMsg = ref('')
+const alertType = ref('success')
+
+const modal = reactive({ show: false, editing: false, editId: null })
+const form = reactive({ name: '', category: '', percentage: 0, order: 0 })
+
+const skillFields = [
+    { key: 'name', label: 'Skill Name', type: 'text', placeholder: 'e.g. Vue.js' },
+    { key: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Frontend' },
+    { key: 'percentage', label: 'Proficiency', type: 'range', min: 0, max: 100, step: 1, placeholder: '' },
+    { key: 'order', label: 'Display Order', type: 'number', placeholder: '0' },
+]
+
+async function fetchSkills() {
+    try {
+        const { data } = await api.get('/admin/skills')
+        skills.value = data.data || []
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to load skills', 'error')
+    }
+}
+
+async function saveSkill() {
+    if (!form.name?.trim()) return showAlert('Skill name is required', 'error')
+    saving.value = true
+    try {
+        modal.editing
+            ? await api.put(`/admin/skills/${modal.editId}`, form)
+            : await api.post('/admin/skills', form)
+        modal.show = false
+        showAlert('Skill saved successfully!', 'success')
+        fetchSkills()
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to save skill', 'error')
+    } finally {
+        saving.value = false
+    }
+}
+
+async function deleteSkill(s) {
+    if (!confirm(`Delete skill "${s.name}"?`)) return
+    try {
+        await api.delete(`/admin/skills/${s.id}`)
+        showAlert('Skill deleted successfully!', 'success')
+        fetchSkills()
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to delete skill', 'error')
+    }
+}
+
+function openAdd() {
+    Object.assign(form, { name: '', category: '', percentage: 0, order: 0 })
+    modal.editing = false; modal.editId = null; modal.show = true
+}
+
+function openEdit(s) {
+    Object.assign(form, { ...s })
+    modal.editing = true; modal.editId = s.id; modal.show = true
+}
+
+function showAlert(msg, type = 'success') {
+    alertMsg.value = msg
+    alertType.value = type
+    setTimeout(() => { alertMsg.value = '' }, 3000)
+}
+
+onMounted(fetchSkills)
+</script>
