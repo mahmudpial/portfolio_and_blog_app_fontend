@@ -63,8 +63,8 @@
 
                     <!-- Bio -->
                     <p class="leading-relaxed mb-10 hero-bio"
-                        style="color:#C9B9E8;max-width:480px;font-family:system-ui;font-size:16px;line-height:1.8;">
-                        {{ settings['home_hero_bio'] || 'I build multi-tenant systems with role-based access control that actually hold up under real use. Proven live in a production RBAC system, and stress-tested by a cross-tenant bug I found and fixed myself.' }}
+                        style="color:#C9B9E8;max-width:520px;font-family:system-ui;font-size:16px;line-height:1.8;">
+                        {{ settings['home_hero_bio'] || 'Software Developer (PHP Laravel) at Smart Software Ltd, Dhaka. I build secure, multi-tenant backend systems using Laravel, Vue.js 3, and Inertia.js — with a hands-on focus on RBAC, tenant isolation, and fail-closed access control design.' }}
                     </p>
 
                     <!-- CTA buttons -->
@@ -174,8 +174,8 @@
                                     style="font-family:'Georgia',serif;">
                                     {{ ownerName }}
                                 </h3>
-                                <p class="text-sm font-medium mb-7 text-center" style="color:#C9B9E8;font-family:system-ui;">
-                                    Full-Stack Web Developer
+                                <p class="text-sm font-semibold mb-7 text-center text-violet-400" style="font-family:system-ui;">
+                                    Software Developer (PHP &amp; Laravel)
                                 </p>
 
                                 <!-- Stats row -->
@@ -884,11 +884,10 @@ watch(homeAvatarUrl, () => {
 
 // ── Typewriter role rotator ──────────────────────────────
 const defaultRoles = [
-    'Full-Stack Web Developer',
-    'Laravel Backend Expert',
-    'UI/UX Enthusiast',
-    'API Architect',
-    'Problem Solver',
+    'Software Developer (PHP & Laravel)',
+    'Laravel Backend & REST APIs',
+    'Vue.js 3 & Multi-tenant RBAC',
+    'AI-Integrated Backend Systems',
 ]
 const roles = computed(() => {
     if (settings.value['home_hero_roles']) {
@@ -930,9 +929,9 @@ const skillsLoading = ref(true)
 const projectsLoading = ref(true)
 
 const profileStats = computed(() => [
-    { value: settings.value['home_stat1_value'] || (projects.value.length > 0 ? projects.value.length + '+' : '3+'), label: settings.value['home_stat1_label'] || 'Projects' },
-    { value: settings.value['home_stat2_value'] || '3+', label: settings.value['home_stat2_label'] || 'Years Experience' },
-    { value: settings.value['home_stat3_value'] || (skills.value.length > 0 ? skills.value.length + '+' : '10+'), label: settings.value['home_stat3_label'] || 'Core Skills' },
+    { value: settings.value['home_stat1_value'] || '3+', label: settings.value['home_stat1_label'] || 'Years Exp.' },
+    { value: settings.value['home_stat2_value'] || '25+', label: settings.value['home_stat2_label'] || 'Projects' },
+    { value: settings.value['home_stat3_value'] || '100%', label: settings.value['home_stat3_label'] || 'Quality' },
 ])
 
 // ── Fallback static skill tags ───────────────────────────
