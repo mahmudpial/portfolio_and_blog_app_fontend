@@ -247,9 +247,10 @@ const rawServices = ref([])
 
 const navLinks = [
     { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
     { to: '/skills', label: 'Skills' },
-    { to: '/pricing', label: 'Pricing' },
     { to: '/portfolio', label: 'Portfolio' },
+    { to: '/pricing', label: 'Pricing' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
 ]
