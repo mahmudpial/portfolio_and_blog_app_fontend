@@ -99,11 +99,11 @@
                     </ul>
                 </div>
 
-                <!-- Col 3 — Services (2 cols) -->
+                <!-- Col 3 — Top Services (2 cols) -->
                 <div class="md:col-span-2">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
                         style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
-                        Services
+                        Top Services
                     </p>
                     <ul class="space-y-3 p-0 m-0 list-none">
                         <li v-for="svc in displayedServices" :key="svc.name || svc.title || svc">
@@ -114,7 +114,7 @@
                                 onmouseout="this.style.color='#C9B9E8';this.style.paddingLeft='0'">
                                 <span class="w-1 h-1 rounded-full flex-shrink-0"
                                     style="background:#3B2A5A;transition:background .2s;"></span>
-                                <span>{{ svc.name || svc.title }}</span>
+                                <span>{{ svc.title || svc.name }}</span>
                             </RouterLink>
                             <RouterLink v-else :to="{ path: '/contact', hash: '#contact-form' }"
                                 class="flex items-center gap-2 text-sm transition-all group"
@@ -241,17 +241,15 @@ const navLinks = [
 ]
 
 const defaultServices = [
-    'Web Development',
-    'REST API Design',
-    'UI/UX Design',
-    'Cloud Deployment',
-    'Code Review',
-    'Technical Support',
+    { id: 1, title: 'Full-Stack Web Engineering' },
+    { id: 2, title: 'RESTful API & Backend' },
+    { id: 3, title: 'Custom CMS & Dashboards' },
+    { id: 5, title: 'Payment Gateway Integration' },
 ]
 
 const displayedServices = computed(() => {
     if (rawServices.value && rawServices.value.length > 0) {
-        return rawServices.value.slice(0, 6)
+        return rawServices.value.slice(0, 4)
     }
     return defaultServices
 })
