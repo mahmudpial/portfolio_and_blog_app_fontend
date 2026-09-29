@@ -55,14 +55,14 @@
             class="flex-1 transition-all duration-300 ease-in-out"
             :class="isExpanded ? 'ml-64' : 'ml-20'"
         >
-            <slot></slot>
+            <RouterView />
         </main>
     </div>
 </template>
 
 <script setup>
 import { ref, h } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterView } from 'vue-router'
 
 const router = useRouter()
 const isExpanded = ref(false)
