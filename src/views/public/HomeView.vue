@@ -396,20 +396,13 @@
                         onmouseover="this.style.borderColor='#8B5CF6'"
                         onmouseout="this.style.borderColor='#3B2A5A'">
 
-                        <!-- Image / placeholder -->
+                        <!-- Image / preview -->
                         <div class="h-48 relative overflow-hidden flex items-center justify-center"
                             style="background:linear-gradient(135deg,#180F28 0%,#241338 100%);">
-                            <img v-if="p.image" :src="p.image" :alt="p.title"
+                            <img :src="getProjectImage(p)" :alt="p.title"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                            <div v-else class="flex flex-col items-center gap-2.5 text-center p-4">
-                                <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 text-violet-400"
-                                    style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 25px rgba(139,92,246,0.2);">
-                                    <ProjectIcon :category="p.category" :title="p.title" :size="32" />
-                                </div>
-                                <span class="text-xs font-semibold text-violet-300 uppercase tracking-wider" style="font-family:system-ui;">
-                                    {{ p.category || 'Web Application' }}
-                                </span>
-                            </div>
+                            <div class="absolute inset-0 pointer-events-none"
+                                style="background:linear-gradient(to top, rgba(18,14,28,0.4) 0%, transparent 60%);"></div>
 
                             <!-- Featured badge -->
                             <div v-if="p.is_featured"
@@ -864,6 +857,7 @@ import ServiceIcon from '@/components/ServiceIcon.vue'
 import TechIcon from '@/components/TechIcon.vue'
 import ProjectIcon from '@/components/ProjectIcon.vue'
 import PricingSection from '@/components/PricingSection.vue'
+import { getProjectImage } from '@/utils/projectImage'
 
 const auth = useAuthStore()
 

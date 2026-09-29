@@ -104,12 +104,13 @@
             </section>
 
             <!-- ── PROJECT IMAGE SHOWCASE ─────────────────────── -->
-            <section v-if="project.image" class="px-6 md:px-8 py-12">
+            <section class="px-6 md:px-8 py-12">
                 <div class="max-w-5xl mx-auto">
-                    <div class="rounded-2xl overflow-hidden border"
-                        style="border-color:#3B2A5A;box-shadow:0 0 40px rgba(59,130,246,0.1);">
-                        <img :src="project.image" :alt="project.title"
-                            style="width:100%;height:auto;max-height:600px;object-fit:cover;display:block;" />
+                    <div class="rounded-2xl overflow-hidden border group relative"
+                        style="border-color:#3B2A5A;box-shadow:0 0 50px rgba(139,92,246,0.18);">
+                        <img :src="getProjectImage(project)" :alt="project.title"
+                            style="width:100%;height:auto;max-height:600px;object-fit:cover;display:block;"
+                            class="transition-transform duration-700 group-hover:scale-[1.02]" />
                     </div>
                 </div>
             </section>
@@ -296,18 +297,9 @@
                                     class="flex items-start gap-3 p-3 rounded-xl border transition-all hover:bg-violet-500 hover:bg-opacity-10"
                                     style="border-color:#3B2A5A;text-decoration:none;">
                                     <!-- Thumbnail -->
-                                    <div v-if="p.image" class="w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden">
-                                        <img :src="p.image" :alt="p.title"
+                                    <div class="w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden border border-violet-900/40">
+                                        <img :src="getProjectImage(p)" :alt="p.title"
                                             style="width:100%;height:100%;object-fit:cover;" />
-                                    </div>
-                                    <div v-else
-                                        class="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center"
-                                        style="background:#3B2A5A;">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94A3B8"
-                                            stroke-width="1">
-                                            <rect x="2" y="3" width="20" height="14" rx="2" />
-                                            <path d="M8 21h8M12 17v4" />
-                                        </svg>
                                     </div>
 
                                     <!-- Content -->
@@ -380,6 +372,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import api from '@/api/axios'
+import { getProjectImage } from '@/utils/projectImage'
 
 const route = useRoute()
 const router = useRouter()
