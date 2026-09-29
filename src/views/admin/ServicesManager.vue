@@ -48,7 +48,7 @@
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-white/5">
                         <tr style="border-bottom:1px solid rgba(139, 92, 246, 0.1);">
-                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Service Name</th>
+                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Service Name &amp; Description</th>
                             <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Category</th>
                             <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Proficiency</th>
                             <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Order</th>
@@ -58,13 +58,19 @@
                     <tbody class="divide-y" style="border-color:rgba(139, 92, 246, 0.05);">
                         <tr v-for="service in services" :key="service.id" class="group transition-all hover:bg-white/[0.02]">
                             <td class="px-8 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center"
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center shrink-0 text-xl"
                                         style="background:linear-gradient(135deg,#180F28,#3B2A5A);">
-                                        <span class="text-white font-bold text-xs">{{ (service.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                                        <span v-if="service.icon">{{ service.icon }}</span>
+                                        <span v-else class="text-white font-bold text-xs">{{ (service.name || 'S').slice(0, 2).toUpperCase() }}</span>
                                     </div>
-                                    <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors" style="font-family:system-ui;">
-                                        {{ service.name }}
+                                    <div>
+                                        <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors" style="font-family:system-ui;">
+                                            {{ service.name }}
+                                        </div>
+                                        <p v-if="service.description" class="text-xs text-white/50 mt-1 max-w-md line-clamp-2" style="font-family:system-ui;">
+                                            {{ service.description }}
+                                        </p>
                                     </div>
                                 </div>
                             </td>
@@ -124,9 +130,9 @@
         <transition name="modal">
             <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
                 style="background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
-                <div class="rounded-3xl border w-full max-w-md shadow-2xl transition-all animate-in zoom-in-95 duration-200"
+                <div class="rounded-3xl border w-full max-w-lg shadow-2xl transition-all animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col"
                     style="background:#120E1C;border-color:rgba(139, 92, 246, 0.3);">
-                    <div class="flex items-center justify-between px-8 py-6 border-b sticky top-0 z-10"
+                    <div class="flex items-center justify-between px-8 py-6 border-b sticky top-0 z-10 shrink-0"
                         style="border-color:rgba(139, 92, 246, 0.1);background:#120E1C;">
                         <h3 class="font-serif text-2xl font-bold text-white">
                             {{ modal.editing ? 'Refine Service' : 'New Service' }}
@@ -140,33 +146,42 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="p-8 space-y-6">
-                        <div v-for="f in serviceFields" :key="f.key" class="space-y-2">
-                            <label class="block text-xs font-bold uppercase tracking-wider opacity-50">
+                    <div class="p-8 space-y-5 overflow-y-auto custom-scrollbar flex-1">
+                        <div v-for="f in serviceFields" :key="f.key" class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
                                 {{ f.label }}
                                 <span v-if="f.key === 'percentage'" style="color:#C084FC; margin-left:8px;">
                                     {{ form.percentage }}%
                                 </span>
                             </label>
-                            <input v-if="f.type !== 'range'" v-model="form[f.key]" :type="f.type" :placeholder="f.placeholder"
-                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
-                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
-                                @focus="this.style.borderColor='#8B5CF6'" @blur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
 
-                            <div v-else class="group relative py-2">
+                            <!-- Textarea for description -->
+                            <textarea v-if="f.type === 'textarea'" v-model="form[f.key]" rows="3" :placeholder="f.placeholder"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
+
+                            <!-- Range slider for percentage -->
+                            <div v-else-if="f.type === 'range'" class="group relative py-2">
                                 <input v-model="form.percentage" type="range" :min="f.min" :max="f.max" :step="f.step"
                                     class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-500" />
                             </div>
+
+                            <!-- Regular inputs -->
+                            <input v-else v-model="form[f.key]" :type="f.type" :placeholder="f.placeholder"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
                         </div>
                     </div>
-                    <div class="flex gap-4 px-8 pb-8">
-                        <button @click="saveService" :disabled="saving" class="flex-1 py-4 text-white font-bold rounded-2xl text-sm
+                    <div class="flex gap-4 px-8 py-6 border-t shrink-0" style="border-color:rgba(139, 92, 246, 0.1);">
+                        <button @click="saveService" :disabled="saving" class="flex-1 py-3.5 text-white font-bold rounded-2xl text-sm
                             transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
                             style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
                             {{ saving ? 'Saving...' : (modal.editing ? 'Update Service' : 'Save Service') }}
                         </button>
                         <button @click="modal.show = false"
-                            class="px-8 py-4 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
+                            class="px-6 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
                             style="border-color:rgba(139, 92, 246, 0.2);color:#C9B9E8;">
                             Cancel
                         </button>
@@ -186,13 +201,14 @@ const saving = ref(false)
 const alertMsg = ref('')
 const alertType = ref('success')
 const modal = reactive({ show: false, editing: false, editId: null })
-const form = reactive({ name: '', category: '', percentage: 50, icon: '', order: 0 })
+const form = reactive({ name: '', category: '', description: '', percentage: 90, icon: '💻', order: 0 })
 
 const serviceFields = [
-    { key: 'name', label: 'Service Name', type: 'text', placeholder: 'e.g. Web Development' },
-    { key: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Frontend' },
-    { key: 'percentage', label: 'Proficiency Level', type: 'range', min: 0, max: 100, step: 5 },
-    { key: 'icon', label: 'Icon Class', type: 'text', placeholder: 'e.g. la-code' },
+    { key: 'name', label: 'Service Name', type: 'text', placeholder: 'e.g. Full-Stack Web Development' },
+    { key: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Web Development' },
+    { key: 'icon', label: 'Icon / Emoji', type: 'text', placeholder: 'e.g. 💻 or ⚡ or 🛠️' },
+    { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Brief summary of what this service offers...' },
+    { key: 'percentage', label: 'Proficiency Level', type: 'range', min: 0, max: 100, step: 1 },
     { key: 'order', label: 'Display Order', type: 'number', placeholder: '0' },
 ]
 
@@ -206,12 +222,19 @@ async function fetchServices() {
 }
 
 function openAdd() {
-    Object.assign(form, { name: '', category: '', percentage: 50, icon: '', order: 0 })
+    Object.assign(form, { name: '', category: '', description: '', percentage: 90, icon: '💻', order: 0 })
     modal.editing = false; modal.editId = null; modal.show = true
 }
 
 function openEdit(s) {
-    Object.assign(form, { ...s })
+    Object.assign(form, {
+        name: s.name || '',
+        category: s.category || '',
+        description: s.description || '',
+        percentage: s.percentage || 90,
+        icon: s.icon || '💻',
+        order: s.order || 0
+    })
     modal.editing = true; modal.editId = s.id; modal.show = true
 }
 
