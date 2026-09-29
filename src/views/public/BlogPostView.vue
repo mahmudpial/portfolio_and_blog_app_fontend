@@ -731,9 +731,10 @@ onMounted(async () => {
 async function fetchPost() {
     try {
         const { data } = await api.get(`/posts/${route.params.slug}`)
-        post.value = data.data
-        likeCounts.value = buildLikeCounts(data.data.likes || [])
-        userReaction.value = findUserReaction(data.data.likes || [])
+        const p = data.data || data
+        post.value = p
+        likeCounts.value = buildLikeCounts(p?.likes || [])
+        userReaction.value = findUserReaction(p?.likes || [])
     } catch (e) {
         console.warn('Post not found:', e.message)
     } finally {

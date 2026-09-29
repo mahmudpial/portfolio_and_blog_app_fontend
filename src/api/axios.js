@@ -30,7 +30,12 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       const token = localStorage.getItem("token");
-      if (token) {
+      const currentRoute = router.currentRoute.value;
+      const isProtectedRoute = currentRoute?.matched?.some(
+        (r) => r.meta?.requiresAuth || r.meta?.requiresAdmin,
+      ) || currentRoute?.path?.startsWith("/admin");
+
+      if (token && isProtectedRoute) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         router.push({ name: "login" });

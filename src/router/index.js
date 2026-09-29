@@ -154,14 +154,17 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const auth = useAuthStore();
+  const isGuestOnly = to.matched.some((record) => record.meta?.guestOnly);
+  const requiresAuth = to.matched.some((record) => record.meta?.requiresAuth);
+  const requiresAdmin = to.matched.some((record) => record.meta?.requiresAdmin);
 
-  if (to.meta.guestOnly && auth.isLoggedIn) {
+  if (isGuestOnly && auth.isLoggedIn) {
     return auth.isAdmin ? { name: "admin" } : { name: "profile" };
   }
-  if (to.meta.requiresAuth && !auth.isLoggedIn) {
+  if (requiresAuth && !auth.isLoggedIn) {
     return { name: "login" };
   }
-  if (to.meta.requiresAdmin && !auth.isAdmin) {
+  if (requiresAdmin && !auth.isAdmin) {
     return { name: "home" };
   }
 });

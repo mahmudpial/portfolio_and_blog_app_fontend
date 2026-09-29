@@ -13,12 +13,14 @@ import PublicNavbar from '@/components/PublicNavbar.vue'
 import PublicFooter from '@/components/PublicFooter.vue'
 
 const route = useRoute()
-const publicPages = ['home', 'skills', 'portfolio', 'ProjectDetail', 'blog', 'blog-post', 'contact', 'profile']
+const publicPages = ['home', 'about', 'skills', 'portfolio', 'ProjectDetail', 'blog', 'blog-post', 'contact', 'profile']
 const authPages = ['login', 'register', 'forgot-password', 'reset-password']
 
-const isAdminPage = computed(() => Boolean(route.meta.requiresAdmin))
-const isAuthPage = computed(() => authPages.includes(route.name))
-const isPublicPage = computed(
-  () => (publicPages.includes(route.name) || !isAdminPage.value) && !isAdminPage.value && !isAuthPage.value,
-)
+const isAdminPage = computed(() => {
+  return route.path.startsWith('/admin') || route.matched.some(record => record.meta?.requiresAdmin)
+})
+const isAuthPage = computed(() => {
+  return authPages.includes(route.name) || route.matched.some(record => record.meta?.guestOnly)
+})
+const isPublicPage = computed(() => !isAdminPage.value && !isAuthPage.value)
 </script>

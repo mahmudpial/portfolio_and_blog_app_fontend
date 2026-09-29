@@ -177,14 +177,14 @@
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </button>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import api from '@/api/axios'
 
 const comments = ref([])
@@ -208,21 +208,22 @@ async function fetchComments(page = 1) {
             approved: filterApproved.value || undefined
         }
         const { data } = await api.get('/admin/comments', { params })
-        comments.value = data.data || []
-        pagination.current_page = data.current_page
-        pagination.last_page = data.last_page
-        pagination.total = data.total
+        const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+        comments.value = Array.isArray(list) ? list : []
+        pagination.current_page = data.current_page || data.data?.current_page || 1
+        pagination.last_page = data.last_page || data.data?.last_page || 1
+        pagination.total = data.total || data.data?.total || comments.value.length
 
-        totalComments.value = data.total || 0
-        pendingComments.value = data.pending_count || 0
-        approvedComments.value = data.approved_count || 0
+        totalComments.value = data.total || data.data?.total || comments.value.length
+        pendingComments.value = data.pending_count ?? comments.value.filter(c => !isApproved(c)).length
+        approvedComments.value = data.approved_count ?? comments.value.filter(c => isApproved(c)).length
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to load comments', 'error')
     }
 }
 
 function isApproved(c) {
-    return c.is_approved || false
+    return c.is_approved === true || c.is_approved === 1 || c.is_approved === '1' || c.status === 'approved'
 }
 
 async function approveComment(c) {
@@ -236,7 +237,7 @@ async function approveComment(c) {
 }
 
 async function deleteComment(c) {
-    if (!confirm(`Delete comment from ${c.user?.name || 'guest'}?`)) return
+    if (!confirm(`Delete comment from ${c.user?.name || c.guest_name || 'guest'}?`)) return
     try {
         await api.delete(`/admin/comments/${c.id}`)
         showAlert('Comment deleted successfully!', 'success')

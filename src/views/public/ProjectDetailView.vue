@@ -1,8 +1,5 @@
 <template>
     <div style="background:#0A0610;min-height:100vh;">
-        <!-- ── NAVBAR ─────────────────────────────────────────── -->
-        <PublicNavbar />
-
         <!-- ── LOADING ─────────────────────────────────────────── -->
         <div v-if="loading" class="flex items-center justify-center min-h-screen gap-3" style="color:#C9B9E8;">
             <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6"

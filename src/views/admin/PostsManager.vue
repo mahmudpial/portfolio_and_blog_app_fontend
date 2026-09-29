@@ -364,10 +364,11 @@ const tagQuery = ref('')
 async function fetchPosts(page = 1) {
     try {
         const { data } = await api.get('/admin/posts', { params: { page } })
-        posts.value = data.data || []
-        pagination.current_page = data.current_page
-        pagination.last_page = data.last_page
-        pagination.total = data.total
+        const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+        posts.value = Array.isArray(list) ? list : []
+        pagination.current_page = data.current_page || data.data?.current_page || 1
+        pagination.last_page = data.last_page || data.data?.last_page || 1
+        pagination.total = data.total || data.data?.total || posts.value.length
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to load posts', 'error')
     }

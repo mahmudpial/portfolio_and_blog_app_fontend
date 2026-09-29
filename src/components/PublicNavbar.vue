@@ -228,6 +228,7 @@ const themeColors = computed(() => {
 
 const navLinks = [
     { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
     { to: '/skills', label: 'Skills' },
     { to: '/portfolio', label: 'Portfolio' },
     { to: '/blog', label: 'Blog' },
@@ -237,10 +238,15 @@ const navLinks = [
 async function fetchSettings() {
     try {
         const { data } = await api.get('/settings')
-        settings.value = data.data.reduce((acc, s) => {
-            acc[s.key] = s.value
-            return acc
-        }, {})
+        const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+        if (Array.isArray(list)) {
+            settings.value = list.reduce((acc, s) => {
+                if (s && s.key) acc[s.key] = s.value
+                return acc
+            }, {})
+        } else if (typeof list === 'object' && list !== null) {
+            settings.value = list
+        }
     } catch (e) {
         console.warn('Could not load settings:', e.message)
     }

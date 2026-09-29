@@ -10,7 +10,12 @@ export const useAuthStore = defineStore("auth", () => {
 
   // ── Getters ─────────────────────────────────────────────────
   const isLoggedIn = computed(() => !!token.value);
-  const isAdmin = computed(() => user.value?.role === "admin");
+  const isAdmin = computed(() => {
+    if (!user.value) return false;
+    const role = (user.value.role || '').toString().toLowerCase();
+    const isAdminFlag = user.value.is_admin;
+    return role === "admin" || isAdminFlag === true || isAdminFlag === 1 || isAdminFlag === "1";
+  });
 
   // ── Actions ─────────────────────────────────────────────────
 
