@@ -13,7 +13,7 @@ import PublicNavbar from '@/components/PublicNavbar.vue'
 import PublicFooter from '@/components/PublicFooter.vue'
 
 const route = useRoute()
-const publicPages = ['home', 'about', 'skills', 'portfolio', 'ProjectDetail', 'blog', 'blog-post', 'contact', 'profile']
+const publicPages = ['home', 'about', 'skills', 'pricing', 'portfolio', 'ProjectDetail', 'blog', 'blog-post', 'contact', 'profile']
 const authPages = ['login', 'register', 'forgot-password', 'reset-password']
 
 const isAdminPage = computed(() => {

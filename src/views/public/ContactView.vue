@@ -319,7 +319,10 @@ onMounted(() => {
     if (route.query.subject) {
         form.subject = route.query.subject
     }
-    if (route.query.service) {
+    if (route.query.plan) {
+        if (!form.subject) form.subject = 'Freelance Project'
+        form.message = `Hi Pial,\n\nI would like to get started with the "${route.query.plan}" pricing package.\n\nHere are some details about my project requirements, expected timeline, and scope:\n- Project Overview:\n- Key Deliverables:\n- Target Launch Date:\n- Budget / Notes:\n\nLooking forward to working together!`
+    } else if (route.query.service) {
         if (!form.subject) form.subject = 'Freelance Project'
         form.message = `Hi Pial,\n\nI am interested in hiring you for your "${route.query.service}" service.\n\nHere are some details about my project requirements, expected timeline, and scope:\n- Project Overview:\n- Key Features:\n- Target Launch Date:\n\nLooking forward to hearing from you!`
     }

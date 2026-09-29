@@ -45,7 +45,7 @@
 
                 <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8">
                     <!-- Breadcrumb -->
-                    <div class="flex items-center gap-2 mb-4 text-xs" style="color:#94A3B8;font-family:system-ui;">
+                    <div class="flex items-center gap-2 mb-6 text-xs" style="color:#94A3B8;font-family:system-ui;">
                         <RouterLink to="/portfolio" class="transition-colors hover:text-violet-400"
                             style="color:#94A3B8;">
                             Portfolio
@@ -55,26 +55,6 @@
                             <path d="M9 18l6-6-6-6" />
                         </svg>
                         <span style="color:#C9B9E8;">{{ project.title }}</span>
-                    </div>
-
-                    <!-- Category + status badges -->
-                    <div class="flex items-center gap-3 mb-4 flex-wrap" style="display:inline-flex;gap:8px;">
-                        <span v-if="project.category" class="text-xs font-bold px-3 py-1.5 rounded-full"
-                            style="background:#8B5CF6;color:#fff;font-family:system-ui;">
-                            {{ project.category }}
-                        </span>
-                        <span v-if="project.is_featured"
-                            class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
-                            style="background:#F59E0B15;color:#F59E0B;border:1px solid #F59E0B30;font-family:system-ui;display:inline-flex;">
-                            ★ Featured
-                        </span>
-                        <span v-if="project.project_url"
-                            class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
-                            style="background:#052e16;color:#4ade80;border-color:#16a34a40;border:1px solid;font-family:system-ui;display:inline-flex;">
-                            <span class="w-1.5 h-1.5 rounded-full bg-green-400"
-                                style="box-shadow:0 0 6px #4ade80;"></span>
-                            Live Project
-                        </span>
                     </div>
 
                     <!-- Title -->
@@ -356,9 +336,6 @@
                     </aside>
                 </div>
             </section>
-
-            <!-- ── FOOTER ───────────────────────────────────────── -->
-            <PublicFooter />
         </div>
     </div>
 </template>
@@ -366,8 +343,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import PublicNavbar from '@/components/PublicNavbar.vue'
-import PublicFooter from '@/components/PublicFooter.vue'
 import api from '@/api/axios'
 
 const route = useRoute()

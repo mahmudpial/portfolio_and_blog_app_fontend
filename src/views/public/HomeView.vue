@@ -477,8 +477,13 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════════
-         ⑤ TESTIMONIALS
-    ════════════════════════════════════════════════════════ -->
+         ⑤ PRICING & PACKAGES SECTION
+        ════════════════════════════════════════════════════════ -->
+        <PricingSection />
+
+        <!-- ═══════════════════════════════════════════════════════
+         ⑥ TESTIMONIALS
+        ════════════════════════════════════════════════════════ -->
         <section class="py-24 px-6 md:px-16 relative overflow-hidden" style="border-top:1px solid #241730;">
             <!-- Section glow -->
             <div class="absolute bottom-0 right-0 pointer-events-none" style="width:600px;height:400px;
@@ -816,6 +821,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import api from '@/api/axios'
 import { useAuthStore } from '@/stores/auth'
 import ServiceIcon from '@/components/ServiceIcon.vue'
+import PricingSection from '@/components/PricingSection.vue'
 
 const auth = useAuthStore()
 
