@@ -25,7 +25,7 @@
             <div class="hidden md:flex items-center gap-2 flex-shrink-0">
                 <RouterLink v-for="link in links" :key="link.to" :to="link.to" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
                  border transition-all hover:bg-white/5"
-                    style="border-color:transparent;color:#475569;font-family:system-ui;"
+                    :style="link.icon === 'globe' ? 'border-color:rgba(34,197,94,0.3);color:#4ADE80;background:rgba(34,197,94,0.1);font-family:system-ui;' : 'border-color:transparent;color:#475569;font-family:system-ui;'"
                     active-class="admin-nav-active">
                     <svg v-if="link.icon === 'dashboard'" width="12" height="12" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2.5">
@@ -34,10 +34,11 @@
                         <rect x="14" y="14" width="7" height="7" />
                         <rect x="3" y="14" width="7" height="7" />
                     </svg>
-                    <svg v-else-if="link.icon === 'eye'" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2.5">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx="12" cy="12" r="3" />
+                    <svg v-else-if="link.icon === 'globe'" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
                     {{ link.label }}
                 </RouterLink>
@@ -115,7 +116,7 @@
 
                     <RouterLink v-for="link in links" :key="link.to" :to="link.to" @click="menuOpen = false"
                         class="flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all hover:bg-white/5"
-                        style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;"
+                        :style="link.icon === 'globe' ? 'border-color:rgba(34,197,94,0.3);color:#4ADE80;background:rgba(34,197,94,0.1);font-family:system-ui;' : 'border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;'"
                         active-class="mobile-admin-active">
                         <svg v-if="link.icon === 'dashboard'" width="14" height="14" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2.5" class="flex-shrink-0">
@@ -124,10 +125,11 @@
                             <rect x="14" y="14" width="7" height="7" />
                             <rect x="3" y="14" width="7" height="7" />
                         </svg>
-                        <svg v-else-if="link.icon === 'eye'" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2.5" class="flex-shrink-0">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
+                        <svg v-else-if="link.icon === 'globe'" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                         </svg>
                         {{ link.label }}
                     </RouterLink>
@@ -183,7 +185,7 @@ const menuOpen = ref(false)
 
 const links = [
     { to: '/admin', label: 'Dashboard', icon: 'dashboard' },
-    { to: '/', label: 'View Site', icon: 'eye' },
+    { to: '/', label: 'View Site', icon: 'globe' },
 ]
 
 const firstName = computed(() => auth.user?.name?.split(' ')[0] || 'Admin')

@@ -425,11 +425,11 @@
                                 style="background:#0A0610dd;backdrop-filter:blur(2px);">
                                 <a v-if="p.project_url" :href="p.project_url" target="_blank"
                                     class="px-4 py-2 text-white text-xs font-bold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg"
-                                    style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);font-family:system-ui;box-shadow:0 0 20px rgba(139,92,246,0.5);">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                        <polyline points="15 3 21 3 21 9" />
-                                        <line x1="10" y1="14" x2="21" y2="3" />
+                                    style="background:linear-gradient(135deg,#10B981,#059669);font-family:system-ui;box-shadow:0 0 20px rgba(16,185,129,0.45);">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <line x1="2" y1="12" x2="22" y2="12" />
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                                     </svg>
                                     Live Demo
                                 </a>
@@ -463,12 +463,12 @@
                             </div>
                             <div class="flex gap-2 pt-2">
                                 <a v-if="p.project_url" :href="p.project_url" target="_blank" class="flex-1 text-center py-2.5 text-white text-xs font-bold rounded-xl
-                         transition-all duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-1.5 shadow-md" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);font-family:system-ui;
-                  box-shadow:0 0 16px rgba(139,92,246,0.35);">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                        <polyline points="15 3 21 3 21 9" />
-                                        <line x1="10" y1="14" x2="21" y2="3" />
+                         transition-all duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-1.5 shadow-md" style="background:linear-gradient(135deg,#10B981,#059669);font-family:system-ui;
+                  box-shadow:0 0 16px rgba(16,185,129,0.35);">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <line x1="2" y1="12" x2="22" y2="12" />
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                                     </svg>
                                     Live Demo
                                 </a>

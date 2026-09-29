@@ -67,13 +67,13 @@
                     <div class="flex items-center gap-4 flex-wrap">
                         <!-- Live Demo Button -->
                         <a v-if="project.project_url" :href="project.project_url" target="_blank"
-                            class="flex items-center gap-2 px-6 py-3 text-white text-sm font-bold rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(139,92,246,0.4)] active:scale-95"
-                            style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);font-family:system-ui;">
+                            class="flex items-center gap-2 px-6 py-3 text-white text-sm font-bold rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.45)] active:scale-95"
+                            style="background:linear-gradient(135deg,#10B981,#059669);font-family:system-ui;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                             </svg>
                             Live Demo
                         </a>
@@ -142,26 +142,26 @@
                                 </h3>
                                 <div style="display:grid;grid-template-columns:1fr;gap:0.75rem;">
                                     <a v-if="project.project_url" :href="project.project_url" target="_blank"
-                                        class="group flex items-center gap-3.5 px-5 py-4 rounded-xl border transition-all duration-300 hover:bg-[#1E1630] hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:scale-[1.01]"
+                                        class="group flex items-center gap-3.5 px-5 py-4 rounded-xl border transition-all duration-300 hover:bg-[#062c1d]/40 hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:scale-[1.01]"
                                         style="border-color:#3B2A5A;background:#120E1C;text-decoration:none;">
                                         <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors"
-                                            style="background:rgba(139,92,246,0.15);color:#C084FC;">
+                                            style="background:rgba(16,185,129,0.15);color:#4ADE80;">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2.5">
-                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                                <polyline points="15 3 21 3 21 9" />
-                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <line x1="2" y1="12" x2="22" y2="12" />
+                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                                             </svg>
                                         </div>
                                         <div style="flex:1;">
-                                            <p class="font-bold text-sm text-white group-hover:text-purple-300 transition-colors">
+                                            <p class="font-bold text-sm text-white group-hover:text-emerald-300 transition-colors">
                                                 View Live Project
                                             </p>
                                             <p class="text-xs transition-colors" style="color:#C9B9E8;">
                                                 {{ project.project_url }}
                                             </p>
                                         </div>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ADE80"
                                             stroke-width="2.5" class="transition-transform duration-300 group-hover:translate-x-1">
                                             <path d="M9 18l6-6-6-6" />
                                         </svg>

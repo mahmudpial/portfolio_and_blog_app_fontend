@@ -153,12 +153,12 @@
                                 <div class="flex flex-wrap gap-3">
                                     <a v-if="p.project_url" :href="p.project_url" target="_blank" @click.stop class="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold
                            rounded-2xl transition-all hover:scale-105"
-                                        style="background:#8B5CF6;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2.5">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                            <polyline points="15 3 21 3 21 9" />
-                                            <line x1="10" y1="14" x2="21" y2="3" />
+                                        style="background:linear-gradient(135deg,#10B981,#059669);box-shadow:0 0 20px rgba(16,185,129,0.35);font-family:system-ui;">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <line x1="2" y1="12" x2="22" y2="12" />
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                                         </svg>
                                         Live Demo
                                     </a>
