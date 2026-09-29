@@ -332,6 +332,13 @@
                             style="border-color:rgba(139, 92, 246, 0.25);"></textarea>
                     </div>
 
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Footer Copyright Tagline</label>
+                        <input v-model="settingsMap['footer_copyright']" type="text" placeholder="e.g. Engineered with precision, security & high performance."
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                    </div>
+
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Contact Email</label>
                         <input v-model="settingsMap['email']" type="email" placeholder="hello@pialcodes.com"

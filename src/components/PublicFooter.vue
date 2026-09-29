@@ -182,13 +182,18 @@
             <!-- ── BOTTOM BAR ────────────────────────────────────── -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-5">
 
-                <!-- Copyright -->
+                <!-- Copyright & Professional Attribution -->
                 <div class="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
-                    <p class="text-sm m-0" style="color:#64748B;font-family:system-ui;">
-                        © {{ new Date().getFullYear() }}
-                        <span class="font-semibold text-white">{{ settings['brand_name'] || 'Pial' }}Dev.</span>
-                        Crafted with <span class="inline-block transition-transform hover:scale-125" style="color:#EF4444;">❤️</span> by
-                        <span class="font-semibold" style="color:#C084FC;">{{ settings['full_name'] || 'Pial Mahmud' }}</span>
+                    <p class="text-xs md:text-sm m-0 text-slate-400 flex flex-wrap items-center justify-center md:justify-start gap-x-2.5 gap-y-1" style="font-family:system-ui;">
+                        <span>
+                            © {{ new Date().getFullYear() }}
+                            <span class="font-semibold text-white">{{ settings['full_name'] || 'Pial Mahmud' }}</span>.
+                            All rights reserved.
+                        </span>
+                        <span class="hidden md:inline" style="color:#3B2A5A;">•</span>
+                        <span class="text-purple-300/80">
+                            {{ settings['footer_copyright'] || 'Engineered with precision, security & high performance.' }}
+                        </span>
                     </p>
                 </div>
 
