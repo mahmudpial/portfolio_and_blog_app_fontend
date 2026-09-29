@@ -115,16 +115,18 @@
                                 style="background:linear-gradient(135deg,#180F28,#241338);">
                                 <img v-if="p.image" :src="p.image" :alt="p.title"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div v-else class="flex flex-col items-center gap-3">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A"
-                                        stroke-width="1">
-                                        <rect x="2" y="3" width="20" height="14" rx="2" />
-                                        <path d="M8 21h8M12 17v4" />
-                                    </svg>
+                                <div v-else class="flex flex-col items-center gap-3 text-center p-4">
+                                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 text-violet-400"
+                                        style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 25px rgba(139,92,246,0.2);">
+                                        <ProjectIcon :category="p.category" :title="p.title" :size="32" />
+                                    </div>
+                                    <span class="text-xs font-semibold text-violet-300 uppercase tracking-wider" style="font-family:system-ui;">
+                                        {{ p.category || 'Web Application' }}
+                                    </span>
                                 </div>
                                 <!-- Featured overlay shimmer -->
-                                <div v-if="p.is_featured" class="absolute inset-0"
-                                    style="background:linear-gradient(135deg,#8B5CF608,transparent 60%);"></div>
+                                <div v-if="p.is_featured" class="absolute inset-0 pointer-events-none"
+                                    style="background:linear-gradient(135deg,#8B5CF612,transparent 60%);"></div>
                             </div>
 
                             <!-- Content -->
@@ -252,6 +254,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '@/api/axios'
+import ProjectIcon from '@/components/ProjectIcon.vue'
 
 const router = useRouter()
 const projects = ref([])

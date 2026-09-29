@@ -20,17 +20,33 @@
         <!-- ── STATS ROW ────────────────────────────────────── -->
         <div class="dashboard-stats-grid grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div v-for="stat in statsCards" :key="stat.label"
-                class="rounded-2xl border p-5 relative overflow-hidden transition-all hover:-translate-y-0.5"
-                style="background:#120E1C;border-color:#3B2A5A;">
-                <div class="absolute top-0 right-0 w-16 h-16 rounded-full pointer-events-none" :style="`background:radial-gradient(circle,${stat.glow}20 0%,transparent 70%);
-                transform:translate(30%,-30%);`"></div>
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                        :style="`background:${stat.glow}15;border:1px solid ${stat.glow}25;`">
-                        <span style="font-size:16px;">{{ stat.icon }}</span>
+                class="rounded-2xl border p-5 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 group cursor-default"
+                style="background:#120E1C;border-color:#3B2A5A;"
+                onmouseover="this.style.borderColor=this.getAttribute('data-glow');"
+                onmouseout="this.style.borderColor='#3B2A5A';"
+                :data-glow="stat.glow">
+                <!-- ambient glow -->
+                <div class="absolute top-0 right-0 w-24 h-24 rounded-full pointer-events-none transition-opacity duration-300 opacity-60 group-hover:opacity-100" 
+                     :style="`background:radial-gradient(circle, ${stat.glow}25 0%, transparent 70%); transform:translate(30%,-30%);`"></div>
+                
+                <div class="flex items-center gap-3 mb-3 relative z-10">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-lg"
+                        :style="`background:${stat.glow}18; border:1px solid ${stat.glow}40; color:${stat.color}; box-shadow: 0 4px 12px ${stat.glow}15;`">
+                        <svg v-if="stat.type === 'users'" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <svg v-else-if="stat.type === 'active'" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <svg v-else-if="stat.type === 'admins'" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
                     </div>
                     <span class="text-xs font-semibold uppercase tracking-wider"
-                        style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
+                        style="color:#94A3B8;font-family:system-ui;letter-spacing:.12em;">
                         {{ stat.label }}
                     </span>
                 </div>
@@ -42,20 +58,51 @@
 
         <!-- ── NAV CARDS ────────────────────────────────────── -->
         <div class="dashboard-nav-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            <RouterLink v-for="card in navCards" :key="card.to" :to="card.to" class="rounded-2xl border p-5 text-center transition-all duration-300
-             hover:-translate-y-1 no-underline group relative overflow-hidden"
+            <RouterLink v-for="card in navCards" :key="card.to" :to="card.to" 
+                class="rounded-2xl border p-5 text-center transition-all duration-300 hover:-translate-y-1.5 no-underline group relative overflow-hidden flex flex-col items-center justify-center"
                 style="background:#120E1C;border-color:#3B2A5A;"
-                onmouseover="this.style.borderColor='#8B5CF6';this.style.boxShadow='0 0 24px #8B5CF618'"
-                onmouseout="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                    style="background:radial-gradient(ellipse 120px 80px at 50% 50%,#8B5CF608,transparent 70%);">
+                onmouseover="this.style.borderColor=this.getAttribute('data-color'); this.style.boxShadow='0 10px 25px -5px ' + this.getAttribute('data-color') + '25';"
+                onmouseout="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';"
+                :data-color="card.color">
+                
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    :style="`background:radial-gradient(circle at 50% 40%, ${card.color}15, transparent 70%);`">
                 </div>
-                <div class="text-3xl mb-3 relative z-10">{{ card.icon }}</div>
-                <div class="font-semibold text-white text-sm mb-1 relative z-10
-                  group-hover:text-violet-400 transition-colors" style="font-family:'Georgia',serif;">
+                
+                <!-- Nav Card Vector Icon -->
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-3 relative z-10 transition-all duration-300 group-hover:scale-110 shadow-lg"
+                     :style="`background:${card.color}15; border:1px solid ${card.color}35; color:${card.color};`">
+                    
+                    <!-- Posts Icon -->
+                    <svg v-if="card.type === 'posts'" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+
+                    <!-- Projects Icon -->
+                    <svg v-else-if="card.type === 'projects'" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+
+                    <!-- Skills Icon -->
+                    <svg v-else-if="card.type === 'skills'" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+
+                    <!-- Services Icon -->
+                    <svg v-else-if="card.type === 'services'" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+
+                    <!-- Comments Icon -->
+                    <svg v-else-if="card.type === 'comments'" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                </div>
+
+                <div class="font-semibold text-white text-sm mb-1 relative z-10 group-hover:text-purple-300 transition-colors" style="font-family:'Georgia',serif;">
                     {{ card.label }}
                 </div>
-                <div class="text-xs relative z-10" style="color:#475569;font-family:system-ui;">
+                <div class="text-xs relative z-10 transition-colors text-slate-400 group-hover:text-purple-200" style="font-family:system-ui;">
                     {{ card.sub }}
                 </div>
             </RouterLink>
@@ -408,18 +455,18 @@ const alertMsg = ref('')
 const alertType = ref('success')
 
 const statsCards = computed(() => [
-    { label: 'Total Users', value: users.value.length, icon: '👥', glow: '#8B5CF6', color: '#C084FC' },
-    { label: 'Active', value: users.value.filter(u => u.status === 'active').length, icon: '✅', glow: '#10B981', color: '#4ADE80' },
-    { label: 'Admins', value: users.value.filter(u => u.role === 'admin').length, icon: '🛡️', glow: '#EF4444', color: '#F87171' },
-    { label: 'Inactive', value: users.value.filter(u => u.status === 'inactive').length, icon: '💤', glow: '#64748B', color: '#94A3B8' },
+    { type: 'users', label: 'Total Users', value: users.value.length, glow: '#8B5CF6', color: '#C084FC' },
+    { type: 'active', label: 'Active', value: users.value.filter(u => u.status === 'active').length, glow: '#10B981', color: '#4ADE80' },
+    { type: 'admins', label: 'Admins', value: users.value.filter(u => u.role === 'admin').length, glow: '#EF4444', color: '#F87171' },
+    { type: 'inactive', label: 'Inactive', value: users.value.filter(u => u.status === 'inactive').length, glow: '#64748B', color: '#94A3B8' },
 ])
 
 const navCards = [
-    { to: '/admin/posts', label: 'Blog Posts', sub: 'Manage content', icon: '📝' },
-    { to: '/admin/projects', label: 'Projects', sub: 'Showcase work', icon: '💼' },
-    { to: '/admin/skills', label: 'Skills', sub: 'Update stack', icon: '⚡' },
-    { to: '/admin/services', label: 'Services', sub: 'Offerings', icon: '🛠️' },
-    { to: '/admin/comments', label: 'Comments', sub: 'Engagement', icon: '💬' },
+    { to: '/admin/posts', label: 'Blog Posts', sub: 'Manage content', type: 'posts', color: '#8B5CF6' },
+    { to: '/admin/projects', label: 'Projects', sub: 'Showcase work', type: 'projects', color: '#06B6D4' },
+    { to: '/admin/skills', label: 'Skills', sub: 'Update stack', type: 'skills', color: '#F59E0B' },
+    { to: '/admin/services', label: 'Services', sub: 'Offerings', type: 'services', color: '#EC4899' },
+    { to: '/admin/comments', label: 'Comments', sub: 'Engagement', type: 'comments', color: '#10B981' },
 ]
 
 // ── Computed ────────────────────────────────────────────────

@@ -328,15 +328,14 @@
                 <!-- Dynamic from API -->
                 <div v-if="!skillsLoading && skills.length > 0" class="flex flex-wrap gap-3">
                     <div v-for="skill in skills.slice(0, 12)" :key="skill.id" class="skill-chip flex items-center gap-3 px-4 py-3 rounded-xl border
-                   transition-all hover:-translate-y-1 hover:scale-105 cursor-default"
+                   transition-all duration-300 hover:-translate-y-1 hover:scale-105 cursor-default group/skill"
                         style="background:#120E1C;border-color:#3B2A5A;">
-                        <!-- Letter avatar -->
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
-                            {{ skill.name[0].toUpperCase() }}
+                        <!-- Tech brand icon -->
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover/skill:scale-110"
+                            style="background:rgba(139, 92, 246, 0.1);border:1px solid rgba(139, 92, 246, 0.25);">
+                            <TechIcon :name="skill.name" :size="20" />
                         </div>
-                        <span class="text-sm font-medium text-white" style="font-family:system-ui;">{{ skill.name
-                        }}</span>
+                        <span class="text-sm font-medium text-white group-hover/skill:text-purple-200 transition-colors" style="font-family:system-ui;">{{ skill.name }}</span>
                         <span class="text-xs font-semibold px-2 py-0.5 rounded-full"
                             style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
                             {{ skill.percentage }}%
@@ -351,9 +350,10 @@
                 </div>
                 <div v-else class="flex flex-wrap gap-3">
                     <div v-for="tag in fallbackTags" :key="tag"
-                        class="px-5 py-2.5 rounded-xl border text-sm font-medium transition-all hover:scale-105"
+                        class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all hover:scale-105 group/tag cursor-default"
                         style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                        {{ tag }}
+                        <TechIcon :name="tag" :size="18" />
+                        <span class="group-hover/tag:text-white transition-colors">{{ tag }}</span>
                     </div>
                 </div>
             </div>
@@ -403,14 +403,14 @@
                             style="background:linear-gradient(135deg,#180F28 0%,#241338 100%);">
                             <img v-if="p.image" :src="p.image" :alt="p.title"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                            <div v-else class="flex flex-col items-center gap-3">
-                                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3B2A5A"
-                                    stroke-width="1">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                                    <path d="M8 21h8M12 17v4" />
-                                </svg>
-                                <span class="text-xs font-medium" style="color:#3B2A5A;font-family:system-ui;">No
-                                    preview</span>
+                            <div v-else class="flex flex-col items-center gap-2.5 text-center p-4">
+                                <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 text-violet-400"
+                                    style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);box-shadow:0 0 25px rgba(139,92,246,0.2);">
+                                    <ProjectIcon :category="p.category" :title="p.title" :size="32" />
+                                </div>
+                                <span class="text-xs font-semibold text-violet-300 uppercase tracking-wider" style="font-family:system-ui;">
+                                    {{ p.category || 'Web Application' }}
+                                </span>
                             </div>
 
                             <!-- Featured badge -->
@@ -868,6 +868,8 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import api from '@/api/axios'
 import { useAuthStore } from '@/stores/auth'
 import ServiceIcon from '@/components/ServiceIcon.vue'
+import TechIcon from '@/components/TechIcon.vue'
+import ProjectIcon from '@/components/ProjectIcon.vue'
 import PricingSection from '@/components/PricingSection.vue'
 
 const auth = useAuthStore()

@@ -98,24 +98,23 @@
                         <!-- Skill cards grid -->
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <div v-for="skill in group" :key="skill.id"
-                                class="skill-card rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 group"
+                                class="skill-card rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-violet-500 hover:shadow-[0_10px_25px_-5px_rgba(139,92,246,0.2)] group"
                                 style="background:#120E1C;border-color:#3B2A5A;">
 
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="flex items-center gap-3">
-                                        <!-- Letter avatar -->
-                                        <div class="w-10 h-10 rounded-xl flex items-center justify-center
-                                text-sm font-bold text-white flex-shrink-0"
-                                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
-                                            {{ skill.name.slice(0, 2).toUpperCase() }}
+                                        <!-- Tech brand icon -->
+                                        <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                                            style="background:rgba(139, 92, 246, 0.1);border:1px solid rgba(139, 92, 246, 0.25);">
+                                            <TechIcon :name="skill.name" :size="24" />
                                         </div>
                                         <div>
-                                            <div class="font-bold text-white text-sm"
+                                            <div class="font-bold text-white text-sm group-hover:text-purple-200 transition-colors"
                                                 style="font-family:'Georgia',serif;">
                                                 {{ skill.name }}
                                             </div>
-                                            <div class="text-xs" style="color:#475569;font-family:system-ui;">
+                                            <div class="text-xs" style="color:#64748B;font-family:system-ui;">
                                                 {{ skill.order || 3 }}y exp.
                                             </div>
                                         </div>
@@ -262,6 +261,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import api from '@/api/axios'
+import TechIcon from '@/components/TechIcon.vue'
 
 const skills = ref([])
 const loading = ref(true)
