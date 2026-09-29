@@ -1,10 +1,9 @@
 <template>
     <div class="max-w-5xl mx-auto px-6 py-10">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-10">
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div class="space-y-1">
-                <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:#A78BFA;opacity:0.8;">Configuration</p>
-                <h1 class="font-serif text-4xl font-bold text-white tracking-tight">Site <span style="color:#8B5CF6;">Settings</span></h1>
+                <h1 class="font-serif text-3xl font-bold text-white tracking-tight">Site <span style="color:#8B5CF6;">Settings</span></h1>
                 <p class="text-sm opacity-60 font-medium">Control every detail of your public portfolio and blog.</p>
             </div>
             <button @click="saveSettings" :disabled="saving" class="px-6 py-3 bg-purple-600 text-white text-sm font-bold rounded-2xl transition-all hover:scale-105 disabled:opacity-50 shadow-lg shadow-purple-600/20">

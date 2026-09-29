@@ -1,10 +1,8 @@
 <template>
     <div class="max-w-7xl mx-auto px-6 py-10">
-        <div class="flex items-center justify-between mb-10 flex-wrap gap-6">
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div class="space-y-1">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] mb-2"
-                    style="color:#A78BFA;opacity:0.8;">Service Control</p>
-                <h1 class="font-serif text-4xl font-bold text-white tracking-tight">
+                <h1 class="font-serif text-3xl font-bold text-white tracking-tight">
                     Services <span style="color:#8B5CF6;">Management</span>
                 </h1>
                 <p class="text-sm opacity-60 font-medium">

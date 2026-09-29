@@ -2,8 +2,6 @@
     <div class="max-w-7xl mx-auto px-6 py-8">
         <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div>
-                <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                    style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                 <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                     Skills Manager
                 </h1>

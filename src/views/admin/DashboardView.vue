@@ -3,8 +3,6 @@
         <!-- ── PAGE HEADER ──────────────────────────────────── -->
         <div class="flex items-start justify-between mb-8 flex-wrap gap-4">
             <div class="min-w-0">
-                <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                    style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
                 <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
                     Dashboard
                 </h1>
