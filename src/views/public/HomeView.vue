@@ -418,7 +418,7 @@
                                     Live Demo
                                 </a>
                                 <a v-if="p.github_url" :href="p.github_url" target="_blank"
-                                    class="px-4 py-2 text-xs font-semibold rounded-xl border transition-all hover:scale-105"
+                                    class="px-4 py-2 text-xs font-semibold rounded-xl border transition-all hover:scale-105 hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     GitHub
                                 </a>
@@ -447,12 +447,12 @@
                                     Live Demo
                                 </a>
                                 <a v-if="p.github_url" :href="p.github_url" target="_blank" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-colors hover:border-violet-500"
+                         transition-all hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     GitHub
                                 </a>
                                 <RouterLink v-if="!p.project_url && !p.github_url" to="/portfolio" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-colors" style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                         transition-all hover:bg-violet-600/20 hover:text-white hover:border-violet-400" style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                     View Details
                                 </RouterLink>
                             </div>

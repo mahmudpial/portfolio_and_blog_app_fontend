@@ -161,7 +161,7 @@
                                         Live Demo
                                     </a>
                                     <a v-if="p.github_url" :href="p.github_url" target="_blank" @click.stop class="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-2xl
-                           border transition-all hover:scale-105 hover:border-violet-500"
+                            border transition-all hover:scale-105 hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
                                         style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                             <path

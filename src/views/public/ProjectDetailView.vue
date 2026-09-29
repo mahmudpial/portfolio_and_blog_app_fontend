@@ -80,7 +80,7 @@
 
                         <!-- GitHub Button -->
                         <a v-if="project.github_url" :href="project.github_url" target="_blank"
-                            class="flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-2xl border transition-all hover:scale-105 hover:bg-white/5 hover:border-violet-400"
+                            class="flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-2xl border transition-all hover:scale-105 hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
                             style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -91,7 +91,7 @@
 
                         <!-- Back button -->
                         <RouterLink to="/portfolio"
-                            class="flex items-center gap-2 px-5 py-3 text-xs font-semibold rounded-2xl border transition-all hover:bg-white/5"
+                            class="flex items-center gap-2 px-5 py-3 text-xs font-semibold rounded-2xl border transition-all hover:bg-white/5 hover:text-white hover:border-violet-400"
                             style="border-color:#3B2A5A;color:#94A3B8;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
@@ -142,38 +142,50 @@
                                 </h3>
                                 <div style="display:grid;grid-template-columns:1fr;gap:0.75rem;">
                                     <a v-if="project.project_url" :href="project.project_url" target="_blank"
-                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-violet-500 hover:bg-opacity-10"
-                                        style="border-color:#8B5CF630;text-decoration:none;">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
-                                            stroke-width="2.5">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                            <polyline points="15 3 21 3 21 9" />
-                                            <line x1="10" y1="14" x2="21" y2="3" />
-                                        </svg>
-                                        <div style="flex:1;">
-                                            <p style="color:#C084FC;font-weight:600;font-size:14px;">View Live Project
-                                            </p>
-                                            <p style="color:#94A3B8;font-size:12px;">{{ project.project_url }}</p>
+                                        class="group flex items-center gap-3.5 px-5 py-4 rounded-xl border transition-all duration-300 hover:bg-[#1E1630] hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:scale-[1.01]"
+                                        style="border-color:#3B2A5A;background:#120E1C;text-decoration:none;">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors"
+                                            style="background:rgba(139,92,246,0.15);color:#C084FC;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2.5">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                <polyline points="15 3 21 3 21 9" />
+                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                            </svg>
                                         </div>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8"
-                                            stroke-width="2.5">
+                                        <div style="flex:1;">
+                                            <p class="font-bold text-sm text-white group-hover:text-purple-300 transition-colors">
+                                                View Live Project
+                                            </p>
+                                            <p class="text-xs transition-colors" style="color:#C9B9E8;">
+                                                {{ project.project_url }}
+                                            </p>
+                                        </div>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
+                                            stroke-width="2.5" class="transition-transform duration-300 group-hover:translate-x-1">
                                             <path d="M9 18l6-6-6-6" />
                                         </svg>
                                     </a>
                                     <a v-if="project.github_url" :href="project.github_url" target="_blank"
-                                        class="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:bg-violet-500 hover:bg-opacity-10"
-                                        style="border-color:#8B5CF630;text-decoration:none;">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#C084FC">
-                                            <path
-                                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
-                                        </svg>
-                                        <div style="flex:1;">
-                                            <p style="color:#C084FC;font-weight:600;font-size:14px;">View Source Code
-                                            </p>
-                                            <p style="color:#94A3B8;font-size:12px;">GitHub Repository</p>
+                                        class="group flex items-center gap-3.5 px-5 py-4 rounded-xl border transition-all duration-300 hover:bg-[#1E1630] hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:scale-[1.01]"
+                                        style="border-color:#3B2A5A;background:#120E1C;text-decoration:none;">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors"
+                                            style="background:rgba(139,92,246,0.15);color:#C084FC;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                                            </svg>
                                         </div>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8"
-                                            stroke-width="2.5">
+                                        <div style="flex:1;">
+                                            <p class="font-bold text-sm text-white group-hover:text-purple-300 transition-colors">
+                                                View Source Code
+                                            </p>
+                                            <p class="text-xs transition-colors" style="color:#C9B9E8;">
+                                                GitHub Repository
+                                            </p>
+                                        </div>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C084FC"
+                                            stroke-width="2.5" class="transition-transform duration-300 group-hover:translate-x-1">
                                             <path d="M9 18l6-6-6-6" />
                                         </svg>
                                     </a>
