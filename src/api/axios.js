@@ -29,9 +29,12 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      router.push({ name: "login" });
+      const token = localStorage.getItem("token");
+      if (token) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        router.push({ name: "login" });
+      }
     }
     return Promise.reject(error);
   },
