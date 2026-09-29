@@ -18,7 +18,7 @@
             <div class="relative z-10 max-w-4xl mx-auto text-center">
                 <!-- Breadcrumb -->
                 <div class="inline-flex items-center gap-2 mb-6 text-xs" style="color:#94A3B8;font-family:system-ui;">
-                    <RouterLink to="/" class="transition-colors hover:text-violet-400" style="color:#94A3B8;">Home</RouterLink>
+                    <RouterLink to="/" class="transition-colors hover:text-violet-400 text-decoration-none" style="color:#94A3B8;">Home</RouterLink>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <path d="M9 18l6-6-6-6" />
                     </svg>
@@ -63,13 +63,13 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div v-for="(faq, idx) in faqs" :key="idx"
+                    <div v-for="(faq, idx) in displayedFaqs" :key="idx"
                         class="rounded-2xl border transition-all duration-300 overflow-hidden"
                         :style="openFaq === idx
                             ? 'background:#180F28;border-color:#8B5CF640;'
                             : 'background:#120E1C;border-color:#3B2A5A;'">
                         <button @click="toggleFaq(idx)"
-                            class="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-white transition-colors"
+                            class="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-white transition-colors cursor-pointer bg-transparent border-0"
                             style="font-family:system-ui;">
                             <span class="text-base md:text-lg">{{ faq.question }}</span>
                             <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-sm transition-transform duration-300"
@@ -100,12 +100,12 @@
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center">
                     <RouterLink to="/contact"
-                        class="px-8 py-3.5 text-white font-semibold rounded-2xl transition-all hover:scale-105"
+                        class="px-8 py-3.5 text-white font-semibold rounded-2xl transition-all hover:scale-105 text-decoration-none"
                         style="background:#8B5CF6;box-shadow:0 0 24px #8B5CF640;font-family:system-ui;">
                         Contact Me Directly
                     </RouterLink>
                     <RouterLink to="/portfolio"
-                        class="px-8 py-3.5 font-semibold rounded-2xl border transition-all hover:scale-105"
+                        class="px-8 py-3.5 font-semibold rounded-2xl border transition-all hover:scale-105 text-decoration-none"
                         style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                         Explore Showcase
                     </RouterLink>
@@ -117,17 +117,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import PricingSection from '@/components/PricingSection.vue'
+import api from '@/api/axios'
 
 const openFaq = ref(0)
+const settings = ref({})
 
 function toggleFaq(idx) {
     openFaq.value = openFaq.value === idx ? -1 : idx
 }
 
-const faqs = [
+const defaultFaqs = [
     {
         question: 'How does the milestone and payment process work?',
         answer: 'Typically, projects follow a standard 50% upfront deposit to initiate development and 50% upon final acceptance, demo walkthrough, and live deployment. For larger enterprise or monthly contracts, milestone-based payments are also supported.'
@@ -149,6 +151,31 @@ const faqs = [
         answer: 'We maintain clear daily/weekly progress updates via WhatsApp, Slack, Discord, or Email with live staging links so you always have full visibility into the development progress.'
     }
 ]
+
+const displayedFaqs = computed(() => {
+    if (settings.value['faqs_json']) {
+        try {
+            const parsed = JSON.parse(settings.value['faqs_json'])
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed
+        } catch {}
+    }
+    return defaultFaqs
+})
+
+onMounted(async () => {
+    try {
+        const { data } = await api.get('/settings')
+        const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+        if (Array.isArray(list)) {
+            settings.value = list.reduce((acc, s) => {
+                if (s && s.key) acc[s.key] = s.value
+                return acc
+            }, {})
+        } else if (typeof list === 'object' && list !== null) {
+            settings.value = list
+        }
+    } catch {}
+})
 </script>
 
 <style scoped>

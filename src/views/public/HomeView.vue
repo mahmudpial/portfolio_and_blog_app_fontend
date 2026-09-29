@@ -35,18 +35,18 @@
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
-                        Available for hire
+                        {{ settings['available_status'] || settings['home_badge_text'] || 'Available for hire' }}
                     </div>
 
                     <!-- Main heading — owner name from config -->
                     <div class="hero-title-block mb-6">
                         <h1 class="font-bold leading-none mb-1 hero-line-1" style="font-size:clamp(40px,5.5vw,72px);color:#fff;font-family:'Georgia',serif;
               letter-spacing:-1px;">
-                            Hi, I'm
+                            {{ settings['home_hero_greeting'] || "Hi, I'm" }}
                         </h1>
                         <h1 class="font-bold leading-none hero-line-2" style="font-size:clamp(40px,5.5vw,72px);font-family:'Georgia',serif;
               letter-spacing:-1px;color:#C084FC;text-shadow:0 0 40px #8B5CF650;">
-                            {{ ownerName }}
+                            {{ settings['home_hero_title'] || settings['full_name'] || ownerName }}
                         </h1>
                     </div>
 
@@ -64,33 +64,31 @@
                     <!-- Bio -->
                     <p class="leading-relaxed mb-10 hero-bio"
                         style="color:#C9B9E8;max-width:480px;font-family:system-ui;font-size:16px;line-height:1.8;">
-                        I build multi-tenant systems with role-based access control that actually hold up under real
-                        use. Proven live in a production RBAC system, and stress-tested by a cross-tenant bug I found
-                        and fixed myself.
+                        {{ settings['home_hero_bio'] || 'I build multi-tenant systems with role-based access control that actually hold up under real use. Proven live in a production RBAC system, and stress-tested by a cross-tenant bug I found and fixed myself.' }}
                     </p>
 
                     <!-- CTA buttons -->
                     <div class="flex flex-wrap gap-4 mb-10 hero-btns">
-                        <RouterLink to="/portfolio" class="flex items-center gap-2.5 px-7 py-3.5 text-white font-bold rounded-2xl
-                     transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg group/btn relative overflow-hidden" style="background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);box-shadow:0 0 28px rgba(139,92,246,0.45);
+                        <RouterLink :to="settings['home_btn1_link'] || '/portfolio'" class="flex items-center gap-2.5 px-7 py-3.5 text-white font-bold rounded-2xl
+                     transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg group/btn relative overflow-hidden text-decoration-none" style="background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);box-shadow:0 0 28px rgba(139,92,246,0.45);
               font-family:system-ui;font-size:15px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5" class="transition-transform duration-300 group-hover/btn:scale-110">
                                 <rect x="2" y="3" width="20" height="14" rx="2" />
                                 <path d="M8 21h8M12 17v4" />
                             </svg>
-                            <span>View My Work</span>
+                            <span>{{ settings['home_btn1_text'] || 'View My Work' }}</span>
                             <span class="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                         </RouterLink>
-                        <RouterLink to="/contact" class="flex items-center gap-2.5 px-7 py-3.5 font-bold rounded-2xl border
-                     transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-violet-600/20 hover:text-white hover:border-violet-400 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]" style="border-color:#3B2A5A;color:#C9B9E8;background:#140F24;
+                        <RouterLink :to="settings['home_btn2_link'] || '/contact'" class="flex items-center gap-2.5 px-7 py-3.5 font-bold rounded-2xl border
+                     transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-violet-600/20 hover:text-white hover:border-violet-400 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] text-decoration-none" style="border-color:#3B2A5A;color:#C9B9E8;background:#140F24;
               font-family:system-ui;font-size:15px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                 <polyline points="22,6 12,13 2,6" />
                             </svg>
-                            <span>Get In Touch</span>
+                            <span>{{ settings['home_btn2_text'] || 'Get In Touch' }}</span>
                         </RouterLink>
                     </div>
 
@@ -593,28 +591,23 @@
                             style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                             Ready to Build?
                         </p>
-                        <h2 class="font-bold text-white leading-tight mb-2"
-                            style="font-size:clamp(26px,4vw,44px);font-family:'Georgia',serif;">
-                            Let's Create Something
-                        </h2>
                         <h2 class="font-bold leading-tight mb-5" style="font-size:clamp(26px,4vw,44px);font-family:'Georgia',serif;
               color:#C084FC;text-shadow:0 0 30px #8B5CF640;">
-                            Remarkable
+                            {{ settings['home_cta_title'] || "Let's Create Something Remarkable" }}
                         </h2>
                         <p class="text-sm leading-relaxed mb-10 mx-auto"
-                            style="color:#C9B9E8;max-width:420px;font-family:system-ui;line-height:1.8;">
-                            Whether it's a new product, a redesign, or a complex backend — I'm
-                            ready to help turn your vision into reality.
+                            style="color:#C9B9E8;max-width:480px;font-family:system-ui;line-height:1.8;">
+                            {{ settings['home_cta_desc'] || "Whether it's a new product, a redesign, or a complex backend — I'm ready to help turn your vision into reality." }}
                         </p>
                         <div class="flex flex-wrap gap-4 justify-center">
-                            <RouterLink to="/contact"
-                                class="px-8 py-3.5 text-white font-semibold rounded-2xl transition-all hover:scale-105"
+                            <RouterLink :to="settings['home_cta_btn_link'] || '/contact'"
+                                class="px-8 py-3.5 text-white font-semibold rounded-2xl transition-all hover:scale-105 text-decoration-none"
                                 style="background:#8B5CF6;box-shadow:0 0 28px #8B5CF640;
                 font-family:system-ui;font-size:15px;">
-                                Start a Project
+                                {{ settings['home_cta_btn_text'] || 'Start a Project' }}
                             </RouterLink>
                             <RouterLink to="/portfolio" class="px-8 py-3.5 font-semibold rounded-2xl border transition-all hover:scale-105
-                       hover:border-violet-500"
+                       hover:border-violet-500 text-decoration-none"
                                 style="border-color:#334155;color:#C9B9E8;font-family:system-ui;font-size:15px;">
                                 See My Work
                             </RouterLink>
@@ -874,14 +867,15 @@ import PricingSection from '@/components/PricingSection.vue'
 
 const auth = useAuthStore()
 
-// ── Owner config (mirrors Laravel config('app.owner_name')) ──
-const ownerName = ref('Pial Mahmud')
+// ── Owner config & CMS Settings ───────────────────────────
+const settings = ref({})
+const ownerName = computed(() => settings.value['home_hero_title'] || settings.value['full_name'] || 'Pial Mahmud')
 const ownerInitials = computed(() =>
     ownerName.value.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
 )
 const homeAvatarLoadFailed = ref(false)
 const homeAvatarUrl = computed(() =>
-    auth.isAdmin ? auth.user?.profile_image?.trim?.() || '' : ''
+    settings.value['avatar_url'] || (auth.isAdmin ? auth.user?.profile_image?.trim?.() || '' : '')
 )
 
 watch(homeAvatarUrl, () => {
@@ -889,24 +883,33 @@ watch(homeAvatarUrl, () => {
 })
 
 // ── Typewriter role rotator ──────────────────────────────
-const roles = [
+const defaultRoles = [
     'Full-Stack Web Developer',
     'Laravel Backend Expert',
     'UI/UX Enthusiast',
     'API Architect',
     'Problem Solver',
 ]
+const roles = computed(() => {
+    if (settings.value['home_hero_roles']) {
+        const list = settings.value['home_hero_roles'].split(',').map(s => s.trim()).filter(Boolean)
+        if (list.length > 0) return list
+    }
+    return defaultRoles
+})
+
 const currentRole = ref('')
 const currentRoleIdx = ref(0)
 const isDeleting = ref(false)
 let typeTimer = null
 
 function typewrite() {
-    const target = roles[currentRoleIdx.value]
+    const list = roles.value
+    if (!list || list.length === 0) return
+    const target = list[currentRoleIdx.value % list.length]
     if (!isDeleting.value) {
         currentRole.value = target.slice(0, currentRole.value.length + 1)
         if (currentRole.value === target) {
-            // Pause then start deleting
             typeTimer = setTimeout(() => { isDeleting.value = true; typewrite() }, 2200)
             return
         }
@@ -914,7 +917,7 @@ function typewrite() {
         currentRole.value = currentRole.value.slice(0, -1)
         if (currentRole.value === '') {
             isDeleting.value = false
-            currentRoleIdx.value = (currentRoleIdx.value + 1) % roles.length
+            currentRoleIdx.value = (currentRoleIdx.value + 1) % list.length
         }
     }
     typeTimer = setTimeout(typewrite, isDeleting.value ? 55 : 90)
@@ -927,9 +930,9 @@ const skillsLoading = ref(true)
 const projectsLoading = ref(true)
 
 const profileStats = computed(() => [
-    { value: projects.value.length > 0 ? projects.value.length + '+' : '3+', label: 'Projects' },
-    { value: '1+', label: 'Years' },
-    { value: skills.value.length > 0 ? skills.value.length + '+' : '10+', label: 'Skills' },
+    { value: settings.value['home_stat1_value'] || (projects.value.length > 0 ? projects.value.length + '+' : '3+'), label: settings.value['home_stat1_label'] || 'Projects' },
+    { value: settings.value['home_stat2_value'] || '3+', label: settings.value['home_stat2_label'] || 'Years Experience' },
+    { value: settings.value['home_stat3_value'] || (skills.value.length > 0 ? skills.value.length + '+' : '10+'), label: settings.value['home_stat3_label'] || 'Core Skills' },
 ])
 
 // ── Fallback static skill tags ───────────────────────────
@@ -957,7 +960,7 @@ function getServiceAccent(index) {
 }
 
 // ── Testimonials ─────────────────────────────────────────
-const testimonials = [
+const defaultTestimonials = [
     {
         stars: 5,
         quote: 'Delivered the project ahead of schedule with exceptional attention to detail. The codebase is clean and easy to maintain.',
@@ -978,25 +981,47 @@ const testimonials = [
     },
 ]
 
+const testimonials = computed(() => {
+    if (settings.value['testimonials_json']) {
+        try {
+            const parsed = JSON.parse(settings.value['testimonials_json'])
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed
+        } catch {}
+    }
+    return defaultTestimonials
+})
+
 // ── Lifecycle ────────────────────────────────────────────
 onMounted(async () => {
-    // Start typewriter after short delay
     typeTimer = setTimeout(typewrite, 600)
 
-    // Fetch data
     try {
         if (auth.isLoggedIn && auth.isAdmin && !auth.user?.profile_image) {
             await auth.fetchProfile()
         }
 
-        const [skillsRes, projectsRes, servicesRes] = await Promise.all([
+        const [skillsRes, projectsRes, servicesRes, settingsRes] = await Promise.allSettled([
             api.get('/skills'),
             api.get('/projects?featured=1'),
             api.get('/services'),
+            api.get('/settings'),
         ])
-        skills.value = skillsRes.data.data || []
-        projects.value = projectsRes.data.data?.slice(0, 3) || []
-        services.value = servicesRes.data.data || []
+
+        if (skillsRes.status === 'fulfilled') skills.value = skillsRes.value.data.data || []
+        if (projectsRes.status === 'fulfilled') projects.value = projectsRes.value.data.data?.slice(0, 3) || []
+        if (servicesRes.status === 'fulfilled') services.value = servicesRes.value.data.data || []
+        if (settingsRes.status === 'fulfilled' && settingsRes.value?.data) {
+            const data = settingsRes.value.data
+            const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+            if (Array.isArray(list)) {
+                settings.value = list.reduce((acc, s) => {
+                    if (s && s.key) acc[s.key] = s.value
+                    return acc
+                }, {})
+            } else if (typeof list === 'object' && list !== null) {
+                settings.value = list
+            }
+        }
     } catch (e) {
         console.warn('Could not fetch portfolio data:', e.message)
     } finally {
