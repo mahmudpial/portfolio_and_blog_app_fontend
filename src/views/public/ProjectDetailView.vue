@@ -29,10 +29,10 @@
         <div v-else>
 
             <!-- Hero -->
-            <section class="relative overflow-hidden " :style="project.hero_image
-                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.5) 0%,rgba(5,8,15,0.98) 100%),
-             url(${project.hero_image}) center/cover no-repeat;min-height:460px;display:flex;align-items:flex-end;`
-                : 'padding-top:7rem;padding-bottom:4rem;'">
+            <section class="relative overflow-hidden" :style="project.hero_image
+                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.7) 0%,rgba(5,8,15,0.98) 100%),
+             url(${project.hero_image}) center/cover no-repeat;`
+                : ''" style="padding-top:2.5rem;padding-bottom:2.5rem;">
 
                 <!-- Fallback gradient bg when no image -->
                 <div v-if="!project.hero_image" class="absolute inset-0 pointer-events-none">
@@ -43,7 +43,7 @@
             background-size:32px 32px;opacity:0.5;"></div>
                 </div>
 
-                <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pb-12 pt-16">
+                <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8">
                     <!-- Breadcrumb -->
                     <div class="flex items-center gap-2 mb-6 text-xs" style="color:#94A3B8;font-family:system-ui;">
                         <RouterLink to="/portfolio" class="transition-colors hover:text-violet-400"
