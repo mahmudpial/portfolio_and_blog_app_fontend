@@ -71,18 +71,20 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <!-- View Live Site Link -->
+                    <!-- Rotating Earth Icon Button (View Live Site) -->
                     <RouterLink to="/" target="_blank"
-                        class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all hover:scale-105"
-                        style="border-color:rgba(34, 197, 94, 0.4); color:#4ADE80; background:rgba(34, 197, 94, 0.1); box-shadow:0 0 12px rgba(34, 197, 94, 0.15);"
-                        onmouseover="this.style.borderColor='#4ADE80'; this.style.boxShadow='0 0 18px rgba(74, 222, 128, 0.3)';"
-                        onmouseout="this.style.borderColor='rgba(34, 197, 94, 0.4)'; this.style.boxShadow='0 0 12px rgba(34, 197, 94, 0.15)';">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        class="relative group/earth flex items-center justify-center w-9 h-9 rounded-xl border transition-all duration-300 hover:scale-110 active:scale-95"
+                        style="border-color:rgba(34, 197, 94, 0.4); color:#4ADE80; background:rgba(34, 197, 94, 0.1); box-shadow:0 0 14px rgba(34, 197, 94, 0.18);"
+                        onmouseover="this.style.borderColor='#4ADE80'; this.style.boxShadow='0 0 22px rgba(74, 222, 128, 0.4)';"
+                        onmouseout="this.style.borderColor='rgba(34, 197, 94, 0.4)'; this.style.boxShadow='0 0 14px rgba(34, 197, 94, 0.18)';"
+                        title="View Live Site"
+                        aria-label="View Live Site">
+                        <svg class="earth-spin w-[18px] h-[18px] text-emerald-400 group-hover/earth:text-emerald-300 transition-colors"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10" />
                             <line x1="2" y1="12" x2="22" y2="12" />
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                         </svg>
-                        <span>View Site</span>
                     </RouterLink>
 
                     <!-- Profile Dropdown Section -->
@@ -306,5 +308,24 @@ function isActiveRoute(path) {
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: rgba(139, 92, 246, 0.2);
     border-radius: 4px;
+}
+
+@keyframes spinGlobe {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.earth-spin {
+    animation: spinGlobe 14s linear infinite;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.group\/earth:hover .earth-spin {
+    animation: spinGlobe 4s linear infinite;
 }
 </style>
