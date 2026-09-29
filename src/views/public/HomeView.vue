@@ -241,45 +241,53 @@
                 </div>
 
                 <!-- Services from API -->
-                <div v-else class="grid md:grid-cols-3 gap-6">
-                    <div v-for="(svc, i) in services" :key="svc.id" class="service-card rounded-2xl border p-6 transition-all duration-300
-                   hover:-translate-y-2 hover:scale-[1.02] cursor-default flex flex-col justify-between"
-                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 80}ms`">
+                <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <RouterLink v-for="(svc, i) in services" :key="svc.id" :to="`/services/${svc.id}`"
+                        class="service-card group rounded-3xl border p-7 transition-all duration-300
+                        hover:-translate-y-2 hover:shadow-2xl flex flex-col justify-between relative overflow-hidden"
+                        :style="`background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;animation-delay:${i * 80}ms;box-shadow:0 10px 30px -10px rgba(0,0,0,0.5);`"
+                        :onmouseover="`this.style.borderColor='#8B5CF6';this.style.boxShadow='0 20px 40px -10px rgba(139,92,246,0.25)'`"
+                        :onmouseout="`this.style.borderColor='#3B2A5A';this.style.boxShadow='0 10px 30px -10px rgba(0,0,0,0.5)'`">
+                        
+                        <!-- Top ambient hover highlight -->
+                        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                            style="background:radial-gradient(circle,#8B5CF630 0%,transparent 70%);filter:blur(30px);"></div>
+
                         <div>
-                            <!-- Icon tile -->
-                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 text-xl"
-                                style="background:#8B5CF615;border:1px solid #8B5CF625;">
-                                <span v-if="svc.icon" style="filter:drop-shadow(0 0 4px #8B5CF6);">{{ svc.icon }}</span>
-                                <span v-else class="text-sm font-bold text-violet-400">{{ (svc.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                            <!-- Top row: Icon tile & Arrow -->
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300"
+                                    style="background:linear-gradient(135deg,#8B5CF620,#6D28D910);border:1px solid #8B5CF635;">
+                                    <span v-if="svc.icon">{{ svc.icon }}</span>
+                                    <span v-else class="text-sm font-bold text-violet-400">{{ (svc.title || svc.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                                </div>
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+                                    style="background:#8B5CF615;color:#C084FC;">
+                                    →
+                                </div>
                             </div>
-                            <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
-                                <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
-                                    {{ svc.name }}
-                                </h3>
-                                <span v-if="svc.category" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex-shrink-0"
-                                    style="background:rgba(139, 92, 246, 0.1);color:#C084FC;border:1px solid rgba(139, 92, 246, 0.2);">
-                                    {{ svc.category }}
-                                </span>
-                            </div>
-                            <p class="text-sm leading-relaxed mb-5" style="color:#C9B9E8;font-family:system-ui;line-height:1.7;">
-                                {{ svc.description || svc.category }}
+
+                            <!-- Title -->
+                            <h3 class="font-bold text-white text-xl mb-3 group-hover:text-purple-300 transition-colors" style="font-family:'Georgia',serif;">
+                                {{ svc.title || svc.name }}
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="text-sm leading-relaxed mb-6 line-clamp-3" style="color:#C9B9E8;font-family:system-ui;line-height:1.7;">
+                                {{ svc.description }}
                             </p>
                         </div>
-                        
-                        <!-- Proficiency Bar -->
-                        <div v-if="svc.percentage" class="pt-4 border-t" style="border-color:rgba(139, 92, 246, 0.1);">
-                            <div class="flex justify-between text-xs mb-1.5 font-medium" style="color:#94A3B8;">
-                                <span>Proficiency</span>
-                                <span style="color:#C084FC;font-weight:700;">{{ svc.percentage }}%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden bg-white/5">
-                                <div class="h-full rounded-full transition-all duration-500" :style="{
-                                    width: svc.percentage + '%',
-                                    background: 'linear-gradient(90deg, #8B5CF6, #C084FC)'
-                                }"></div>
-                            </div>
+
+                        <!-- Card Footer Action -->
+                        <div class="pt-5 border-t flex items-center justify-between text-xs font-semibold" style="border-color:rgba(139, 92, 246, 0.15);">
+                            <span class="text-violet-400 group-hover:text-purple-300 transition-colors flex items-center gap-1.5" style="font-family:system-ui;">
+                                Explore Details &amp; Workflow
+                            </span>
+                            <span class="text-white/40 group-hover:text-white transition-colors">
+                                View →
+                            </span>
                         </div>
-                    </div>
+                    </RouterLink>
                 </div>
             </div>
         </section>

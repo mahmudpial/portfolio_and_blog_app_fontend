@@ -299,9 +299,11 @@ select option {
 </style>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import api from '@/api/axios'
 
+const route = useRoute()
 const loading = ref(false)
 const successMsg = ref('')
 const errorMsg = ref('')
@@ -311,6 +313,16 @@ const form = reactive({
     email: '',
     subject: '',
     message: '',
+})
+
+onMounted(() => {
+    if (route.query.subject) {
+        form.subject = route.query.subject
+    }
+    if (route.query.service) {
+        if (!form.subject) form.subject = 'Freelance Project'
+        form.message = `Hi Pial,\n\nI am interested in hiring you for your "${route.query.service}" service.\n\nHere are some details about my project requirements, expected timeline, and scope:\n- Project Overview:\n- Key Features:\n- Target Launch Date:\n\nLooking forward to hearing from you!`
+    }
 })
 
 const subjects = [

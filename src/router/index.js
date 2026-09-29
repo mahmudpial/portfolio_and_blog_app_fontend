@@ -39,6 +39,11 @@ const routes = [
     name: "contact",
     component: () => import("@/views/public/ContactView.vue"),
   },
+  {
+    path: "/services/:id",
+    name: "service-detail",
+    component: () => import("@/views/public/ServiceDetailView.vue"),
+  },
 
   // ── Auth pages ─────────────────────────────────────────────
   {
