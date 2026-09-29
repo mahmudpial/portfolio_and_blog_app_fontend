@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="post in posts" :key="post.id" class="group transition-colors"
+                        <tr v-for="post in paginatedPosts" :key="post.id" class="group transition-colors"
                             style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
                             onmouseout="this.style.background='transparent'">
                             <td class="px-6 py-4">
@@ -125,17 +125,17 @@
                 </table>
             </div>
 
-            <!-- Pagination -->
-            <div v-if="pagination.last_page > 1"
+            <!-- Pagination Controls (3 per page) -->
+            <div v-if="totalPages > 1"
                 class="flex items-center justify-between px-6 py-4 border-t flex-wrap gap-3"
-                style="border-color:#241730;">
-                <span class="text-xs" style="color:#475569;font-family:system-ui;">
-                    Page {{ pagination.current_page }} of {{ pagination.last_page }}
+                style="border-color:#241730;background:#0E0A16;">
+                <span class="text-xs" style="color:#94A3B8;font-family:system-ui;">
+                    Showing {{ (currentPage - 1) * perPage + 1 }} - {{ Math.min(currentPage * perPage, posts.length) }} of {{ posts.length }} posts
                 </span>
-                <div class="flex gap-2">
-                    <button :disabled="pagination.current_page === 1"
-                        @click="fetchPosts(pagination.current_page - 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
-                     disabled:opacity-40 transition-all hover:scale-105"
+                <div class="flex items-center gap-2">
+                    <button :disabled="currentPage === 1"
+                        @click="goToPage(currentPage - 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
+                     disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
                         style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -143,9 +143,21 @@
                         </svg>
                         Prev
                     </button>
-                    <button :disabled="pagination.current_page === pagination.last_page"
-                        @click="fetchPosts(pagination.current_page + 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
-                     disabled:opacity-40 transition-all hover:scale-105"
+
+                    <div class="flex items-center gap-1.5">
+                        <button v-for="page in totalPages" :key="page"
+                            @click="goToPage(page)"
+                            class="w-8 h-8 rounded-xl text-xs font-semibold transition-all flex items-center justify-center"
+                            :style="currentPage === page
+                                ? 'background:#8B5CF6;color:#fff;box-shadow:0 0 12px #8B5CF640;'
+                                : 'background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;'">
+                            {{ page }}
+                        </button>
+                    </div>
+
+                    <button :disabled="currentPage === totalPages"
+                        @click="goToPage(currentPage + 1)" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border
+                     disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
                         style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
                         Next
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -348,25 +360,36 @@ const saving = ref(false)
 const alertMsg = ref('')
 const alertType = ref('success')
 
-const pagination = reactive({
-    current_page: 1,
-    last_page: 1,
-    total: 0
+// ── 3 ITEMS PER PAGE PAGINATION ───────────────────────────
+const perPage = 3
+const currentPage = ref(1)
+
+const totalPages = computed(() => Math.ceil(posts.value.length / perPage) || 1)
+
+const paginatedPosts = computed(() => {
+    const start = (currentPage.value - 1) * perPage
+    return posts.value.slice(start, start + perPage)
 })
+
+function goToPage(page) {
+    if (page >= 1 && page <= totalPages.value) {
+        currentPage.value = page
+    }
+}
 
 const modal = reactive({ show: false, editing: false, editId: null })
 const form = reactive({ title: '', slug: '', category_id: '', status: 'draft', hero_image: '', image: '', tags: [], body: '' })
 const categoryQuery = ref('')
 const tagQuery = ref('')
 
-async function fetchPosts(page = 1) {
+async function fetchPosts() {
     try {
-        const { data } = await api.get('/admin/posts', { params: { page } })
+        const { data } = await api.get('/admin/posts', { params: { per_page: 100 } })
         const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
         posts.value = Array.isArray(list) ? list : []
-        pagination.current_page = data.current_page || data.data?.current_page || 1
-        pagination.last_page = data.last_page || data.data?.last_page || 1
-        pagination.total = data.total || data.data?.total || posts.value.length
+        if (currentPage.value > totalPages.value) {
+            currentPage.value = Math.max(1, totalPages.value)
+        }
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to load posts', 'error')
     }
@@ -416,7 +439,7 @@ async function savePost() {
             : await api.post('/admin/posts', payload)
         modal.show = false
         showAlert('Post saved successfully!', 'success')
-        fetchPosts(pagination.current_page)
+        fetchPosts()
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to save post', 'error')
     } finally {
@@ -429,7 +452,7 @@ async function deletePost(p) {
     try {
         await api.delete(`/admin/posts/${p.id}`)
         showAlert('Post deleted successfully!', 'success')
-        fetchPosts(pagination.current_page)
+        fetchPosts()
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to delete post', 'error')
     }

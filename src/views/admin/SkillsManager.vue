@@ -50,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="skill in skills" :key="skill.id" class="group transition-colors"
+                        <tr v-for="skill in paginatedSkills" :key="skill.id" class="group transition-colors"
                             style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
                             onmouseout="this.style.background='transparent'">
                             <td class="px-6 py-4">
@@ -127,6 +127,47 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination Controls (6 per page) -->
+            <div v-if="totalPages > 1"
+                class="flex items-center justify-between px-6 py-4 border-t flex-wrap gap-3"
+                style="border-color:#241730;background:#0E0A16;">
+                <span class="text-xs" style="color:#94A3B8;font-family:system-ui;">
+                    Showing {{ (currentPage - 1) * perPage + 1 }} - {{ Math.min(currentPage * perPage, skills.length) }} of {{ skills.length }} skills
+                </span>
+                <div class="flex items-center gap-2">
+                    <button :disabled="currentPage === 1"
+                        @click="goToPage(currentPage - 1)"
+                        class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
+                        style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Prev
+                    </button>
+
+                    <div class="flex items-center gap-1.5">
+                        <button v-for="page in totalPages" :key="page"
+                            @click="goToPage(page)"
+                            class="w-8 h-8 rounded-xl text-xs font-semibold transition-all flex items-center justify-center"
+                            :style="currentPage === page
+                                ? 'background:#8B5CF6;color:#fff;box-shadow:0 0 12px #8B5CF640;'
+                                : 'background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;'">
+                            {{ page }}
+                        </button>
+                    </div>
+
+                    <button :disabled="currentPage === totalPages"
+                        @click="goToPage(currentPage + 1)"
+                        class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
+                        style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
+                        Next
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -195,7 +236,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import api from '@/api/axios'
 
 const skills = ref([])
@@ -205,6 +246,23 @@ const alertType = ref('success')
 
 const modal = reactive({ show: false, editing: false, editId: null })
 const form = reactive({ name: '', category: '', percentage: 0, order: 0 })
+
+// ── 6 ITEMS PER PAGE PAGINATION ───────────────────────────
+const perPage = 6
+const currentPage = ref(1)
+
+const totalPages = computed(() => Math.ceil(skills.value.length / perPage) || 1)
+
+const paginatedSkills = computed(() => {
+    const start = (currentPage.value - 1) * perPage
+    return skills.value.slice(start, start + perPage)
+})
+
+function goToPage(page) {
+    if (page >= 1 && page <= totalPages.value) {
+        currentPage.value = page
+    }
+}
 
 const skillFields = [
     { key: 'name', label: 'Skill Name', type: 'text', placeholder: 'e.g. Vue.js' },
@@ -217,6 +275,9 @@ async function fetchSkills() {
     try {
         const { data } = await api.get('/skills')
         skills.value = data.data || []
+        if (currentPage.value > totalPages.value) {
+            currentPage.value = Math.max(1, totalPages.value)
+        }
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to load skills', 'error')
     }

@@ -55,7 +55,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y" style="border-color:rgba(139, 92, 246, 0.05);">
-                        <tr v-for="service in services" :key="service.id" class="group transition-all hover:bg-white/[0.02]">
+                        <tr v-for="service in paginatedServices" :key="service.id" class="group transition-all hover:bg-white/[0.02]">
                             <td class="px-8 py-5">
                                 <div class="flex items-start gap-4">
                                     <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center shrink-0 text-violet-400"
@@ -110,6 +110,47 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Pagination Controls (4 per page) -->
+            <div v-if="totalPages > 1"
+                class="flex items-center justify-between px-8 py-5 border-t flex-wrap gap-4"
+                style="border-color:rgba(139, 92, 246, 0.1);background:rgba(18, 14, 28, 0.4);">
+                <span class="text-xs" style="color:#94A3B8;font-family:system-ui;">
+                    Showing {{ (currentPage - 1) * perPage + 1 }} - {{ Math.min(currentPage * perPage, services.length) }} of {{ services.length }} services
+                </span>
+                <div class="flex items-center gap-2">
+                    <button :disabled="currentPage === 1"
+                        @click="goToPage(currentPage - 1)"
+                        class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
+                        style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Prev
+                    </button>
+
+                    <div class="flex items-center gap-1.5">
+                        <button v-for="page in totalPages" :key="page"
+                            @click="goToPage(page)"
+                            class="w-8 h-8 rounded-xl text-xs font-semibold transition-all flex items-center justify-center"
+                            :style="currentPage === page
+                                ? 'background:#8B5CF6;color:#fff;box-shadow:0 0 12px #8B5CF640;'
+                                : 'background:#0A0610;border:1px solid #3B2A5A;color:#C9B9E8;'">
+                            {{ page }}
+                        </button>
+                    </div>
+
+                    <button :disabled="currentPage === totalPages"
+                        @click="goToPage(currentPage + 1)"
+                        class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs border disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-105"
+                        style="border-color:#3B2A5A;color:#C9B9E8;background:#0A0610;font-family:system-ui;">
+                        Next
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -201,7 +242,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import api from '@/api/axios'
 import ServiceIcon from '@/components/ServiceIcon.vue'
 
@@ -211,6 +252,23 @@ const alertMsg = ref('')
 const alertType = ref('success')
 const modal = reactive({ show: false, editing: false, editId: null })
 const form = reactive({ title: '', name: '', description: '', icon: 'code', order: 0 })
+
+// ── 4 ITEMS PER PAGE PAGINATION ───────────────────────────
+const perPage = 4
+const currentPage = ref(1)
+
+const totalPages = computed(() => Math.ceil(services.value.length / perPage) || 1)
+
+const paginatedServices = computed(() => {
+    const start = (currentPage.value - 1) * perPage
+    return services.value.slice(start, start + perPage)
+})
+
+function goToPage(page) {
+    if (page >= 1 && page <= totalPages.value) {
+        currentPage.value = page
+    }
+}
 
 const iconOptions = [
     { key: 'code', label: 'Full-Stack' },
@@ -225,6 +283,9 @@ async function fetchServices() {
     try {
         const { data } = await api.get('/services')
         services.value = data.data || []
+        if (currentPage.value > totalPages.value) {
+            currentPage.value = Math.max(1, totalPages.value)
+        }
     } catch (err) {
         showAlert('Failed to load services', 'error')
     }
