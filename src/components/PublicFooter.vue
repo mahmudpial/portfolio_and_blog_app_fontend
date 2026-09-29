@@ -18,21 +18,20 @@
                 <!-- Col 1 — Brand (5 cols) -->
                 <div class="md:col-span-5">
                     <!-- Logo -->
-                    <div class="flex items-center gap-2 mb-5">
-                        <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">
-                            Pial
+                    <RouterLink to="/" class="inline-flex items-center gap-2 mb-5 group text-decoration-none">
+                        <span class="text-2xl font-bold text-white tracking-tight" style="font-family:'Georgia',serif;">
+                            {{ settings['brand_name'] || 'Pial' }}
                         </span>
                         <span class="w-2.5 h-2.5 rounded-full bg-violet-500 mt-0.5" style="box-shadow:0 0 10px #8B5CF6,0 0 20px #8B5CF640;
               animation:logoPulse 2s ease-in-out infinite;"></span>
-                        <span class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">
+                        <span class="text-2xl font-bold text-white tracking-tight" style="font-family:'Georgia',serif;">
                             Dev
                         </span>
-                    </div>
+                    </RouterLink>
 
                     <p class="text-sm leading-relaxed mb-6"
-                        style="color:#C9B9E8;font-family:system-ui;max-width:320px;line-height:1.8;">
-                        I build multi-tenant systems with role-based access control that actually hold up under real use
-                        cases.
+                        style="color:#C9B9E8;font-family:system-ui;max-width:340px;line-height:1.8;">
+                        {{ settings['footer_bio'] || 'I build multi-tenant systems with role-based access control that actually hold up under real use cases.' }}
                     </p>
 
                     <!-- Available badge -->
@@ -47,7 +46,7 @@
 
                     <!-- Tech stack badges -->
                     <div class="flex flex-wrap gap-2">
-                        <span v-for="tech in techStack" :key="tech" class="text-xs px-3 py-1.5 rounded-full border"
+                        <span v-for="tech in techStack" :key="tech" class="text-xs px-3 py-1.5 rounded-full border transition-colors hover:border-violet-500/50"
                             style="background:#120E1C;border-color:#3B2A5A;
               color:#C9B9E8;font-family:system-ui;">
                             {{ tech }}
@@ -61,7 +60,7 @@
                         style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Navigation
                     </p>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 p-0 m-0 list-none">
                         <li v-for="link in navLinks" :key="link.to">
                             <RouterLink :to="link.to" class="flex items-center gap-2 text-sm transition-all group"
                                 style="color:#C9B9E8;font-family:system-ui;text-decoration:none;"
@@ -81,11 +80,26 @@
                         style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Services
                     </p>
-                    <ul class="space-y-3">
-                        <li v-for="svc in services" :key="svc" class="flex items-center gap-2 text-sm"
-                            style="color:#C9B9E8;font-family:system-ui;">
-                            <span class="w-1 h-1 rounded-full flex-shrink-0" style="background:#3B2A5A;"></span>
-                            {{ svc }}
+                    <ul class="space-y-3 p-0 m-0 list-none">
+                        <li v-for="svc in displayedServices" :key="svc.name || svc.title || svc">
+                            <RouterLink v-if="svc.id" :to="`/services/${svc.id}`"
+                                class="flex items-center gap-2 text-sm transition-all group"
+                                style="color:#C9B9E8;font-family:system-ui;text-decoration:none;"
+                                onmouseover="this.style.color='#C084FC';this.style.paddingLeft='4px'"
+                                onmouseout="this.style.color='#C9B9E8';this.style.paddingLeft='0'">
+                                <span class="w-1 h-1 rounded-full flex-shrink-0"
+                                    style="background:#3B2A5A;transition:background .2s;"></span>
+                                <span>{{ svc.name || svc.title }}</span>
+                            </RouterLink>
+                            <RouterLink v-else :to="{ path: '/contact', hash: '#contact-form' }"
+                                class="flex items-center gap-2 text-sm transition-all group"
+                                style="color:#C9B9E8;font-family:system-ui;text-decoration:none;"
+                                onmouseover="this.style.color='#C084FC';this.style.paddingLeft='4px'"
+                                onmouseout="this.style.color='#C9B9E8';this.style.paddingLeft='0'">
+                                <span class="w-1 h-1 rounded-full flex-shrink-0"
+                                    style="background:#3B2A5A;transition:background .2s;"></span>
+                                <span>{{ svc }}</span>
+                            </RouterLink>
                         </li>
                     </ul>
                 </div>
@@ -99,8 +113,8 @@
 
                     <div class="space-y-4 mb-6">
                         <a v-for="info in contactInfo" :key="info.label" :href="info.href"
-                            :target="info.href.startsWith('mailto:') ? '_blank' : null"
-                            :rel="info.href.startsWith('mailto:') ? 'noopener noreferrer' : null" class="flex items-center gap-3 p-3 rounded-xl border transition-all
+                            :target="info.href.startsWith('http') ? '_blank' : null"
+                            :rel="info.href.startsWith('http') ? 'noopener noreferrer' : null" class="flex items-center gap-3 p-3 rounded-xl border transition-all
                      hover:-translate-y-0.5 group"
                             style="background:#120E1C;border-color:#3B2A5A;text-decoration:none;"
                             onmouseover="this.style.borderColor='#8B5CF640'"
@@ -110,20 +124,21 @@
                                 <svg :viewBox="info.vb" width="14" height="14" fill="none" stroke="#C084FC"
                                     stroke-width="2" v-html="info.svgPath"></svg>
                             </div>
-                            <div>
+                            <div class="overflow-hidden">
                                 <div class="text-xs uppercase tracking-wider mb-0.5"
                                     style="color:#475569;font-family:system-ui;letter-spacing:.1em;">
                                     {{ info.label }}
                                 </div>
-                                <div class="text-sm font-medium text-white" style="font-family:system-ui;">{{ info.value
-                                    }}</div>
+                                <div class="text-sm font-medium text-white truncate" style="font-family:system-ui;">
+                                    {{ info.value }}
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- CTA -->
                     <RouterLink :to="{ path: '/contact', hash: '#contact-form' }" class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm
-                   font-semibold text-white transition-all hover:scale-105 w-full"
+                   font-semibold text-white transition-all hover:scale-105 w-full text-decoration-none"
                         style="background:#8B5CF6;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -143,22 +158,20 @@
             <div class="flex flex-col md:flex-row items-center justify-between gap-5">
 
                 <!-- Copyright -->
-                <div class="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
-                    <p class="text-sm" style="color:#475569;font-family:system-ui;">
+                <div class="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
+                    <p class="text-sm m-0" style="color:#64748B;font-family:system-ui;">
                         © {{ new Date().getFullYear() }}
-                        <span class="font-semibold" style="color:#C9B9E8;">PialDev-</span>
-                        Crafted with
-                        <span class="font-semibold" style="color:#C084FC;"> Pial Mahmud</span>
+                        <span class="font-semibold text-white">{{ settings['brand_name'] || 'Pial' }}Dev.</span>
+                        Crafted with <span class="inline-block transition-transform hover:scale-125" style="color:#EF4444;">❤️</span> by
+                        <span class="font-semibold" style="color:#C084FC;">{{ settings['full_name'] || 'Pial Mahmud' }}</span>
                     </p>
-
-
                 </div>
 
                 <!-- Right — Socials + scroll top -->
                 <div class="flex items-center gap-3">
-                    <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" :aria-label="s.label" class="w-9 h-9 rounded-xl border flex items-center justify-center
+                    <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" rel="noopener noreferrer" :aria-label="s.label" class="w-9 h-9 rounded-xl border flex items-center justify-center
          transition-all hover:scale-110 hover:-translate-y-0.5"
-                        style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
+                        style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;text-decoration:none;"
                         :onmouseover="s.label === 'Upwork'
                             ? `this.style.borderColor='#6fda44';this.style.color='#6fda44';this.style.boxShadow='0 0 10px #6fda4430'`
                             : `this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'`"
@@ -181,9 +194,9 @@
                         <svg v-else-if="s.label === 'Upwork'" width="18" height="18" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
-                                d="M13.5 3.5c-1.7 0-3.2 1.1-3.8 2.9l-1.3 4.2c-.4 1.2-.7 2.6-.7 3.7 0 2.3 1.9 4.2 4.2 4.2 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.9-4.2-4.3-4.2-.6 0-1.2.1-1.7.3l.7-2.1c.6-.2 1.2-.3 1.8-.3 1.7 0 3.1 1.3 3.1 3.1 0 1.7-1.3 3.1-3.1 3.1-.8 0-1.5-.3-2-.8l-.8 2.3c.7.7 1.6 1.2 2.6 1.2 2.5 0 4.5-2 4.5-4.5 0-2.5-2-4.5-4.5-4.5z" />
+                                d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z" />
                         </svg>
-                        <!-- Globe -->
+                        <!-- Website / Globe -->
                         <svg v-else width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
@@ -197,11 +210,11 @@
 
                     <!-- Scroll to top -->
                     <button @click="scrollToTop()" class="w-9 h-9 rounded-xl border flex items-center justify-center
-                   transition-all hover:scale-110 hover:-translate-y-0.5"
+                   transition-all hover:scale-110 hover:-translate-y-0.5 cursor-pointer"
                         style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
                         onmouseover="this.style.borderColor='#8B5CF6';this.style.color='#C084FC';this.style.boxShadow='0 0 10px #8B5CF630'"
                         onmouseout="this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';this.style.boxShadow='none'"
-                        title="Back to top">
+                        title="Back to top" aria-label="Back to top">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <path d="M18 15l-6-6-6 6" />
@@ -215,80 +228,125 @@
 
 <style scoped>
 @keyframes greenPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 6px #4ade80;
-    }
-
-    50% {
-        box-shadow: 0 0 14px #4ade80, 0 0 28px #4ade8060;
-    }
+    0%, 100% { box-shadow: 0 0 6px #4ade80; }
+    50% { box-shadow: 0 0 14px #4ade80, 0 0 28px #4ade8060; }
 }
 
 @keyframes logoPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 10px #8B5CF6, 0 0 20px #8B5CF640;
-    }
-
-    50% {
-        box-shadow: 0 0 16px #8B5CF6, 0 0 32px #8B5CF680;
-    }
+    0%, 100% { box-shadow: 0 0 10px #8B5CF6, 0 0 20px #8B5CF640; }
+    50% { box-shadow: 0 0 16px #8B5CF6, 0 0 32px #8B5CF680; }
 }
 </style>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
+import api from '@/api/axios'
+
+const settings = ref({})
+const rawServices = ref([])
+
 const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/skills', label: 'Skills' },
+    { to: '/pricing', label: 'Pricing' },
     { to: '/portfolio', label: 'Portfolio' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
 ]
 
-const services = [
+const defaultServices = [
     'Web Development',
     'REST API Design',
-    'UI/UX ',
+    'UI/UX Design',
     'Cloud Deployment',
     'Code Review',
     'Technical Support',
 ]
+
+const displayedServices = computed(() => {
+    if (rawServices.value && rawServices.value.length > 0) {
+        return rawServices.value.slice(0, 6)
+    }
+    return defaultServices
+})
 
 const techStack = [
     'Laravel', 'Vue.js 3', 'MySQL',
     'Tailwind CSS', 'PHP', 'REST API',
 ]
 
-const contactInfo = [
+const contactInfo = computed(() => [
     {
         label: 'Email',
-        value: 'hello@pialcodes.com',
-        href: 'mailto:hello@pialcodes.com',
+        value: settings.value['email'] || 'hello@pialcodes.com',
+        href: `mailto:${settings.value['email'] || 'hello@pialcodes.com'}`,
         vb: '0 0 24 24',
         svgPath: `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>`,
     },
     {
         label: 'Location',
-        value: 'Dhaka, Bangladesh',
-        href: '#',
+        value: settings.value['location'] || 'Dhaka, Bangladesh',
+        href: 'https://maps.google.com/?q=Dhaka,Bangladesh',
         vb: '0 0 24 24',
         svgPath: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>`,
     },
-]
+])
 
-const socials = [
-    { label: 'GitHub', url: 'https://github.com/' },
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pial-mahmud/' },
-    { label: 'Upwork', url: 'https://www.upwork.com/freelancers/~01e5ccd10431c78406?mp_source=share' },
-    { label: 'Website', url: '#' },
-]
+const socials = computed(() => [
+    {
+        label: 'GitHub',
+        url: settings.value['github_url'] || 'https://github.com/mahmudpial'
+    },
+    {
+        label: 'LinkedIn',
+        url: settings.value['linkedin_url'] || 'https://www.linkedin.com/in/pial-mahmud/'
+    },
+    {
+        label: 'Upwork',
+        url: settings.value['upwork_url'] || 'https://www.upwork.com/freelancers/~01e5ccd10431c78406?mp_source=share'
+    },
+    {
+        label: 'Website',
+        url: settings.value['website_url'] || 'https://pialsoftdev.me'
+    },
+])
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
+async function loadData() {
+    try {
+        const [settingsRes, servicesRes] = await Promise.allSettled([
+            api.get('/settings'),
+            api.get('/services')
+        ])
+
+        if (settingsRes.status === 'fulfilled' && settingsRes.value?.data) {
+            const data = settingsRes.value.data
+            const list = data.data?.data ?? data.data ?? (Array.isArray(data) ? data : [])
+            if (Array.isArray(list)) {
+                settings.value = list.reduce((acc, s) => {
+                    if (s && s.key) acc[s.key] = s.value
+                    return acc
+                }, {})
+            } else if (typeof list === 'object' && list !== null) {
+                settings.value = list
+            }
+        }
+
+        if (servicesRes.status === 'fulfilled' && servicesRes.value?.data) {
+            const data = servicesRes.value.data
+            rawServices.value = data.data || []
+        }
+    } catch {
+        // Fallback gracefully
+    }
+}
+
+onMounted(() => {
+    loadData()
+})
 </script>

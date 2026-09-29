@@ -228,7 +228,6 @@ const themeColors = computed(() => {
 
 const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
     { to: '/skills', label: 'Skills' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/portfolio', label: 'Portfolio' },
