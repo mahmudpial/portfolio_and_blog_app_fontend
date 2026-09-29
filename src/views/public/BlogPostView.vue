@@ -29,10 +29,10 @@
         <div v-else>
 
             <!-- Hero -->
-            <section class="relative overflow-hidden " :style="post.hero_image
-                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.5) 0%,rgba(5,8,15,0.98) 100%),
-             url(${post.hero_image}) center/cover no-repeat;min-height:460px;display:flex;align-items:flex-end;`
-                : 'padding-top:7rem;padding-bottom:4rem;'">
+            <section class="relative overflow-hidden" :style="post.hero_image
+                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.6) 0%,rgba(5,8,15,0.98) 100%),
+             url(${post.hero_image}) center/cover no-repeat;`
+                : ''" style="padding-top:2rem;padding-bottom:2rem;">
 
                 <!-- Fallback gradient bg when no image -->
                 <div v-if="!post.hero_image" class="absolute inset-0 pointer-events-none">
@@ -43,10 +43,10 @@
             background-size:32px 32px;opacity:0.5;"></div>
                 </div>
 
-                <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pb-12 pt-16">
+                <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8">
                     <!-- Breadcrumb -->
-                    <div class="flex items-center gap-2 mb-6 text-xs" style="color:#475569;font-family:system-ui;">
-                        <RouterLink to="/blog" class="transition-colors hover:text-violet-400" style="color:#475569;">Blog
+                    <div class="flex items-center gap-2 mb-4 text-xs" style="color:#94A3B8;font-family:system-ui;">
+                        <RouterLink to="/blog" class="transition-colors hover:text-violet-400" style="color:#94A3B8;">Blog
                         </RouterLink>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
@@ -56,7 +56,7 @@
                     </div>
 
                     <!-- Category + reading time -->
-                    <div class="flex items-center gap-3 mb-5 flex-wrap">
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
                         <span v-if="post.category" class="text-xs font-bold px-3 py-1.5 rounded-full"
                             style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                             {{ post.category.name }}
@@ -72,8 +72,8 @@
                     </div>
 
                     <!-- Title -->
-                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(26px,3.6vw,44px);font-family:'Georgia',serif;
-            letter-spacing:-.5px;max-width:920px;line-height:1.25;">
+                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(28px,4.5vw,52px);font-family:'Georgia',serif;
+            letter-spacing:-.5px;max-width:760px;">
                         {{ post.title }}
                     </h1>
 
