@@ -244,30 +244,32 @@
                 <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <RouterLink v-for="(svc, i) in services" :key="svc.id" :to="`/services/${svc.id}`"
                         class="service-card group rounded-3xl border p-7 transition-all duration-300
-                        hover:-translate-y-2 hover:shadow-2xl flex flex-col justify-between relative overflow-hidden"
+                        hover:-translate-y-2.5 flex flex-col justify-between relative overflow-hidden"
                         :style="`background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;animation-delay:${i * 80}ms;box-shadow:0 10px 30px -10px rgba(0,0,0,0.5);`"
-                        :onmouseover="`this.style.borderColor='#8B5CF6';this.style.boxShadow='0 20px 40px -10px rgba(139,92,246,0.25)'`"
+                        :onmouseover="`this.style.borderColor='${getServiceAccent(i).color}80';this.style.boxShadow='0 20px 40px -10px ${getServiceAccent(i).glow}'`"
                         :onmouseout="`this.style.borderColor='#3B2A5A';this.style.boxShadow='0 10px 30px -10px rgba(0,0,0,0.5)'`">
                         
-                        <!-- Top ambient hover highlight -->
+                        <!-- Top ambient hover highlight with dynamic color -->
                         <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                            style="background:radial-gradient(circle,#8B5CF630 0%,transparent 70%);filter:blur(30px);"></div>
+                            :style="`background:radial-gradient(circle,${getServiceAccent(i).color}30 0%,transparent 70%);filter:blur(30px);`"></div>
 
                         <div>
                             <!-- Top row: Icon tile & Arrow -->
                             <div class="flex items-center justify-between mb-5">
-                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-violet-400 group-hover:text-purple-300 group-hover:scale-110 transition-all duration-300"
-                                    style="background:linear-gradient(135deg,#8B5CF620,#6D28D910);border:1px solid #8B5CF635;">
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                                    :style="`background:${getServiceAccent(i).bg};border:1px solid ${getServiceAccent(i).border};color:${getServiceAccent(i).color};box-shadow:0 0 20px ${getServiceAccent(i).glow};`">
                                     <ServiceIcon :name="svc.icon || 'code'" :size="24" />
                                 </div>
-                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-                                    style="background:#8B5CF615;color:#C084FC;">
-                                    →
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs transition-all duration-300 group-hover:scale-110 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+                                    :style="`background:${getServiceAccent(i).bg};color:${getServiceAccent(i).color};border:1px solid ${getServiceAccent(i).border};`">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
                                 </div>
                             </div>
 
                             <!-- Title -->
-                            <h3 class="font-bold text-white text-xl mb-3 group-hover:text-purple-300 transition-colors" style="font-family:'Georgia',serif;">
+                            <h3 class="font-bold text-white text-xl mb-3 group-hover:text-purple-200 transition-colors" style="font-family:'Georgia',serif;">
                                 {{ svc.title || svc.name }}
                             </h3>
 
@@ -279,11 +281,11 @@
 
                         <!-- Card Footer Action -->
                         <div class="pt-5 border-t flex items-center justify-between text-xs font-semibold" style="border-color:rgba(139, 92, 246, 0.15);">
-                            <span class="text-violet-400 group-hover:text-purple-300 transition-colors flex items-center gap-1.5" style="font-family:system-ui;">
+                            <span class="transition-colors flex items-center gap-1.5" :style="`color:${getServiceAccent(i).color};font-family:system-ui;`">
                                 Explore Details &amp; Workflow
                             </span>
-                            <span class="text-white/40 group-hover:text-white transition-colors">
-                                View →
+                            <span class="text-white/40 group-hover:text-white transition-all duration-300 group-hover:translate-x-1 flex items-center gap-1">
+                                View <span>→</span>
                             </span>
                         </div>
                     </RouterLink>
@@ -384,8 +386,10 @@
                 <!-- Projects from API -->
                 <div v-else-if="projects.length > 0" class="grid md:grid-cols-3 gap-6">
                     <div v-for="(p, i) in projects" :key="p.id" class="project-card rounded-2xl border overflow-hidden transition-all duration-300
-                   hover:-translate-y-2 group"
-                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 100}ms`">
+                   hover:-translate-y-2.5 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] group flex flex-col justify-between"
+                        :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 100}ms`"
+                        onmouseover="this.style.borderColor='#8B5CF6'"
+                        onmouseout="this.style.borderColor='#3B2A5A'">
 
                         <!-- Image / placeholder -->
                         <div class="h-48 relative overflow-hidden flex items-center justify-center"
@@ -404,55 +408,73 @@
 
                             <!-- Featured badge -->
                             <div v-if="p.is_featured"
-                                class="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-lg"
-                                style="background:#F59E0B20;color:#F59E0B;border:1px solid #F59E0B40;font-family:system-ui;">
-                                ★ Featured
+                                class="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-md"
+                                style="background:rgba(245, 158, 11, 0.15);color:#F59E0B;border:1px solid rgba(245, 158, 11, 0.4);font-family:system-ui;">
+                                <span class="text-amber-400">★</span> Featured
                             </div>
 
                             <!-- Overlay on hover -->
                             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3"
-                                style="background:#0A0610cc;">
+                                style="background:#0A0610dd;backdrop-filter:blur(2px);">
                                 <a v-if="p.project_url" :href="p.project_url" target="_blank"
-                                    class="px-4 py-2 text-white text-xs font-semibold rounded-xl transition-all hover:scale-105"
-                                    style="background:#8B5CF6;font-family:system-ui;">
+                                    class="px-4 py-2 text-white text-xs font-bold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg"
+                                    style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);font-family:system-ui;box-shadow:0 0 20px rgba(139,92,246,0.5);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                        <polyline points="15 3 21 3 21 9" />
+                                        <line x1="10" y1="14" x2="21" y2="3" />
+                                    </svg>
                                     Live Demo
                                 </a>
                                 <a v-if="p.github_url" :href="p.github_url" target="_blank"
-                                    class="px-4 py-2 text-xs font-semibold rounded-xl border transition-all hover:scale-105 hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
-                                    style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                                    class="px-4 py-2 text-xs font-bold rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-1.5 hover:bg-violet-600/20 hover:text-white hover:border-violet-400 hover:shadow-[0_0_15px_rgba(139,92,246,0.25)]"
+                                    style="border-color:#3B2A5A;background:#140F24;color:#C9B9E8;font-family:system-ui;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                                    </svg>
                                     GitHub
                                 </a>
                             </div>
                         </div>
 
                         <!-- Project info -->
-                        <div class="p-5">
-                            <div class="flex items-center justify-between mb-2">
-                                <span v-if="p.category"
-                                    class="text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider"
-                                    style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
-                                    {{ p.category }}
-                                </span>
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span v-if="p.category"
+                                        class="text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider"
+                                        style="background:#8B5CF615;color:#C084FC;font-family:system-ui;">
+                                        {{ p.category }}
+                                    </span>
+                                </div>
+                                <h3 class="font-bold text-white mb-2 group-hover:text-purple-200 transition-colors" style="font-family:'Georgia',serif;font-size:17px;">
+                                    {{ p.title }}
+                                </h3>
+                                <p class="text-sm leading-relaxed mb-5 line-clamp-3" style="color:#C9B9E8;font-family:system-ui;">
+                                    {{ p.description }}
+                                </p>
                             </div>
-                            <h3 class="font-bold text-white mb-2" style="font-family:'Georgia',serif;font-size:17px;">
-                                {{ p.title }}
-                            </h3>
-                            <p class="text-sm leading-relaxed mb-4" style="color:#C9B9E8;font-family:system-ui;">
-                                {{ p.description?.substring(0, 110) }}{{ p.description?.length > 110 ? '...' : '' }}
-                            </p>
-                            <div class="flex gap-2">
-                                <a v-if="p.project_url" :href="p.project_url" target="_blank" class="flex-1 text-center py-2.5 text-white text-xs font-semibold rounded-xl
-                         transition-all hover:scale-105" style="background:#8B5CF6;font-family:system-ui;
-                  box-shadow:0 0 16px #8B5CF630;">
+                            <div class="flex gap-2 pt-2">
+                                <a v-if="p.project_url" :href="p.project_url" target="_blank" class="flex-1 text-center py-2.5 text-white text-xs font-bold rounded-xl
+                         transition-all duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-1.5 shadow-md" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);font-family:system-ui;
+                  box-shadow:0 0 16px rgba(139,92,246,0.35);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                        <polyline points="15 3 21 3 21 9" />
+                                        <line x1="10" y1="14" x2="21" y2="3" />
+                                    </svg>
                                     Live Demo
                                 </a>
-                                <a v-if="p.github_url" :href="p.github_url" target="_blank" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-all hover:bg-violet-600/20 hover:text-white hover:border-violet-400"
-                                    style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                                <a v-if="p.github_url" :href="p.github_url" target="_blank" class="flex-1 text-center py-2.5 text-xs font-bold rounded-xl border
+                         transition-all duration-300 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-1.5 hover:bg-violet-600/20 hover:text-white hover:border-violet-400 hover:shadow-[0_0_15px_rgba(139,92,246,0.25)]"
+                                    style="border-color:#3B2A5A;background:#140F24;color:#C9B9E8;font-family:system-ui;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                                    </svg>
                                     GitHub
                                 </a>
-                                <RouterLink v-if="!p.project_url && !p.github_url" to="/portfolio" class="flex-1 text-center py-2.5 text-xs font-semibold rounded-xl border
-                         transition-all hover:bg-violet-600/20 hover:text-white hover:border-violet-400" style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                                <RouterLink v-if="!p.project_url && !p.github_url" to="/portfolio" class="flex-1 text-center py-2.5 text-xs font-bold rounded-xl border
+                         transition-all duration-300 hover:scale-[1.03] active:scale-95 hover:bg-violet-600/20 hover:text-white hover:border-violet-400" style="border-color:#3B2A5A;background:#140F24;color:#C9B9E8;font-family:system-ui;">
                                     View Details
                                 </RouterLink>
                             </div>
@@ -893,6 +915,19 @@ const fallbackTags = [
 // ── Services ─────────────────────────────────────────────
 const services = ref([])
 const servicesLoading = ref(true)
+
+const serviceAccents = [
+    { color: '#8B5CF6', bg: 'rgba(139, 92, 246, 0.12)', border: 'rgba(139, 92, 246, 0.3)', glow: 'rgba(139, 92, 246, 0.3)' }, // Violet
+    { color: '#06B6D4', bg: 'rgba(6, 182, 212, 0.12)', border: 'rgba(6, 182, 212, 0.3)', glow: 'rgba(6, 182, 212, 0.3)' }, // Cyan
+    { color: '#A855F7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.3)', glow: 'rgba(168, 85, 247, 0.3)' }, // Purple
+    { color: '#10B981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.3)', glow: 'rgba(16, 185, 129, 0.3)' }, // Emerald
+    { color: '#F59E0B', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.3)', glow: 'rgba(245, 158, 11, 0.3)' }, // Amber
+    { color: '#EC4899', bg: 'rgba(236, 72, 153, 0.12)', border: 'rgba(236, 72, 153, 0.3)', glow: 'rgba(236, 72, 153, 0.3)' }, // Pink
+]
+
+function getServiceAccent(index) {
+    return serviceAccents[index % serviceAccents.length]
+}
 
 // ── Testimonials ─────────────────────────────────────────
 const testimonials = [

@@ -29,29 +29,31 @@
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
                 <div v-for="plan in displayPlans" :key="plan.id"
                     class="pricing-card rounded-3xl border transition-all duration-300 flex flex-col justify-between relative overflow-hidden group"
-                    :class="plan.is_popular ? 'md:-translate-y-2 md:shadow-2xl' : 'hover:-translate-y-1'"
+                    :class="plan.is_popular ? 'md:-translate-y-2 md:shadow-2xl popular-border-glow' : 'hover:-translate-y-2 hover:shadow-xl'"
                     :style="plan.is_popular
-                        ? 'background:linear-gradient(180deg, #180F28 0%, #120E1C 100%);border-color:#8B5CF6;box-shadow:0 0 35px #8B5CF630;'
-                        : 'background:rgba(18, 14, 28, 0.85);border-color:#3B2A5A;'">
+                        ? 'background:linear-gradient(180deg, #1A102E 0%, #120E1C 100%);border-color:#8B5CF6;box-shadow:0 0 35px rgba(139,92,246,0.25);'
+                        : 'background:rgba(18, 14, 28, 0.9);border-color:#3B2A5A;'"
+                    :onmouseover="!plan.is_popular ? `this.style.borderColor='#8B5CF680';this.style.boxShadow='0 20px 40px -10px rgba(139,92,246,0.2)'` : ''"
+                    :onmouseout="!plan.is_popular ? `this.style.borderColor='#3B2A5A';this.style.boxShadow='none'` : ''">
 
                     <!-- Popular ambient top glow -->
-                    <div v-if="plan.is_popular" class="absolute -top-24 left-1/2 -translate-x-1/2 w-56 h-56 rounded-full pointer-events-none"
-                        style="background:radial-gradient(circle,#8B5CF640 0%,transparent 70%);filter:blur(30px);"></div>
+                    <div v-if="plan.is_popular" class="absolute -top-24 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"
+                        style="background:radial-gradient(circle,#8B5CF640 0%,transparent 70%);filter:blur(35px);"></div>
 
                     <!-- Popular Ribbon -->
                     <div v-if="plan.is_popular"
-                        class="absolute top-0 right-0 text-[11px] font-bold px-4 py-1 rounded-bl-2xl uppercase tracking-wider flex items-center gap-1 text-white shadow-lg"
-                        style="background:linear-gradient(135deg, #8B5CF6, #7C3AED);font-family:system-ui;">
-                        <span>★</span> Most Popular
+                        class="absolute top-0 right-0 text-[11px] font-bold px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider flex items-center gap-1.5 text-white shadow-lg z-10"
+                        style="background:linear-gradient(135deg, #8B5CF6, #6D28D9);font-family:system-ui;box-shadow:0 0 15px rgba(139,92,246,0.4);">
+                        <span class="text-amber-300 animate-pulse">★</span> Most Popular
                     </div>
 
                     <!-- Top Content -->
-                    <div class="p-8">
+                    <div class="p-8 relative z-10">
                         <!-- Plan Name & Subtitle -->
                         <div class="mb-6">
                             <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3"
                                 :style="plan.is_popular
-                                    ? 'background:#8B5CF620;color:#C084FC;border:1px solid #8B5CF640;'
+                                    ? 'background:rgba(139,92,246,0.2);color:#C084FC;border:1px solid rgba(139,92,246,0.4);'
                                     : 'background:#180F28;color:#94A3B8;border:1px solid #3B2A5A;'"
                                 style="font-family:system-ui;">
                                 Tier 0{{ plan.order || 1 }}
@@ -81,31 +83,33 @@
                             </p>
                             <ul class="space-y-3">
                                 <li v-for="(feat, idx) in parseFeatures(plan.features)" :key="idx"
-                                    class="flex items-start gap-3 text-sm leading-relaxed" style="color:#C9B9E8;font-family:system-ui;">
-                                    <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                                        :style="plan.is_popular ? 'background:#8B5CF625;color:#C084FC;' : 'background:#180F28;color:#8B5CF6;'">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    class="flex items-start gap-3 text-sm leading-relaxed group/item transition-colors" style="color:#C9B9E8;font-family:system-ui;">
+                                    <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-transform duration-300 group-hover/item:scale-110"
+                                        :style="plan.is_popular
+                                            ? 'background:rgba(139, 92, 246, 0.25);color:#C084FC;border:1px solid rgba(139,92,246,0.4);box-shadow:0 0 10px rgba(139,92,246,0.25);'
+                                            : 'background:rgba(139, 92, 246, 0.1);color:#8B5CF6;border:1px solid rgba(139,92,246,0.2);'">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5">
                                             <polyline points="20 6 9 17 4 12" />
                                         </svg>
                                     </div>
-                                    <span>{{ feat }}</span>
+                                    <span class="group-hover/item:text-purple-100 transition-colors">{{ feat }}</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Bottom Action Button -->
-                    <div class="p-8 pt-0">
+                    <div class="p-8 pt-0 relative z-10">
                         <RouterLink :to="`/contact?plan=${encodeURIComponent(plan.name)}`"
-                            class="w-full py-3.5 px-6 rounded-2xl text-sm font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-95 text-center shadow-lg"
+                            class="w-full py-3.5 px-6 rounded-2xl text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.03] active:scale-95 text-center shadow-lg relative group/btn overflow-hidden"
                             :style="plan.is_popular
-                                ? 'background:#8B5CF6;color:#fff;box-shadow:0 0 24px #8B5CF640;'
-                                : 'background:#180F28;border:1px solid #3B2A5A;color:#C9B9E8;'"
-                            :onmouseover="!plan.is_popular ? `this.style.borderColor='#8B5CF6';this.style.color='#fff';` : ''"
-                            :onmouseout="!plan.is_popular ? `this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8';` : ''"
+                                ? 'background:linear-gradient(135deg, #8B5CF6, #7C3AED, #6366F1);color:#fff;box-shadow:0 0 24px rgba(139,92,246,0.45);'
+                                : 'background:#161026;border:1px solid #3B2A5A;color:#C9B9E8;'"
+                            :onmouseover="!plan.is_popular ? `this.style.borderColor='#8B5CF6';this.style.backgroundColor='#1E1630';this.style.color='#fff';this.style.boxShadow='0 0 20px rgba(139,92,246,0.25)'` : ''"
+                            :onmouseout="!plan.is_popular ? `this.style.borderColor='#3B2A5A';this.style.backgroundColor='#161026';this.style.color='#C9B9E8';this.style.boxShadow='none'` : ''"
                             style="font-family:system-ui;">
                             <span>Choose {{ plan.name }}</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform duration-300 group-hover/btn:translate-x-1">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </RouterLink>
@@ -114,14 +118,16 @@
             </div>
 
             <!-- Custom Architecture Banner -->
-            <div class="mt-14 rounded-3xl border p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden"
-                style="background:linear-gradient(135deg, #180F28, #120E1C);border-color:#3B2A5A;">
+            <div class="mt-14 rounded-3xl border p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden group"
+                style="background:linear-gradient(135deg, #180F28, #120E1C);border-color:#3B2A5A;"
+                onmouseover="this.style.borderColor='#8B5CF680';this.style.boxShadow='0 15px 35px -10px rgba(139,92,246,0.2)'"
+                onmouseout="this.style.borderColor='#3B2A5A';this.style.boxShadow='none'">
                 <div class="space-y-2 text-center md:text-left">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold"
                         style="background:#8B5CF615;color:#C084FC;border:1px solid #8B5CF630;font-family:system-ui;">
                         <span>💼</span> Custom Enterprise Scope
                     </div>
-                    <h4 class="font-serif text-xl md:text-2xl font-bold text-white">
+                    <h4 class="font-serif text-xl md:text-2xl font-bold text-white group-hover:text-purple-200 transition-colors">
                         Need a custom tailored solution or long-term retainer?
                     </h4>
                     <p class="text-sm opacity-70 max-w-xl leading-relaxed" style="color:#C9B9E8;font-family:system-ui;">
@@ -129,7 +135,7 @@
                     </p>
                 </div>
                 <RouterLink to="/contact?subject=Custom%20Enterprise%20Architecture"
-                    class="px-8 py-3.5 text-white text-sm font-semibold rounded-2xl border transition-all hover:scale-105 hover:border-violet-500 shrink-0 text-center"
+                    class="px-8 py-3.5 text-white text-sm font-semibold rounded-2xl border transition-all duration-300 hover:scale-105 hover:border-violet-400 hover:bg-violet-600/20 shrink-0 text-center shadow-md"
                     style="border-color:#3B2A5A;background:#0A0610;color:#C9B9E8;font-family:system-ui;"
                     onmouseover="this.style.borderColor='#8B5CF6';this.style.color='#fff'"
                     onmouseout="this.style.borderColor='#3B2A5A';this.style.color='#C9B9E8'">
@@ -262,5 +268,18 @@ onMounted(fetchPlans)
 <style scoped>
 .pricing-card {
     will-change: transform, box-shadow;
+}
+
+.popular-border-glow {
+    animation: popularGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes popularGlow {
+    0% {
+        box-shadow: 0 0 25px rgba(139, 92, 246, 0.25), 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+    100% {
+        box-shadow: 0 0 45px rgba(139, 92, 246, 0.45), 0 15px 40px -10px rgba(139, 92, 246, 0.2);
+    }
 }
 </style>
