@@ -40,7 +40,7 @@
         <!-- Main Services Grid/Table -->
         <div class="rounded-3xl border overflow-hidden backdrop-blur-xl transition-all" style="background:rgba(25, 18, 38, 0.6);border-color:rgba(139, 92, 246, 0.2);">
             <div class="px-8 py-6 border-b flex items-center justify-between" style="border-color:rgba(139, 92, 246, 0.1);">
-                <h2 class="font-serif text-xl font-semibold text-white">Expertise Directory</h2>
+                <h2 class="font-serif text-xl font-semibold text-white">Services Directory</h2>
                 <div class="text-xs font-medium opacity-40 uppercase tracking-widest">Sorted by Order</div>
             </div>
 
@@ -48,9 +48,8 @@
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-white/5">
                         <tr style="border-bottom:1px solid rgba(139, 92, 246, 0.1);">
-                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Service Name &amp; Description</th>
-                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Category</th>
-                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Proficiency</th>
+                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Service &amp; Description</th>
+                            <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Icon</th>
                             <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50">Order</th>
                             <th class="px-8 py-4 text-xs font-bold uppercase tracking-wider opacity-50 text-right">Actions</th>
                         </tr>
@@ -62,51 +61,37 @@
                                     <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center shrink-0 text-xl"
                                         style="background:linear-gradient(135deg,#180F28,#3B2A5A);">
                                         <span v-if="service.icon">{{ service.icon }}</span>
-                                        <span v-else class="text-white font-bold text-xs">{{ (service.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                                        <span v-else class="text-white font-bold text-xs">{{ (service.title || service.name || 'S').slice(0, 2).toUpperCase() }}</span>
                                     </div>
                                     <div>
                                         <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors" style="font-family:system-ui;">
-                                            {{ service.name }}
+                                            {{ service.title || service.name }}
                                         </div>
-                                        <p v-if="service.description" class="text-xs text-white/50 mt-1 max-w-md line-clamp-2" style="font-family:system-ui;">
+                                        <p v-if="service.description" class="text-xs text-white/60 mt-1 max-w-lg line-clamp-2 leading-relaxed" style="font-family:system-ui;">
                                             {{ service.description }}
                                         </p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-8 py-5">
-                                <span class="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter"
-                                    style="background:rgba(139, 92, 246, 0.1);color:#C084FC;border:1px solid rgba(139, 92, 246, 0.2);">
-                                    {{ service.category || 'General' }}
+                                <span class="text-base px-3 py-1.5 rounded-xl border inline-flex items-center justify-center"
+                                    style="background:rgba(139, 92, 246, 0.1);border-color:rgba(139, 92, 246, 0.2);">
+                                    {{ service.icon || '💻' }}
                                 </span>
                             </td>
-                            <td class="px-8 py-5 w-64">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 h-2 rounded-full overflow-hidden bg-white/5 ring-1 ring-white/10">
-                                        <div class="h-full transition-all duration-500" :style="{
-                                            width: (service.percentage || 0) + '%',
-                                            background: 'linear-gradient(90deg,#8B5CF6,#C084FC)',
-                                            boxShadow: '0 0 12px #8B5CF650'
-                                        }"></div>
-                                    </div>
-                                    <span class="text-xs font-bold min-w-[35px] text-right" style="color:#C084FC;font-family:system-ui;">
-                                        {{ service.percentage || 0 }}%
-                                    </span>
-                                </div>
-                            </td>
                             <td class="px-8 py-5">
-                                <span class="text-xs font-medium opacity-50" style="font-family:system-ui;">
+                                <span class="text-xs font-medium opacity-60" style="font-family:system-ui;">
                                     #{{ service.order || 0 }}
                                 </span>
                             </td>
                             <td class="px-8 py-5 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button @click="openEdit(service)" class="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all">
+                                    <button @click="openEdit(service)" class="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all" title="Edit">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                         </svg>
                                     </button>
-                                    <button @click="deleteService(service)" class="p-2 rounded-xl text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all">
+                                    <button @click="deleteService(service)" class="p-2 rounded-xl text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all" title="Delete">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
                                         </svg>
@@ -115,10 +100,10 @@
                             </td>
                         </tr>
                         <tr v-if="services.length === 0">
-                            <td colspan="5" class="text-center py-24">
+                            <td colspan="4" class="text-center py-24">
                                 <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-4xl">⚡</div>
                                 <p class="text-white font-bold text-lg mb-1">No services listed</p>
-                                <p class="text-sm opacity-40">Start documenting your professional expertise.</p>
+                                <p class="text-sm opacity-40">Start documenting your professional services.</p>
                             </td>
                         </tr>
                     </tbody>
@@ -150,9 +135,6 @@
                         <div v-for="f in serviceFields" :key="f.key" class="space-y-1.5">
                             <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
                                 {{ f.label }}
-                                <span v-if="f.key === 'percentage'" style="color:#C084FC; margin-left:8px;">
-                                    {{ form.percentage }}%
-                                </span>
                             </label>
 
                             <!-- Textarea for description -->
@@ -160,12 +142,6 @@
                                 class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
                                 style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
                                 onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
-
-                            <!-- Range slider for percentage -->
-                            <div v-else-if="f.type === 'range'" class="group relative py-2">
-                                <input v-model="form.percentage" type="range" :min="f.min" :max="f.max" :step="f.step"
-                                    class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-500" />
-                            </div>
 
                             <!-- Regular inputs -->
                             <input v-else v-model="form[f.key]" :type="f.type" :placeholder="f.placeholder"
@@ -201,14 +177,12 @@ const saving = ref(false)
 const alertMsg = ref('')
 const alertType = ref('success')
 const modal = reactive({ show: false, editing: false, editId: null })
-const form = reactive({ name: '', category: '', description: '', percentage: 90, icon: '💻', order: 0 })
+const form = reactive({ title: '', name: '', description: '', icon: '💻', order: 0 })
 
 const serviceFields = [
-    { key: 'name', label: 'Service Name', type: 'text', placeholder: 'e.g. Full-Stack Web Development' },
-    { key: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Web Development' },
+    { key: 'title', label: 'Service Title / Name', type: 'text', placeholder: 'e.g. Full-Stack Web Development' },
     { key: 'icon', label: 'Icon / Emoji', type: 'text', placeholder: 'e.g. 💻 or ⚡ or 🛠️' },
-    { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Brief summary of what this service offers...' },
-    { key: 'percentage', label: 'Proficiency Level', type: 'range', min: 0, max: 100, step: 1 },
+    { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Describe what this service delivers...' },
     { key: 'order', label: 'Display Order', type: 'number', placeholder: '0' },
 ]
 
@@ -222,16 +196,16 @@ async function fetchServices() {
 }
 
 function openAdd() {
-    Object.assign(form, { name: '', category: '', description: '', percentage: 90, icon: '💻', order: 0 })
+    Object.assign(form, { title: '', name: '', description: '', icon: '💻', order: 0 })
     modal.editing = false; modal.editId = null; modal.show = true
 }
 
 function openEdit(s) {
+    const titleVal = s.title || s.name || ''
     Object.assign(form, {
-        name: s.name || '',
-        category: s.category || '',
+        title: titleVal,
+        name: titleVal,
         description: s.description || '',
-        percentage: s.percentage || 90,
         icon: s.icon || '💻',
         order: s.order || 0
     })
@@ -239,28 +213,57 @@ function openEdit(s) {
 }
 
 async function saveService() {
-    if (!form.name?.trim()) return showAlert('Service name is required', 'error')
+    const titleVal = form.title?.trim() || form.name?.trim()
+    if (!titleVal) return showAlert('Service title is required', 'error')
+    if (!form.description?.trim()) return showAlert('Service description is required', 'error')
+
     saving.value = true
     try {
+        const payload = {
+            title: titleVal,
+            name: titleVal,
+            description: form.description.trim(),
+            icon: form.icon?.trim() || null,
+            order: Number(form.order) || 0
+        }
+
         modal.editing
-            ? await api.put(`/admin/services/${modal.editId}`, form)
-            : await api.post('/admin/services', form)
-        modal.show = false; showAlert('Service saved successfully!', 'success'); fetchServices()
-    } catch (err) { showAlert(err.response?.data?.message || 'Failed to save service', 'error') }
-    finally { saving.value = false }
+            ? await api.put(`/admin/services/${modal.editId}`, payload)
+            : await api.post('/admin/services', payload)
+
+        modal.show = false
+        showAlert('Service saved successfully!', 'success')
+        fetchServices()
+    } catch (err) {
+        console.error('Save service error:', err)
+        const res = err.response?.data
+        let errorText = res?.message || 'Failed to save service'
+        if (res?.errors) {
+            const firstKey = Object.keys(res.errors)[0]
+            if (firstKey && res.errors[firstKey]?.length) {
+                errorText = res.errors[firstKey][0]
+            }
+        }
+        showAlert(errorText, 'error')
+    } finally {
+        saving.value = false
+    }
 }
 
 async function deleteService(s) {
-    if (!confirm(`Delete service "${s.name}"?`)) return
+    if (!confirm(`Delete service "${s.title || s.name}"?`)) return
     try {
         await api.delete(`/admin/services/${s.id}`)
-        showAlert('Service deleted successfully!', 'success'); fetchServices()
-    } catch (err) { showAlert(err.response?.data?.message || 'Failed to delete service', 'error') }
+        showAlert('Service deleted successfully!', 'success')
+        fetchServices()
+    } catch (err) {
+        showAlert(err.response?.data?.message || 'Failed to delete service', 'error')
+    }
 }
 
 function showAlert(msg, type = 'success') {
     alertMsg.value = msg; alertType.value = type
-    setTimeout(() => alertMsg.value = '', 3000)
+    setTimeout(() => alertMsg.value = '', 4000)
 }
 
 onMounted(fetchServices)
