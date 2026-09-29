@@ -208,7 +208,7 @@
 </style>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
 import api from '@/api/axios'
@@ -219,6 +219,12 @@ const menuOpen = ref(false)
 const profileMenuOpen = ref(false)
 const profileMenuRef = ref(null)
 const settings = ref({})
+
+const themeColors = computed(() => {
+    return themeStore.isDark
+        ? { bg: '18, 14, 28', border: '#3B2A5A' }
+        : { bg: '240, 240, 245', border: '#D1D5DB' }
+})
 
 const navLinks = [
     { to: '/', label: 'Home' },
