@@ -82,6 +82,7 @@ const routes = [
     children: [
       {
         path: "",
+        alias: "dashboard",
         name: "admin",
         component: () => import("@/views/admin/DashboardView.vue"),
       },

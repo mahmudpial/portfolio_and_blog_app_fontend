@@ -217,7 +217,7 @@ const skillFields = [
 
 async function fetchSkills() {
     try {
-        const { data } = await api.get('/admin/skills')
+        const { data } = await api.get('/skills')
         skills.value = data.data || []
     } catch (err) {
         showAlert(err.response?.data?.message || 'Failed to load skills', 'error')

@@ -110,11 +110,22 @@ onMounted(fetchSettings)
 
 async function fetchSettings() {
     try {
-        const { data } = await api.get('/settings')
-        const settings = data.data || []
-        settings.forEach(s => {
-            settingsMap[s.key] = s.value
-        })
+        let res
+        try {
+            res = await api.get('/settings')
+        } catch (e) {
+            res = await api.get('/admin/settings')
+        }
+        const settings = res.data?.data || res.data || []
+        if (Array.isArray(settings)) {
+            settings.forEach(s => {
+                if (s && s.key) settingsMap[s.key] = s.value ?? ''
+            })
+        } else if (typeof settings === 'object' && settings !== null) {
+            Object.entries(settings).forEach(([k, v]) => {
+                settingsMap[k] = v ?? ''
+            })
+        }
     } catch (err) {
         showAlert('Failed to load settings', 'error')
     }
@@ -126,10 +137,18 @@ async function saveSettings() {
         const payload = {
             settings: Object.entries(settingsMap).map(([key, value]) => ({ key, value }))
         }
-        await api.put('/settings', payload)
+        try {
+            await api.put('/settings', payload)
+        } catch (e) {
+            try {
+                await api.put('/admin/settings', payload)
+            } catch (e2) {
+                await api.post('/admin/settings', payload)
+            }
+        }
         showAlert('Site settings saved successfully!', 'success')
     } catch (err) {
-        showAlert('Failed to save settings', 'error')
+        showAlert(err.response?.data?.message || 'Failed to save settings', 'error')
     } finally {
         saving.value = false
     }

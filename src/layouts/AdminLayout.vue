@@ -2,69 +2,115 @@
     <div class="flex min-h-screen" style="background:#0A0610; color:#fff; font-family:system-ui;">
         <!-- Slim-to-Full Sidebar -->
         <aside
-            class="fixed left-0 top-0 h-screen z-50 transition-all duration-300 ease-in-out group border-r"
+            class="fixed left-0 top-0 h-screen z-50 transition-all duration-300 ease-in-out group border-r flex flex-col justify-between"
             :class="isExpanded ? 'w-64' : 'w-20'"
-            style="background:rgba(18, 14, 28, 0.8); backdrop-filter:blur(20px); border-color:rgba(139, 92, 246, 0.1);"
+            style="background:rgba(18, 14, 28, 0.95); backdrop-filter:blur(20px); border-color:rgba(139, 92, 246, 0.15);"
             @mouseenter="isExpanded = true"
             @mouseleave="isExpanded = false"
         >
-            <div class="flex flex-col h-full">
+            <div class="flex flex-col h-full overflow-hidden">
                 <!-- Logo Section -->
-                <div class="p-6 mb-6 flex items-center gap-4 overflow-hidden">
+                <div class="p-5 mb-2 flex items-center gap-3 overflow-hidden border-b" style="border-color:rgba(139, 92, 246, 0.1);">
                     <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center ring-2 ring-purple-500/30"
                          style="background:linear-gradient(135deg,#8B5CF6,#C084FC);">
-                        <span class="font-bold text-white">P</span>
+                        <span class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">P</span>
                     </div>
-                    <span v-if="isExpanded" class="font-serif text-xl font-bold text-white transition-opacity duration-300 whitespace-nowrap">
-                        Admin<span style="color:#8B5CF6;">Panel</span>
-                    </span>
+                    <div v-if="isExpanded" class="flex flex-col transition-opacity duration-300 whitespace-nowrap overflow-hidden">
+                        <span class="font-bold text-white text-base tracking-wide" style="font-family:'Georgia',serif;">
+                            Admin<span style="color:#8B5CF6;">Panel</span>
+                        </span>
+                        <span class="text-[10px] uppercase tracking-widest text-purple-400/80 font-semibold">Workspace</span>
+                    </div>
                 </div>
 
                 <!-- Nav Links -->
-                <nav class="flex-1 px-3 space-y-2">
+                <nav class="flex-1 px-3 py-3 space-y-1.5 overflow-y-auto custom-scrollbar">
                     <RouterLink v-for="item in menuItems" :key="item.path" :to="item.path"
-                        class="flex items-center gap-4 px-3 py-3 rounded-2xl transition-all group/item"
-                        :class="router.currentRoute.value.path === item.path
-                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20'
+                        class="flex items-center gap-3.5 px-3 py-2.5 rounded-xl transition-all group/item text-sm font-medium"
+                        :class="isActiveRoute(item.path)
+                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold'
                             : 'text-white/60 hover:bg-white/5 hover:text-white'"
                     >
                         <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center transition-transform group-hover/item:scale-110">
-                            <component :is="item.icon" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" />
+                            <component :is="item.icon" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" />
                         </div>
-                        <span v-if="isExpanded" class="text-sm font-medium transition-opacity duration-300 whitespace-nowrap">
+                        <span v-if="isExpanded" class="transition-opacity duration-300 whitespace-nowrap">
                             {{ item.label }}
                         </span>
                     </RouterLink>
                 </nav>
 
-                <!-- User Profile Bottom -->
-                <div class="p-4 border-t transition-all" style="border-color:rgba(139, 92, 246, 0.1);">
-                    <div class="flex items-center gap-3 p-2 rounded-2xl bg-white/5">
-                        <div class="w-8 h-8 rounded-full flex-shrink-0 bg-gradient-to-tr from-purple-600 to-pink-500"></div>
-                        <div v-if="isExpanded" class="overflow-hidden">
-                            <p class="text-xs font-bold text-white truncate">Pial Mahmud</p>
-                            <p class="text-[10px] opacity-50 truncate">Super Admin</p>
+                <!-- User Profile & Quick Actions at Bottom -->
+                <div class="p-3 border-t transition-all space-y-2" style="border-color:rgba(139, 92, 246, 0.1);">
+                    <!-- User badge -->
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-white/5">
+                        <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-xs text-white"
+                             style="background:linear-gradient(135deg,#7C3AED,#C084FC);">
+                            {{ (auth.user?.name || 'A')[0].toUpperCase() }}
+                        </div>
+                        <div v-if="isExpanded" class="overflow-hidden min-w-0 flex-1">
+                            <p class="text-xs font-bold text-white truncate">{{ auth.user?.name || 'Administrator' }}</p>
+                            <p class="text-[10px] text-purple-300/60 truncate">{{ auth.user?.email || 'Admin' }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
-        <main
-            class="flex-1 transition-all duration-300 ease-in-out"
+        <!-- Main Content Area with integrated Header -->
+        <div
+            class="flex-1 flex flex-col transition-all duration-300 ease-in-out min-w-0"
             :class="isExpanded ? 'ml-64' : 'ml-20'"
         >
-            <RouterView />
-        </main>
+            <!-- Integrated Top Bar -->
+            <header class="sticky top-0 z-40 h-16 border-b flex items-center justify-between px-6 sm:px-8"
+                style="background:rgba(10, 6, 16, 0.85); backdrop-filter:blur(16px); border-color:rgba(139, 92, 246, 0.12);">
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-purple-500" style="box-shadow:0 0 8px #8B5CF6;"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-purple-300/80">Admin Console</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- View Live Site Link -->
+                    <RouterLink to="/" target="_blank"
+                        class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all hover:bg-white/5 hover:scale-105"
+                        style="border-color:rgba(139, 92, 246, 0.3); color:#C9B9E8; background:rgba(18, 14, 28, 0.6);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <span>View Site</span>
+                    </RouterLink>
+
+                    <!-- Logout Button -->
+                    <button @click="auth.logout()"
+                        class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all hover:scale-105"
+                        style="border-color:rgba(239, 68, 68, 0.3); color:#f87171; background:rgba(239, 68, 68, 0.08);">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Routed Child View -->
+            <main class="flex-1">
+                <RouterView />
+            </main>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref, h } from 'vue'
-import { useRouter, RouterView } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-const router = useRouter()
+const route = useRoute()
+const auth = useAuthStore()
 const isExpanded = ref(false)
 
 const IconDashboard = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
@@ -114,7 +160,7 @@ const IconSettings = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke
 ])
 
 const menuItems = [
-    { label: 'Dashboard', path: '/admin/dashboard', icon: IconDashboard },
+    { label: 'Dashboard', path: '/admin', icon: IconDashboard },
     { label: 'Blog Posts', path: '/admin/posts', icon: IconPosts },
     { label: 'Projects', path: '/admin/projects', icon: IconProjects },
     { label: 'Skills', path: '/admin/skills', icon: IconSkills },
@@ -124,6 +170,13 @@ const menuItems = [
     { label: 'Messages', path: '/admin/messages', icon: IconMessages },
     { label: 'Site Settings', path: '/admin/settings', icon: IconSettings },
 ]
+
+function isActiveRoute(path) {
+    if (path === '/admin') {
+        return route.path === '/admin' || route.path === '/admin/dashboard'
+    }
+    return route.path.startsWith(path)
+}
 </script>
 
 <style scoped>
@@ -131,5 +184,12 @@ const menuItems = [
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
+}
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 4px;
 }
 </style>
