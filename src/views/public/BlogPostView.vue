@@ -29,10 +29,10 @@
         <div v-else>
 
             <!-- Hero -->
-            <section class="relative overflow-hidden " :style="post.hero_image
-                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.5) 0%,rgba(5,8,15,0.98) 100%),
-             url(${post.hero_image}) center/cover no-repeat;min-height:460px;display:flex;align-items:flex-end;`
-                : 'padding-top:7rem;padding-bottom:4rem;'">
+            <section class="relative overflow-hidden" :style="post.hero_image
+                ? `background:linear-gradient(to bottom,rgba(5,8,15,0.7) 0%,rgba(5,8,15,0.98) 100%),
+             url(${post.hero_image}) center/cover no-repeat;`
+                : ''" style="padding-top:2rem;padding-bottom:2.5rem;border-bottom:1px solid #241730;">
 
                 <!-- Fallback gradient bg when no image -->
                 <div v-if="!post.hero_image" class="absolute inset-0 pointer-events-none">
@@ -43,25 +43,30 @@
             background-size:32px 32px;opacity:0.5;"></div>
                 </div>
 
-                <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pb-12 pt-16">
+                <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-10">
                     <!-- Breadcrumb -->
-                    <div class="flex items-center gap-2 mb-6 text-xs" style="color:#475569;font-family:system-ui;">
-                        <RouterLink to="/blog" class="transition-colors hover:text-violet-400" style="color:#475569;">Blog
+                    <div class="flex items-center gap-2 mb-4 text-xs flex-wrap" style="color:#94A3B8;font-family:system-ui;">
+                        <RouterLink to="/" class="transition-colors hover:text-violet-400" style="color:#94A3B8;">Home</RouterLink>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                        <RouterLink to="/blog" class="transition-colors hover:text-violet-400" style="color:#94A3B8;">Blog
                         </RouterLink>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <path d="M9 18l6-6-6-6" />
                         </svg>
-                        <span style="color:#C9B9E8;">{{ post.title }}</span>
+                        <span style="color:#C9B9E8;" class="truncate max-w-xs md:max-w-md">{{ post.title }}</span>
                     </div>
 
                     <!-- Category + reading time -->
-                    <div class="flex items-center gap-3 mb-5 flex-wrap">
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
                         <span v-if="post.category" class="text-xs font-bold px-3 py-1.5 rounded-full"
                             style="background:#8B5CF6;color:#fff;font-family:system-ui;">
                             {{ post.category.name }}
                         </span>
-                        <span class="flex items-center gap-1.5 text-xs" style="color:#475569;font-family:system-ui;">
+                        <span class="flex items-center gap-1.5 text-xs" style="color:#94A3B8;font-family:system-ui;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="10" />
@@ -72,8 +77,8 @@
                     </div>
 
                     <!-- Title -->
-                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(28px,4.5vw,52px);font-family:'Georgia',serif;
-            letter-spacing:-.5px;max-width:760px;">
+                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(28px,4.5vw,48px);font-family:'Georgia',serif;
+            letter-spacing:-.5px;max-width:860px;">
                         {{ post.title }}
                     </h1>
 
@@ -88,13 +93,13 @@
                             <div>
                                 <div class="text-sm font-semibold text-white" style="font-family:system-ui;">{{
                                     post.user?.name || 'Admin' }}</div>
-                                <div class="text-xs" style="color:#475569;font-family:system-ui;">
+                                <div class="text-xs" style="color:#94A3B8;font-family:system-ui;">
                                     {{ formatDate(post.created_at) }}
                                 </div>
                             </div>
                         </div>
                         <div class="w-px h-8" style="background:#3B2A5A;"></div>
-                        <div class="flex items-center gap-1.5 text-xs" style="color:#475569;font-family:system-ui;">
+                        <div class="flex items-center gap-1.5 text-xs" style="color:#94A3B8;font-family:system-ui;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -104,7 +109,7 @@
                         </div>
 
                         <!-- Tags -->
-                        <div v-if="post.tags?.length" class="flex flex-wrap gap-2 ml-auto">
+                        <div v-if="post.tags?.length" class="flex flex-wrap gap-2 sm:ml-auto">
                             <span v-for="tag in post.tags" :key="tag.id" class="text-xs px-2.5 py-1 rounded-full border"
                                 style="background:#120E1C;color:#C9B9E8;
                 border-color:#3B2A5A;font-family:system-ui;">
@@ -116,8 +121,8 @@
             </section>
 
             <!-- ── ARTICLE BODY + SIDEBAR ──────────────────────── -->
-            <section class="py-14 px-6 md:px-8">
-                <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
+            <section class="py-12 px-6 md:px-10">
+                <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 xl:gap-14 items-start">
 
                     <!-- Article content -->
                     <article class="flex-1 min-w-0">
