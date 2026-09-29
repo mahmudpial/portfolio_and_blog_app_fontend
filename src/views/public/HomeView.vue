@@ -233,8 +233,16 @@
                     </h2>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-5">
-                    <div v-for="(svc, i) in services" :key="svc.title" class="service-card rounded-2xl border p-6 transition-all duration-300
+                <!-- Loading skeleton -->
+                <div v-if="servicesLoading" class="grid md:grid-cols-3 gap-5">
+                    <div v-for="i in 3" :key="i" class="rounded-2xl animate-pulse"
+                        style="background:#120E1C;height:200px;border:1px solid #3B2A5A;">
+                    </div>
+                </div>
+
+                <!-- Services from API -->
+                <div v-else class="grid md:grid-cols-3 gap-5">
+                    <div v-for="(svc, i) in services" :key="svc.id" class="service-card rounded-2xl border p-6 transition-all duration-300
                    hover:-translate-y-2 hover:scale-[1.02] cursor-default"
                         :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 80}ms`">
                         <!-- Icon tile -->
@@ -243,10 +251,10 @@
                             <span style="filter:drop-shadow(0 0 4px #8B5CF6);">{{ svc.icon }}</span>
                         </div>
                         <h3 class="font-bold text-white text-lg mb-3" style="font-family:'Georgia',serif;">
-                            {{ svc.title }}
+                            {{ svc.name }}
                         </h3>
                         <p class="text-sm leading-relaxed" style="color:#C9B9E8;font-family:system-ui;">
-                            {{ svc.desc }}
+                            {{ svc.category }}
                         </p>
                     </div>
                 </div>
@@ -846,14 +854,8 @@ const fallbackTags = [
 ]
 
 // ── Services ─────────────────────────────────────────────
-const services = [
-    { icon: '🖥', title: 'Web Development', desc: 'Full-stack web applications built with Laravel, Vue, and modern tooling — fast, secure, and scalable.' },
-    { icon: '📱', title: 'Responsive UI Design', desc: 'Pixel-perfect interfaces that look stunning on every screen size, crafted with Tailwind CSS.' },
-    { icon: '⚡', title: 'REST API Development', desc: 'Well-structured, documented REST APIs for web and mobile clients with JWT auth and rate limiting.' },
-    { icon: '☁️', title: 'Cloud Deployment', desc: 'Deploy and manage applications on VPS, shared hosting, or cloud providers with CI/CD pipelines.' },
-    { icon: '📊', title: 'Performance Optimization', desc: 'Audit and optimize queries, caching, and asset delivery to make your app blazingly fast.' },
-    { icon: '🔧', title: 'Technical Support', desc: 'Bug fixes, code reviews, and ongoing maintenance for existing projects and legacy codebases.' },
-]
+const services = ref([])
+const servicesLoading = ref(true)
 
 // ── Testimonials ─────────────────────────────────────────
 const testimonials = [
@@ -888,17 +890,20 @@ onMounted(async () => {
             await auth.fetchProfile()
         }
 
-        const [sRes, pRes] = await Promise.all([
+        const [skillsRes, projectsRes, servicesRes] = await Promise.all([
             api.get('/skills'),
             api.get('/projects?featured=1'),
+            api.get('/services'),
         ])
-        skills.value = sRes.data.data || []
-        projects.value = pRes.data.data?.slice(0, 3) || []
+        skills.value = skillsRes.data.data || []
+        projects.value = projectsRes.data.data?.slice(0, 3) || []
+        services.value = servicesRes.data.data || []
     } catch (e) {
         console.warn('Could not fetch portfolio data:', e.message)
     } finally {
         skillsLoading.value = false
         projectsLoading.value = false
+        servicesLoading.value = false
     }
 })
 

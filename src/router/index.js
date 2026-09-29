@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import AdminLayout from "@/layouts/AdminLayout.vue";
 
 const routes = [
   // ── Public pages ───────────────────────────────────────────
@@ -76,39 +77,55 @@ const routes = [
   // ── Admin pages ────────────────────────────────────────────
   {
     path: "/admin",
-    name: "admin",
-    component: () => import("@/views/admin/DashboardView.vue"),
+    component: AdminLayout,
     meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: "/admin/skills",
-    name: "admin-skills",
-    component: () => import("@/views/admin/SkillsManager.vue"),
-    meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: "/admin/projects",
-    name: "admin-projects",
-    component: () => import("@/views/admin/ProjectsManager.vue"),
-    meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: "/admin/posts",
-    name: "admin-posts",
-    component: () => import("@/views/admin/PostsManager.vue"),
-    meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: "/admin/comments",
-    name: "admin-comments",
-    component: () => import("@/views/admin/CommentsManager.vue"),
-    meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: "/admin/messages",
-    name: "admin-messages",
-    component: () => import("@/views/admin/MessagesManager.vue"),
-    meta: { requiresAuth: true, requiresAdmin: true },
+    children: [
+      {
+        path: "",
+        name: "admin",
+        component: () => import("@/views/admin/DashboardView.vue"),
+      },
+      {
+        path: "skills",
+        name: "admin-skills",
+        component: () => import("@/views/admin/SkillsManager.vue"),
+      },
+      {
+        path: "projects",
+        name: "admin-projects",
+        component: () => import("@/views/admin/ProjectsManager.vue"),
+      },
+      {
+        path: "posts",
+        name: "admin-posts",
+        component: () => import("@/views/admin/PostsManager.vue"),
+      },
+      {
+        path: "comments",
+        name: "admin-comments",
+        component: () => import("@/views/admin/CommentsManager.vue"),
+      },
+      {
+        path: "messages",
+        name: "admin-messages",
+        component: () => import("@/views/admin/MessagesManager.vue"),
+      },
+      {
+        path: "services",
+        name: "admin-services",
+        component: () => import("@/views/admin/ServicesManager.vue"),
+      },
+      {
+        path: "pricing",
+        name: "admin-pricing",
+        component: () => import("@/views/admin/PricingManager.vue"),
+      },
+      {
+        path: "settings",
+        name: "admin-settings",
+        component: () => import("@/views/admin/SiteSettingsManager.vue"),
+      },
+    ],
   },
 
   { path: "/:pathMatch(.*)*", redirect: "/" },

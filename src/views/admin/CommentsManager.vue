@@ -1,103 +1,100 @@
 <template>
-    <div style="background:#0A0610;min-height:100vh;">
-        <div class="max-w-7xl mx-auto px-6 py-8">
-
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-1"
-                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
-                    <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
-                        Comments Manager
-                    </h1>
-                    <p class="text-sm mt-1" style="color:#C9B9E8;font-family:system-ui;">
-                        {{ comments.length }} comment{{ comments.length !== 1 ? 's' : '' }} found
-                    </p>
-                </div>
-                <select v-model="filterApproved" @change="fetchComments()"
-                    class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-                    style="background:#120E1C;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                    <option value="">All comments</option>
-                    <option value="0">Pending only</option>
-                    <option value="1">Approved only</option>
-                </select>
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-widest mb-1"
+                    style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Admin Panel</p>
+                <h1 class="font-bold text-white text-2xl" style="font-family:'Georgia',serif;">
+                    Comments Manager
+                </h1>
+                <p class="text-sm mt-1" style="color:#C9B9E8;font-family:system-ui;">
+                    {{ comments.length }} comment{{ comments.length !== 1 ? 's' : '' }} found
+                </p>
             </div>
+            <select v-model="filterApproved" @change="fetchComments()"
+                class="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
+                style="background:#120E1C;border:1px solid #3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                <option value="">All comments</option>
+                <option value="0">Pending only</option>
+                <option value="1">Approved only</option>
+            </select>
+        </div>
 
-            <transition name="fade">
-                <div v-if="alertMsg" class="mb-5 p-4 rounded-xl border flex items-center gap-3 text-sm" :style="alertType === 'success'
-                    ? 'background:#052e16;border-color:#16a34a40;color:#4ade80;'
-                    : 'background:#1a0505;border-color:#dc262640;color:#f87171;'" style="font-family:system-ui;">{{
-                    alertMsg }}
-                </div>
-            </transition>
+        <transition name="fade">
+            <div v-if="alertMsg" class="mb-5 p-4 rounded-xl border flex items-center gap-3 text-sm" :style="alertType === 'success'
+                ? 'background:#052e16;border-color:#16a34a40;color:#4ade80;'
+                : 'background:#1a0505;border-color:#dc262640;color:#f87171;'" style="font-family:system-ui;">{{
+                alertMsg }}
+            </div>
+        </transition>
 
-            <!-- Stats row -->
-            <div class="grid grid-cols-3 gap-4 mb-6">
-                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="text-xs font-semibold uppercase tracking-wider mb-1"
-                        style="color:#475569;font-family:system-ui;">Total</div>
-                    <div class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">{{ totalComments
-                    }}</div>
-                </div>
-                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="text-xs font-semibold uppercase tracking-wider mb-1"
-                        style="color:#475569;font-family:system-ui;">Pending</div>
-                    <div class="text-2xl font-bold" style="color:#F59E0B;font-family:'Georgia',serif;">
-                        {{ pendingComments }}
-                    </div>
-                </div>
-                <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="text-xs font-semibold uppercase tracking-wider mb-1"
-                        style="color:#475569;font-family:system-ui;">Approved</div>
-                    <div class="text-2xl font-bold" style="color:#4ade80;font-family:'Georgia',serif;">
-                        {{ approvedComments }}
-                    </div>
+        <!-- Stats row -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1"
+                    style="color:#475569;font-family:system-ui;">Total</div>
+                <div class="text-2xl font-bold text-white" style="font-family:'Georgia',serif;">{{ totalComments
+                }}</div>
+            </div>
+            <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1"
+                    style="color:#475569;font-family:system-ui;">Pending</div>
+                <div class="text-2xl font-bold" style="color:#F59E0B;font-family:'Georgia',serif;">
+                    {{ pendingComments }}
                 </div>
             </div>
-
-            <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
-                <div class="px-6 py-5 border-b" style="border-color:#241730;">
-                    <h2 class="font-bold text-white" style="font-family:'Georgia',serif;">All Comments</h2>
+            <div class="rounded-2xl border p-4" style="background:#120E1C;border-color:#3B2A5A;">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1"
+                    style="color:#475569;font-family:system-ui;">Approved</div>
+                <div class="text-2xl font-bold" style="color:#4ade80;font-family:'Georgia',serif;">
+                    {{ approvedComments }}
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr style="border-bottom:1px solid #241730;">
-                                <th v-for="h in ['Author', 'Post', 'Comment', 'Status', 'Actions']" :key="h"
-                                    class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">{{ h }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="c in comments" :key="c.id" class="group transition-colors"
-                                style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
-                                onmouseout="this.style.background='transparent'">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-full flex items-center justify-center
+            </div>
+        </div>
+
+        <div class="rounded-2xl border overflow-hidden" style="background:#120E1C;border-color:#3B2A5A;">
+            <div class="px-6 py-5 border-b" style="border-color:#241730;">
+                <h2 class="font-bold text-white" style="font-family:'Georgia',serif;">All Comments</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr style="border-bottom:1px solid #241730;">
+                            <th v-for="h in ['Author', 'Post', 'Comment', 'Status', 'Actions']" :key="h"
+                                class="text-left px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
+                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">{{ h }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="c in comments" :key="c.id" class="group transition-colors"
+                            style="border-bottom:1px solid #241730;" onmouseover="this.style.background='#180F28'"
+                            onmouseout="this.style.background='transparent'">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full flex items-center justify-center
                                 text-xs font-bold text-white flex-shrink-0"
-                                            style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
-                                            {{ (c.user?.name || c.guest_name || 'A')[0].toUpperCase() }}
+                                        style="background:linear-gradient(135deg,#3B2A5A,#7C3AED);">
+                                        {{ (c.user?.name || c.guest_name || 'A')[0].toUpperCase() }}
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-white"
+                                            style="font-family:system-ui;">
+                                            {{ c.user?.name || c.guest_name }}
                                         </div>
-                                        <div>
-                                            <div class="text-sm font-semibold text-white"
-                                                style="font-family:system-ui;">
-                                                {{ c.user?.name || c.guest_name }}
-                                            </div>
-                                            <div class="text-xs" style="color:#475569;font-family:system-ui;">
-                                                {{ c.user?.email || c.guest_email }}
-                                            </div>
+                                        <div class="text-xs" style="color:#475569;font-family:system-ui;">
+                                            {{ c.user?.email || c.guest_email }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-xs font-medium" style="color:#C9B9E8;font-family:system-ui;max-width:180px;
-                    display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         {{ c.post?.title || '—' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-sm" style="color:#C9B9E8;font-family:system-ui;max-width:240px;
-                    display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         {{ c.body }}
                                     </span>
                                 </td>
@@ -116,8 +113,8 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
                                         <button v-if="!isApproved(c)" @click="approveComment(c)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
-                             border transition-all hover:scale-105" style="border-color:#16a34a30;color:#4ade80;
-                      background:#16a34a10;font-family:system-ui;">
+                                    border transition-all hover:scale-105" style="border-color:#16a34a30;color:#4ade80;
+                                    background:#16a34a10;font-family:system-ui;">
                                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2.5">
                                                 <polyline points="20 6 9 17 4 12" />
@@ -125,8 +122,8 @@
                                             Approve
                                         </button>
                                         <button @click="deleteComment(c)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
-                             border transition-all hover:scale-105" style="border-color:#dc262630;color:#f87171;
-                      background:#dc262610;font-family:system-ui;">
+                                    border transition-all hover:scale-105" style="border-color:#dc262630;color:#f87171;
+                                    background:#dc262610;font-family:system-ui;">
                                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2.5">
                                                 <polyline points="3 6 5 6 21 6" />
@@ -185,65 +182,3 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .3s
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0
-}
-</style>
-
-<script setup>
-import { ref, reactive, onMounted, computed } from 'vue'
-import api from '@/api/axios'
-
-const comments = ref([])
-const filterApproved = ref('')
-const alertMsg = ref('')
-const alertType = ref('success')
-const pagination = reactive({ current_page: 1, last_page: 1 })
-const totalComments = computed(() => comments.value.length)
-const pendingComments = computed(() => comments.value.filter(c => !isApproved(c)).length)
-const approvedComments = computed(() => comments.value.filter(c => isApproved(c)).length)
-
-onMounted(fetchComments)
-
-async function fetchComments(page = 1) {
-    const { data } = await api.get('/admin/comments', {
-        params: { page, approved: filterApproved.value !== '' ? filterApproved.value : undefined }
-    })
-    const items = normalizeItems(data)
-    comments.value = items
-    pagination.current_page = data.data?.current_page || data.current_page || 1
-    pagination.last_page = data.data?.last_page || data.last_page || 1
-}
-async function approveComment(c) {
-    await api.patch(`/admin/comments/${c.id}/approve`)
-    showAlert('Comment approved.', 'success'); fetchComments()
-}
-async function deleteComment(c) {
-    if (!confirm('Delete this comment?')) return
-    await api.delete(`/admin/comments/${c.id}`)
-    showAlert('Comment deleted.', 'success'); fetchComments()
-}
-function showAlert(msg, type = 'success') {
-    alertMsg.value = msg; alertType.value = type
-    setTimeout(() => alertMsg.value = '', 3000)
-}
-
-function normalizeItems(response) {
-    if (Array.isArray(response?.data?.data)) return response.data.data
-    if (Array.isArray(response?.data)) return response.data
-    if (Array.isArray(response?.comments)) return response.comments
-    return []
-}
-
-function isApproved(comment) {
-    return Boolean(comment.is_approved ?? comment.approved ?? comment.status === 'approved')
-}
-</script>
