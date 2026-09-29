@@ -12,8 +12,10 @@
 
         <!-- ── NOT FOUND ───────────────────────────────────────── -->
         <div v-else-if="!currentService" class="flex flex-col items-center justify-center min-h-screen gap-4 px-6 text-center">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
-                style="background:#120E1C;border:1px solid #3B2A5A;">⚡</div>
+            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-violet-400"
+                style="background:#120E1C;border:1px solid #3B2A5A;">
+                <ServiceIcon name="code" :size="32" />
+            </div>
             <h1 class="text-white font-bold text-2xl" style="font-family:'Georgia',serif;">
                 Service Not Found
             </h1>
@@ -51,28 +53,30 @@
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M9 18l6-6-6-6" />
                         </svg>
-                        <span style="color:#C9B9E8;">{{ currentService.title }}</span>
+                        <span style="color:#C9B9E8;">{{ currentService.title || currentService.name }}</span>
                     </div>
 
                     <!-- Top Badges & Meta -->
                     <div class="flex items-center gap-3 mb-4 flex-wrap">
-                        <span class="text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5"
+                        <span class="text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#8B5CF620;color:#C084FC;border:1px solid #8B5CF640;font-family:system-ui;">
-                            <span>{{ currentService.icon || '💻' }}</span>
-                            Professional Service
+                            <ServiceIcon :name="currentService.icon || 'code'" :size="14" />
+                            <span>Professional Service</span>
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"
+                        <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#052e16;color:#4ade80;border:1px solid #16a34a30;font-family:system-ui;">
                             <span class="w-1.5 h-1.5 rounded-full bg-green-400" style="box-shadow:0 0 6px #4ade80;"></span>
                             Available for New Projects
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1.5 rounded-full"
+                        <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#120E1C;color:#C9B9E8;border:1px solid #3B2A5A;font-family:system-ui;">
-                            ⏱️ Delivery: {{ serviceDetails.timeline || '7-14 Days' }}
+                            <ServiceIcon name="clock" :size="14" class="text-violet-400" />
+                            <span>Delivery: {{ serviceDetails.timeline || '7-14 Days' }}</span>
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1.5 rounded-full"
+                        <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2"
                             style="background:#120E1C;color:#F59E0B;border:1px solid #F59E0B30;font-family:system-ui;">
-                            🛡️ 30 Days Free Support
+                            <ServiceIcon name="shield" :size="14" class="text-amber-400" />
+                            <span>30 Days Free Support</span>
                         </span>
                     </div>
 
@@ -80,7 +84,7 @@
                     <div class="max-w-3xl">
                         <h1 class="font-bold text-white mb-4 leading-tight tracking-tight"
                             style="font-size:clamp(28px,4.5vw,46px);font-family:'Georgia',serif;">
-                            {{ currentService.title }}
+                            {{ currentService.title || currentService.name }}
                         </h1>
                         <p class="text-base leading-relaxed" style="color:#C9B9E8;font-family:system-ui;line-height:1.8;">
                             {{ currentService.description }}
@@ -98,10 +102,10 @@
 
                         <!-- ① Overview & Value Proposition -->
                         <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
-                            <div class="flex items-center gap-3 mb-5">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                                    style="background:#8B5CF620;border:1px solid #8B5CF630;">
-                                    💡
+                            <div class="flex items-center gap-3.5 mb-5">
+                                <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
+                                    style="background:#8B5CF618;border:1px solid #8B5CF630;">
+                                    <ServiceIcon name="sparkles" :size="20" />
                                 </div>
                                 <h2 class="text-white text-xl font-bold font-serif">What This Service Offers</h2>
                             </div>
@@ -110,7 +114,7 @@
                             </p>
                             <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t" style="border-color:#241730;">
                                 <div v-for="(highlight, idx) in serviceDetails.highlights" :key="idx"
-                                    class="flex items-start gap-3 p-3.5 rounded-2xl"
+                                    class="flex items-start gap-3 p-4 rounded-2xl transition-colors hover:border-purple-500/40"
                                     style="background:rgba(25, 18, 38, 0.4);border:1px solid rgba(139, 92, 246, 0.15);">
                                     <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
                                         style="background:#8B5CF625;color:#C084FC;">
@@ -128,17 +132,17 @@
                         <!-- ② Delivery Workflow / How It Works -->
                         <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
                             <div class="flex items-center justify-between mb-8 flex-wrap gap-2">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                                        style="background:#8B5CF620;border:1px solid #8B5CF630;">
-                                        🔄
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
+                                        style="background:#8B5CF618;border:1px solid #8B5CF630;">
+                                        <ServiceIcon name="workflow" :size="20" />
                                     </div>
                                     <div>
                                         <h2 class="text-white text-xl font-bold font-serif">How I Deliver Your Project</h2>
                                         <p class="text-xs opacity-60" style="color:#C9B9E8;font-family:system-ui;">Transparent, step-by-step workflow from idea to deployment</p>
                                     </div>
                                 </div>
-                                <span class="text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+                                <span class="text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider"
                                     style="background:#8B5CF615;color:#C084FC;border:1px solid #8B5CF630;">
                                     5-Step Agile Process
                                 </span>
@@ -147,7 +151,7 @@
                             <div class="space-y-6 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-gradient-to-b before:from-purple-500 before:to-transparent before:opacity-30">
                                 <div v-for="(step, idx) in workflowSteps" :key="idx" class="relative flex items-start gap-5">
                                     <!-- Step Number Bubble -->
-                                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm text-white shrink-0 z-10"
+                                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm text-white shrink-0 z-10 font-serif"
                                         :style="idx === 0 ? 'background:linear-gradient(135deg,#8B5CF6,#6D28D9);box-shadow:0 0 16px #8B5CF650;' : 'background:#180F28;border:1px solid #3B2A5A;'">
                                         {{ idx + 1 }}
                                     </div>
@@ -166,10 +170,10 @@
 
                         <!-- ③ Technologies & Tools -->
                         <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                                    style="background:#8B5CF620;border:1px solid #8B5CF630;">
-                                    💻
+                            <div class="flex items-center gap-3.5 mb-6">
+                                <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
+                                    style="background:#8B5CF618;border:1px solid #8B5CF630;">
+                                    <ServiceIcon name="code" :size="20" />
                                 </div>
                                 <div>
                                     <h2 class="text-white text-xl font-bold font-serif">Tech Stack &amp; Tools</h2>
@@ -181,18 +185,18 @@
                                 <div v-for="tech in serviceDetails.techStack" :key="tech.name"
                                     class="p-4 rounded-2xl border transition-all hover:-translate-y-1 hover:border-purple-500/50"
                                     style="background:rgba(25, 18, 38, 0.5);border-color:rgba(139, 92, 246, 0.15);">
-                                    <div class="text-xs font-bold text-white mb-0.5" style="font-family:system-ui;">{{ tech.name }}</div>
-                                    <div class="text-[11px] opacity-60" style="color:#C9B9E8;font-family:system-ui;">{{ tech.role }}</div>
+                                    <div class="text-xs font-bold text-white mb-1" style="font-family:system-ui;">{{ tech.name }}</div>
+                                    <div class="text-[11px] text-violet-300 opacity-70" style="font-family:system-ui;">{{ tech.role }}</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- ④ Security, Architecture & Quality Standards -->
                         <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                                    style="background:#8B5CF620;border:1px solid #8B5CF630;">
-                                    🔒
+                            <div class="flex items-center gap-3.5 mb-6">
+                                <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
+                                    style="background:#8B5CF618;border:1px solid #8B5CF630;">
+                                    <ServiceIcon name="shield" :size="20" />
                                 </div>
                                 <div>
                                     <h2 class="text-white text-xl font-bold font-serif">Security &amp; Performance Standards</h2>
@@ -202,9 +206,13 @@
 
                             <div class="grid sm:grid-cols-2 gap-4">
                                 <div v-for="sec in securityStandards" :key="sec.title"
-                                    class="p-5 rounded-2xl border" style="background:rgba(25, 18, 38, 0.4);border-color:rgba(139, 92, 246, 0.15);">
-                                    <div class="text-base mb-2">{{ sec.icon }}</div>
-                                    <h4 class="text-white font-bold text-xs mb-1" style="font-family:system-ui;">{{ sec.title }}</h4>
+                                    class="p-5 rounded-2xl border transition-colors hover:border-purple-500/40"
+                                    style="background:rgba(25, 18, 38, 0.4);border-color:rgba(139, 92, 246, 0.15);">
+                                    <div class="w-8 h-8 rounded-xl flex items-center justify-center mb-3 text-violet-400"
+                                        style="background:#8B5CF615;border:1px solid #8B5CF630;">
+                                        <ServiceIcon :name="sec.iconName" :size="16" />
+                                    </div>
+                                    <h4 class="text-white font-bold text-xs mb-1.5" style="font-family:system-ui;">{{ sec.title }}</h4>
                                     <p class="text-xs opacity-70 leading-relaxed" style="color:#C9B9E8;font-family:system-ui;">
                                         {{ sec.desc }}
                                     </p>
@@ -214,17 +222,17 @@
 
                         <!-- ⑤ Included Deliverables -->
                         <div class="rounded-3xl border p-8" style="background:#120E1C;border-color:#3B2A5A;">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                                    style="background:#8B5CF620;border:1px solid #8B5CF630;">
-                                    📦
+                            <div class="flex items-center gap-3.5 mb-6">
+                                <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-violet-400"
+                                    style="background:#8B5CF618;border:1px solid #8B5CF630;">
+                                    <ServiceIcon name="package" :size="20" />
                                 </div>
                                 <h2 class="text-white text-xl font-bold font-serif">What You Will Receive (Deliverables)</h2>
                             </div>
 
                             <ul class="space-y-3.5">
                                 <li v-for="(del, i) in deliverables" :key="i" class="flex items-start gap-3 text-sm" style="color:#C9B9E8;font-family:system-ui;">
-                                    <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                                    <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold"
                                         style="background:#052e16;color:#4ade80;border:1px solid #16a34a40;">
                                         ✓
                                     </span>
@@ -239,13 +247,14 @@
                     <div class="space-y-6 lg:sticky lg:top-24">
 
                         <!-- Booking & CTA Card -->
-                        <div class="rounded-3xl border p-6 text-center overflow-hidden relative"
+                        <div class="rounded-3xl border p-7 text-center overflow-hidden relative"
                             style="background:linear-gradient(135deg,#120E1C,#1E1430);border-color:#8B5CF640;box-shadow:0 15px 35px -10px #8B5CF625;">
                             
                             <!-- Header badge -->
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-4"
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4"
                                 style="background:#8B5CF620;color:#C084FC;border:1px solid #8B5CF640;font-family:system-ui;">
-                                ★ Direct Project Booking
+                                <ServiceIcon name="sparkles" :size="12" />
+                                <span>Direct Project Booking</span>
                             </div>
 
                             <h3 class="text-white font-bold text-xl font-serif mb-2">Ready to Start?</h3>
@@ -261,14 +270,14 @@
                                 <div class="text-3xl font-bold text-white mt-1 font-serif">
                                     {{ serviceDetails.startingPrice || '$250 - $650' }}
                                 </div>
-                                <div class="text-[11px] text-violet-400 mt-1" style="font-family:system-ui;">
+                                <div class="text-[11px] text-violet-400 mt-1 font-medium" style="font-family:system-ui;">
                                     Custom milestones &amp; flexible payment terms
                                 </div>
                             </div>
 
                             <!-- Hire Button -->
                             <button @click="hireThisService"
-                                class="w-full py-4 text-white font-bold rounded-2xl text-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg mb-4"
+                                class="w-full py-4 text-white font-bold rounded-2xl text-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg mb-4 cursor-pointer"
                                 style="background:#8B5CF6;box-shadow:0 8px 25px -4px #8B5CF660;font-family:system-ui;">
                                 <span>Get Started with this Service</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -276,29 +285,42 @@
                                 </svg>
                             </button>
 
-                            <!-- Direct Fast Connect Buttons -->
+                            <!-- Direct Fast Connect Buttons with clean SVGs -->
                             <div class="space-y-2.5 pt-2">
                                 <a href="mailto:hello@pialcodes.com"
-                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                                    <span>✉️</span> Email Inquiry
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                    <span>Email Inquiry</span>
                                 </a>
                                 <a href="https://www.linkedin.com/in/pial-mahmud/" target="_blank"
-                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                                    <span>🔗</span> Connect on LinkedIn
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                        <rect x="2" y="9" width="4" height="12"/>
+                                        <circle cx="4" cy="4" r="2"/>
+                                    </svg>
+                                    <span>Connect on LinkedIn</span>
                                 </a>
                                 <a href="https://github.com/mahmudpial" target="_blank"
-                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+                                    class="w-full py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all hover:bg-white/5"
                                     style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
-                                    <span>🐙</span> View GitHub Code
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                    </svg>
+                                    <span>View GitHub Code</span>
                                 </a>
                             </div>
 
-                            <!-- Guarantee note -->
-                            <div class="mt-6 pt-5 border-t text-[11px] opacity-60 flex items-center justify-center gap-1.5"
+                            <!-- Guarantee note with SVG -->
+                            <div class="mt-6 pt-5 border-t text-[11px] opacity-70 flex items-center justify-center gap-2"
                                 style="border-color:#241730;color:#C9B9E8;font-family:system-ui;">
-                                <span>🛡️</span> 100% Satisfaction &amp; Clean Code Guaranteed
+                                <ServiceIcon name="shield" :size="14" class="text-violet-400" />
+                                <span>100% Satisfaction &amp; Clean Code Guaranteed</span>
                             </div>
                         </div>
 
@@ -311,8 +333,8 @@
                                     :style="svc.id == currentService.id ? 'background:#8B5CF620;border-color:#8B5CF650;color:#fff;' : 'background:rgba(25,18,38,0.4);border-color:#241730;color:#C9B9E8;'"
                                     :onmouseover="svc.id != currentService.id ? `this.style.borderColor='#8B5CF6';this.style.color='#fff'` : ''"
                                     :onmouseout="svc.id != currentService.id ? `this.style.borderColor='#241730';this.style.color='#C9B9E8'` : ''">
-                                    <span class="flex items-center gap-2">
-                                        <span>{{ svc.icon || '💻' }}</span>
+                                    <span class="flex items-center gap-2.5">
+                                        <ServiceIcon :name="svc.icon || 'code'" :size="14" class="text-violet-400" />
                                         <span class="truncate max-w-[190px]">{{ svc.title || svc.name }}</span>
                                     </span>
                                     <span class="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span>
@@ -334,6 +356,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import api from '@/api/axios'
+import ServiceIcon from '@/components/ServiceIcon.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -495,10 +518,10 @@ const workflowSteps = [
 ]
 
 const securityStandards = [
-    { icon: '🛡️', title: 'OWASP Security Guard', desc: 'Protected against XSS, CSRF, SQL Injection and clickjacking attacks.' },
-    { icon: '🔑', title: 'Encrypted Token Auth', desc: 'State-of-the-art Sanctum & JWT token management with secure cookie/header transmission.' },
-    { icon: '⚡', title: 'Sub-100ms Response', desc: 'Optimized database queries, lazy-loading, and Redis caching for blazing performance.' },
-    { icon: '📦', title: 'Versioned Codebase', desc: 'Organized Git commit history with branch protection and seamless deploy scripts.' }
+    { iconName: 'shield', title: 'OWASP Security Guard', desc: 'Protected against XSS, CSRF, SQL Injection and clickjacking attacks.' },
+    { iconName: 'shield', title: 'Encrypted Token Auth', desc: 'State-of-the-art Sanctum & JWT token management with secure cookie/header transmission.' },
+    { iconName: 'sparkles', title: 'Sub-100ms Response', desc: 'Optimized database queries, lazy-loading, and Redis caching for blazing performance.' },
+    { iconName: 'package', title: 'Versioned Codebase', desc: 'Organized Git commit history with branch protection and seamless deploy scripts.' }
 ]
 
 const deliverables = [

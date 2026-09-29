@@ -256,10 +256,9 @@
                         <div>
                             <!-- Top row: Icon tile & Arrow -->
                             <div class="flex items-center justify-between mb-5">
-                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300"
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-violet-400 group-hover:text-purple-300 group-hover:scale-110 transition-all duration-300"
                                     style="background:linear-gradient(135deg,#8B5CF620,#6D28D910);border:1px solid #8B5CF635;">
-                                    <span v-if="svc.icon">{{ svc.icon }}</span>
-                                    <span v-else class="text-sm font-bold text-violet-400">{{ (svc.title || svc.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                                    <ServiceIcon :name="svc.icon || 'code'" :size="24" />
                                 </div>
                                 <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
                                     style="background:#8B5CF615;color:#C084FC;">
@@ -816,6 +815,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import api from '@/api/axios'
 import { useAuthStore } from '@/stores/auth'
+import ServiceIcon from '@/components/ServiceIcon.vue'
 
 const auth = useAuthStore()
 

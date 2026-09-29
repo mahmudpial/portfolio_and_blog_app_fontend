@@ -58,10 +58,9 @@
                         <tr v-for="service in services" :key="service.id" class="group transition-all hover:bg-white/[0.02]">
                             <td class="px-8 py-5">
                                 <div class="flex items-start gap-4">
-                                    <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center shrink-0 text-xl"
+                                    <div class="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-white/10 group-hover:ring-purple-500/50 transition-all flex items-center justify-center shrink-0 text-violet-400"
                                         style="background:linear-gradient(135deg,#180F28,#3B2A5A);">
-                                        <span v-if="service.icon">{{ service.icon }}</span>
-                                        <span v-else class="text-white font-bold text-xs">{{ (service.title || service.name || 'S').slice(0, 2).toUpperCase() }}</span>
+                                        <ServiceIcon :name="service.icon || 'code'" :size="20" />
                                     </div>
                                     <div>
                                         <div class="font-bold text-white text-sm group-hover:text-purple-400 transition-colors" style="font-family:system-ui;">
@@ -74,9 +73,10 @@
                                 </div>
                             </td>
                             <td class="px-8 py-5">
-                                <span class="text-base px-3 py-1.5 rounded-xl border inline-flex items-center justify-center"
-                                    style="background:rgba(139, 92, 246, 0.1);border-color:rgba(139, 92, 246, 0.2);">
-                                    {{ service.icon || '💻' }}
+                                <span class="text-xs px-3 py-1.5 rounded-xl border inline-flex items-center gap-2 font-mono"
+                                    style="background:rgba(139, 92, 246, 0.1);border-color:rgba(139, 92, 246, 0.2);color:#C084FC;">
+                                    <ServiceIcon :name="service.icon || 'code'" :size="14" />
+                                    <span>{{ service.icon || 'code' }}</span>
                                 </span>
                             </td>
                             <td class="px-8 py-5">
@@ -101,7 +101,9 @@
                         </tr>
                         <tr v-if="services.length === 0">
                             <td colspan="4" class="text-center py-24">
-                                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-4xl">⚡</div>
+                                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-violet-400">
+                                    <ServiceIcon name="code" :size="32" />
+                                </div>
                                 <p class="text-white font-bold text-lg mb-1">No services listed</p>
                                 <p class="text-sm opacity-40">Start documenting your professional services.</p>
                             </td>
@@ -132,19 +134,49 @@
                         </button>
                     </div>
                     <div class="p-8 space-y-5 overflow-y-auto custom-scrollbar flex-1">
-                        <div v-for="f in serviceFields" :key="f.key" class="space-y-1.5">
+                        <!-- Service Title -->
+                        <div class="space-y-1.5">
                             <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
-                                {{ f.label }}
+                                Service Title / Name
                             </label>
+                            <input v-model="form.title" type="text" placeholder="e.g. Full-Stack Web Development"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
+                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                        </div>
 
-                            <!-- Textarea for description -->
-                            <textarea v-if="f.type === 'textarea'" v-model="form[f.key]" rows="3" :placeholder="f.placeholder"
+                        <!-- Professional Icon Selector -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
+                                Professional SVG Icon
+                            </label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button v-for="ico in iconOptions" :key="ico.key" type="button" @click="form.icon = ico.key"
+                                    class="p-2.5 rounded-xl border flex items-center gap-2 text-xs font-medium transition-all"
+                                    :style="form.icon === ico.key ? 'background:#8B5CF625;border-color:#8B5CF6;color:#fff;' : 'background:#0A0610;border-color:rgba(139,92,246,0.15);color:#C9B9E8;'">
+                                    <ServiceIcon :name="ico.key" :size="16" class="text-violet-400" />
+                                    <span>{{ ico.label }}</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
+                                Description
+                            </label>
+                            <textarea v-model="form.description" rows="3" placeholder="Describe what this service delivers..."
                                 class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
                                 style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
                                 onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
+                        </div>
 
-                            <!-- Regular inputs -->
-                            <input v-else v-model="form[f.key]" :type="f.type" :placeholder="f.placeholder"
+                        <!-- Display Order -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider opacity-60 text-white">
+                                Display Order
+                            </label>
+                            <input v-model="form.order" type="number" placeholder="0"
                                 class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
                                 style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
                                 onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
@@ -152,12 +184,12 @@
                     </div>
                     <div class="flex gap-4 px-8 py-6 border-t shrink-0" style="border-color:rgba(139, 92, 246, 0.1);">
                         <button @click="saveService" :disabled="saving" class="flex-1 py-3.5 text-white font-bold rounded-2xl text-sm
-                            transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                            transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 cursor-pointer"
                             style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
                             {{ saving ? 'Saving...' : (modal.editing ? 'Update Service' : 'Save Service') }}
                         </button>
                         <button @click="modal.show = false"
-                            class="px-6 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
+                            class="px-6 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5 cursor-pointer"
                             style="border-color:rgba(139, 92, 246, 0.2);color:#C9B9E8;">
                             Cancel
                         </button>
@@ -171,19 +203,22 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import api from '@/api/axios'
+import ServiceIcon from '@/components/ServiceIcon.vue'
 
 const services = ref([])
 const saving = ref(false)
 const alertMsg = ref('')
 const alertType = ref('success')
 const modal = reactive({ show: false, editing: false, editId: null })
-const form = reactive({ title: '', name: '', description: '', icon: '💻', order: 0 })
+const form = reactive({ title: '', name: '', description: '', icon: 'code', order: 0 })
 
-const serviceFields = [
-    { key: 'title', label: 'Service Title / Name', type: 'text', placeholder: 'e.g. Full-Stack Web Development' },
-    { key: 'icon', label: 'Icon / Emoji', type: 'text', placeholder: 'e.g. 💻 or ⚡ or 🛠️' },
-    { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Describe what this service delivers...' },
-    { key: 'order', label: 'Display Order', type: 'number', placeholder: '0' },
+const iconOptions = [
+    { key: 'code', label: 'Full-Stack' },
+    { key: 'api', label: 'REST API' },
+    { key: 'dashboard', label: 'Admin/CMS' },
+    { key: 'database', label: 'Database' },
+    { key: 'payment', label: 'Payments' },
+    { key: 'uiux', label: 'UI/UX' },
 ]
 
 async function fetchServices() {
