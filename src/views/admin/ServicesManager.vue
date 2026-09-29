@@ -8,7 +8,7 @@
                     Services <span style="color:#8B5CF6;">Management</span>
                 </h1>
                 <p class="text-sm opacity-60 font-medium">
-                    Managing {{ services.length }} professional capabilities and expertise levels.
+                    Managing {{ skills.length }} professional capabilities and expertise levels.
                 </p>
             </div>
             <button @click="openAdd" class="group relative flex items-center gap-3 px-6 py-3 text-white text-sm font-bold
@@ -174,8 +174,8 @@
                         </button>
                     </div>
                 </div>
-            </transition>
-        </div>
+            </div>
+        </transition>
     </div>
 </template>
 

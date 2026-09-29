@@ -85,6 +85,7 @@
                                             {{ c.user?.email || c.guest_email }}
                                         </div>
                                     </div>
+                                </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-xs font-medium" style="color:#C9B9E8;font-family:system-ui;max-width:180px;
@@ -180,5 +181,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>

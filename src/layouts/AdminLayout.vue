@@ -61,33 +61,68 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-    LayoutDashboard,
-    FileText,
-    Briefcase,
-    Zap,
-    Settings,
-    MessageSquare,
-    Mail,
-    CreditCard,
-    Wrench
-} from 'lucide-vue-next'
 
 const router = useRouter()
 const isExpanded = ref(false)
 
+const IconDashboard = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('rect', { x: 3, y: 3, width: 7, height: 7, rx: 1 }),
+    h('rect', { x: 14, y: 3, width: 7, height: 7, rx: 1 }),
+    h('rect', { x: 14, y: 14, width: 7, height: 7, rx: 1 }),
+    h('rect', { x: 3, y: 14, width: 7, height: 7, rx: 1 })
+])
+
+const IconPosts = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
+    h('polyline', { points: '14 2 14 8 20 8' }),
+    h('line', { x1: 16, y1: 13, x2: 8, y2: 13 }),
+    h('line', { x1: 16, y1: 17, x2: 8, y2: 17 })
+])
+
+const IconProjects = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('rect', { x: 2, y: 7, width: 20, height: 14, rx: 2 }),
+    h('path', { d: 'M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16' })
+])
+
+const IconSkills = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('polygon', { points: '13 2 3 14 12 14 11 22 21 10 12 10 13 2' })
+])
+
+const IconServices = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('path', { d: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z' })
+])
+
+const IconPricing = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('rect', { x: 1, y: 4, width: 22, height: 16, rx: 2 }),
+    h('line', { x1: 1, y1: 10, x2: 23, y2: 10 })
+])
+
+const IconComments = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
+])
+
+const IconMessages = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
+    h('polyline', { points: '22,6 12,13 2,6' })
+])
+
+const IconSettings = () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
+    h('circle', { cx: 12, cy: 12, r: 3 }),
+    h('path', { d: 'M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z' })
+])
+
 const menuItems = [
-    { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'Blog Posts', path: '/admin/posts', icon: FileText },
-    { label: 'Projects', path: '/admin/projects', icon: Briefcase },
-    { label: 'Skills', path: '/admin/skills', icon: Zap },
-    { label: 'Services', path: '/admin/services', icon: Wrench },
-    { label: 'Pricing', path: '/admin/pricing', icon: CreditCard },
-    { label: 'Comments', path: '/admin/comments', icon: MessageSquare },
-    { label: 'Messages', path: '/admin/messages', icon: Mail },
-    { label: 'Site Settings', path: '/admin/settings', icon: Settings },
+    { label: 'Dashboard', path: '/admin/dashboard', icon: IconDashboard },
+    { label: 'Blog Posts', path: '/admin/posts', icon: IconPosts },
+    { label: 'Projects', path: '/admin/projects', icon: IconProjects },
+    { label: 'Skills', path: '/admin/skills', icon: IconSkills },
+    { label: 'Services', path: '/admin/services', icon: IconServices },
+    { label: 'Pricing', path: '/admin/pricing', icon: IconPricing },
+    { label: 'Comments', path: '/admin/comments', icon: IconComments },
+    { label: 'Messages', path: '/admin/messages', icon: IconMessages },
+    { label: 'Site Settings', path: '/admin/settings', icon: IconSettings },
 ]
 </script>
 

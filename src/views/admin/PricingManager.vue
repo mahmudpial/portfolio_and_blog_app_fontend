@@ -188,8 +188,8 @@
                         </button>
                     </div>
                 </div>
-            </transition>
-        </div>
+            </div>
+        </transition>
     </div>
 </template>
 
