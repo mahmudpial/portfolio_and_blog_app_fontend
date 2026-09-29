@@ -185,86 +185,110 @@
                             </p>
                         </div>
 
-                        <!-- 4 Key Pillars with Crisp Professional SVGs -->
+                        <!-- 4 Key Pillars with Crisp Professional SVGs & High-Tech Animations -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             
                             <!-- Pillar 1: Clean Architecture -->
-                            <div class="p-5 rounded-2xl border transition-all hover:border-violet-500/40 hover:-translate-y-0.5"
-                                style="background:#120E1C;border-color:#3B2A5A;">
-                                <div class="flex items-center gap-3 mb-2.5">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-violet-400 shrink-0"
-                                        style="background:#8B5CF618;border:1px solid #8B5CF630;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <div class="pillar-card group relative p-5 rounded-2xl border transition-all duration-300 overflow-hidden cursor-default"
+                                style="background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;--accent-color:#8B5CF6;--accent-glow:rgba(139,92,246,0.35);">
+                                
+                                <!-- Ambient dynamic hover glow -->
+                                <div class="absolute -top-12 -right-12 w-28 h-28 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                    style="background:radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%);filter:blur(16px);"></div>
+
+                                <!-- Card Header -->
+                                <div class="flex items-center gap-3 mb-2.5 relative z-10">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-violet-400 shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+                                        style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-y-[-1px]">
                                             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                                             <polyline points="2 17 12 22 22 17"></polyline>
                                             <polyline points="2 12 12 17 22 12"></polyline>
                                         </svg>
                                     </div>
-                                    <span class="font-bold text-sm text-white" style="font-family:system-ui;">
+                                    <span class="font-bold text-sm text-white group-hover:text-purple-200 transition-colors" style="font-family:system-ui;">
                                         Clean Architecture
                                     </span>
                                 </div>
-                                <p class="text-xs leading-relaxed" style="color:#94A3B8;font-family:system-ui;">
+                                <p class="text-xs leading-relaxed relative z-10" style="color:#94A3B8;font-family:system-ui;">
                                     Writing decoupled, SOLID-compliant, and testable enterprise backend code.
                                 </p>
                             </div>
 
                             <!-- Pillar 2: High Performance -->
-                            <div class="p-5 rounded-2xl border transition-all hover:border-violet-500/40 hover:-translate-y-0.5"
-                                style="background:#120E1C;border-color:#3B2A5A;">
-                                <div class="flex items-center gap-3 mb-2.5">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-violet-400 shrink-0"
-                                        style="background:#8B5CF618;border:1px solid #8B5CF630;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <div class="pillar-card group relative p-5 rounded-2xl border transition-all duration-300 overflow-hidden cursor-default"
+                                style="background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;--accent-color:#F59E0B;--accent-glow:rgba(245,158,11,0.35);">
+                                
+                                <!-- Ambient dynamic hover glow -->
+                                <div class="absolute -top-12 -right-12 w-28 h-28 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                    style="background:radial-gradient(circle, rgba(245,158,11,0.4) 0%, transparent 70%);filter:blur(16px);"></div>
+
+                                <!-- Card Header -->
+                                <div class="flex items-center gap-3 mb-2.5 relative z-10">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-amber-400 shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]"
+                                        style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:scale-110">
                                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                         </svg>
                                     </div>
-                                    <span class="font-bold text-sm text-white" style="font-family:system-ui;">
+                                    <span class="font-bold text-sm text-white group-hover:text-amber-200 transition-colors" style="font-family:system-ui;">
                                         High Performance
                                     </span>
                                 </div>
-                                <p class="text-xs leading-relaxed" style="color:#94A3B8;font-family:system-ui;">
+                                <p class="text-xs leading-relaxed relative z-10" style="color:#94A3B8;font-family:system-ui;">
                                     Optimized database queries, query execution plans, Redis caching, and fast load speeds.
                                 </p>
                             </div>
 
                             <!-- Pillar 3: Modern UI/UX -->
-                            <div class="p-5 rounded-2xl border transition-all hover:border-violet-500/40 hover:-translate-y-0.5"
-                                style="background:#120E1C;border-color:#3B2A5A;">
-                                <div class="flex items-center gap-3 mb-2.5">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-violet-400 shrink-0"
-                                        style="background:#8B5CF618;border:1px solid #8B5CF630;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <div class="pillar-card group relative p-5 rounded-2xl border transition-all duration-300 overflow-hidden cursor-default"
+                                style="background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;--accent-color:#06B6D4;--accent-glow:rgba(6,182,212,0.35);">
+                                
+                                <!-- Ambient dynamic hover glow -->
+                                <div class="absolute -top-12 -right-12 w-28 h-28 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                    style="background:radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%);filter:blur(16px);"></div>
+
+                                <!-- Card Header -->
+                                <div class="flex items-center gap-3 mb-2.5 relative z-10">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-cyan-400 shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                                        style="background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.3);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-x-[1px]">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                             <line x1="3" y1="9" x2="21" y2="9"></line>
                                             <line x1="9" y1="21" x2="9" y2="9"></line>
                                         </svg>
                                     </div>
-                                    <span class="font-bold text-sm text-white" style="font-family:system-ui;">
+                                    <span class="font-bold text-sm text-white group-hover:text-cyan-200 transition-colors" style="font-family:system-ui;">
                                         Modern UI/UX
                                     </span>
                                 </div>
-                                <p class="text-xs leading-relaxed" style="color:#94A3B8;font-family:system-ui;">
+                                <p class="text-xs leading-relaxed relative z-10" style="color:#94A3B8;font-family:system-ui;">
                                     Reactive Vue.js 3 SPAs, smooth micro-interactions, and accessible Tailwind CSS design.
                                 </p>
                             </div>
 
                             <!-- Pillar 4: Security & RBAC -->
-                            <div class="p-5 rounded-2xl border transition-all hover:border-violet-500/40 hover:-translate-y-0.5"
-                                style="background:#120E1C;border-color:#3B2A5A;">
-                                <div class="flex items-center gap-3 mb-2.5">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-emerald-400 shrink-0"
-                                        style="background:#10B98118;border:1px solid #10B98130;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <div class="pillar-card group relative p-5 rounded-2xl border transition-all duration-300 overflow-hidden cursor-default"
+                                style="background:rgba(18, 14, 28, 0.95);border-color:#3B2A5A;--accent-color:#10B981;--accent-glow:rgba(16,185,129,0.35);">
+                                
+                                <!-- Ambient dynamic hover glow -->
+                                <div class="absolute -top-12 -right-12 w-28 h-28 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                    style="background:radial-gradient(circle, rgba(16,185,129,0.4) 0%, transparent 70%);filter:blur(16px);"></div>
+
+                                <!-- Card Header -->
+                                <div class="flex items-center gap-3 mb-2.5 relative z-10">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-emerald-400 shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                                        style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:scale-105">
                                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                         </svg>
                                     </div>
-                                    <span class="font-bold text-sm text-white" style="font-family:system-ui;">
+                                    <span class="font-bold text-sm text-white group-hover:text-emerald-200 transition-colors" style="font-family:system-ui;">
                                         Security &amp; RBAC
                                     </span>
                                 </div>
-                                <p class="text-xs leading-relaxed" style="color:#94A3B8;font-family:system-ui;">
+                                <p class="text-xs leading-relaxed relative z-10" style="color:#94A3B8;font-family:system-ui;">
                                     Multi-tenant data isolation, fail-closed access control, and OWASP security compliance.
                                 </p>
                             </div>
@@ -524,5 +548,32 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions */
+/* ── Engineering Pillar Cards Micro-Animations ── */
+.pillar-card {
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 16px 36px -8px var(--accent-glow), 0 0 20px -4px var(--accent-color);
+}
+
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.pillar-card:hover::before {
+    left: 140%;
+}
 </style>
