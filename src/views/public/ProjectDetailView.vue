@@ -228,28 +228,12 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <!-- ── CTA ── -->
-                        <div class="mt-16 pt-8 border-t" style="border-color:#241730;">
-                            <p class="text-sm font-semibold text-white mb-4" style="font-family:'Georgia',serif;">
-                                Interested in a similar project?
-                            </p>
-                            <RouterLink to="/contact"
-                                class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-semibold transition-all hover:scale-105 active:scale-95"
-                                style="background:#8B5CF6;color:#fff;box-shadow:0 0 20px #8B5CF635;font-family:system-ui;">
-                                Get in Touch
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </RouterLink>
-                        </div>
                     </article>
 
                     <!-- ── SIDEBAR ──────────────────────────────── -->
-                    <aside class="w-full lg:w-72 flex-shrink-0">
+                    <aside class="w-full lg:w-72 flex-shrink-0 space-y-6">
                         <!-- Project stats -->
-                        <div class="rounded-2xl p-5 mb-8" style="background:#120E1C;border:1px solid #3B2A5A;">
+                        <div class="rounded-2xl p-5" style="background:#120E1C;border:1px solid #3B2A5A;">
                             <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4"
                                 style="color:#C9B9E8;font-family:system-ui;letter-spacing:.08em;">
                                 Quick Info
@@ -298,7 +282,7 @@
                             </div>
                         </div>
 
-                        <!-- ── RELATED PROJECTS ─────────────────────── -->
+                        <!-- ── RELATED / SIMILAR PROJECTS ────────────── -->
                         <div v-if="relatedProjects.length > 0" class="rounded-2xl p-5"
                             style="background:#120E1C;border:1px solid #3B2A5A;">
                             <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4"
@@ -344,6 +328,46 @@
                                     </svg>
                                 </RouterLink>
                             </div>
+                        </div>
+
+                        <!-- ── INTERESTED IN A SIMILAR PROJECT CTA CARD ── -->
+                        <div class="rounded-2xl p-6 text-center relative overflow-hidden border transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] group"
+                            style="background:linear-gradient(145deg, #1A102E 0%, #120E1C 100%);border-color:#3B2A5A;"
+                            onmouseover="this.style.borderColor='#8B5CF680'"
+                            onmouseout="this.style.borderColor='#3B2A5A'">
+                            
+                            <!-- Ambient top glow -->
+                            <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-36 h-36 rounded-full pointer-events-none"
+                                style="background:radial-gradient(circle,rgba(139,92,246,0.25) 0%,transparent 70%);filter:blur(20px);"></div>
+
+                            <!-- Icon -->
+                            <div class="w-12 h-12 rounded-2xl mx-auto mb-3.5 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+                                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#C084FC;box-shadow:0 0 15px rgba(139,92,246,0.2);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                            </div>
+
+                            <!-- Heading -->
+                            <h4 class="text-base font-bold text-white mb-2 group-hover:text-purple-200 transition-colors" style="font-family:'Georgia',serif;">
+                                Interested in a similar project?
+                            </h4>
+
+                            <!-- Description -->
+                            <p class="text-xs leading-relaxed mb-5" style="color:#C9B9E8;font-family:system-ui;">
+                                Have an idea or looking for custom software development? Let's discuss your requirements!
+                            </p>
+
+                            <!-- CTA Button -->
+                            <RouterLink :to="`/contact?subject=${encodeURIComponent('Inquiry: ' + (project.title || 'Project'))}`"
+                                class="w-full py-3 px-4 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg group/cbtn"
+                                style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);box-shadow:0 0 20px rgba(139,92,246,0.4);font-family:system-ui;">
+                                <span>Get in Touch</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="transition-transform duration-300 group-hover/cbtn:translate-x-1">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </RouterLink>
                         </div>
                     </aside>
                 </div>
