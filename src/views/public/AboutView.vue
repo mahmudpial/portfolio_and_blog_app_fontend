@@ -141,24 +141,11 @@
                             <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-3xl opacity-30"
                                 style="background:#8B5CF6;"></div>
 
-                            <div class="relative rounded-2xl overflow-hidden border border-white/10 mb-6 aspect-[4/5] bg-black/40 flex items-center justify-center">
-                                <img v-if="settings['avatar_url'] || settings['about_image']"
-                                    :src="settings['avatar_url'] || settings['about_image']"
-                                    alt="Pial Mahmud" class="w-full h-full object-cover" />
-                                <div v-else class="w-full h-full flex flex-col items-center justify-center gap-4 p-8 text-center"
-                                    style="background:linear-gradient(145deg,#120E1C,#1E1430);">
-                                    <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-violet-400"
-                                        style="background:#8B5CF620;border:1px solid #8B5CF640;box-shadow:0 0 20px #8B5CF630;">
-                                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <polyline points="16 18 22 12 16 6"></polyline>
-                                            <polyline points="8 6 2 12 8 18"></polyline>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="text-base font-bold text-white font-serif">Pial Mahmud</div>
-                                        <div class="text-xs text-violet-400 mt-0.5">Software Developer (PHP &amp; Laravel)</div>
-                                    </div>
-                                </div>
+                            <div class="relative rounded-2xl overflow-hidden border border-white/10 mb-6 aspect-[4/5] bg-black/40 flex items-center justify-center group">
+                                <img :src="aboutPhotoUrl"
+                                    alt="Pial Mahmud" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                <div class="absolute inset-0 pointer-events-none"
+                                    style="background:linear-gradient(to top, rgba(18,14,28,0.6) 0%, transparent 40%);"></div>
                             </div>
 
                             <div class="flex items-center justify-between">
@@ -405,11 +392,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import api from '@/api/axios'
 
 const settings = ref({})
 const statsSection = ref(null)
+
+const aboutPhotoUrl = computed(() => {
+    return settings.value['about_image'] || settings.value['avatar_url'] || '/images/pial-mahmud-about.jpg'
+})
 
 // Target numbers for counting animation
 const targetStats = [3, 25, 100]

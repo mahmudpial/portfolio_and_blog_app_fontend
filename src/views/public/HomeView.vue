@@ -869,7 +869,7 @@ const ownerInitials = computed(() =>
 )
 const homeAvatarLoadFailed = ref(false)
 const homeAvatarUrl = computed(() =>
-    settings.value['avatar_url'] || (auth.isAdmin ? auth.user?.profile_image?.trim?.() || '' : '')
+    settings.value['avatar_url'] || (auth.isAdmin ? auth.user?.profile_image?.trim?.() || '' : '') || '/images/pial-mahmud.jpg'
 )
 
 watch(homeAvatarUrl, () => {
