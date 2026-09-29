@@ -126,81 +126,69 @@
                     </div>
                 </div>
 
-                <!-- RIGHT — Profile card -->
+                <!-- RIGHT — Large Professional Tech Lead Profile Showcase -->
                 <div class="hidden md:flex justify-end items-center hero-card">
-                    <div class="relative w-[22rem] lg:w-[24rem]">
+                    <div class="relative w-[23rem] lg:w-[26rem]">
 
-                        <!-- Floating "Clean Code" badge -->
-                        <div class="absolute -top-5 left-2 z-20 flex items-center gap-2 px-4 py-2
-                        rounded-2xl border text-xs font-bold floating-badge-1" style="background:rgba(20,15,36,0.92);border-color:rgba(139,92,246,0.4);color:#E2D9F3;
-              font-family:system-ui;box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(139,92,246,0.25);backdrop-filter:blur(10px);">
-                            <span class="text-violet-400 font-extrabold">&lt;/&gt;</span> Clean Code
+                        <!-- Ambient Glow Rings Behind Photo -->
+                        <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full pointer-events-none blur-3xl opacity-40"
+                            style="background:radial-gradient(circle, #8B5CF6 0%, transparent 70%);"></div>
+                        <div class="absolute -bottom-10 -right-10 w-64 h-64 rounded-full pointer-events-none blur-3xl opacity-35"
+                            style="background:radial-gradient(circle, #06B6D4 0%, transparent 70%);"></div>
+
+                        <!-- Top Left Floating Role Badge -->
+                        <div class="absolute -top-5 -left-4 z-30 flex items-center gap-2 px-4 py-2.5 rounded-2xl border text-xs font-bold floating-badge-1"
+                            style="background:rgba(20, 15, 36, 0.94);border-color:rgba(139, 92, 246, 0.45);color:#E2D9F3;font-family:system-ui;box-shadow:0 10px 30px rgba(0,0,0,0.6), 0 0 25px rgba(139,92,246,0.3);backdrop-filter:blur(12px);">
+                            <div class="w-2.5 h-2.5 rounded-full bg-violet-400" style="box-shadow:0 0 8px #8B5CF6;"></div>
+                            <span class="text-violet-300 font-extrabold">&lt;/&gt;</span>
+                            <span>PHP &amp; Laravel Developer</span>
                         </div>
 
-                        <!-- Card -->
-                        <div class="rounded-3xl border overflow-hidden transition-all duration-500 hover:shadow-[0_0_90px_rgba(139,92,246,0.25)]" style="background:rgba(18,14,28,0.95);border-color:#3B2A5A;
-              box-shadow:0 0 80px rgba(139,92,246,0.15),0 40px 80px #00000060;backdrop-filter:blur(12px);">
+                        <!-- Top Right Floating Open-To-Work Badge -->
+                        <div class="absolute -top-4 -right-3 z-30 flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold transition-transform hover:scale-105"
+                            style="background:rgba(5, 46, 22, 0.92);color:#4ade80;border-color:rgba(74,222,128,0.4);box-shadow:0 8px 25px rgba(0,0,0,0.5), 0 0 15px rgba(74,222,128,0.25);backdrop-filter:blur(10px);font-family:system-ui;">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span>Open to Work</span>
+                        </div>
 
-                            <!-- Card header with avatar -->
-                            <div class="relative flex flex-col items-center pt-14 pb-8 px-8"
-                                style="background:linear-gradient(180deg,#1C1333 0%,#120E1C 100%);">
-                                <!-- Corner dots -->
-                                <div class="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-violet-400"
-                                    style="box-shadow:0 0 10px #8B5CF6;animation:dotPulse 3s infinite;"></div>
-                                <div class="absolute bottom-6 left-4 w-2 h-2 rounded-full"
-                                    style="background:#3B2A5A;"></div>
+                        <!-- Main Portrait Showcase Frame -->
+                        <div class="relative rounded-3xl border overflow-hidden group transition-all duration-500 hover:shadow-[0_0_90px_rgba(139,92,246,0.3)]"
+                            style="background:#120E1C;border-color:#3B2A5A;box-shadow:0 25px 60px -15px rgba(0,0,0,0.8), 0 0 50px rgba(139,92,246,0.18);">
+                            
+                            <!-- Large Portrait Photo -->
+                            <div class="relative w-full aspect-[4/5] overflow-hidden bg-[#0A0610] flex items-center justify-center">
+                                <img :src="homeAvatarUrl"
+                                    alt="Pial Mahmud - Software Developer"
+                                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                                
+                                <!-- Bottom gradient fade for text clarity -->
+                                <div class="absolute inset-0 pointer-events-none"
+                                    style="background:linear-gradient(to bottom, transparent 50%, rgba(10,6,16,0.5) 75%, rgba(18,14,28,0.98) 100%);"></div>
 
-                                <!-- Avatar circle with ring -->
-                                <div class="relative mb-0">
-                                    <div class="w-28 h-28 rounded-full flex items-center justify-center
-                              text-3xl font-bold text-white transition-transform duration-500 hover:scale-105" style="background:linear-gradient(135deg,#3B2A5A 0%,#7C3AED 100%);
-                    box-shadow:0 0 0 4px #120E1C,0 0 0 8px rgba(139,92,246,0.35),0 0 45px rgba(139,92,246,0.4);overflow:hidden;">
-                                        <img v-if="homeAvatarUrl && !homeAvatarLoadFailed" :src="homeAvatarUrl"
-                                            alt="Admin avatar" class="w-full h-full object-cover"
-                                            @error="homeAvatarLoadFailed = true" />
-                                        <span v-else>{{ ownerInitials }}</span>
-                                    </div>
-                                    <!-- Online indicator with pulse -->
-                                    <div class="absolute bottom-1 right-1 flex items-center justify-center">
-                                        <span class="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-green-400 opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-4 w-4 border-2 border-[#120E1C] bg-green-500 shadow-[0_0_8px_#4ade80]"></span>
-                                    </div>
-                                </div>
-                            </div>
+                                <!-- Subtle edge lighting / vignette -->
+                                <div class="absolute inset-0 pointer-events-none"
+                                    style="box-shadow:inset 0 0 30px rgba(0,0,0,0.5);"></div>
 
-                            <!-- Card body -->
-                            <div class="px-8 pb-8">
-                                <h3 class="font-bold text-white text-[26px] mb-1.5 text-center"
-                                    style="font-family:'Georgia',serif;">
-                                    {{ ownerName }}
-                                </h3>
-                                <p class="text-sm font-semibold mb-7 text-center text-violet-400" style="font-family:system-ui;">
-                                    Software Developer (PHP &amp; Laravel)
-                                </p>
-
-                                <!-- Stats row -->
-                                <div class="grid grid-cols-3 gap-3 mb-7">
-                                    <div v-for="stat in profileStats" :key="stat.label"
-                                        class="text-center py-3.5 rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-[#1A122E] hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] cursor-default group/stat"
-                                        style="background:#0D0818;border:1px solid #2A1C44;">
-                                        <div class="font-bold text-white text-xl group-hover/stat:text-violet-300 transition-colors font-serif">
-                                            {{ stat.value }}
+                                <!-- Floating Experience & Credentials Bar (Bottom) -->
+                                <div class="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between p-3.5 rounded-2xl border"
+                                    style="background:rgba(18, 14, 28, 0.88);border-color:rgba(139, 92, 246, 0.3);backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,0.6);">
+                                    <div>
+                                        <div class="text-white font-bold text-base flex items-center gap-1.5" style="font-family:'Georgia',serif;">
+                                            {{ ownerName }}
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="#8B5CF6" class="shrink-0">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
                                         </div>
-                                        <div class="text-[11px] font-semibold mt-0.5 tracking-wider uppercase" style="color:#A79AC5;font-family:system-ui;">{{
-                                            stat.label
-                                            }}</div>
+                                        <div class="text-[11px] font-semibold text-violet-300" style="font-family:system-ui;">
+                                            Software Developer · Smart Software Ltd
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- Open to work -->
-                                <div class="flex justify-center">
-                                    <div class="flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(74,222,128,0.2)]"
-                                        style="background:rgba(5, 46, 22, 0.7);color:#4ade80;border:1px solid rgba(74,222,128,0.3);backdrop-filter:blur(6px);font-family:system-ui;">
-                                        <span class="relative flex h-2 w-2">
-                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                        </span>
-                                        Open to Work
+                                    <div class="text-right border-l pl-3.5" style="border-color:rgba(139,92,246,0.25);">
+                                        <div class="text-xs font-bold text-white font-serif">3+ Years</div>
+                                        <div class="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">25+ Projects</div>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +196,7 @@
 
                         <!-- Floating glow ring behind card -->
                         <div class="absolute inset-0 -z-10 rounded-3xl"
-                            style="box-shadow:0 0 80px rgba(139,92,246,0.25);transform:scale(1.05);"></div>
+                            style="box-shadow:0 0 80px rgba(139,92,246,0.22);transform:scale(1.04);"></div>
                     </div>
                 </div>
             </div>
@@ -869,7 +857,7 @@ const ownerInitials = computed(() =>
 )
 const homeAvatarLoadFailed = ref(false)
 const homeAvatarUrl = computed(() =>
-    settings.value['avatar_url'] || (auth.isAdmin ? auth.user?.profile_image?.trim?.() || '' : '') || '/images/pial-mahmud.jpg'
+    settings.value['avatar_url'] || settings.value['about_image'] || auth.user?.profile_image?.trim?.() || '/images/pial-mahmud-about.jpg'
 )
 
 watch(homeAvatarUrl, () => {
