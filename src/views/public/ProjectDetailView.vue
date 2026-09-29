@@ -78,8 +78,8 @@
                     </div>
 
                     <!-- Title -->
-                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(28px,4.5vw,52px);font-family:'Georgia',serif;
-            letter-spacing:-.5px;max-width:760px;">
+                    <h1 class="font-bold text-white leading-tight mb-5" style="font-size:clamp(26px,3.6vw,44px);font-family:'Georgia',serif;
+            letter-spacing:-.5px;max-width:920px;line-height:1.25;">
                         {{ project.title }}
                     </h1>
 
