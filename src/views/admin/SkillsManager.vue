@@ -172,28 +172,31 @@
 
         <!-- Modal -->
         <transition name="modal">
-            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
-                style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="modal.show = false">
-                <div class="rounded-2xl border w-full max-w-md shadow-2xl"
-                    style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:#241730;">
-                        <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
-                            {{ modal.editing ? 'Edit Skill' : 'Add Skill' }}
+            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6"
+                style="background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
+                <div class="rounded-3xl border w-full max-w-md shadow-2xl max-h-[88vh] flex flex-col overflow-hidden transition-all animate-in zoom-in-95 duration-200"
+                    style="background:#120E1C;border-color:rgba(139, 92, 246, 0.35);box-shadow:0 25px 60px -15px rgba(0,0,0,0.9), 0 0 40px rgba(139,92,246,0.2);">
+                    
+                    <!-- Fixed Header -->
+                    <div class="flex items-center justify-between px-7 py-5 border-b shrink-0"
+                        style="border-color:rgba(139, 92, 246, 0.15);background:#120E1C;">
+                        <h3 class="font-serif text-xl font-bold text-white">
+                            {{ modal.editing ? 'Edit Skill & Tech' : 'Add New Skill' }}
                         </h3>
                         <button @click="modal.show = false"
-                            class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"
-                            style="color:#475569;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white border-0 bg-transparent cursor-pointer">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
                     </div>
-                    <div class="p-6 space-y-4">
-                        <div v-for="f in skillFields" :key="f.key">
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">
+
+                    <!-- Scrollable Body -->
+                    <div class="p-7 space-y-5 overflow-y-auto flex-1 custom-scrollbar">
+                        <div v-for="f in skillFields" :key="f.key" class="space-y-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">
                                 {{ f.label }}
                                 <span v-if="f.key === 'percentage'" style="color:#C084FC;">
                                     — {{ form.percentage }}%
@@ -201,31 +204,33 @@
                             </label>
                             <input v-model="form[f.key]" :type="f.type" :placeholder="f.placeholder" :min="f.min"
                                 :max="f.max" :step="f.step"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
                                 :class="f.type === 'range' ? 'accent-violet-500' : ''" :style="f.type === 'range'
                                     ? 'background:transparent;border:none;padding:8px 0;'
-                                    : 'background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;'"
-                                onfocus="if(this.type!=='range'){this.style.borderColor='#8B5CF6'}"
-                                onblur="if(this.type!=='range'){this.style.borderColor='#3B2A5A'}" />
+                                    : 'background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;'" />
                             <!-- Range preview bar -->
-                            <div v-if="f.type === 'range'" class="w-full h-1.5 rounded-full mt-1 overflow-hidden"
+                            <div v-if="f.type === 'range'" class="w-full h-2 rounded-full mt-1 overflow-hidden"
                                 style="background:#180F28;">
-                                <div class="h-1.5 rounded-full" :style="{
+                                <div class="h-2 rounded-full transition-all duration-300" :style="{
                                     width: form.percentage + '%',
-                                    background: 'linear-gradient(90deg,#8B5CF6,#C084FC)'
+                                    background: 'linear-gradient(90deg,#8B5CF6,#C084FC)',
+                                    boxShadow: '0 0 10px rgba(139, 92, 246, 0.5)'
                                 }"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex gap-3 px-6 pb-6">
-                        <button @click="saveSkill" :disabled="saving" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
-                            transition-all hover:scale-105 disabled:opacity-50"
-                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
-                            {{ saving ? 'Saving...' : 'Save Skill' }}
+
+                    <!-- Fixed Sticky Action Footer -->
+                    <div class="flex items-center gap-4 px-7 py-4 border-t shrink-0 bg-[#120E1C]"
+                        style="border-color:rgba(139, 92, 246, 0.15);box-shadow:0 -10px 25px rgba(0,0,0,0.5);">
+                        <button @click="saveSkill" :disabled="saving" class="flex-1 py-3.5 text-white font-bold rounded-2xl text-sm
+                            transition-all hover:scale-[1.01] active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer border-0"
+                            style="background:#8B5CF6;box-shadow:0 8px 20px -4px #8B5CF650;">
+                            <span>{{ saving ? 'Saving...' : 'Save Skill' }}</span>
                         </button>
                         <button @click="modal.show = false"
-                            class="flex-1 py-3 rounded-xl text-sm border hover:bg-white/5"
-                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                            class="px-7 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5 cursor-pointer"
+                            style="border-color:rgba(139, 92, 246, 0.25);color:#C9B9E8;background:transparent;">
                             Cancel
                         </button>
                     </div>

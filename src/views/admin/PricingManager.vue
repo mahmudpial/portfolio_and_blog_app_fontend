@@ -91,58 +91,60 @@
 
         <!-- Editor Modal -->
         <transition name="modal">
-            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
+            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6"
                 style="background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
-                <div class="rounded-3xl border w-full max-w-xl shadow-2xl transition-all animate-in zoom-in-95 duration-200"
-                    style="background:#120E1C;border-color:rgba(139, 92, 246, 0.3);">
-                    <div class="flex items-center justify-between px-8 py-6 border-b sticky top-0 z-10"
-                        style="border-color:rgba(139, 92, 246, 0.1);background:#120E1C;">
-                        <h3 class="font-serif text-2xl font-bold text-white">
-                            {{ modal.editing ? 'Refine Plan' : 'New Tier' }}
+                <div class="rounded-3xl border w-full max-w-xl shadow-2xl max-h-[88vh] flex flex-col overflow-hidden transition-all animate-in zoom-in-95 duration-200"
+                    style="background:#120E1C;border-color:rgba(139, 92, 246, 0.35);box-shadow:0 25px 60px -15px rgba(0,0,0,0.9), 0 0 40px rgba(139,92,246,0.2);">
+                    
+                    <!-- Fixed Header -->
+                    <div class="flex items-center justify-between px-7 py-5 border-b shrink-0"
+                        style="border-color:rgba(139, 92, 246, 0.15);background:#120E1C;">
+                        <h3 class="font-serif text-xl font-bold text-white">
+                            {{ modal.editing ? 'Refine Pricing Plan' : 'New Pricing Plan' }}
                         </h3>
                         <button @click="modal.show = false"
-                            class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white border-0 bg-transparent cursor-pointer">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
                     </div>
-                    <div class="p-8 space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Scrollable Body -->
+                    <div class="p-7 space-y-5 overflow-y-auto flex-1 custom-scrollbar">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Plan Name</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Plan Name *</label>
                                 <input v-model="form.name" type="text" placeholder="e.g. Professional"
                                     class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
-                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
-                                    onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Price</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Price *</label>
                                 <div class="flex gap-2">
                                     <span class="flex items-center justify-center px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-bold">$</span>
-                                    <input v-model="form.price" type="text" placeholder="49"
+                                    <input v-model="form.price" type="text" placeholder="499"
                                         class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
-                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
-                                        onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'" />
+                                        style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
                                 </div>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Duration</label>
-                                <select v-model="form.duration" class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border appearance-none"
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Billing Frequency</label>
+                                <select v-model="form.duration" class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border cursor-pointer"
                                     style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;">
-                                    <option value="month">Monthly</option>
-                                    <option value="year">Yearly</option>
-                                    <option value="project">Per Project</option>
-                                    <option value="hour">Hourly</option>
+                                    <option value="month" style="background:#120E1C;">Monthly</option>
+                                    <option value="year" style="background:#120E1C;">Yearly</option>
+                                    <option value="project" style="background:#120E1C;">Per Project</option>
+                                    <option value="hour" style="background:#120E1C;">Hourly</option>
                                 </select>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Display Priority</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Display Priority</label>
                                 <input v-model="form.order" type="number"
                                     class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
                                     style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
@@ -150,14 +152,13 @@
                         </div>
 
                         <div class="space-y-2">
-                            <label class="block text-xs font-bold uppercase tracking-wider opacity-50">Key Features (One per line)</label>
-                            <textarea v-model="featureText" rows="4" placeholder="Full Responsive Design&#10;SEO Optimization&#10;24/7 Support"
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Key Features (One per line)</label>
+                            <textarea v-model="featureText" rows="4" placeholder="Multi-Tenant Architecture&#10;RBAC &amp; Granular Permissions&#10;RESTful API Endpoints&#10;24/7 Security Audit Support"
                                 class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border resize-none"
-                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='rgba(139, 92, 246, 0.2)'"></textarea>
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;"></textarea>
                         </div>
 
-                        <div class="flex items-center gap-3 pt-2">
+                        <div class="flex items-center gap-3 pt-1">
                             <div class="relative flex items-center">
                                 <input type="checkbox" id="popular" v-model="form.is_popular" class="sr-only" />
                                 <div class="w-10 h-6 bg-white/10 rounded-full transition-colors cursor-pointer"
@@ -169,19 +170,22 @@
                             </div>
                             <label for="popular" class="text-sm font-medium cursor-pointer text-white/80"
                                 @click="form.is_popular = !form.is_popular">
-                                Set as Most Popular
+                                Highlight as Most Popular / Recommended Plan
                             </label>
                         </div>
                     </div>
-                    <div class="flex gap-4 px-8 pb-8">
-                        <button @click="savePlan" :disabled="saving" class="flex-1 py-4 text-white font-bold rounded-2xl text-sm
-                            transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
-                            style="background:#8B5CF6;box-shadow:0 10px 20px -5px #8B5CF640;">
-                            {{ saving ? 'Saving...' : (modal.editing ? 'Update Plan' : 'Create Plan') }}
+
+                    <!-- Fixed Sticky Action Footer -->
+                    <div class="flex items-center gap-4 px-7 py-4 border-t shrink-0 bg-[#120E1C]"
+                        style="border-color:rgba(139, 92, 246, 0.15);box-shadow:0 -10px 25px rgba(0,0,0,0.5);">
+                        <button @click="savePlan" :disabled="saving" class="flex-1 py-3.5 text-white font-bold rounded-2xl text-sm
+                            transition-all hover:scale-[1.01] active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer border-0"
+                            style="background:#8B5CF6;box-shadow:0 8px 20px -4px #8B5CF650;">
+                            <span>{{ saving ? 'Saving...' : (modal.editing ? 'Update Plan' : 'Create Plan') }}</span>
                         </button>
                         <button @click="modal.show = false"
-                            class="px-8 py-4 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5"
-                            style="border-color:rgba(139, 92, 246, 0.2);color:#C9B9E8;">
+                            class="px-7 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5 cursor-pointer"
+                            style="border-color:rgba(139, 92, 246, 0.25);color:#C9B9E8;background:transparent;">
                             Cancel
                         </button>
                     </div>

@@ -171,175 +171,154 @@
 
         <!-- Modal -->
         <transition name="modal">
-            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 px-4"
-                style="background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);" @click.self="modal.show = false">
-                <div class="rounded-2xl border w-full max-w-2xl shadow-2xl max-h-screen overflow-y-auto"
-                    style="background:#120E1C;border-color:#3B2A5A;">
-                    <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10"
-                        style="border-color:#241730;background:#120E1C;">
-                        <h3 class="font-bold text-white text-lg" style="font-family:'Georgia',serif;">
-                            {{ modal.editing ? 'Edit Post' : 'New Post' }}
-                        </h3>
+            <div v-if="modal.show" class="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6"
+                style="background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
+                <div class="rounded-3xl border w-full max-w-3xl shadow-2xl max-h-[88vh] flex flex-col overflow-hidden transition-all animate-in zoom-in-95 duration-200"
+                    style="background:#120E1C;border-color:rgba(139, 92, 246, 0.35);box-shadow:0 25px 60px -15px rgba(0,0,0,0.9), 0 0 40px rgba(139,92,246,0.2);">
+                    
+                    <!-- Fixed Header -->
+                    <div class="flex items-center justify-between px-7 py-5 border-b shrink-0"
+                        style="border-color:rgba(139, 92, 246, 0.15);background:#120E1C;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl flex items-center justify-center text-violet-300"
+                                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-white">
+                                {{ modal.editing ? 'Edit Article & Post' : 'Create New Article' }}
+                            </h3>
+                        </div>
                         <button @click="modal.show = false"
-                            class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/5"
-                            style="color:#475569;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white/40 hover:text-white border-0 bg-transparent cursor-pointer">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
                     </div>
-                    <div class="p-6 space-y-4">
+
+                    <!-- Scrollable Body -->
+                    <div class="p-7 space-y-5 overflow-y-auto flex-1 custom-scrollbar">
                         <!-- Title -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Title</label>
-                            <input v-model="form.title" type="text" placeholder="Post title..."
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Article Title *</label>
+                            <input v-model="form.title" type="text" placeholder="e.g. Building Resilient Multi-Tenant Architectures in Laravel"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
                         </div>
+
                         <!-- Category + Status -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Category</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Category</label>
                                 <input v-model="categoryQuery" @input="syncCategorySelection" list="post-categories"
                                     type="text" placeholder="Select or type a category"
-                                    class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                    onfocus="this.style.borderColor='#8B5CF6'"
-                                    onblur="this.style.borderColor='#3B2A5A'" />
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
                                 <datalist id="post-categories">
                                     <option v-for="cat in categories" :key="cat.id" :value="cat.name" />
                                 </datalist>
-                                <div class="flex flex-wrap gap-2 mt-2" v-if="categories.length">
+                                <div class="flex flex-wrap gap-1.5 mt-2" v-if="categories.length">
                                     <button v-for="cat in categories.slice(0, 6)" :key="`quick-${cat.id}`" type="button"
                                         @click="selectCategory(cat)"
-                                        class="px-2.5 py-1 rounded-full text-xs border transition-all hover:scale-105"
+                                        class="px-2.5 py-1 rounded-full text-[11px] border transition-all hover:scale-105 cursor-pointer"
                                         :style="Number(form.category_id) === Number(cat.id)
                                             ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
                                             : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'">
                                         {{ cat.name }}
                                     </button>
                                 </div>
-                                <p class="text-xs mt-2" style="color:#475569;font-family:system-ui;">
-                                    You can type to search, or click a suggested category.
-                                </p>
                             </div>
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Status</label>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Publish Status</label>
                                 <select v-model="form.status"
-                                    class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;">
-                                    <option value="draft" style="background:#120E1C;">Draft</option>
-                                    <option value="published" style="background:#120E1C;">Published</option>
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border cursor-pointer"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;">
+                                    <option value="draft" style="background:#120E1C;">Draft (Hidden)</option>
+                                    <option value="published" style="background:#120E1C;">Published (Public Live)</option>
                                 </select>
                             </div>
                         </div>
-                        <!-- Hero Image URL -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Hero Image URL (Hero
-                                Section Background)</label>
-                            <input v-model="form.hero_image" type="text" placeholder="https://... (for page header)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
+
+                        <!-- Hero Image & Article Image -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Hero Header Image URL</label>
+                                <input v-model="form.hero_image" type="text" placeholder="https://... (banner image)"
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Article Thumbnail URL</label>
+                                <input v-model="form.image" type="text" placeholder="https://... (card thumbnail)"
+                                    class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                    style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
+                            </div>
                         </div>
-                        <!-- Hero Image URL -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Hero Image URL (Page
-                                Header Background)</label>
-                            <input v-model="form.hero_image" type="text" placeholder="https://... (hero section)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                        </div>
-                        <!-- Article Image URL -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Article Image URL
-                                (Content Body)</label>
-                            <input v-model="form.image" type="text" placeholder="https://... (article content)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                        </div>
+
                         <!-- Tags -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-3"
-                                style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Tags</label>
-                            <input v-model="tagQuery" type="text" placeholder="Search tags..."
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none mb-3"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'" onblur="this.style.borderColor='#3B2A5A'" />
-                            <div v-if="form.tags.length" class="flex flex-wrap gap-2 mb-3">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Tags</label>
+                            <input v-model="tagQuery" type="text" placeholder="Search tags (e.g. Laravel, Security, Architecture)..."
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all border"
+                                style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;" />
+                            <div v-if="form.tags.length" class="flex flex-wrap gap-2 pt-1">
                                 <span v-for="tagId in form.tags" :key="`selected-${tagId}`"
-                                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs border"
-                                    style="background:#8B5CF615;border-color:#8B5CF630;color:#C084FC;font-family:system-ui;">
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs border"
+                                    style="background:#8B5CF615;border-color:#8B5CF640;color:#C084FC;">
                                     # {{tags.find(tag => Number(tag.id) === Number(tagId))?.name || tagId}}
-                                    <button type="button" @click="toggleTag(tagId)" style="color:inherit;">×</button>
+                                    <button type="button" @click="toggleTag(tagId)" class="hover:text-white border-0 bg-transparent cursor-pointer font-bold">×</button>
                                 </span>
                             </div>
-                            <div class="flex flex-wrap gap-2" v-if="filteredTags.length">
-                                <button v-for="tag in filteredTags" :key="tag.id" type="button"
-                                    class="px-3 py-2 rounded-xl border text-xs transition-all hover:scale-105" :style="form.tags.includes(Number(tag.id))
+                            <div class="flex flex-wrap gap-1.5 pt-1" v-if="filteredTags.length">
+                                <button v-for="tag in filteredTags.slice(0, 10)" :key="tag.id" type="button"
+                                    class="px-2.5 py-1 rounded-xl border text-xs transition-all hover:scale-105 cursor-pointer" :style="form.tags.includes(Number(tag.id))
                                         ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
                                         : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'"
-                                    style="font-family:system-ui;" @click="toggleTag(tag.id)">
+                                    @click="toggleTag(tag.id)">
                                     # {{ tag.name }}
                                 </button>
                             </div>
-                            <p v-else class="text-xs" style="color:#475569;font-family:system-ui;">
-                                No tags found. Try a different search or check the tags API.
-                            </p>
-                            <p class="text-xs mt-2" style="color:#475569;font-family:system-ui;">
-                                Click tags to add or remove them from the post.
-                            </p>
-                            <div v-if="!tags.length" class="text-xs mt-2" style="color:#f87171;font-family:system-ui;">
-                                Tags could not be loaded from the API.
-                            </div>
                         </div>
-                        <!-- Body -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <label class="block text-xs font-semibold uppercase tracking-wider"
-                                    style="color:#475569;font-family:system-ui;letter-spacing:.12em;">Content</label>
+
+                        <!-- Content Body -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-200/60">Article Content (HTML / Markdown Supported)</label>
                                 <button type="button" @click="showGuide = !showGuide"
-                                    class="text-xs px-2 py-1 rounded border transition-all hover:scale-105" :style="showGuide
+                                    class="text-xs px-3 py-1 rounded-xl border transition-all hover:scale-105 cursor-pointer" :style="showGuide
                                         ? 'background:#8B5CF615;border-color:#8B5CF6;color:#C084FC;'
-                                        : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'"
-                                    style="font-family:system-ui;">
-                                    {{ showGuide ? '✓ Guide Open' : '📝 Show Guide' }}
+                                        : 'background:#0A0610;border-color:#3B2A5A;color:#C9B9E8;'">
+                                    {{ showGuide ? '✓ Guide Open' : '📝 Formatting Guide' }}
                                 </button>
                             </div>
-                            <textarea v-model="form.body" rows="10"
-                                placeholder="Write your post content here... (HTML supported)"
-                                class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none" style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;
-                                font-family:'Courier New',monospace;line-height:1.7;" onfocus="this.style.borderColor='#8B5CF6'"
-                                onblur="this.style.borderColor='#3B2A5A'"></textarea>
-                            <p class="text-xs mt-2" style="color:#475569;font-family:system-us;margin-bottom:1rem;">
-                                HTML is supported. {{ form.body.length }} characters.
-                            </p>
+                            <textarea v-model="form.body" rows="9"
+                                placeholder="Write your post content here... (HTML and code blocks supported)"
+                                class="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none resize-y border" style="background:#0A0610;border-color:rgba(139, 92, 246, 0.2);color:#fff;
+                                font-family:monospace;line-height:1.7;"></textarea>
+                            
                             <!-- Formatting Guide -->
                             <transition name="slide">
                                 <FormattingGuide v-if="showGuide" />
                             </transition>
                         </div>
                     </div>
-                    <div class="flex gap-3 px-6 pb-6">
-                        <button @click="savePost" :disabled="saving" class="flex-1 py-3 text-white font-semibold rounded-xl text-sm
-                            transition-all hover:scale-105 disabled:opacity-50"
-                            style="background:#8B5CF6;box-shadow:0 0 16px #8B5CF635;font-family:system-ui;">
-                            {{ saving ? 'Saving...' : modal.editing ? 'Update Post' : 'Publish Post' }}
+
+                    <!-- Fixed Sticky Action Footer -->
+                    <div class="flex items-center gap-4 px-7 py-4 border-t shrink-0 bg-[#120E1C]"
+                        style="border-color:rgba(139, 92, 246, 0.15);box-shadow:0 -10px 25px rgba(0,0,0,0.5);">
+                        <button @click="savePost" :disabled="saving" class="flex-1 py-3.5 text-white font-bold rounded-2xl text-sm
+                            transition-all hover:scale-[1.01] active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer border-0"
+                            style="background:#8B5CF6;box-shadow:0 8px 20px -4px #8B5CF650;">
+                            <span>{{ saving ? 'Saving...' : modal.editing ? 'Update Post' : 'Publish Post' }}</span>
                         </button>
                         <button @click="modal.show = false"
-                            class="flex-1 py-3 rounded-xl text-sm border hover:bg-white/5"
-                            style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
+                            class="px-7 py-3.5 rounded-2xl text-sm font-bold border transition-all hover:bg-white/5 cursor-pointer"
+                            style="border-color:rgba(139, 92, 246, 0.25);color:#C9B9E8;background:transparent;">
                             Cancel
                         </button>
                     </div>
