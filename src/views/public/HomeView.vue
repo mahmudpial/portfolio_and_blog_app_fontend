@@ -797,9 +797,34 @@
     border-color: #8B5CF640 !important;
 }
 
+.skill-chip {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
 .skill-chip:hover {
-    border-color: #8B5CF640 !important;
-    box-shadow: 0 0 12px #8B5CF610;
+    transform: translateY(-4px) scale(1.03);
+    border-color: rgba(168, 85, 247, 0.8) !important;
+    background: linear-gradient(145deg, #1C1330 0%, #120E1C 100%) !important;
+    box-shadow: 0 12px 30px -5px rgba(139, 92, 246, 0.4), 0 0 20px -3px rgba(168, 85, 247, 0.3) !important;
+}
+
+.skill-chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.65s ease;
+    pointer-events: none;
+}
+
+.skill-chip:hover::before {
+    left: 140%;
 }
 
 /* Social buttons */

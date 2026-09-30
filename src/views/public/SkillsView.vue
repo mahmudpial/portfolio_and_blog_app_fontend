@@ -363,3 +363,46 @@ function displayStatLabel(label) {
     return label
 }
 </script>
+
+<style scoped>
+.skill-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(168, 85, 247, 0.7) !important;
+    background: linear-gradient(145deg, #1C1330 0%, #120E1C 100%) !important;
+    box-shadow: 0 16px 36px -8px rgba(139, 92, 246, 0.35), 0 0 24px -4px rgba(168, 85, 247, 0.25) !important;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+}
+
+.skill-card:hover::before {
+    left: 140%;
+}
+
+.stat-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168, 85, 247, 0.5) !important;
+    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.25);
+}
+</style>
+
