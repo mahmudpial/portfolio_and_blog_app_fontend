@@ -1,51 +1,52 @@
 <template>
-  <div class="fixed bottom-6 right-6 z-[9999] font-sans select-none print:hidden">
+  <div class="fixed bottom-5 right-5 z-[9999] font-sans select-none print:hidden">
     <!-- Floating Trigger Button -->
     <div v-if="!isOpen" class="relative group">
-      <!-- Glow effect -->
+      <!-- Subtle ambient glow -->
       <div
-        class="absolute -inset-1 rounded-full opacity-75 blur-md transition duration-500 group-hover:opacity-100 group-hover:scale-110"
+        class="absolute -inset-0.5 rounded-full opacity-60 blur-sm transition duration-300 group-hover:opacity-100"
         style="background: linear-gradient(135deg, var(--brand-primary, #8B5CF6), var(--brand-secondary, #EC4899));"
       ></div>
 
       <button
         @click="toggleChat"
-        class="relative flex items-center gap-3 px-5 py-3.5 rounded-full shadow-2xl transition-all duration-300 transform group-hover:scale-105 active:scale-95 text-white font-semibold cursor-pointer border"
+        class="relative flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-105 active:scale-95 text-white cursor-pointer border"
         :style="{
-          background: 'linear-gradient(135deg, #1E1035 0%, #120E1C 100%)',
-          borderColor: 'var(--brand-border, rgba(139, 92, 246, 0.4))',
-          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px var(--brand-glow, rgba(139, 92, 246, 0.35))'
+          background: 'linear-gradient(135deg, rgba(30, 16, 53, 0.95) 0%, rgba(18, 14, 28, 0.95) 100%)',
+          borderColor: 'var(--brand-border, rgba(139, 92, 246, 0.35))',
+          boxShadow: '0 4px 15px -2px rgba(0, 0, 0, 0.5), 0 0 10px var(--brand-glow, rgba(139, 92, 246, 0.25))'
         }"
         aria-label="Ask Pial AI Assistant"
       >
         <!-- Animated AI Sparkle Avatar -->
-        <div class="relative w-7 h-7 rounded-full flex items-center justify-center overflow-hidden"
+        <div class="w-5 h-5 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0"
           style="background: linear-gradient(135deg, var(--brand-primary, #8B5CF6), var(--brand-secondary, #EC4899));">
-          <svg class="w-4 h-4 text-white animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+          <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2L14.4 7.6L20 10L14.4 12.4L12 18L9.6 12.4L4 10L9.6 7.6L12 2Z" />
           </svg>
         </div>
 
-        <span class="text-sm font-medium tracking-wide">Ask Pial AI</span>
+        <span class="text-xs font-semibold tracking-wide hidden xs:inline sm:inline">Ask AI</span>
+        <span class="text-xs font-semibold tracking-wide hidden md:inline">Assistant</span>
 
         <!-- Online Pulse Dot -->
-        <span class="relative flex h-2.5 w-2.5">
+        <span class="relative flex h-2 w-2 ml-0.5">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
       </button>
 
-      <!-- First-time Tooltip Badge -->
+      <!-- First-time Tooltip Badge (Compact & Professional) -->
       <div
         v-if="showWelcomeBadge"
-        class="absolute bottom-16 right-0 w-64 p-3 rounded-2xl shadow-xl text-xs backdrop-blur-xl border transition-all animate-bounce"
-        style="background: rgba(18, 14, 28, 0.95); border-color: var(--brand-border, rgba(139, 92, 246, 0.4)); color: #E2E8F0;"
+        class="absolute bottom-13 right-0 w-56 p-2.5 rounded-xl shadow-xl text-[11px] backdrop-blur-xl border transition-all"
+        style="background: rgba(18, 14, 28, 0.95); border-color: var(--brand-border, rgba(139, 92, 246, 0.35)); color: #E2E8F0;"
       >
         <div class="flex items-start justify-between gap-2">
-          <p class="m-0 leading-relaxed font-normal">
-            👋 Have questions about Pial's stack, projects, or pricing? <strong class="text-violet-400">Ask me anything!</strong>
+          <p class="m-0 leading-snug font-normal">
+            👋 Ask about Pial's <strong class="text-violet-400 font-semibold">stack, SaaS projects</strong> or <strong class="text-violet-400 font-semibold">rates</strong>!
           </p>
-          <button @click.stop="showWelcomeBadge = false" class="text-slate-400 hover:text-white p-0.5 cursor-pointer">✕</button>
+          <button @click.stop="showWelcomeBadge = false" class="text-slate-400 hover:text-white p-0.5 cursor-pointer leading-none">✕</button>
         </div>
       </div>
     </div>
