@@ -60,9 +60,13 @@
                             <!-- Skills -->
                             <RouterLink to="/skills" @click="servicesMenuOpen = false"
                                 class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
-                                    style="background:rgba(139, 92, 246, 0.15); border:1px solid rgba(139, 92, 246, 0.3); color:#C084FC;">
-                                    ⚡
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-transform group-hover:scale-110"
+                                    style="background:rgba(139, 92, 246, 0.15); border:1px solid rgba(139, 92, 246, 0.35); color:#C084FC; box-shadow:0 0 14px rgba(139,92,246,0.2);">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>
                                 </div>
                                 <div>
                                     <div class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">
@@ -77,9 +81,13 @@
                             <!-- Services -->
                             <RouterLink to="/#services" @click="servicesMenuOpen = false"
                                 class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
-                                    style="background:rgba(6, 182, 212, 0.15); border:1px solid rgba(6, 182, 212, 0.3); color:#38BDF8;">
-                                    🛠️
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-transform group-hover:scale-110"
+                                    style="background:rgba(6, 182, 212, 0.15); border:1px solid rgba(6, 182, 212, 0.35); color:#38BDF8; box-shadow:0 0 14px rgba(6,182,212,0.2);">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
                                 </div>
                                 <div>
                                     <div class="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
@@ -94,9 +102,13 @@
                             <!-- Pricing -->
                             <RouterLink to="/pricing" @click="servicesMenuOpen = false"
                                 class="flex items-start gap-3 p-2.5 rounded-xl transition-all hover:bg-white/10 group text-decoration-none">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
-                                    style="background:rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.3); color:#34D399;">
-                                    💎
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-transform group-hover:scale-110"
+                                    style="background:rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.35); color:#34D399; box-shadow:0 0 14px rgba(16,185,129,0.2);">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 3h12l4 6-10 12L2 9l4-6z"></path>
+                                        <path d="M2 9h20"></path>
+                                        <path d="M12 21L8 9l4-6 4 6-4 12z"></path>
+                                    </svg>
                                 </div>
                                 <div>
                                     <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
@@ -302,15 +314,39 @@
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </button>
-                        <div v-if="mobileServicesOpen" class="pl-8 pr-4 space-y-1 mt-1 border-l-2 ml-4 border-purple-500/20">
-                            <RouterLink to="/skills" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
-                                <span>⚡ Skills Matrix</span>
+                        <div v-if="mobileServicesOpen" class="pl-6 pr-4 space-y-2 mt-2 border-l ml-4" style="border-color:rgba(139,92,246,0.25);">
+                            <RouterLink to="/skills" @click="menuOpen = false" class="flex items-center gap-2.5 py-1.5 text-xs font-semibold text-purple-200 hover:text-white text-decoration-none group">
+                                <div class="w-6 h-6 rounded-lg flex items-center justify-center text-violet-400 shrink-0"
+                                    style="background:rgba(139,92,246,0.15); border:1px solid rgba(139,92,246,0.3);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Skills Matrix</span>
                             </RouterLink>
-                            <RouterLink to="/#services" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
-                                <span>🛠️ Service Offerings</span>
+                            <RouterLink to="/#services" @click="menuOpen = false" class="flex items-center gap-2.5 py-1.5 text-xs font-semibold text-cyan-200 hover:text-white text-decoration-none group">
+                                <div class="w-6 h-6 rounded-lg flex items-center justify-center text-cyan-400 shrink-0"
+                                    style="background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                </div>
+                                <span>Service Offerings</span>
                             </RouterLink>
-                            <RouterLink to="/pricing" @click="menuOpen = false" class="flex items-center gap-2 py-2 text-xs font-semibold text-purple-300 hover:text-white text-decoration-none">
-                                <span>💎 Pricing &amp; Plans</span>
+                            <RouterLink to="/pricing" @click="menuOpen = false" class="flex items-center gap-2.5 py-1.5 text-xs font-semibold text-emerald-200 hover:text-white text-decoration-none group">
+                                <div class="w-6 h-6 rounded-lg flex items-center justify-center text-emerald-400 shrink-0"
+                                    style="background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 3h12l4 6-10 12L2 9l4-6z"></path>
+                                        <path d="M2 9h20"></path>
+                                        <path d="M12 21L8 9l4-6 4 6-4 12z"></path>
+                                    </svg>
+                                </div>
+                                <span>Pricing &amp; Plans</span>
                             </RouterLink>
                         </div>
                     </div>
