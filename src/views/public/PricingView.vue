@@ -45,9 +45,12 @@
         </section>
 
         <!-- ── PRICING CARDS SECTION ────────────────────────────── -->
-        <div class="px-6 md:px-16 pb-20">
+        <div class="px-6 md:px-16 pb-12">
             <PricingSection :show-header="false" :is-standalone-page="true" />
         </div>
+
+        <!-- ── INTERACTIVE PROJECT ESTIMATOR ────────────────────── -->
+        <ProjectEstimator />
 
         <!-- ── FAQ SECTION ──────────────────────────────────────── -->
         <section class="py-20 px-6 md:px-16" style="border-top:1px solid #241730;background:#0D0814;">
@@ -120,6 +123,7 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import PricingSection from '@/components/PricingSection.vue'
+import ProjectEstimator from '@/components/ProjectEstimator.vue'
 
 const openFaq = ref(0)
 
