@@ -16,7 +16,7 @@
           borderColor: 'var(--brand-border, rgba(139, 92, 246, 0.35))',
           boxShadow: '0 4px 15px -2px rgba(0, 0, 0, 0.6), 0 0 12px var(--brand-glow, rgba(139, 92, 246, 0.25))'
         }"
-        aria-label="Ask Pial AI Assistant"
+        aria-label="Ask AI"
       >
         <!-- Animated AI Sparkle Avatar -->
         <div
