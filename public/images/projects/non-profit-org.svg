@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ngoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071210" />
+      <stop offset="50%" stop-color="#0E241F" />
+      <stop offset="100%" stop-color="#141E26" />
+    </linearGradient>
+
+    <linearGradient id="ngoEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="ngoCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142A24" />
+      <stop offset="100%" stop-color="#0D1E1A" />
+    </linearGradient>
+
+    <filter id="ngoShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#ngoBg)" />
+
+  <g transform="translate(40, 30)">
+    <rect width="1120" height="615" rx="16" fill="#0D1E1A" stroke="#1F473C" stroke-width="1.5" filter="url(#ngoShadow)" />
+
+    <!-- Window Top -->
+    <rect width="1120" height="46" rx="16" fill="#071310" />
+    <path d="M0 46 L1120 46" stroke="#15332B" stroke-width="1" />
+
+    <circle cx="24" cy="23" r="6" fill="#EF4444" opacity="0.8" />
+    <circle cx="44" cy="23" r="6" fill="#F59E0B" opacity="0.8" />
+    <circle cx="64" cy="23" r="6" fill="#10B981" opacity="0.8" />
+
+    <rect x="350" y="10" width="420" height="26" rx="8" fill="#0E2620" stroke="#1C4B3E" stroke-width="1" />
+    <text x="375" y="27" fill="#6EE7B7" font-family="monospace" font-size="11">🌱 https://hopeforward.ngo/campaigns/flood-relief-2026</text>
+
+    <!-- Header -->
+    <g transform="translate(30, 65)">
+      <rect width="36" height="36" rx="10" fill="url(#ngoEmerald)" />
+      <text x="18" y="24" fill="#FFFFFF" font-size="16" text-anchor="middle">🤝</text>
+      <text x="48" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="800">HopeForward <tspan fill="#34D399">Foundation</tspan></text>
+      <text x="48" y="34" fill="#94A3B8" font-family="sans-serif" font-size="10">GLOBAL CHARITY, EDUCATION &amp; DISASTER RELIEF PLATFORM</text>
+
+      <rect x="910" y="4" width="150" height="32" rx="8" fill="url(#ngoEmerald)" />
+      <text x="985" y="24" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">❤️ Donate Now (bKash/Card)</text>
+    </g>
+
+    <!-- Main Campaign Banner -->
+    <g transform="translate(30, 120)">
+      <rect width="1060" height="200" rx="14" fill="url(#ngoCard)" stroke="#1F473C" stroke-width="1" />
+      
+      <g transform="translate(30, 30)">
+        <rect width="120" height="24" rx="6" fill="#064E3B" />
+        <text x="60" y="16" fill="#34D399" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">URGENT RELIEF MISSION</text>
+        <text x="0" y="60" fill="#FFFFFF" font-family="sans-serif" font-size="22" font-weight="800">Sylhet &amp; Sunamganj Flood Emergency Response 2026</text>
+        <text x="0" y="85" fill="#A7F3D0" font-family="sans-serif" font-size="12">Providing clean water, dry food ration packs, and emergency medical mobile clinics to 15,000+ families.</text>
+        
+        <!-- Progress Bar -->
+        <g transform="translate(0, 110)">
+          <text x="0" y="0" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">৳ 4,280,000 Raised <tspan fill="#94A3B8" font-size="12">of ৳ 5,000,000 Goal (85.6%)</tspan></text>
+          <text x="1000" y="0" fill="#34D399" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="end">1,842 Donors</text>
+
+          <rect x="0" y="10" width="1000" height="12" rx="6" fill="#0A1815" />
+          <rect x="0" y="10" width="856" height="12" rx="6" fill="url(#ngoEmerald)" />
+        </g>
+      </g>
+    </g>
+
+    <!-- Bottom 3 Cause Cards -->
+    <g transform="translate(30, 340)">
+      <!-- Card 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="335" height="235" rx="12" fill="url(#ngoCard)" stroke="#1F473C" stroke-width="1" />
+        <text x="20" y="30" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">🎒 Orphan Schooling &amp; Books</text>
+        <text x="20" y="55" fill="#94A3B8" font-family="sans-serif" font-size="11">Providing year-long STEM tuition, school uniforms, and nutritious mid-day meals.</text>
+        <text x="20" y="180" fill="#34D399" font-family="sans-serif" font-size="13" font-weight="700">৳ 850,000 Raised</text>
+        <rect x="20" y="195" width="295" height="6" rx="3" fill="#0A1815" />
+        <rect x="20" y="195" width="240" height="6" rx="3" fill="#10B981" />
+      </g>
+
+      <!-- Card 2 -->
+      <g transform="translate(362, 0)">
+        <rect width="335" height="235" rx="12" fill="url(#ngoCard)" stroke="#1F473C" stroke-width="1" />
+        <text x="20" y="30" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">💧 Deep Tube-Well Clean Water</text>
+        <text x="20" y="55" fill="#94A3B8" font-family="sans-serif" font-size="11">Installing arsenic-free deep solar pumps across coastal villages in Satkhira.</text>
+        <text x="20" y="180" fill="#38BDF8" font-family="sans-serif" font-size="13" font-weight="700">৳ 1,420,000 Raised</text>
+        <rect x="20" y="195" width="295" height="6" rx="3" fill="#0A1815" />
+        <rect x="20" y="195" width="270" height="6" rx="3" fill="#0284C7" />
+      </g>
+
+      <!-- Card 3 -->
+      <g transform="translate(725, 0)">
+        <rect width="335" height="235" rx="12" fill="url(#ngoCard)" stroke="#1F473C" stroke-width="1" />
+        <text x="20" y="30" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">🏥 Free Eye Surgery &amp; Care</text>
+        <text x="20" y="55" fill="#94A3B8" font-family="sans-serif" font-size="11">Restoring vision for 500+ elderly farmers with free cataract laser surgery.</text>
+        <text x="20" y="180" fill="#F59E0B" font-family="sans-serif" font-size="13" font-weight="700">৳ 620,000 Raised</text>
+        <rect x="20" y="195" width="295" height="6" rx="3" fill="#0A1815" />
+        <rect x="20" y="195" width="200" height="6" rx="3" fill="#F59E0B" />
+      </g>
+    </g>
+  </g>
+</svg>

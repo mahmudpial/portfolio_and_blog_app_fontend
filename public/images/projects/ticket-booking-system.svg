@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ticketBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080718" />
+      <stop offset="50%" stop-color="#0E0F2B" />
+      <stop offset="100%" stop-color="#1B0E2E" />
+    </linearGradient>
+
+    <linearGradient id="ticketRose" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="100%" stop-color="#BE123C" />
+    </linearGradient>
+
+    <linearGradient id="ticketCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161738" />
+      <stop offset="100%" stop-color="#0F1027" />
+    </linearGradient>
+
+    <filter id="ticketShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#ticketBg)" />
+
+  <g transform="translate(40, 30)">
+    <rect width="1120" height="615" rx="16" fill="#0F1027" stroke="#2B2657" stroke-width="1.5" filter="url(#ticketShadow)" />
+
+    <!-- Window Bar -->
+    <rect width="1120" height="46" rx="16" fill="#0A091A" />
+    <path d="M0 46 L1120 46" stroke="#1E1C3D" stroke-width="1" />
+
+    <circle cx="24" cy="23" r="6" fill="#EF4444" opacity="0.8" />
+    <circle cx="44" cy="23" r="6" fill="#F59E0B" opacity="0.8" />
+    <circle cx="64" cy="23" r="6" fill="#10B981" opacity="0.8" />
+
+    <rect x="350" y="10" width="420" height="26" rx="8" fill="#151536" stroke="#272757" stroke-width="1" />
+    <text x="375" y="27" fill="#FDA4AF" font-family="monospace" font-size="11">🎟 https://tickets.live/booking/express-train/seat-map</text>
+
+    <!-- Header -->
+    <g transform="translate(30, 65)">
+      <rect width="36" height="36" rx="10" fill="url(#ticketRose)" />
+      <text x="18" y="24" fill="#FFFFFF" font-size="16" text-anchor="middle">🎟</text>
+      <text x="48" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="800">SeatMaster <tspan fill="#F43F5E">Live</tspan></text>
+      <text x="48" y="34" fill="#94A3B8" font-family="sans-serif" font-size="10">REAL-TIME SEAT BOOKING &amp; WEBSOCKET BROADCAST</text>
+
+      <rect x="910" y="4" width="150" height="32" rx="8" fill="#4C0519" stroke="#E11D48" stroke-width="1" />
+      <text x="985" y="24" fill="#FDA4AF" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">⏱ Hold Timer: 08:42</text>
+    </g>
+
+    <!-- Main Seat Booking Grid (Left) & Ticket Summary (Right) -->
+    <g transform="translate(30, 120)">
+      
+      <!-- Seat Map Grid Card -->
+      <g transform="translate(0, 0)">
+        <rect width="700" height="455" rx="14" fill="url(#ticketCard)" stroke="#2B2657" stroke-width="1" />
+        <text x="24" y="28" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">Cox's Bazar Express • Coach B (First Class Air-Conditioned)</text>
+        
+        <!-- Legend -->
+        <g transform="translate(24, 45)">
+          <rect x="0" y="0" width="16" height="16" rx="4" fill="#1E2048" stroke="#373B78" />
+          <text x="24" y="13" fill="#94A3B8" font-family="sans-serif" font-size="11">Available</text>
+
+          <rect x="120" y="0" width="16" height="16" rx="4" fill="#F43F5E" />
+          <text x="144" y="13" fill="#FDA4AF" font-family="sans-serif" font-size="11">Selected (You)</text>
+
+          <rect x="260" y="0" width="16" height="16" rx="4" fill="#334155" />
+          <text x="284" y="13" fill="#64748B" font-family="sans-serif" font-size="11">Booked</text>
+
+          <rect x="380" y="0" width="16" height="16" rx="4" fill="#F59E0B" />
+          <text x="404" y="13" fill="#FDE68A" font-family="sans-serif" font-size="11">Holding (Live)</text>
+        </g>
+
+        <!-- Seat Rows Layout -->
+        <g transform="translate(50, 95)">
+          <!-- Row 1 -->
+          <rect x="0" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="20" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">A1</text>
+          <rect x="50" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="70" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">A2</text>
+          <text x="130" y="25" fill="#475569" font-family="sans-serif" font-size="11" font-weight="700">AISLE</text>
+          <rect x="180" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="200" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">A3</text>
+          <rect x="230" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="250" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">A4</text>
+
+          <!-- Row 2 -->
+          <g transform="translate(0, 55)">
+            <rect x="0" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="20" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">B1</text>
+            <rect x="50" y="0" width="40" height="40" rx="8" fill="#F43F5E" /><text x="70" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">B2</text>
+            <text x="130" y="25" fill="#475569" font-family="sans-serif" font-size="11" font-weight="700">AISLE</text>
+            <rect x="180" y="0" width="40" height="40" rx="8" fill="#F43F5E" /><text x="200" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">B3</text>
+            <rect x="230" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="250" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">B4</text>
+          </g>
+
+          <!-- Row 3 -->
+          <g transform="translate(0, 110)">
+            <rect x="0" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="20" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">C1</text>
+            <rect x="50" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="70" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">C2</text>
+            <text x="130" y="25" fill="#475569" font-family="sans-serif" font-size="11" font-weight="700">AISLE</text>
+            <rect x="180" y="0" width="40" height="40" rx="8" fill="#F59E0B" /><text x="200" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">C3</text>
+            <rect x="230" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="250" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">C4</text>
+          </g>
+
+          <!-- Row 4 -->
+          <g transform="translate(0, 165)">
+            <rect x="0" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="20" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">D1</text>
+            <rect x="50" y="0" width="40" height="40" rx="8" fill="#1E2048" stroke="#373B78" /><text x="70" y="25" fill="#FFFFFF" font-family="sans-serif" font-size="11" text-anchor="middle">D2</text>
+            <text x="130" y="25" fill="#475569" font-family="sans-serif" font-size="11" font-weight="700">AISLE</text>
+            <rect x="180" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="200" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">D3</text>
+            <rect x="230" y="0" width="40" height="40" rx="8" fill="#334155" /><text x="250" y="25" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">D4</text>
+          </g>
+        </g>
+
+        <!-- Live Toast Notification (Bottom Left) -->
+        <g transform="translate(24, 380)">
+          <rect width="650" height="48" rx="10" fill="#0C1B2E" stroke="#0284C7" stroke-width="1" />
+          <circle cx="24" cy="24" r="5" fill="#38BDF8" />
+          <text x="40" y="28" fill="#E0F2FE" font-family="sans-serif" font-size="12" font-weight="600">⚡ WebSocket Event: Seat C3 held by user (IP: 103.220.*) · 2s ago</text>
+        </g>
+      </g>
+
+      <!-- Right Column: Passenger & Ticket Pass Preview -->
+      <g transform="translate(720, 0)">
+        <rect width="340" height="455" rx="14" fill="url(#ticketCard)" stroke="#2B2657" stroke-width="1" />
+        <text x="20" y="28" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">Booking Summary</text>
+
+        <g transform="translate(20, 50)">
+          <rect width="300" height="150" rx="12" fill="#090A1A" stroke="#25244E" stroke-width="1" />
+          <text x="16" y="26" fill="#F43F5E" font-family="sans-serif" font-size="12" font-weight="700">DEPARTURE: DHAKA (Kamalapur)</text>
+          <text x="16" y="44" fill="#94A3B8" font-family="sans-serif" font-size="10">Train #702 • Oct 04, 2026 @ 07:30 AM</text>
+
+          <line x1="16" y1="58" x2="284" y2="58" stroke="#1F1E40" stroke-dasharray="3 3" />
+
+          <text x="16" y="80" fill="#94A3B8" font-family="sans-serif" font-size="10">SELECTED SEATS:</text>
+          <text x="16" y="102" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="800">B2, B3 <tspan fill="#F43F5E" font-size="12">(2 Tickets)</tspan></text>
+          <text x="16" y="130" fill="#34D399" font-family="sans-serif" font-size="13" font-weight="700">Total: ৳ 1,950 BDT</text>
+        </g>
+
+        <!-- Checkout Action Button -->
+        <g transform="translate(20, 220)">
+          <rect width="300" height="45" rx="12" fill="url(#ticketRose)" />
+          <text x="150" y="28" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">Confirm &amp; Pay via bKash / Card →</text>
+        </g>
+
+        <g transform="translate(20, 290)">
+          <text x="0" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11">✓ Instant SMS Ticket with QR Code</text>
+          <text x="0" y="42" fill="#94A3B8" font-family="sans-serif" font-size="11">✓ Multi-device race condition lock</text>
+          <text x="0" y="64" fill="#94A3B8" font-family="sans-serif" font-size="11">✓ Redis atomic seat allocation</text>
+        </g>
+      </g>
+
+    </g>
+  </g>
+</svg>

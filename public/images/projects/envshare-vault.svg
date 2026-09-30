@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070913" />
+      <stop offset="50%" stop-color="#0E1222" />
+      <stop offset="100%" stop-color="#141128" />
+    </linearGradient>
+
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+
+    <linearGradient id="vaultCardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161B30" />
+      <stop offset="100%" stop-color="#101426" />
+    </linearGradient>
+
+    <linearGradient id="glowPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="shadowVault" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="675" fill="url(#bgGrad2)" />
+
+  <!-- Background Cyber Matrix Elements -->
+  <circle cx="200" cy="180" r="260" fill="#06B6D4" opacity="0.06" />
+  <circle cx="1020" cy="500" r="260" fill="#8B5CF6" opacity="0.07" />
+
+  <!-- Main Application Window -->
+  <g transform="translate(40, 30)">
+    <rect width="1120" height="615" rx="16" fill="#0E1222" stroke="#222B45" stroke-width="1.5" filter="url(#shadowVault)" />
+
+    <!-- Top Window Chrome -->
+    <rect width="1120" height="46" rx="16" fill="#090D1A" />
+    <path d="M0 46 L1120 46" stroke="#1D243A" stroke-width="1" />
+
+    <!-- Traffic Lights -->
+    <circle cx="24" cy="23" r="6" fill="#EF4444" opacity="0.8" />
+    <circle cx="44" cy="23" r="6" fill="#F59E0B" opacity="0.8" />
+    <circle cx="64" cy="23" r="6" fill="#10B981" opacity="0.8" />
+
+    <!-- URL Bar with Lock -->
+    <rect x="340" y="10" width="440" height="26" rx="8" fill="#141A2E" stroke="#263152" stroke-width="1" />
+    <circle cx="360" cy="23" r="3" fill="#06B6D4" />
+    <text x="375" y="27" fill="#67E8F9" font-family="monospace" font-size="11" font-weight="600">🔒 https://envshare.vault.dev/share/e2ee-9b4f7a2</text>
+
+    <!-- Security Protocol Tag -->
+    <rect x="940" y="10" width="155" height="26" rx="8" fill="#082F49" stroke="#0284C7" stroke-width="1" />
+    <text x="1017" y="27" fill="#38BDF8" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">🛡 AES-256-GCM ZERO-KNOWLEDGE</text>
+
+    <!-- ── APP HEADER & NAV ──────────────────────────────────── -->
+    <g transform="translate(40, 65)">
+      <g transform="translate(0, 0)">
+        <rect width="40" height="40" rx="10" fill="url(#cyanGrad)" />
+        <path d="M20 10 L28 14 L28 22 C28 27 20 31 20 31 C20 31 12 27 12 22 L12 14 Z" fill="none" stroke="#FFFFFF" stroke-width="2.5" />
+        <text x="52" y="24" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="18" font-weight="800">envShare <tspan fill="#38BDF8">Vault</tspan></text>
+        <text x="52" y="38" fill="#94A3B8" font-family="sans-serif" font-size="11">End-to-End Encrypted Secret &amp; Environment Config Sharing</text>
+      </g>
+
+      <!-- Top Right Actions -->
+      <g transform="translate(860, 4)">
+        <rect width="180" height="34" rx="10" fill="url(#shieldGrad)" />
+        <text x="90" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="middle">+ Share New Secret</text>
+      </g>
+    </g>
+
+    <!-- ── VAULT MAIN CONTENT (2 COLUMNS) ─────────────────────── -->
+    <g transform="translate(40, 130)">
+
+      <!-- LEFT: Live Encrypted Payload Editor -->
+      <g transform="translate(0, 0)">
+        <rect width="660" height="440" rx="14" fill="url(#vaultCardBg)" stroke="#222B48" stroke-width="1" />
+        
+        <!-- Editor Header -->
+        <rect width="660" height="42" rx="14" fill="#12162B" />
+        <path d="M0 42 L660 42" stroke="#222B48" stroke-width="1" />
+        <text x="20" y="26" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700">🔒 Secret Payload (.env / config)</text>
+        <rect x="530" y="10" width="110" height="22" rx="6" fill="#042F2E" stroke="#0D9488" stroke-width="1" />
+        <text x="585" y="25" fill="#2DD4BF" font-family="monospace" font-size="10" font-weight="700" text-anchor="middle">CLIENT ENCRYPTED</text>
+
+        <!-- Secret Key-Value Code Editor Area -->
+        <g transform="translate(20, 60)">
+          <!-- Line 1 -->
+          <text x="0" y="20" fill="#64748B" font-family="monospace" font-size="12">01</text>
+          <text x="35" y="20" fill="#38BDF8" font-family="monospace" font-size="12">APP_ENV</text>
+          <text x="105" y="20" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <text x="120" y="20" fill="#A7F3D0" font-family="monospace" font-size="12">production</text>
+
+          <!-- Line 2 -->
+          <text x="0" y="50" fill="#64748B" font-family="monospace" font-size="12">02</text>
+          <text x="35" y="50" fill="#38BDF8" font-family="monospace" font-size="12">APP_KEY</text>
+          <text x="105" y="50" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <rect x="120" y="36" width="340" height="20" rx="4" fill="#090D1A" stroke="#1E293B" stroke-width="1" />
+          <text x="130" y="50" fill="#F43F5E" font-family="monospace" font-size="12">base64:7v8Z••••••••••••••••••••••••••••</text>
+          <text x="475" y="50" fill="#94A3B8" font-family="sans-serif" font-size="10">[MASKED]</text>
+
+          <!-- Line 3 -->
+          <text x="0" y="80" fill="#64748B" font-family="monospace" font-size="12">03</text>
+          <text x="35" y="80" fill="#38BDF8" font-family="monospace" font-size="12">DB_PASSWORD</text>
+          <text x="140" y="80" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <rect x="155" y="66" width="305" height="20" rx="4" fill="#090D1A" stroke="#1E293B" stroke-width="1" />
+          <text x="165" y="80" fill="#F43F5E" font-family="monospace" font-size="12">••••••••••••••••••••••••</text>
+
+          <!-- Line 4 -->
+          <text x="0" y="110" fill="#64748B" font-family="monospace" font-size="12">04</text>
+          <text x="35" y="110" fill="#38BDF8" font-family="monospace" font-size="12">STRIPE_SECRET</text>
+          <text x="150" y="110" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <rect x="165" y="96" width="295" height="20" rx="4" fill="#090D1A" stroke="#1E293B" stroke-width="1" />
+          <text x="175" y="110" fill="#F43F5E" font-family="monospace" font-size="12">sk_live_51N••••••••••••••••</text>
+
+          <!-- Line 5 -->
+          <text x="0" y="140" fill="#64748B" font-family="monospace" font-size="12">05</text>
+          <text x="35" y="140" fill="#38BDF8" font-family="monospace" font-size="12">REDIS_HOST</text>
+          <text x="130" y="140" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <text x="145" y="140" fill="#A7F3D0" font-family="monospace" font-size="12">127.0.0.1</text>
+
+          <!-- Line 6 -->
+          <text x="0" y="170" fill="#64748B" font-family="monospace" font-size="12">06</text>
+          <text x="35" y="170" fill="#38BDF8" font-family="monospace" font-size="12">AWS_SECRET_KEY</text>
+          <text x="165" y="170" fill="#94A3B8" font-family="monospace" font-size="12">=</text>
+          <rect x="180" y="156" width="280" height="20" rx="4" fill="#090D1A" stroke="#1E293B" stroke-width="1" />
+          <text x="190" y="170" fill="#F43F5E" font-family="monospace" font-size="12">wJalrXUtn••••••••••••••••</text>
+        </g>
+
+        <!-- Shareable Link & Encryption Passphrase Box -->
+        <g transform="translate(20, 275)">
+          <rect width="620" height="85" rx="10" fill="#0A0E1D" stroke="#1E2845" stroke-width="1" />
+          <text x="16" y="24" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">ONE-TIME GENERATED SECURE LINK:</text>
+          
+          <rect x="16" y="34" width="450" height="34" rx="8" fill="#141B33" stroke="#253259" stroke-width="1" />
+          <text x="30" y="56" fill="#38BDF8" font-family="monospace" font-size="12">https://envshare.vault.dev/v#k=9x8a2c7...f8e2</text>
+
+          <rect x="478" y="34" width="126" height="34" rx="8" fill="#2563EB" />
+          <text x="541" y="56" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700" text-anchor="middle">📋 Copy Link</text>
+        </g>
+
+        <!-- Bottom Security Verification Bar -->
+        <g transform="translate(20, 380)">
+          <text x="0" y="20" fill="#10B981" font-family="sans-serif" font-size="11" font-weight="600">✓ Keys never touch server unencrypted</text>
+          <text x="350" y="20" fill="#A855F7" font-family="sans-serif" font-size="11" font-weight="600">⚡ Client-Side WebCrypto API</text>
+        </g>
+      </g>
+
+      <!-- RIGHT: Security & Self-Destruct Rules -->
+      <g transform="translate(680, 0)">
+        
+        <!-- Rule 1: Self Destruct Setting -->
+        <g transform="translate(0, 0)">
+          <rect width="360" height="135" rx="14" fill="url(#vaultCardBg)" stroke="#222B48" stroke-width="1" />
+          <text x="18" y="26" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700">🔥 Destruction Policy</text>
+          
+          <g transform="translate(18, 42)">
+            <rect width="324" height="36" rx="8" fill="#450A0A" stroke="#DC2626" stroke-width="1" />
+            <circle cx="20" cy="18" r="5" fill="#EF4444" />
+            <text x="36" y="22" fill="#FCA5A5" font-family="sans-serif" font-size="11" font-weight="700">Burn after 1 view (Zero-Trace)</text>
+          </g>
+
+          <g transform="translate(18, 86)">
+            <rect width="324" height="36" rx="8" fill="#10152B" stroke="#222C4A" stroke-width="1" />
+            <circle cx="20" cy="18" r="5" fill="#64748B" />
+            <text x="36" y="22" fill="#94A3B8" font-family="sans-serif" font-size="11">Expire in 24 Hours if unread</text>
+          </g>
+        </g>
+
+        <!-- Rule 2: Passphrase & Password Lock -->
+        <g transform="translate(0, 150)">
+          <rect width="360" height="135" rx="14" fill="url(#vaultCardBg)" stroke="#222B48" stroke-width="1" />
+          <text x="18" y="26" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700">🔑 Extra Passphrase Protection</text>
+          
+          <g transform="translate(18, 42)">
+            <rect width="324" height="36" rx="8" fill="#0A0F20" stroke="#0284C7" stroke-width="1" />
+            <text x="14" y="22" fill="#38BDF8" font-family="monospace" font-size="11">Argon2id Hash Enabled</text>
+            <rect x="250" y="8" width="60" height="20" rx="5" fill="#0284C7" />
+            <text x="280" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="9" font-weight="700" text-anchor="middle">ACTIVE</text>
+          </g>
+
+          <text x="18" y="105" fill="#94A3B8" font-family="sans-serif" font-size="10" line-height="1.4">Requires password input prior to decrypting ciphertext in client browser.</text>
+        </g>
+
+        <!-- Access & Audit Logs Summary -->
+        <g transform="translate(0, 300)">
+          <rect width="360" height="140" rx="14" fill="url(#vaultCardBg)" stroke="#222B48" stroke-width="1" />
+          <text x="18" y="24" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700">📜 Audit Activity Log</text>
+
+          <g transform="translate(18, 40)">
+            <circle cx="6" cy="6" r="3" fill="#10B981" />
+            <text x="18" y="10" fill="#E2E8F0" font-family="sans-serif" font-size="10" font-weight="600">Vault Created by Admin (Pial)</text>
+            <text x="18" y="24" fill="#64748B" font-family="sans-serif" font-size="9">Today 04:12:08 UTC • SHA-256 Validated</text>
+          </g>
+
+          <g transform="translate(18, 78)">
+            <circle cx="6" cy="6" r="3" fill="#06B6D4" />
+            <text x="18" y="10" fill="#E2E8F0" font-family="sans-serif" font-size="10" font-weight="600">Encrypted in Memory (128-bit Entropy)</text>
+            <text x="18" y="24" fill="#64748B" font-family="sans-serif" font-size="9">Client: Firefox 128 (Mac OS)</text>
+          </g>
+        </g>
+      </g>
+
+    </g>
+  </g>
+</svg>

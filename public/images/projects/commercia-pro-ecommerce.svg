@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="commerciaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090B14" />
+      <stop offset="50%" stop-color="#0F1424" />
+      <stop offset="100%" stop-color="#161933" />
+    </linearGradient>
+
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <linearGradient id="commerciaCardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161C33" />
+      <stop offset="100%" stop-color="#101426" />
+    </linearGradient>
+
+    <filter id="shadowShop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#commerciaBg)" />
+
+  <g transform="translate(40, 30)">
+    <rect width="1120" height="615" rx="16" fill="#101426" stroke="#222B48" stroke-width="1.5" filter="url(#shadowShop)" />
+
+    <!-- Window Top -->
+    <rect width="1120" height="46" rx="16" fill="#0A0D1A" />
+    <path d="M0 46 L1120 46" stroke="#1D243B" stroke-width="1" />
+
+    <circle cx="24" cy="23" r="6" fill="#EF4444" opacity="0.8" />
+    <circle cx="44" cy="23" r="6" fill="#F59E0B" opacity="0.8" />
+    <circle cx="64" cy="23" r="6" fill="#10B981" opacity="0.8" />
+
+    <rect x="350" y="10" width="420" height="26" rx="8" fill="#151B30" stroke="#263255" stroke-width="1" />
+    <text x="375" y="27" fill="#60A5FA" font-family="monospace" font-size="11">🛍 https://commerciapro.store/admin/orders</text>
+
+    <!-- Top Navigation -->
+    <g transform="translate(30, 65)">
+      <rect width="36" height="36" rx="10" fill="url(#amberGrad)" />
+      <path d="M10 12 L14 12 L18 24 L26 24 L29 15 L14 15" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="18" cy="27" r="2" fill="#FFFFFF" />
+      <circle cx="26" cy="27" r="2" fill="#FFFFFF" />
+      <text x="48" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="800">Commercia <tspan fill="#F59E0B">Pro</tspan></text>
+      <text x="48" y="34" fill="#94A3B8" font-family="sans-serif" font-size="10">E-COMMERCE &amp; MULTI-VENDOR MANAGEMENT</text>
+    </g>
+
+    <!-- KPI Stats Row -->
+    <g transform="translate(30, 125)">
+      <g transform="translate(0, 0)">
+        <rect width="250" height="90" rx="12" fill="url(#commerciaCardBg)" stroke="#222B48" stroke-width="1" />
+        <text x="16" y="26" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">TOTAL REVENUE (OCT)</text>
+        <text x="16" y="58" fill="#FFFFFF" font-family="sans-serif" font-size="24" font-weight="800">$48,290 <tspan fill="#10B981" font-size="13">↑ 18.4%</tspan></text>
+      </g>
+
+      <g transform="translate(270, 0)">
+        <rect width="250" height="90" rx="12" fill="url(#commerciaCardBg)" stroke="#222B48" stroke-width="1" />
+        <text x="16" y="26" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">ACTIVE ORDERS</text>
+        <text x="16" y="58" fill="#FFFFFF" font-family="sans-serif" font-size="24" font-weight="800">324 <tspan fill="#F59E0B" font-size="13">Processing</tspan></text>
+      </g>
+
+      <g transform="translate(540, 0)">
+        <rect width="250" height="90" rx="12" fill="url(#commerciaCardBg)" stroke="#222B48" stroke-width="1" />
+        <text x="16" y="26" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">AVERAGE ORDER VALUE</text>
+        <text x="16" y="58" fill="#FFFFFF" font-family="sans-serif" font-size="24" font-weight="800">$148.90</text>
+      </g>
+
+      <g transform="translate(810, 0)">
+        <rect width="250" height="90" rx="12" fill="url(#commerciaCardBg)" stroke="#222B48" stroke-width="1" />
+        <text x="16" y="26" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">INVENTORY ITEMS</text>
+        <text x="16" y="58" fill="#FFFFFF" font-family="sans-serif" font-size="24" font-weight="800">1,840 <tspan fill="#38BDF8" font-size="13">SKUs</tspan></text>
+      </g>
+    </g>
+
+    <!-- Orders Table Section -->
+    <g transform="translate(30, 235)">
+      <rect width="1060" height="340" rx="14" fill="url(#commerciaCardBg)" stroke="#222B48" stroke-width="1" />
+      <text x="24" y="28" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">Recent Customer Orders &amp; Fulfillment</text>
+      
+      <!-- Table Header -->
+      <g transform="translate(24, 46)">
+        <rect width="1012" height="30" rx="6" fill="#13182E" />
+        <text x="16" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">ORDER ID</text>
+        <text x="140" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">CUSTOMER</text>
+        <text x="360" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">ITEMS</text>
+        <text x="560" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">PAYMENT</text>
+        <text x="740" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">TOTAL</text>
+        <text x="900" y="20" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="600">STATUS</text>
+      </g>
+
+      <!-- Row 1 -->
+      <g transform="translate(24, 88)">
+        <text x="16" y="20" fill="#38BDF8" font-family="monospace" font-size="12" font-weight="700">#ORD-9482</text>
+        <text x="140" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="600">Emma Watson (Dhaka)</text>
+        <text x="360" y="20" fill="#CBD5E1" font-family="sans-serif" font-size="12">Mechanical Keyboard (x1), Mouse (x1)</text>
+        <text x="560" y="20" fill="#E2E8F0" font-family="sans-serif" font-size="12">bKash Gateway</text>
+        <text x="740" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">$185.00</text>
+        <rect x="900" y="6" width="90" height="22" rx="6" fill="#064E3B" />
+        <text x="945" y="21" fill="#34D399" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">DELIVERED</text>
+      </g>
+
+      <!-- Row 2 -->
+      <g transform="translate(24, 136)">
+        <text x="16" y="20" fill="#38BDF8" font-family="monospace" font-size="12" font-weight="700">#ORD-9481</text>
+        <text x="140" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="600">Liam Henderson</text>
+        <text x="360" y="20" fill="#CBD5E1" font-family="sans-serif" font-size="12">4K UltraWide Monitor 34" (x1)</text>
+        <text x="560" y="20" fill="#E2E8F0" font-family="sans-serif" font-size="12">Stripe Card</text>
+        <text x="740" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">$540.00</text>
+        <rect x="900" y="6" width="90" height="22" rx="6" fill="#1E3A8A" />
+        <text x="945" y="21" fill="#60A5FA" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">DISPATCHED</text>
+      </g>
+
+      <!-- Row 3 -->
+      <g transform="translate(24, 184)">
+        <text x="16" y="20" fill="#38BDF8" font-family="monospace" font-size="12" font-weight="700">#ORD-9480</text>
+        <text x="140" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="600">Sadia Alam (Chittagong)</text>
+        <text x="360" y="20" fill="#CBD5E1" font-family="sans-serif" font-size="12">Ergonomic Desk Chair (x2)</text>
+        <text x="560" y="20" fill="#E2E8F0" font-family="sans-serif" font-size="12">Nagad Wallet</text>
+        <text x="740" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">$320.00</text>
+        <rect x="900" y="6" width="90" height="22" rx="6" fill="#451A03" />
+        <text x="945" y="21" fill="#FBBF24" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">PROCESSING</text>
+      </g>
+
+      <!-- Row 4 -->
+      <g transform="translate(24, 232)">
+        <text x="16" y="20" fill="#38BDF8" font-family="monospace" font-size="12" font-weight="700">#ORD-9479</text>
+        <text x="140" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="600">David Miller</text>
+        <text x="360" y="20" fill="#CBD5E1" font-family="sans-serif" font-size="12">USB-C Hub Pro + Thunderbolt Cable</text>
+        <text x="560" y="20" fill="#E2E8F0" font-family="sans-serif" font-size="12">SSLCommerz</text>
+        <text x="740" y="20" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">$95.00</text>
+        <rect x="900" y="6" width="90" height="22" rx="6" fill="#064E3B" />
+        <text x="945" y="21" fill="#34D399" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">DELIVERED</text>
+      </g>
+    </g>
+  </g>
+</svg>
