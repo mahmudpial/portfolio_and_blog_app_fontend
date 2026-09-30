@@ -132,8 +132,8 @@
                 </div>
 
                 <!-- RIGHT — Large Professional Tech Lead Profile Showcase -->
-                <div class="hidden md:flex justify-end items-center hero-card">
-                    <div class="relative w-[23rem] lg:w-[26rem]">
+                <div class="flex justify-center md:justify-end items-center hero-card mt-8 md:mt-0">
+                    <div class="relative w-[19rem] sm:w-[22rem] md:w-[23rem] lg:w-[26rem]">
 
                         <!-- Ambient Glow Rings Behind Photo -->
                         <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full pointer-events-none blur-3xl opacity-40"
@@ -161,21 +161,56 @@
 
                         <!-- Main Portrait Showcase Frame -->
                         <div class="relative rounded-3xl border overflow-hidden group transition-all duration-500 hover:shadow-[0_0_90px_rgba(139,92,246,0.3)]"
-                            style="background:#120E1C;border-color:#3B2A5A;box-shadow:0 25px 60px -15px rgba(0,0,0,0.8), 0 0 50px rgba(139,92,246,0.18);">
+                            style="background:#120E1C;border-color:#3B2A5A;box-shadow:0 25px 60px -15px rgba(0,0,0,0.8), 0 0 50px rgba(139,92,246,0.18);"
+                            @mouseenter="isHeroPaused = true"
+                            @mouseleave="isHeroPaused = false">
                             
                             <!-- Large Portrait Photo -->
-                            <div class="relative w-full aspect-[4/5] overflow-hidden bg-[#0A0610] flex items-center justify-center">
-                                <img :src="homeAvatarUrl"
-                                    alt="Pial Mahmud - Software Developer"
-                                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                            <div class="relative w-full aspect-[4/5] overflow-hidden bg-[#0A0610] flex items-center justify-center select-none">
+                                <!-- Dual Crossfade Images -->
+                                <div v-for="(imgSrc, idx) in heroImages" :key="idx"
+                                    class="absolute inset-0 transition-all duration-1000 ease-in-out flex items-center justify-center"
+                                    :class="currentHeroImgIdx === idx ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 pointer-events-none z-0'">
+                                    <img :src="imgSrc"
+                                        :alt="`${ownerName} - Photo ${idx + 1}`"
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        loading="eager" />
+                                </div>
                                 
                                 <!-- Bottom gradient fade for text clarity -->
-                                <div class="absolute inset-0 pointer-events-none"
-                                    style="background:linear-gradient(to bottom, transparent 50%, rgba(10,6,16,0.5) 75%, rgba(18,14,28,0.98) 100%);"></div>
+                                <div class="absolute inset-0 pointer-events-none z-10"
+                                    style="background:linear-gradient(to bottom, transparent 45%, rgba(10,6,16,0.5) 75%, rgba(18,14,28,0.98) 100%);"></div>
 
                                 <!-- Subtle edge lighting / vignette -->
-                                <div class="absolute inset-0 pointer-events-none"
+                                <div class="absolute inset-0 pointer-events-none z-10"
                                     style="box-shadow:inset 0 0 30px rgba(0,0,0,0.5);"></div>
+
+                                <!-- Manual Switch Arrows (Visible on hover) -->
+                                <button @click.stop="prevHeroImage" 
+                                    class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border flex items-center justify-center text-white/80 hover:text-white transition-all opacity-0 group-hover:opacity-100 hover:scale-110 cursor-pointer"
+                                    style="background:rgba(18,14,28,0.85);border-color:rgba(139,92,246,0.4);backdrop-filter:blur(8px);"
+                                    title="Previous photo">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </button>
+                                <button @click.stop="nextHeroImage" 
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border flex items-center justify-center text-white/80 hover:text-white transition-all opacity-0 group-hover:opacity-100 hover:scale-110 cursor-pointer"
+                                    style="background:rgba(18,14,28,0.85);border-color:rgba(139,92,246,0.4);backdrop-filter:blur(8px);"
+                                    title="Next photo">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </button>
+
+                                <!-- Top-Right Dynamic Photo Indicators -->
+                                <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-full border"
+                                    style="background:rgba(18,14,28,0.85);border-color:rgba(139,92,246,0.35);backdrop-filter:blur(10px);box-shadow:0 4px 15px rgba(0,0,0,0.5);">
+                                    <button v-for="(_, idx) in heroImages" :key="'dot-' + idx"
+                                        @click.stop="setHeroImage(idx)"
+                                        class="transition-all duration-300 rounded-full flex items-center justify-center border-0 cursor-pointer p-0"
+                                        :style="currentHeroImgIdx === idx 
+                                            ? 'width:20px;height:7px;background:#8B5CF6;box-shadow:0 0 8px #8B5CF6;' 
+                                            : 'width:7px;height:7px;background:rgba(255,255,255,0.3);'"
+                                        :title="`Photo ${idx + 1}`">
+                                    </button>
+                                </div>
 
                                 <!-- Floating Experience & Credentials Bar (Bottom) -->
                                 <div class="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between p-3.5 rounded-2xl border"
@@ -892,14 +927,40 @@ const ownerName = computed(() => settings.value['home_hero_title'] || settings.v
 const ownerInitials = computed(() =>
     ownerName.value.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
 )
-const homeAvatarLoadFailed = ref(false)
-const homeAvatarUrl = computed(() =>
-    settings.value['avatar_url'] || settings.value['about_image'] || auth.user?.profile_image?.trim?.() || '/images/pial-mahmud-about.jpg'
-)
 
-watch(homeAvatarUrl, () => {
-    homeAvatarLoadFailed.value = false
+// ── Hero Dual Image Carousel & Crossfade Rotator ─────────
+const currentHeroImgIdx = ref(0)
+const isHeroPaused = ref(false)
+let heroImageTimer = null
+
+const heroImages = computed(() => {
+    const img1 = settings.value['home_hero_image_1'] || settings.value['avatar_url'] || settings.value['about_image'] || auth.user?.profile_image?.trim?.() || '/images/pial-mahmud-about.jpg'
+    const img2 = settings.value['home_hero_image_2'] || '/images/pial-mahmud.jpg'
+    return [img1, img2]
 })
+
+function nextHeroImage() {
+    currentHeroImgIdx.value = (currentHeroImgIdx.value + 1) % heroImages.value.length
+}
+
+function prevHeroImage() {
+    currentHeroImgIdx.value = (currentHeroImgIdx.value - 1 + heroImages.value.length) % heroImages.value.length
+}
+
+function setHeroImage(idx) {
+    currentHeroImgIdx.value = idx
+}
+
+function startHeroImageRotator() {
+    if (heroImageTimer) clearInterval(heroImageTimer)
+    // Default interval: 7 seconds (or configured in CMS settings, clamped between 3s and 120s)
+    const intervalSec = Math.max(3, Number(settings.value['home_hero_interval_sec']) || 7)
+    heroImageTimer = setInterval(() => {
+        if (!isHeroPaused.value) {
+            nextHeroImage()
+        }
+    }, intervalSec * 1000)
+}
 
 // ── Typewriter role rotator ──────────────────────────────
 const defaultRoles = [
@@ -1012,6 +1073,7 @@ const testimonials = computed(() => {
 // ── Lifecycle ────────────────────────────────────────────
 onMounted(async () => {
     typeTimer = setTimeout(typewrite, 600)
+    startHeroImageRotator()
 
     try {
         if (auth.isLoggedIn && auth.isAdmin && !auth.user?.profile_image) {
@@ -1039,6 +1101,8 @@ onMounted(async () => {
             } else if (typeof list === 'object' && list !== null) {
                 settings.value = list
             }
+            // Restart rotator if custom interval was received from backend
+            startHeroImageRotator()
         }
     } catch (e) {
         console.warn('Could not fetch portfolio data:', e.message)
@@ -1051,5 +1115,6 @@ onMounted(async () => {
 
 onUnmounted(() => {
     clearTimeout(typeTimer)
+    if (heroImageTimer) clearInterval(heroImageTimer)
 })
 </script>

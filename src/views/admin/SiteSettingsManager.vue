@@ -215,6 +215,38 @@
                             class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
                             style="border-color:rgba(139, 92, 246, 0.25);" />
                     </div>
+
+                    <!-- Hero Showcase Dual Images & Interval -->
+                    <div class="md:col-span-2 pt-4 border-t" style="border-color:rgba(139, 92, 246, 0.15);">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-violet-400 mb-4 flex items-center gap-2">
+                            <span>📸</span>
+                            <span>Hero Dual Photo Crossfade Showcase</span>
+                        </h4>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Hero Showcase Photo 1 URL</label>
+                        <input v-model="settingsMap['home_hero_image_1']" type="text" placeholder="/images/pial-mahmud-about.jpg or https://..."
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                        <p class="text-[11px] opacity-40 mt-1">First rotating portrait image shown on the hero section.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Hero Showcase Photo 2 URL</label>
+                        <input v-model="settingsMap['home_hero_image_2']" type="text" placeholder="/images/pial-mahmud.jpg or https://..."
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                        <p class="text-[11px] opacity-40 mt-1">Second rotating portrait image shown on crossfade.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2">Auto-Switch Interval (Seconds)</label>
+                        <input v-model="settingsMap['home_hero_interval_sec']" type="number" min="3" max="300" placeholder="e.g. 7"
+                            class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 border text-white focus:outline-none focus:border-violet-500 transition-colors"
+                            style="border-color:rgba(139, 92, 246, 0.25);" />
+                        <p class="text-[11px] opacity-40 mt-1">Recommended: 6–8 seconds (smooth auto-rotator between the 2 photos).</p>
+                    </div>
                 </div>
             </div>
 
