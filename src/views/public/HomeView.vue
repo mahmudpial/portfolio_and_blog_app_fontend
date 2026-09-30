@@ -313,9 +313,9 @@
                         </div>
 
                         <!-- Card Footer Action -->
-                        <div class="pt-5 border-t flex items-center justify-between text-xs font-semibold" style="border-color:rgba(139, 92, 246, 0.15);">
+                        <div class="pt-4 border-t flex items-center justify-between text-xs font-semibold" style="border-color:rgba(139, 92, 246, 0.15);">
                             <span class="transition-colors flex items-center gap-1.5" :style="`color:${getServiceAccent(i).color};font-family:system-ui;`">
-                                Explore Details &amp; Workflow
+                                Explore Details
                             </span>
                             <span class="text-white/40 group-hover:text-white transition-all duration-300 group-hover:translate-x-1 flex items-center gap-1">
                                 View <span>→</span>
@@ -608,16 +608,16 @@
                     </div>
 
                     <div class="relative z-10">
-                        <p class="text-xs font-semibold uppercase tracking-widest mb-4"
+                        <p class="text-xs font-semibold uppercase tracking-widest mb-3"
                             style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                             Ready to Build?
                         </p>
-                        <h2 class="font-bold leading-tight mb-5" style="font-size:clamp(26px,4vw,44px);font-family:'Georgia',serif;
-              color:#C084FC;text-shadow:0 0 30px #8B5CF640;">
+                        <h2 class="font-bold leading-snug mb-4 max-w-2xl mx-auto" style="font-size:clamp(24px,3.2vw,38px);font-family:'Georgia',serif;
+              color:#C084FC;text-shadow:0 0 24px rgba(139,92,246,0.3);">
                             {{ settings['home_cta_title'] || "Let's Create Something Remarkable" }}
                         </h2>
-                        <p class="text-sm leading-relaxed mb-10 mx-auto"
-                            style="color:#C9B9E8;max-width:480px;font-family:system-ui;line-height:1.8;">
+                        <p class="text-sm leading-relaxed mb-8 mx-auto"
+                            style="color:#C9B9E8;max-width:520px;font-family:system-ui;line-height:1.75;">
                             {{ settings['home_cta_desc'] || "Whether it's a new product, a redesign, or a complex backend — I'm ready to help turn your vision into reality." }}
                         </p>
                         <div class="flex flex-wrap gap-4 justify-center">

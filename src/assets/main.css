@@ -163,15 +163,6 @@ html.light-mode .text-slate-400 {
   color: #64748B !important;
 }
 
-html.light-mode h1,
-html.light-mode h2,
-html.light-mode h3,
-html.light-mode h4,
-html.light-mode h5,
-html.light-mode h6 {
-  color: #0F172A !important;
-}
-
 /* Inputs, Textareas, Selects */
 html.light-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 html.light-mode textarea,
