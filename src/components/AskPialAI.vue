@@ -1,7 +1,12 @@
 <template>
   <div class="fixed bottom-5 right-5 z-[9999] font-sans select-none print:hidden">
-    <!-- Floating Trigger Button -->
-    <div v-if="!isOpen" class="relative group">
+    <!-- Floating Trigger Button (Magic Entrance & Scroll Hide/Show) -->
+    <div
+      v-if="!isOpen"
+      class="relative group transition-all"
+      :class="isVisible ? 'translate-x-0 opacity-100 scale-100 pointer-events-auto' : 'translate-x-36 opacity-0 scale-75 pointer-events-none'"
+      style="transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.45s ease;"
+    >
       <!-- Subtle ambient glow -->
       <div
         class="absolute -inset-0.5 rounded-full opacity-60 blur-sm transition duration-300 group-hover:opacity-100"
@@ -303,18 +308,29 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 
 const themeStore = useThemeStore()
 const isDark = computed(() => themeStore.isDark)
 
 const isOpen = ref(false)
+const isVisible = ref(false)
 const isTyping = ref(false)
 const showWelcomeBadge = ref(true)
 const inputQuery = ref('')
 const messagesContainer = ref(null)
 const inputField = ref(null)
+let scrollTimeout = null
+
+function handleScroll() {
+  if (isOpen.value) return
+  isVisible.value = false
+  clearTimeout(scrollTimeout)
+  scrollTimeout = setTimeout(() => {
+    isVisible.value = true
+  }, 420)
+}
 
 const quickChips = [
   {
@@ -560,9 +576,21 @@ function formatMessage(text) {
 }
 
 onMounted(() => {
+  // Magic Entrance entrance on page load
+  setTimeout(() => {
+    isVisible.value = true
+  }, 600)
+
+  window.addEventListener('scroll', handleScroll, { passive: true })
+
   setTimeout(() => {
     showWelcomeBadge.value = false
   }, 10000)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  if (scrollTimeout) clearTimeout(scrollTimeout)
 })
 </script>
 
