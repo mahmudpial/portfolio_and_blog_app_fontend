@@ -467,13 +467,13 @@
 
         <!-- ── ADD / EDIT USER MODAL ───────────────────────── -->
         <transition name="fade">
-            <div v-if="modal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(10,6,16,0.85);backdrop-filter:blur(8px);">
-                <div class="w-full max-w-lg rounded-2xl border p-6 sm:p-8 relative overflow-hidden shadow-2xl"
-                    style="background:#120E1C;border-color:#3B2A5A;box-shadow:0 24px 60px rgba(0,0,0,0.8),0 0 40px rgba(139,92,246,0.15);"
+            <div v-if="modal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" style="background:rgba(10,6,16,0.85);backdrop-filter:blur(12px);" @click.self="modal.show = false">
+                <div class="w-full max-w-lg rounded-3xl border relative overflow-hidden shadow-2xl max-h-[88vh] flex flex-col"
+                    style="background:#120E1C;border-color:rgba(139, 92, 246, 0.35);box-shadow:0 24px 60px rgba(0,0,0,0.8),0 0 40px rgba(139,92,246,0.15);"
                     @click.stop>
                     
                     <!-- Modal Header -->
-                    <div class="flex items-center justify-between pb-5 border-b mb-6" style="border-color:#241730;">
+                    <div class="flex items-center justify-between px-7 py-5 border-b shrink-0" style="border-color:rgba(139, 92, 246, 0.15);background:#120E1C;">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl flex items-center justify-center"
                                 style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#C084FC;">
@@ -499,89 +499,91 @@
                         </button>
                     </div>
 
-                    <!-- Modal Form -->
-                    <form @submit.prevent="saveUser()" class="space-y-4">
-                        <!-- Full Name -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
-                                Full Name <span class="text-red-400">*</span>
-                            </label>
-                            <input v-model="form.name" type="text" required placeholder="e.g. John Doe"
-                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
-                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
-                        </div>
-
-                        <!-- Email Address -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
-                                Email Address <span class="text-red-400">*</span>
-                            </label>
-                            <input v-model="form.email" type="email" required placeholder="e.g. john@example.com"
-                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
-                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
-                        </div>
-
-                        <!-- Password -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
-                                Password <span v-if="!modal.editing" class="text-red-400">*</span> <span v-else class="text-[10px] text-slate-400 font-normal lowercase">(leave blank to keep current)</span>
-                            </label>
-                            <input v-model="form.password" type="password" :required="!modal.editing" placeholder="••••••••"
-                                class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
-                                style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
-                                onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
-                        </div>
-
-                        <!-- Role and Status with balanced 50/50 weights -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Role Dropdown -->
+                    <!-- Modal Form Body -->
+                    <form @submit.prevent="saveUser()" class="flex flex-col flex-1 overflow-hidden m-0">
+                        <div class="p-7 space-y-4 overflow-y-auto flex-1">
+                            <!-- Full Name -->
                             <div>
                                 <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
-                                    User Role
+                                    Full Name <span class="text-red-400">*</span>
                                 </label>
-                                <div class="relative w-full">
-                                    <select v-model="form.role"
-                                        class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
-                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                        onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
-                                        onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
-                                        <option value="user" style="background:#120E1C;color:#fff;">User</option>
-                                        <option value="admin" style="background:#120E1C;color:#fff;">Admin</option>
-                                    </select>
-                                    <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <polyline points="6 9 12 15 18 9" />
-                                    </svg>
-                                </div>
+                                <input v-model="form.name" type="text" required placeholder="e.g. John Doe"
+                                    class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                    onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                    onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
                             </div>
 
-                            <!-- Status Dropdown -->
+                            <!-- Email Address -->
                             <div>
                                 <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
-                                    Status
+                                    Email Address <span class="text-red-400">*</span>
                                 </label>
-                                <div class="relative w-full">
-                                    <select v-model="form.status"
-                                        class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
-                                        style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
-                                        onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
-                                        onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
-                                        <option value="active" style="background:#120E1C;color:#fff;">Active</option>
-                                        <option value="inactive" style="background:#120E1C;color:#fff;">Inactive</option>
-                                    </select>
-                                    <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <polyline points="6 9 12 15 18 9" />
-                                    </svg>
+                                <input v-model="form.email" type="email" required placeholder="e.g. john@example.com"
+                                    class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                    onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                    onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
+                            </div>
+
+                            <!-- Password -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                    Password <span v-if="!modal.editing" class="text-red-400">*</span> <span v-else class="text-[10px] text-slate-400 font-normal lowercase">(leave blank to keep current)</span>
+                                </label>
+                                <input v-model="form.password" type="password" :required="!modal.editing" placeholder="••••••••"
+                                    class="w-full h-11 px-4 rounded-xl text-sm focus:outline-none transition-all"
+                                    style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                    onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                    onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';" />
+                            </div>
+
+                            <!-- Role and Status with balanced 50/50 weights -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <!-- Role Dropdown -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                        User Role
+                                    </label>
+                                    <div class="relative w-full">
+                                        <select v-model="form.role"
+                                            class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                                            style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                            onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                            onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                                            <option value="user" style="background:#120E1C;color:#fff;">User</option>
+                                            <option value="admin" style="background:#120E1C;color:#fff;">Admin</option>
+                                        </select>
+                                        <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="6 9 12 15 18 9" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Status Dropdown -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:#C9B9E8;font-family:system-ui;">
+                                        Status
+                                    </label>
+                                    <div class="relative w-full">
+                                        <select v-model="form.status"
+                                            class="w-full h-11 pl-4 pr-9 rounded-xl text-sm focus:outline-none appearance-none transition-all cursor-pointer font-medium"
+                                            style="background:#0A0610;border:1px solid #3B2A5A;color:#fff;font-family:system-ui;"
+                                            onfocus="this.style.borderColor='#8B5CF6'; this.style.boxShadow='0 0 12px rgba(139,92,246,0.2)';"
+                                            onblur="this.style.borderColor='#3B2A5A'; this.style.boxShadow='none';">
+                                            <option value="active" style="background:#120E1C;color:#fff;">Active</option>
+                                            <option value="inactive" style="background:#120E1C;color:#fff;">Inactive</option>
+                                        </select>
+                                        <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="6 9 12 15 18 9" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Actions -->
-                        <div class="flex items-center justify-end gap-3 pt-4 border-t mt-6" style="border-color:#241730;">
+                        <!-- Sticky Bottom Footer Actions -->
+                        <div class="px-7 py-4 border-t shrink-0 flex items-center justify-end gap-3 bg-[#120E1C]" style="border-color:rgba(139, 92, 246, 0.15);">
                             <button type="button" @click="modal.show = false"
                                 class="px-5 py-2.5 rounded-xl text-xs font-semibold border transition-colors hover:bg-white/5"
                                 style="border-color:#3B2A5A;color:#C9B9E8;font-family:system-ui;">
@@ -619,6 +621,15 @@ const filterStatus = ref('')
 const alertMsg = ref('')
 const alertType = ref('success')
 const saving = ref(false)
+const activeUserEndpoint = ref('/admin/users')
+
+const counts = reactive({
+    posts: 0,
+    projects: 0,
+    skills: 0,
+    services: 0,
+    comments: 0
+})
 
 const statsCards = computed(() => [
     { type: 'users', label: 'Total Users', value: users.value.length, glow: '#8B5CF6', color: '#C084FC' },
@@ -627,13 +638,13 @@ const statsCards = computed(() => [
     { type: 'inactive', label: 'Inactive', value: users.value.filter(u => u.status === 'inactive').length, glow: '#64748B', color: '#94A3B8' },
 ])
 
-const navCards = [
-    { to: '/admin/posts', label: 'Blog Posts', sub: 'Manage content', type: 'posts', color: '#8B5CF6' },
-    { to: '/admin/projects', label: 'Projects', sub: 'Showcase work', type: 'projects', color: '#06B6D4' },
-    { to: '/admin/skills', label: 'Skills', sub: 'Update stack', type: 'skills', color: '#F59E0B' },
-    { to: '/admin/services', label: 'Services', sub: 'Offerings', type: 'services', color: '#EC4899' },
-    { to: '/admin/comments', label: 'Comments', sub: 'Engagement', type: 'comments', color: '#10B981' },
-]
+const navCards = computed(() => [
+    { to: '/admin/posts', label: 'Blog Posts', sub: counts.posts ? `${counts.posts} published` : 'Manage content', type: 'posts', color: '#8B5CF6' },
+    { to: '/admin/projects', label: 'Projects', sub: counts.projects ? `${counts.projects} showcase` : 'Showcase work', type: 'projects', color: '#06B6D4' },
+    { to: '/admin/skills', label: 'Skills', sub: counts.skills ? `${counts.skills} technologies` : 'Update stack', type: 'skills', color: '#F59E0B' },
+    { to: '/admin/services', label: 'Services', sub: counts.services ? `${counts.services} offerings` : 'Offerings', type: 'services', color: '#EC4899' },
+    { to: '/admin/comments', label: 'Comments', sub: counts.comments ? `${counts.comments} comments` : 'Engagement', type: 'comments', color: '#10B981' },
+])
 
 // ── Computed ────────────────────────────────────────────────
 const filteredUsers = computed(() => {
@@ -655,15 +666,80 @@ function formatDate(date) {
 }
 
 function initials(name) {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+    if (!name) return 'U'
+    return name.split(' ').filter(Boolean).map(n => n[0]).join('').toUpperCase().slice(0, 2)
+}
+
+function normalizeUser(u) {
+    if (!u) return {}
+    const isAdmin = u.is_admin === true || u.is_admin === 1 || u.is_admin === '1' || (u.role && u.role.toString().toLowerCase() === 'admin')
+    return {
+        id: u.id || 1,
+        name: u.name || u.full_name || 'Admin User',
+        email: u.email || 'admin@pialsoftdev.me',
+        role: isAdmin ? 'admin' : (u.role ? u.role.toString().toLowerCase() : 'user'),
+        status: (u.status === 'inactive' || u.is_active === false || u.is_active === 0) ? 'inactive' : 'active',
+        created_at: u.created_at || u.createdAt || new Date().toISOString(),
+    }
+}
+
+async function fetchDashboardStats() {
+    try {
+        const [postsRes, projectsRes, skillsRes, servicesRes, commentsRes] = await Promise.allSettled([
+            api.get('/posts'),
+            api.get('/projects'),
+            api.get('/skills'),
+            api.get('/services'),
+            api.get('/admin/comments'),
+        ])
+
+        if (postsRes.status === 'fulfilled') {
+            const list = postsRes.value.data?.data?.data ?? postsRes.value.data?.data ?? postsRes.value.data?.posts ?? []
+            counts.posts = Array.isArray(list) ? list.length : 0
+        }
+        if (projectsRes.status === 'fulfilled') {
+            const list = projectsRes.value.data?.data?.data ?? projectsRes.value.data?.data ?? projectsRes.value.data?.projects ?? []
+            counts.projects = Array.isArray(list) ? list.length : 0
+        }
+        if (skillsRes.status === 'fulfilled') {
+            const list = skillsRes.value.data?.data ?? skillsRes.value.data ?? []
+            counts.skills = Array.isArray(list) ? list.length : 0
+        }
+        if (servicesRes.status === 'fulfilled') {
+            const list = servicesRes.value.data?.data ?? servicesRes.value.data ?? []
+            counts.services = Array.isArray(list) ? list.length : 0
+        }
+        if (commentsRes.status === 'fulfilled') {
+            const list = commentsRes.value.data?.data?.data ?? commentsRes.value.data?.data ?? commentsRes.value.data ?? []
+            counts.comments = Array.isArray(list) ? list.length : 0
+        }
+    } catch (e) {
+        console.warn('Could not load dashboard entity counts:', e.message)
+    }
 }
 
 async function fetchUsers() {
-    try {
-        const { data } = await api.get('/admin/users')
-        users.value = data.data || []
-    } catch (err) {
-        showAlert(err.response?.data?.message || 'Failed to fetch users', 'error')
+    const USER_ENDPOINTS = ['/admin/users', '/users', '/admin/dashboard/users', '/admin/dashboard']
+    let lastError = null
+
+    for (const endpoint of USER_ENDPOINTS) {
+        try {
+            const { data } = await api.get(endpoint)
+            const paginated = data.data?.data ?? data.data?.users ?? data.data ?? data.users ?? (Array.isArray(data) ? data : [])
+            const list = Array.isArray(paginated) ? paginated : (Array.isArray(data.data) ? data.data : [])
+            if (Array.isArray(list) && list.length > 0) {
+                users.value = list.map(normalizeUser)
+                activeUserEndpoint.value = endpoint
+                return
+            }
+        } catch (err) {
+            lastError = err
+        }
+    }
+
+    // If API returned empty array, include currently logged in admin user
+    if (users.value.length === 0 && auth.user) {
+        users.value = [normalizeUser(auth.user)]
     }
 }
 
@@ -701,10 +777,19 @@ async function saveUser() {
         if (modal.editing) {
             const payload = { name: form.name, email: form.email, role: form.role, status: form.status }
             if (form.password) payload.password = form.password
-            await api.put(`/admin/users/${modal.editId}`, payload)
+            
+            try {
+                await api.put(`${activeUserEndpoint.value}/${modal.editId}`, payload)
+            } catch {
+                await api.put(`/admin/users/${modal.editId}`, payload)
+            }
             showAlert('User updated successfully!', 'success')
         } else {
-            await api.post('/admin/users', form)
+            try {
+                await api.post(activeUserEndpoint.value, form)
+            } catch {
+                await api.post('/admin/users', form)
+            }
             showAlert('User created successfully!', 'success')
         }
         modal.show = false
@@ -719,7 +804,11 @@ async function saveUser() {
 async function toggleStatus(u) {
     try {
         const newStatus = u.status === 'active' ? 'inactive' : 'active'
-        await api.patch(`/admin/users/${u.id}`, { status: newStatus })
+        try {
+            await api.patch(`${activeUserEndpoint.value}/${u.id}`, { status: newStatus })
+        } catch {
+            await api.patch(`/admin/users/${u.id}`, { status: newStatus })
+        }
         await fetchUsers()
         showAlert('User status updated!', 'success')
     } catch (err) {
@@ -730,7 +819,11 @@ async function toggleStatus(u) {
 async function deleteUser(u) {
     if (!confirm(`Delete user ${u.name}?`)) return
     try {
-        await api.delete(`/admin/users/${u.id}`)
+        try {
+            await api.delete(`${activeUserEndpoint.value}/${u.id}`)
+        } catch {
+            await api.delete(`/admin/users/${u.id}`)
+        }
         await fetchUsers()
         showAlert('User deleted!', 'success')
     } catch (err) {
@@ -738,5 +831,10 @@ async function deleteUser(u) {
     }
 }
 
-onMounted(fetchUsers)
+onMounted(async () => {
+    await Promise.allSettled([
+        fetchUsers(),
+        fetchDashboardStats()
+    ])
+})
 </script>

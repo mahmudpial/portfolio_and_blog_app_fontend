@@ -144,14 +144,69 @@
 
             <!-- Right side -->
             <div class="hidden md:flex items-center gap-3">
-                <!-- Theme Toggle -->
-                <button @click="themeStore.toggleTheme()" class="p-2 rounded-xl border transition-all hover:scale-110 cursor-pointer"
-                    style="background:#120E1C;border-color:#3B2A5A;color:#C9B9E8;"
-                    title="Toggle Dark / Light Theme"
-                    aria-label="Toggle Theme">
-                    <span v-if="themeStore.isDark">☀️</span>
-                    <span v-else>🌙</span>
-                </button>
+                <!-- Theme & Color Customizer Dropdown -->
+                <div class="relative" ref="themeMenuRef">
+                    <button @click="themeMenuOpen = !themeMenuOpen"
+                        class="flex items-center gap-2 p-2 px-3 rounded-xl border transition-all hover:scale-105 cursor-pointer"
+                        style="background:rgba(18, 14, 28, 0.85);border-color:rgba(139, 92, 246, 0.25);color:var(--color-text);"
+                        title="Customize Theme & Colors"
+                        aria-label="Customize Theme & Colors">
+                        <span class="w-2.5 h-2.5 rounded-full" :style="`background:${themeStore.currentPalette.primary};box-shadow:0 0 8px ${themeStore.currentPalette.primary};`"></span>
+                        <svg v-if="themeStore.isDark" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </button>
+
+                    <transition name="dropdown">
+                        <div v-if="themeMenuOpen"
+                            class="absolute right-0 mt-2 w-64 rounded-2xl border p-4 shadow-2xl z-50 overflow-hidden"
+                            style="background:rgba(18, 14, 28, 0.96); backdrop-filter:blur(24px); border-color:rgba(139, 92, 246, 0.25); box-shadow:0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(139,92,246,0.15);">
+                            
+                            <!-- Dark / Light Mode Switcher -->
+                            <div class="mb-4 pb-3 border-b" style="border-color:rgba(139,92,246,0.15);">
+                                <span class="block text-[11px] font-bold uppercase tracking-wider text-purple-300/80 mb-2">Display Mode</span>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button @click="themeStore.setMode('dark')"
+                                        class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer"
+                                        :style="themeStore.isDark ? 'background:rgba(139,92,246,0.25);border-color:#8B5CF6;color:#fff;' : 'background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#94A3B8;'">
+                                        <span>🌙 Dark</span>
+                                    </button>
+                                    <button @click="themeStore.setMode('light')"
+                                        class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer"
+                                        :style="themeStore.isLight ? 'background:rgba(139,92,246,0.25);border-color:#8B5CF6;color:#fff;' : 'background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#94A3B8;'">
+                                        <span>☀️ Light</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Theme Accent Color Palettes -->
+                            <div>
+                                <span class="block text-[11px] font-bold uppercase tracking-wider text-purple-300/80 mb-2">Accent Palette</span>
+                                <div class="grid grid-cols-5 gap-2">
+                                    <button v-for="pal in themeStore.availablePalettes" :key="pal.id"
+                                        @click="themeStore.setPalette(pal.id)"
+                                        class="w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:scale-110 cursor-pointer border relative"
+                                        :style="`background:${pal.primary};border-color:${themeStore.paletteId === pal.id ? '#FFFFFF' : 'transparent'};box-shadow:${themeStore.paletteId === pal.id ? '0 0 12px ' + pal.primary : 'none'};`"
+                                        :title="pal.name">
+                                        <svg v-if="themeStore.paletteId === pal.id" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="text-[11px] text-purple-200/70 text-center mt-2 font-medium">
+                                    {{ themeStore.currentPalette.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
 
                 <!-- Guest Login -->
                 <template v-if="!auth.isLoggedIn">
@@ -366,7 +421,37 @@
                         Contact
                     </RouterLink>
 
-                    <div class="h-px my-3" style="background:var(--color-border);"></div>
+                    <!-- Mobile Theme Customizer Section -->
+                    <div class="p-3 my-2 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Theme Mode</span>
+                            <div class="flex gap-1">
+                                <button @click="themeStore.setMode('dark')"
+                                    class="px-3 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer"
+                                    :style="themeStore.isDark ? 'background:rgba(139,92,246,0.3);border-color:#8B5CF6;color:#fff;' : 'background:transparent;border-color:transparent;color:#94A3B8;'">
+                                    🌙 Dark
+                                </button>
+                                <button @click="themeStore.setMode('light')"
+                                    class="px-3 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer"
+                                    :style="themeStore.isLight ? 'background:rgba(139,92,246,0.3);border-color:#8B5CF6;color:#fff;' : 'background:transparent;border-color:transparent;color:#94A3B8;'">
+                                    ☀️ Light
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Palette</span>
+                            <div class="flex items-center gap-1.5">
+                                <button v-for="pal in themeStore.availablePalettes" :key="pal.id"
+                                    @click="themeStore.setPalette(pal.id)"
+                                    class="w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer border"
+                                    :style="`background:${pal.primary};border-color:${themeStore.paletteId === pal.id ? '#FFFFFF' : 'transparent'};box-shadow:${themeStore.paletteId === pal.id ? '0 0 8px ' + pal.primary : 'none'};`"
+                                    :title="pal.name">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="h-px my-2" style="background:var(--color-border);"></div>
 
                     <template v-if="auth.isLoggedIn">
                         <RouterLink to="/profile" @click="menuOpen = false"
@@ -466,6 +551,8 @@ const servicesDropdownRef = ref(null)
 const mobileServicesOpen = ref(false)
 const profileMenuOpen = ref(false)
 const profileMenuRef = ref(null)
+const themeMenuOpen = ref(false)
+const themeMenuRef = ref(null)
 const settings = ref({})
 
 const isServicesActive = computed(() => {
@@ -510,6 +597,9 @@ function handleClickOutside(event) {
     }
     if (!servicesDropdownRef.value?.contains(event.target)) {
         servicesMenuOpen.value = false
+    }
+    if (!themeMenuRef.value?.contains(event.target)) {
+        themeMenuOpen.value = false
     }
 }
 

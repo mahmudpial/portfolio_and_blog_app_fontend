@@ -80,7 +80,7 @@
                 </div>
 
                 <!-- Col 2 — Navigation (2 cols) -->
-                <div class="md:col-span-2">
+                <div class="hidden md:block md:col-span-2">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
                         style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Navigation
@@ -100,7 +100,7 @@
                 </div>
 
                 <!-- Col 3 — Top Services (2 cols) -->
-                <div class="md:col-span-2">
+                <div class="hidden md:block md:col-span-2">
                     <p class="text-xs font-semibold uppercase tracking-widest mb-5"
                         style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">
                         Top Services
