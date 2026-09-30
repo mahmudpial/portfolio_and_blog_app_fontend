@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-6 right-6 z-50 font-sans select-none print:hidden">
+  <div class="fixed bottom-6 right-6 z-[9999] font-sans select-none print:hidden">
     <!-- Floating Trigger Button -->
     <div v-if="!isOpen" class="relative group">
       <!-- Glow effect -->
