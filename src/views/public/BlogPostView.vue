@@ -135,6 +135,20 @@
                             style="color:#C9B9E8;font-family:system-ui;font-size:16px;line-height:1.9;">
                         </div>
 
+                        <!-- ── INTERACTIVE CODE PLAYGROUND & ARCHITECTURE CASE STUDY ── -->
+                        <div class="mt-10 pt-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <h3 class="text-base font-bold text-white m-0" style="font-family:'Georgia',serif;">
+                                    Technical Architecture &amp; Code Playground
+                                </h3>
+                            </div>
+                            <p class="text-xs text-purple-300/70 mb-4 font-sans">
+                                Explore live implementation patterns, multi-tenant middleware, and test simulated JSON outputs.
+                            </p>
+                            <CodePlayground :snippets="caseStudySnippets" />
+                        </div>
+
                         <!-- ── REACTIONS ──────────────────────────────── -->
                         <div class="mt-12 pt-8 border-t" style="border-color:#241730;">
                             <p class="text-sm font-semibold text-white mb-4" style="font-family:'Georgia',serif;">
@@ -693,12 +707,81 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import api from '@/api/axios'
 import { useAuthStore } from '@/stores/auth'
+import CodePlayground from '@/components/CodePlayground.vue'
 
 const route = useRoute()
 const auth = useAuthStore()
 const post = ref(null)
 const loading = ref(true)
 const copied = ref(false)
+
+const caseStudySnippets = computed(() => [
+    {
+        lang: 'php',
+        filename: 'TenantIsolationMiddleware.php',
+        code: `<?php
+
+namespace App\\Http\\Middleware;
+
+use Closure;
+use Illuminate\\Http\\Request;
+use App\\Models\\Tenant;
+
+class TenantIsolationMiddleware
+{
+    public function handle(Request $request, Closure $next)
+    {
+        $tenantId = $request->header('X-Tenant-ID') 
+            ?? $request->user()?->tenant_id;
+
+        if (!$tenantId || !Tenant::where('id', $tenantId)->exists()) {
+            return response()->json([
+                'error' => 'Unauthorized Tenant Domain',
+                'status' => 403
+            ], 403);
+        }
+
+        app()->instance('currentTenant', Tenant::find($tenantId));
+
+        return $next($request);
+    }
+}`,
+        previewJson: `{
+  "status": "success",
+  "data": {
+    "tenant_id": "tenant_diu_enterprise",
+    "name": "Pial Mahmud SaaS Cluster",
+    "isolation_mode": "database_per_tenant",
+    "status": "active",
+    "region": "ap-southeast-1"
+  }
+}`
+    },
+    {
+        lang: 'vue',
+        filename: 'useTenantContext.js',
+        code: `import { ref, computed } from 'vue'
+import api from '@/api/axios'
+
+export function useTenantContext() {
+  const currentTenant = ref(null)
+  const isTenantLoaded = computed(() => !!currentTenant.value)
+
+  async function fetchTenantDetails(tenantId) {
+    const { data } = await api.get('/tenants/' + tenantId)
+    currentTenant.value = data.tenant
+    return currentTenant.value
+  }
+
+  return { currentTenant, isTenantLoaded, fetchTenantDetails }
+}`,
+        previewJson: `{
+  "connected": true,
+  "client_auth": "Bearer JWT_AUTH_TOKEN_VERIFIED",
+  "latency_ms": 14
+}`
+    }
+])
 
 const likeCounts = ref({})
 const userReaction = ref(null)

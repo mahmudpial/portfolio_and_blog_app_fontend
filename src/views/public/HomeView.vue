@@ -525,12 +525,17 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════════
-         ⑤ PRICING & PACKAGES SECTION
+         ⑤ GITHUB LIVE ACTIVITY & REPOSITORIES
+        ════════════════════════════════════════════════════════ -->
+        <GitHubActivity />
+
+        <!-- ═══════════════════════════════════════════════════════
+         ⑥ PRICING & PACKAGES SECTION
         ════════════════════════════════════════════════════════ -->
         <PricingSection />
 
         <!-- ═══════════════════════════════════════════════════════
-         ⑥ TESTIMONIALS
+         ⑦ TESTIMONIALS & CLIENT REVIEWS
         ════════════════════════════════════════════════════════ -->
         <section class="py-24 px-6 md:px-16 relative overflow-hidden" style="border-top:1px solid #241730;">
             <!-- Section glow -->
@@ -538,19 +543,34 @@
         background:radial-gradient(circle at 80% 90%,#6D28D915,transparent 60%);"></div>
 
             <div class="max-w-7xl mx-auto relative z-10">
-                <div class="text-center mb-16">
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3"
-                        style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Kind Words</p>
-                    <h2 class="font-bold text-white"
-                        style="font-size:clamp(28px,4vw,44px);font-family:'Georgia',serif;">
-                        Client Feedback
-                    </h2>
+                <div class="flex items-center justify-between mb-16 flex-wrap gap-4 text-center md:text-left">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-widest mb-2"
+                            style="color:#8B5CF6;font-family:system-ui;letter-spacing:.2em;">Kind Words</p>
+                        <h2 class="font-bold text-white text-3xl md:text-4xl" style="font-family:'Georgia',serif;">
+                            Client Feedback &amp; Endorsements
+                        </h2>
+                    </div>
+                    <button
+                        @click="showReviewModal = true"
+                        class="px-5 py-2.5 rounded-xl text-xs font-semibold border transition-all hover:scale-105 cursor-pointer flex items-center gap-2 shadow-lg"
+                        style="background:rgba(139, 92, 246, 0.15); border-color:#8B5CF6; color:#C084FC;"
+                    >
+                        <span>★</span>
+                        <span>Leave a Client Review</span>
+                    </button>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-5">
-                    <div v-for="(t, i) in testimonials" :key="t.name"
-                        class="testimonial-card rounded-2xl border p-7 transition-all hover:-translate-y-1"
+                    <div v-for="(t, i) in displayedTestimonials" :key="t.name + i"
+                        class="testimonial-card rounded-2xl border p-7 transition-all hover:-translate-y-1 relative"
                         :style="`background:#120E1C;border-color:#3B2A5A;animation-delay:${i * 100}ms`">
+                        
+                        <!-- Verified Badge if submitted review -->
+                        <div v-if="t.is_verified" class="absolute top-4 right-4 text-[10px] px-2 py-0.5 rounded-full border bg-emerald-500/15 text-emerald-300 border-emerald-500/30 flex items-center gap-1 font-semibold">
+                            <span>✓</span> Verified Client
+                        </div>
+
                         <!-- Stars -->
                         <div class="flex gap-1 mb-5">
                             <span v-for="s in t.stars" :key="s" style="color:#F59E0B;font-size:18px;">★</span>
@@ -579,6 +599,13 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Client Review Modal -->
+            <ReviewModal
+                :is-open="showReviewModal"
+                @close="showReviewModal = false"
+                @review-submitted="handleReviewSubmitted"
+            />
         </section>
 
         <!-- ═══════════════════════════════════════════════════════
@@ -917,9 +944,28 @@ import ServiceIcon from '@/components/ServiceIcon.vue'
 import TechIcon from '@/components/TechIcon.vue'
 import ProjectIcon from '@/components/ProjectIcon.vue'
 import PricingSection from '@/components/PricingSection.vue'
+import GitHubActivity from '@/components/GitHubActivity.vue'
+import ReviewModal from '@/components/ReviewModal.vue'
 import { getProjectImage } from '@/utils/projectImage'
 
 const auth = useAuthStore()
+
+// ── Client Reviews & Testimonials State ──────────────────
+const showReviewModal = ref(false)
+const localReviews = ref([])
+
+function loadLocalReviews() {
+    try {
+        const saved = localStorage.getItem('client_reviews')
+        if (saved) {
+            localReviews.value = JSON.parse(saved)
+        }
+    } catch {}
+}
+
+function handleReviewSubmitted(newReview) {
+    localReviews.value.unshift(newReview)
+}
 
 // ── Owner config & CMS Settings ───────────────────────────
 const settings = ref({})
@@ -1060,7 +1106,7 @@ const defaultTestimonials = [
     },
 ]
 
-const testimonials = computed(() => {
+const baseTestimonials = computed(() => {
     if (settings.value['testimonials_json']) {
         try {
             const parsed = JSON.parse(settings.value['testimonials_json'])
@@ -1070,8 +1116,13 @@ const testimonials = computed(() => {
     return defaultTestimonials
 })
 
+const displayedTestimonials = computed(() => {
+    return [...localReviews.value, ...baseTestimonials.value]
+})
+
 // ── Lifecycle ────────────────────────────────────────────
 onMounted(async () => {
+    loadLocalReviews()
     typeTimer = setTimeout(typewrite, 600)
     startHeroImageRotator()
 
