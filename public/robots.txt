@@ -1,0 +1,24 @@
+# Robots.txt for Pial Mahmud - Software Developer Portfolio
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /skills
+Allow: /pricing
+Allow: /portfolio
+Allow: /portfolio/*
+Allow: /blog
+Allow: /blog/*
+Allow: /contact
+Allow: /services/*
+
+# Disallow private admin, authentication and user profile routes
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /profile
+
+# Sitemap Location
+Sitemap: https://pial.dev/sitemap.xml
